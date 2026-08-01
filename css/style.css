@@ -513,6 +513,8 @@ body::before {
     border-radius: 3px;
     transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    direction: ltr;
+    transform-origin: left center;
 }
 
 .level-progress-fill::after {
