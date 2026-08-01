@@ -58,10 +58,13 @@ function renderLesson(chapterData) {
     
     // بخش‌های آموزشی
     chapterData.lesson.sections.forEach((section, i) => {
+        // تبدیل \n به <br> برای نمایش درست
+        const textWithBreaks = (section.text || '').replace(/\n/g, '<br>');
+        
         html += `
             <div class="lesson-section">
                 <h3>${section.icon || '📝'} ${section.title}</h3>
-                <div class="lesson-text">${section.text}</div>
+                <div class="lesson-text">${textWithBreaks}</div>
                 ${section.code ? renderCode(section.code) : ''}
                 ${section.output ? renderOutput(section.output) : ''}
             </div>
