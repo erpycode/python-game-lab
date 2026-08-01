@@ -420,12 +420,79 @@ body::before {
 }
 
 /* ============================================
-   صفحه فصل‌ها
+   صفحه فصل‌ها — دسته‌بندی سطوح
    ============================================ */
 .chapters-grid {
     display: flex;
     flex-direction: column;
+    gap: 24px;
+}
+
+.level-section {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.level-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 4px solid var(--accent);
+    padding-right: 16px;
+}
+
+.level-info {
+    flex: 1;
+}
+
+.level-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.level-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.level-progress {
+    display: flex;
+    align-items: center;
     gap: 12px;
+    min-width: 150px;
+}
+
+.level-progress-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.level-progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.level-progress-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.level-chapters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .chapter-card {

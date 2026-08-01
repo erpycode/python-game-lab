@@ -3,12 +3,11 @@
    ============================================ */
 
 // ============================================
-// رندر صفحه فصل‌ها
+// رندر صفحه فصل‌ها (دسته‌بندی شده)
 // ============================================
 function renderChaptersGrid() {
     const container = document.getElementById('chapters-grid');
     const progress = getProgress();
-    let html = '';
     
     // اطلاعات فصل‌ها
     const chaptersInfo = [
@@ -16,7 +15,7 @@ function renderChaptersGrid() {
         { num: 2, title: 'فصل ۲: عملگرها', desc: 'عملگرهای ریاضی، مقایسه و منطقی', level: 'beginner' },
         { num: 3, title: 'فصل ۳: شرط‌ها', desc: 'if, else, elif و شرط‌ها', level: 'intermediate' },
         { num: 4, title: 'فصل ۴: حلقه‌ها', desc: 'for, while, range و break', level: 'intermediate' },
-        { num: 5, title: 'فصل ۵: توابع', desc: 'def, return, پارامترها', level: 'advanced' },
+        { num: 5, title: 'فصل ۵: توابع', desc: 'def, return, پارامترها', level: 'intermediate' },
         { num: 6, title: 'فصل ۶: لیست‌ها', desc: 'ایجاد، دسترسی، متدهای لیست', level: 'advanced' },
         { num: 7, title: 'فصل ۷: دیکشنری', desc: 'کلید-مقدار، متدهای دیکشنری', level: 'advanced' },
         { num: 8, title: 'فصل ۸: متدهای رشته', desc: 'split, join, replace و...', level: 'advanced' },
@@ -24,35 +23,78 @@ function renderChaptersGrid() {
         { num: 10, title: 'فصل ۱۰: مدیریت خطا', desc: 'try, except, raise', level: 'advanced' }
     ];
     
-    chaptersInfo.forEach(ch => {
-        const isLocked = isChapterLocked(ch.num);
-        const isCompleted = progress.completedChapters.includes(ch.num);
-        const chapterProgress = getChapterProgress(ch.num);
+    // دسته‌بندی بر اساس سطح
+    const levels = [
+        { key: 'beginner', title: '📗 مبتدی', subtitle: 'شروع یادگیری پایتون', color: 'var(--accent)' },
+        { key: 'intermediate', title: '📘 متوسط', subtitle: 'عمیق‌تر شو!', color: 'var(--blue)' },
+        { key: 'advanced', title: '📕 پیشرفته', subtitle: 'حرفه‌ای شو!', color: 'var(--purple)' }
+    ];
+    
+    let html = '';
+    
+    levels.forEach(level => {
+        const levelChapters = chaptersInfo.filter(ch => ch.level === level.key);
+        if (levelChapters.length === 0) return;
         
-        let statusIcon = '🔒';
-        let cardClass = 'chapter-card';
-        
-        if (isCompleted) {
-            statusIcon = '✅';
-            cardClass += ' completed';
-        } else if (isLocked) {
-            cardClass += ' locked';
-        } else {
-            statusIcon = '▶️';
-        }
+        // محاسبه پیشرفت این سطح
+        const completedInLevel = levelChapters.filter(ch => 
+            progress.completedChapters.includes(ch.num)
+        ).length;
+        const totalInLevel = levelChapters.length;
+        const progressPercent = Math.round((completedInLevel / totalInLevel) * 100);
         
         html += `
-            <div class="${cardClass}" onclick="openChapter(${ch.num})">
-                <div class="chapter-number ${ch.level}">
-                    ${levelIcon(ch.level)} ${toPersianNum(ch.num)}
+            <div class="level-section">
+                <div class="level-header" style="border-right-color: ${level.color};">
+                    <div class="level-info">
+                        <h3 class="level-title">${level.title}</h3>
+                        <p class="level-subtitle">${level.subtitle}</p>
+                    </div>
+                    <div class="level-progress">
+                        <div class="level-progress-bar">
+                            <div class="level-progress-fill" style="width: ${progressPercent}%; background: ${level.color};"></div>
+                        </div>
+                        <span class="level-progress-text">${toPersianNum(completedInLevel)}/${toPersianNum(totalInLevel)}</span>
+                    </div>
                 </div>
-                <div class="chapter-info">
-                    <h3>${ch.title}</h3>
-                    <p>${ch.desc}</p>
-                    ${chapterProgress ? `<p style="color: var(--accent); font-size: 0.8rem;">⭐ ${toPersianNum(chapterProgress.xp)} XP</p>` : ''}
+                <div class="level-chapters">
+        `;
+        
+        levelChapters.forEach(ch => {
+            const isLocked = isChapterLocked(ch.num);
+            const isCompleted = progress.completedChapters.includes(ch.num);
+            const chapterProgress = getChapterProgress(ch.num);
+            
+            let statusIcon = '🔒';
+            let cardClass = 'chapter-card';
+            
+            if (isCompleted) {
+                statusIcon = '✅';
+                cardClass += ' completed';
+            } else if (isLocked) {
+                cardClass += ' locked';
+            } else {
+                statusIcon = '▶️';
+            }
+            
+            html += `
+                <div class="${cardClass}" onclick="openChapter(${ch.num})">
+                    <div class="chapter-number ${ch.level}">
+                        ${levelIcon(ch.level)} ${toPersianNum(ch.num)}
+                    </div>
+                    <div class="chapter-info">
+                        <h3>${ch.title}</h3>
+                        <p>${ch.desc}</p>
+                        ${chapterProgress ? `<p style="color: var(--accent); font-size: 0.8rem;">⭐ ${toPersianNum(chapterProgress.xp)} XP</p>` : ''}
+                    </div>
+                    <div class="chapter-status">
+                        ${isLocked ? '<span class="chapter-locked-icon">🔒</span>' : statusIcon}
+                    </div>
                 </div>
-                <div class="chapter-status">
-                    ${isLocked ? '<span class="chapter-locked-icon">🔒</span>' : statusIcon}
+            `;
+        });
+        
+        html += `
                 </div>
             </div>
         `;
