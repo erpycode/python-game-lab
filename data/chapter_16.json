@@ -1,0 +1,147 @@
+{
+    "id": "16",
+    "title": "فصل ۱۶: آشنایی با فریم‌ورک‌ها 🏗️",
+    "level": "expert",
+    "lesson": {
+        "title": "فریم‌ورک‌های پایتون",
+        "intro": "فریم‌ورک‌ها مثل ابزارهای آماده هستن که کار برنامه‌نویسی رو سریع‌تر و منظم‌تر می‌کنن. هر فریم‌ورک برای یه کار خاص طراحی شده: وب، داده، هوش مصنوعی و...",
+        "sections": [
+            {
+                "icon": "🌐",
+                "title": "Flask - وب‌سایت ساده",
+                "text": "Flask سبک‌ترین فریم‌ورک وب پایتون هست. با چند خط کد یه وب‌سایت می‌سازی!\n\n💡 Flask برای شروع عالیه، برای پروژه‌های بزرگ Django بهتره.",
+                "code": "from flask import Flask\n\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return 'سلام دنیا!'\n\n@app.route('/about')\ndef about():\n    return 'این سایت م hoeme'\n\nif __name__ == '__main__':\n    app.run(debug=True)",
+                "output": "# سرور شروع میشه و در http://localhost:5000 قابل دسترسیه"
+            },
+            {
+                "icon": "🔧",
+                "title": "Django - فریم‌ورک کامل",
+                "text": "Django یه فریم‌ورک کامل (batteries included) هست. همه چیز توش هست:\n\n• ORM برای دیتابیس\n• Admin panel آماده\n• سیستم احراز هویت\n• سیستم template\n\n💡 Django برای پروژه‌های بزرگ و تیمی عالیه!",
+                "code": "# models.py - تعریف مدل\nfrom django.db import models\n\nclass Article(models.Model):\n    title = models.CharField(max_length=200)\n    content = models.TextField()\n    created = models.DateTimeField(auto_now_add=True)\n\n    def __str__(self):\n        return self.title",
+                "output": "# مدل Article ساخته میشه و می‌تونی باهاش کار کنی"
+            },
+            {
+                "icon": "🤖",
+                "title": "FastAPI - API سریع",
+                "text": "FastAPI جدیدترین فریم‌ورک API پایتون هست. خیلی سریعه و auto documentation داره!\n\n💡 FastAPI برای ساخت REST API عالیه و با Python type hints کار می‌کنه.",
+                "code": "from fastapi import FastAPI\nfrom pydantic import BaseModel\n\napp = FastAPI()\n\nclass Item(BaseModel):\n    name: str\n    price: float\n\n@app.get('/')\ndef read_root():\n    return {'Hello': 'World'}\n\n@app.post('/items/')\ndef create_item(item: Item):\n    return item",
+                "output": "# API شروع میشه و در http://localhost:8000 قابل دسترسیه"
+            },
+            {
+                "icon": "📊",
+                "title": "Pandas - تحلیل داده",
+                "text": "Pandas قدرتمندترین ابزار تحلیل داده در پایتون هست. DataFrame مثل یه جدول اکسل هوشمند هست!\n\n💡 Pandas برای کار با CSV, Excel, دیتابیس و داده‌های JSON عالیه!",
+                "code": "import pandas as pd\n\n# ساخت DataFrame\ndata = {\n    'name': ['Ali', 'Sara', 'Mina'],\n    'age': [25, 30, 28],\n    'score': [90, 85, 95]\n}\ndf = pd.DataFrame(data)\n\nprint(df)\nprint('\\nمیانگین سن:', df['age'].mean())\nprint('بالاترین نمره:', df['score'].max())",
+                "output": "   name  age  score\n0   Ali   25     90\n1  Sara   30     85\n2  Mina   28     95\n\nمیانگین سن: 27.666666666666668\nبالاترین نمره: 95"
+            },
+            {
+                "icon": "🧠",
+                "title": "Scikit-learn - یادگیری ماشین",
+                "text": "Scikit-learn محبوب‌ترین کتابخانه یادگیری ماشین پایتون هست.\n\n• Classification (طبقه‌بندی)\n• Regression (регрессия)\n• Clustering (خوشه‌بندی)\n• Model evaluation (ارزیابی مدل)\n\n💡 Scikit-learn API ساده‌ای داره: fit(), predict(), score()",
+                "code": "from sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score\n\n# مثال ساده طبقه‌بندی\nX = [[1, 2], [3, 4], [5, 6], [7, 8]]\ny = [0, 0, 1, 1]\n\n# تقسیم داده\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.25\n)\n\n# ساخت و آموزش مدل\nmodel = RandomForestClassifier(n_estimators=100)\nmodel.fit(X_train, y_train)\n\n# پیش‌بینی\npredictions = model.predict(X_test)\nprint(f'دقت: {accuracy_score(y_test, predictions)}')",
+                "output": "دقت: 1.0"
+            },
+            {
+                "icon": "🎮",
+                "title": "Pygame - بازی‌سازی",
+                "text": "Pygame کتابخانه ساخت بازی با پایتون هست. باهاش می‌تونی بازی‌های 2D بسازی!\n\n💡 Pygame برای شروع بازی‌سازی عالیه، برای بازی‌های حرفه‌ای Unity یا Godot بهتره.",
+                "code": "import pygame\nimport sys\n\n# شروع pygame\npygame.init()\n\n# ساخت صفحه نمایش\nscreen = pygame.display.set_mode((800, 600))\npygame.display.set_caption('بازی من')\n\n# رنگ‌ها\nWHITE = (255, 255, 255)\nBLUE = (0, 0, 255)\n\n# حلقه بازی\nrunning = True\nwhile running:\n    for event in pygame.event.get():\n        if event.type == pygame.QUIT:\n            running = False\n    \n    screen.fill(WHITE)\n    pygame.draw.circle(screen, BLUE, (400, 300), 50)\n    pygame.display.flip()\n\npygame.quit()\nsys.exit()",
+                "output": "# یه پنجره 800x600 با یه دایره آبی باز میشه"
+            }
+        ],
+        "tips": [
+            "Flask برای پروژه‌های کوچک، Django برای پروژه‌های بزرگ",
+            "FastAPI خیلی سریع‌تر از Flask و Django هست",
+            "Pandas برای تحلیل داده ضروریه، حتماً یاد بگیر!",
+            "Scikit-learn برای شروع ML عالیه، بعداً TensorFlow یا PyTorch یاد بگیر",
+            "Pygame برای بازی‌سازی ساده عالیه"
+        ]
+    },
+    "exercises": [
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "import pandas as pd\n\ndata = {'fruit': ['apple', 'banana', 'apple'], 'count': [5, 3, 8]}\ndf = pd.DataFrame(data)\nprint(df.groupby('fruit')['count'].sum())",
+            "answer": "fruit\napple    13\nbanana    3\nName: count, dtype: int64",
+            "hint": "groupby بر اساس fruit گروه‌بندی و sum می‌کنه",
+            "hints": ["apple دو بار تکرار شده: 5 + 8 = 13", "banana یک بار: 3", "groupby نتایج رو ترکیب می‌کنه"]
+        },
+        {
+            "type": "quiz",
+            "title": "کدوم فریم‌ورک برای ساخت API مناسب‌تره؟",
+            "code": "",
+            "options": [
+                {"label": "a", "text": "Flask"},
+                {"label": "b", "text": "FastAPI"},
+                {"label": "c", "text": "Pandas"},
+                {"label": "d", "text": "Pygame"}
+            ],
+            "correct": "b",
+            "hint": "FastAPI مخصوص ساخت API طراحی شده",
+            "hints": ["FastAPI مخصوص REST API هست", "Flask هم API می‌سازه ولی FastAPI بهتره", "Pandas برای تحلیل داده هست"]
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "from sklearn.linear_model import LinearRegression\nimport numpy as np\n\nX = np.array([[1], [2], [3], [4], [5]])\ny = np.array([2, 4, 6, 8, 10])\n\nmodel = LinearRegression()\nmodel.fit(X, y)\n\nprint(f'پیش‌بینی برای 6: {model.predict([[6]])[0]:.0f}')",
+            "answer": "12",
+            "hint": "الگوی y = 2x هست، پس 6 × 2 = 12",
+            "hints": ["داده‌ها رابطه y = 2x دارن", "مدل LinearRegression این رابطه رو یاد می‌گیره", "6 × 2 = 12"]
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'name': ['Ali', 'Sara', 'Mina', 'Reza'],\n    'score': [85, 92, 78, 95]\n})\n\nresult = df[df['score'] > 80]\nprint(len(result))",
+            "answer": "3",
+            "hint": "فقط ردیف‌هایی که نمره بیشتر از 80 دارن",
+            "hints": ["Ali: 85 > 80 ✅", "Sara: 92 > 80 ✅", "Mina: 78 > 80 ❌", "Reza: 95 > 80 ✅", "سه نفر符合条件 هستن"]
+        }
+    ],
+    "challenges": [
+        {
+            "type": "predict",
+            "difficulty": "easy",
+            "title": "خروجی این کد چیه؟",
+            "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'city': ['Tehran', 'Isfahan', 'Tehran', 'Shiraz'],\n    'temp': [35, 32, 38, 30]\n})\n\nprint(df.groupby('city')['temp'].max())",
+            "answer": "city\nIsfahan    32\nShiraz     30\nTehran     38\nName: temp, dtype: int64",
+            "hint": "groupby حداکثر دما رو بر اساس شهر نشون میده",
+            "xp": 10
+        },
+        {
+            "type": "predict",
+            "difficulty": "medium",
+            "title": "خروجی این کد چیه؟",
+            "code": "from sklearn.tree import DecisionTreeClassifier\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import accuracy_score\n\nX = [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]\ny = [0, 0, 1, 1, 1]\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.4, random_state=42\n)\n\nmodel = DecisionTreeClassifier()\nmodel.fit(X_train, y_train)\nprint(accuracy_score(y_test, model.predict(X_test)))",
+            "answer": "0.5",
+            "hint": "داده کمه و مدل overfit میشه",
+            "xp": 15
+        },
+        {
+            "type": "bug_hunter",
+            "difficulty": "medium",
+            "title": "خطا رو پیدا کن!",
+            "code": "import pandas as pd\n\ndf = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})\nprint(df['C'])",
+            "error_line": 4,
+            "hint": "ستون C وجود نداره!",
+            "xp": 15
+        },
+        {
+            "type": "predict",
+            "difficulty": "medium",
+            "title": "خروجی این کد چیه؟",
+            "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'product': ['A', 'B', 'A', 'B', 'A'],\n    'quantity': [10, 20, 5, 15, 30]\n})\n\nresult = df.groupby('product')['quantity'].agg(['sum', 'mean'])\nprint(result.loc['A', 'mean'])",
+            "answer": "15.0",
+            "hint": "A سه بار تکرار شده: 10 + 5 + 30 = 45، 45/3 = 15",
+            "xp": 20
+        },
+        {
+            "type": "predict",
+            "difficulty": "hard",
+            "title": "خروجی این کد پیچیده چیه؟",
+            "code": "from sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.svm import SVC\nimport numpy as np\n\nX_train = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])\ny_train = np.array([0, 0, 1, 1])\nX_test = np.array([[2, 3], [6, 7]])\n\npipeline = Pipeline([\n    ('scaler', StandardScaler()),\n    ('svm', SVC(kernel='linear'))\n])\n\npipeline.fit(X_train, y_train)\npredictions = pipeline.predict(X_test)\nprint(predictions)",
+            "answer": "[0 1]",
+            "hint": "SVM خطی داده‌ها رو جدا می‌کنه",
+            "xp": 30
+        }
+    ]
+}
