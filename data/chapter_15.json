@@ -64,7 +64,12 @@
             "code": "import re\n\ntext = 'hello world 123'\nmatch = re.search(r'\\d+', text)\nif match:\n    print(match.group())",
             "answer": "123",
             "hint": "\\d+ یعنی یک یا بیشتر عدد",
-            "hints": ["\\d عدد رو نشون میده", "+ یعنی یک یا بیشتر", "عدد پیدا شده 123 هست"]
+            "hints": [
+                "\\d عدد رو نشون میده",
+                "+ یعنی یک یا بیشتر",
+                "عدد پیدا شده 123 هست"
+            ],
+            "explanation": "\\\\d+ الگوی عددی هست که یک یا بیشتر عدد رو پیدا می‌کنه. اولین عدد توی متن 123 هست"
         },
         {
             "type": "predict",
@@ -72,21 +77,43 @@
             "code": "import re\n\ntext = 'abc 123 def 456'\nmatches = re.findall(r'\\d+', text)\nprint(matches)",
             "answer": "['123', '456']",
             "hint": "findall همه تطابق‌ها رو برمی‌گردونه",
-            "hints": ["findall لیست همه تطابق‌ها رو برمی‌گردونه", "\\d+ عدد رو پیدا می‌کنه", "دو عدد پیدا میشه: 123 و 456"]
+            "hints": [
+                "findall لیست همه تطابق‌ها رو برمی‌گردونه",
+                "\\d+ عدد رو پیدا می‌کنه",
+                "دو عدد پیدا میشه: 123 و 456"
+            ],
+            "explanation": "findall همه تطابق‌ها رو برمی‌گردونه. دو عدد 123 و 456 پیدا میشه و به صورت لیست رشته‌ها برمی‌گرده"
         },
         {
             "type": "quiz",
             "title": "کدوم الگو ایمیل رو درست پیدا می‌کنه؟",
             "code": "",
             "options": [
-                {"label": "a", "text": "r'\\w+@\\w+'"},
-                {"label": "b", "text": "r'[a-z]+@[a-z]+'"},
-                {"label": "c", "text": "r'\\w+@\\w+\\.\\w+'"},
-                {"label": "d", "text": "r'@\\w+'"}
+                {
+                    "label": "a",
+                    "text": "r'\\w+@\\w+'"
+                },
+                {
+                    "label": "b",
+                    "text": "r'[a-z]+@[a-z]+'"
+                },
+                {
+                    "label": "c",
+                    "text": "r'\\w+@\\w+\\.\\w+'"
+                },
+                {
+                    "label": "d",
+                    "text": "r'@\\w+'"
+                }
             ],
             "correct": "c",
             "hint": "ایمیل یه نقطه بعد از @ داره",
-            "hints": ["ایمیل فرمت user@domain.com داره", "نقطه (.) بعد از @ مهمه", "گزینه c نقطه رو شامل میشه"]
+            "hints": [
+                "ایمیل فرمت user@domain.com داره",
+                "نقطه (.) بعد از @ مهمه",
+                "گزینه c نقطه رو شامل میشه"
+            ],
+            "explanation": "ایمیل فرمت user@domain.com داره. گزینه c شامل نقطه (.) بعد از @ هست که برای جدا کردن دامنه لازمه"
         },
         {
             "type": "predict",
@@ -94,7 +121,12 @@
             "code": "import re\n\ntext = 'score: 95, level: 7'\npattern = r'(?P<key>\\w+):\\s*(?P<val>\\d+)'\nmatch = re.search(pattern, text)\nif match:\n    print(f'{match.group(\"key\")}={match.group(\"val\")}')",
             "answer": "score=95",
             "hint": "named group ها اسم دارن",
-            "hints": ["(?P<key>\\w+) نام متغیر key رو ذخیره می‌کنه", "match.group('key') مقدار key رو برمی‌گردونه", "score اول پیدا میشه"]
+            "hints": [
+                "(?P<key>\\w+) نام متغیر key رو ذخیره می‌کنه",
+                "match.group('key') مقدار key رو برمی‌گردونه",
+                "score اول پیدا میشه"
+            ],
+            "explanation": "named group ها با (?P<name>...) اسم دارن. match.group('key') مقدار key رو برمی‌گردونه. اولین تطابق score=95 هست"
         }
     ],
     "challenges": [
@@ -105,7 +137,8 @@
             "code": "import re\n\npattern = re.compile(r'\\bcat\\b')\ntext = 'the cat sat on the caterpillar'\nmatches = pattern.findall(text)\nprint(len(matches))",
             "answer": "1",
             "hint": "\\b لبه کلمه هست، caterpillar شامل cat نمیشه",
-            "xp": 10
+            "xp": 10,
+            "explanation": "\\\\b لبه کلمه‌ست. 'cat' یک بار پیدا میشه ولی 'caterpillar' شامل cat نیست چون لبه کلمه رعایت شده"
         },
         {
             "type": "predict",
@@ -114,7 +147,8 @@
             "code": "import re\n\ntext = 'Python 3.9, Java 17, Go 1.21'\nversions = re.findall(r'(\\w+)\\s([\\d.]+)', text)\nprint(versions)",
             "answer": "[('Python', '3.9'), ('Java', '17'), ('Go', '1.21')]",
             "hint": "هر دو گروه capture میشن",
-            "xp": 15
+            "xp": 15,
+            "explanation": "الگو دو گروه capture می‌کنه: اسم زبان و نسخه. findall لیستی از tupleها برمی‌گردونه"
         },
         {
             "type": "bug_hunter",
@@ -123,7 +157,8 @@
             "code": "import re\n\ntext = 'Hello World'\nmatch = re.search(r'[a-z]+', text)\nprint(match.group())",
             "error_line": 4,
             "hint": "متن با حرف بزرگ شروع میشه!",
-            "xp": 15
+            "xp": 15,
+            "explanation": "الگو [a-z]+ فقط حروف کوچیک رو پیدا می‌کنه ولی 'Hello' با H بزرگ شروع میشه. match خالی میشه و خطا میده"
         },
         {
             "type": "predict",
@@ -132,7 +167,8 @@
             "code": "import re\n\ntext = '100 dollars, 200 euros, 300 pounds'\nresult = re.sub(r'\\d+', lambda m: str(int(m.group()) * 2), text)\nprint(result)",
             "answer": "200 dollars, 400 euros, 600 pounds",
             "hint": "lambda هر عدد رو دو برابر می‌کنه",
-            "xp": 20
+            "xp": 20,
+            "explanation": "lambda هر عدد پیدا شده رو دو برابر می‌کنه. re.sub جایگزینی رو روی همه اعداد انجام میده"
         },
         {
             "type": "predict",
@@ -141,7 +177,8 @@
             "code": "import re\n\nphone_numbers = ['09121234567', '021-12345678', '+989121234567', '12345']\n\nfor phone in phone_numbers:\n    if re.match(r'^(\\+98|0)\\d{10}$', phone):\n        print(f'{phone}: Iranian mobile')\n    elif re.match(r'^0\\d{2}-?\\d{8}$', phone):\n        print(f'{phone}: Iranian landline')\n    else:\n        print(f'{phone}: Unknown format')",
             "answer": "09121234567: Iranian mobile\n021-12345678: Iranian landline\n+989121234567: Unknown format\n12345: Unknown format",
             "hint": "regex ساده +98 رو شامل نمیشه",
-            "xp": 30
+            "xp": 30,
+            "explanation": "regex ساده +98****4567 رو نمی‌فهمه چون الگو دقیقاً 10 رقم بعد از 0 یا +98 می‌خواد"
         }
     ]
 }

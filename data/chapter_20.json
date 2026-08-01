@@ -64,21 +64,43 @@
             "code": "import os\n\n# شبیه‌سازی environment variables\nos.environ['APP_NAME'] = 'MyApp'\nos.environ['APP_VERSION'] = '1.0'\n\nname = os.getenv('APP_NAME')\nversion = os.getenv('APP_VERSION', '0.1')\nmissing = os.getenv('APP_DEBUG', 'Not Set')\n\nprint(f'Name: {name}')\nprint(f'Version: {version}')\nprint(f'Debug: {missing}')",
             "answer": "Name: MyApp\nVersion: 1.0\nDebug: Not Set",
             "hint": ".getenv مقدار پیش‌فرض برمی‌گردونه وقتی متغیر نباشه",
-            "hints": ["APP_NAME و APP_VERSION وجود دارن", "APP_DEBUG وجود نداره، پس مقدار پیش‌فرض برمی‌گرده", "Not Set مقدار پیش‌فرض هست"]
+            "hints": [
+                "APP_NAME و APP_VERSION وجود دارن",
+                "APP_DEBUG وجود نداره، پس مقدار پیش‌فرض برمی‌گرده",
+                "Not Set مقدار پیش‌فرض هست"
+            ],
+            "explanation": "جواب صحیح Name: MyApp\nVersion: 1.0\nDebug: Not Set هست. کد رو خط به خط اجرا کن تا به جواب برسی."
         },
         {
             "type": "quiz",
             "title": "کدوم دستور محیط مجازی رو فعال می‌کنه؟",
             "code": "",
             "options": [
-                {"label": "a", "text": "python -m venv activate"},
-                {"label": "b", "text": "source venv/bin/activate"},
-                {"label": "c", "text": "pip activate venv"},
-                {"label": "d", "text": "venv start"}
+                {
+                    "label": "a",
+                    "text": "python -m venv activate"
+                },
+                {
+                    "label": "b",
+                    "text": "source venv/bin/activate"
+                },
+                {
+                    "label": "c",
+                    "text": "pip activate venv"
+                },
+                {
+                    "label": "d",
+                    "text": "venv start"
+                }
             ],
             "correct": "b",
             "hint": "source دستور لینوکس/مک برای اجرای اسکریپت‌هاست",
-            "hints": ["source فایل‌ها رو اجرا می‌کنه", "venv/bin/activate مسیر اسکریپت فعال‌سازی هست", "pip مخصوص مدیریت پکیج‌هاست"]
+            "hints": [
+                "source فایل‌ها رو اجرا می‌کنه",
+                "venv/bin/activate مسیر اسکریپت فعال‌سازی هست",
+                "pip مخصوص مدیریت پکیج‌هاست"
+            ],
+            "explanation": "جواب صحیح گزینه  هست. با دقت بیشتری گزینه‌ها رو مقایسه کن."
         },
         {
             "type": "predict",
@@ -86,7 +108,12 @@
             "code": "import subprocess\nimport sys\n\n# شبیه‌سازی pip freeze\npackages = {\n    'flask': '3.0.0',\n    'requests': '2.31.0',\n    'pandas': '2.1.0'\n}\n\n# ساخت requirements.txt محتوا\nreq_content = ''\nfor pkg, ver in sorted(packages.items()):\n    req_content += f'{pkg}=={ver}\\n'\n\nprint(req_content.strip())",
             "answer": "flask==3.0.0\npandas==2.1.0\nrequests==2.31.0",
             "hint": "sorted() حروف الفبایی مرتب می‌کنه",
-            "hints": ["p بعد از f میاد", "pandas بعد از flask هست", "requests آخرین هست"]
+            "hints": [
+                "p بعد از f میاد",
+                "pandas بعد از flask هست",
+                "requests آخرین هست"
+            ],
+            "explanation": "جواب صحیح flask==3.0.0\npandas==2.1.0\nrequests==2.31.0 هست. کد رو خط به خط اجرا کن تا به جواب برسی."
         }
     ],
     "challenges": [
@@ -97,7 +124,8 @@
             "code": "import os\n\n# شبیه‌سازی متغیرهای محیطی\nos.environ['SECRET_KEY'] = 'abc123'\nos.environ['DEBUG'] = 'True'\n\ndef get_config():\n    config = {\n        'secret': os.getenv('SECRET_KEY', 'default'),\n        'debug': os.getenv('DEBUG', 'False') == 'True',\n        'host': os.getenv('HOST', 'localhost')\n    }\n    return config\n\nconfig = get_config()\nprint(config)",
             "answer": "{'secret': 'abc123', 'debug': True, 'host': 'localhost'}",
             "hint": "DEBUG 'True' == 'True' برابر True هست",
-            "xp": 10
+            "xp": 10,
+            "explanation": "جواب صحیح {'secret': 'abc123', 'debug': True, 'host': 'localhost'} هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "predict",
@@ -106,7 +134,8 @@
             "code": "import os\n\n# شبیه‌سازی فایل .env\nenv_content = \"\"\"DB_HOST=localhost\nDB_PORT=5432\nDB_NAME=myapp\nAPI_KEY=secret_123\n\"\"\"\n\n# تبدیل به دیکشنری\nenv_vars = {}\nfor line in env_content.strip().split('\\n'):\n    if '=' in line and not line.startswith('#'):\n        key, value = line.split('=', 1)\n        env_vars[key.strip()] = value.strip()\n\nprint(f'Total vars: {len(env_vars)}')\nprint(f'DB_PORT: {env_vars.get(\"DB_PORT\", \"N/A\")}')\nprint(f'API_KEY starts with: {env_vars[\"API_KEY\"][:7]}')",
             "answer": "Total vars: 4\nDB_PORT: 5432\nAPI_KEY starts with: secret_",
             "hint": "split('=') فقط اولین = رو جدا می‌کنه",
-            "xp": 15
+            "xp": 15,
+            "explanation": "جواب صحیح Total vars: 4\nDB_PORT: 5432\nAPI_KEY starts with: secret_ هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "bug_hunter",
@@ -115,7 +144,8 @@
             "code": "import os\n\n# فایل .env داره:\n# DB_HOST=localhost\n# DB_PASS=secret123\n\ndef connect_db():\n    host = os.getenv('DB_HOST')\n    password = os.getenv('DB_PASSWORD')  # مشکل اینجاست!\n    \n    if password is None:\n        raise ValueError('Password not found!')\n    \n    return f'Connected to {host}'\n\nprint(connect_db())",
             "error_line": 8,
             "hint": "نام متغیر رو اشتباه نوشتی! DB_PASS هست ولی DB_PASSWORD خوندی",
-            "xp": 15
+            "xp": 15,
+            "explanation": "خط  خطا داره. کد رو با دقت بخون و ببین کجا مشکل داره."
         },
         {
             "type": "predict",
@@ -124,7 +154,8 @@
             "code": "import os\n\n# محیط مجازی شبیه‌سازی شده\nos.environ['VIRTUAL_ENV'] = '/home/user/myenv'\nos.environ['PATH'] = '/home/user/myenv/bin:/usr/bin'\n\ndef show_env():\n    venv = os.getenv('VIRTUAL_ENV', 'No venv')\n    is_active = venv != 'No venv'\n    \n    print(f'Virtual env: {venv}')\n    print(f'Active: {is_active}')\n    \n    if is_active:\n        # استخراج نام پروژه از مسیر\n        project = venv.split('/')[-1]\n        print(f'Project: {project}')\n\nshow_env()",
             "answer": "Virtual env: /home/user/myenv\nActive: True\nProject: myenv",
             "hint": "split('/')[-1] آخرین بخش مسیر رو میگیره",
-            "xp": 20
+            "xp": 20,
+            "explanation": "جواب صحیح Virtual env: /home/user/myenv\nActive: True\nProject: myenv هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "predict",
@@ -133,7 +164,8 @@
             "code": "import os\nimport json\n\n# شبیه‌سازی محیط مULTIPLE\nenvs = {\n    'dev': {'DEBUG': 'True', 'DB': 'sqlite'},\n    'prod': {'DEBUG': 'False', 'DB': 'postgresql'},\n    'test': {'DEBUG': 'True', 'DB': 'sqlite'}\n}\n\ndef create_env_file(env_name, config):\n    lines = []\n    for key, value in sorted(config.items()):\n        lines.append(f'{key}={value}')\n    return '\\n'.join(lines)\n\n# ساخت فایل‌ها\nfor name, config in envs.items():\n    content = create_env_file(name, config)\n    print(f'=== {name}.env ===')\n    print(content)\n    print()",
             "answer": "=== dev.env ===\nDB=sqlite\nDEBUG=True\n\n=== prod.env ===\nDB=postgresql\nDEBUG=False\n\n=== test.env ===\nDB=sqlite\nDEBUG=True",
             "hint": "sorted() کلیدها رو مرتب می‌کنه",
-            "xp": 30
+            "xp": 30,
+            "explanation": "جواب صحیح === dev.env ===\nDB=sqlite\nDEBUG=True\n\n=== prod.env ===\nDB=postgresql\nDEBUG=False\n\n=== test.env ===\nDB=sqlite\nDEBUG=True هست. کد رو با دقت بخون و خط به خط اجرا کن."
         }
     ]
 }

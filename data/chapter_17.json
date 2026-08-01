@@ -64,21 +64,43 @@
             "code": "import hashlib\n\npassword = 'admin'\nhashed = hashlib.md5(password.encode()).hexdigest()\nprint(len(hashed))",
             "answer": "32",
             "hint": "MD5 hash همیشه 32 کاراکتری هست",
-            "hints": ["MD5 hash 128 بیتی هست", "هر 4 بیت یک کاراکتر hexadecimal میشه", "128 / 4 = 32 کاراکتر"]
+            "hints": [
+                "MD5 hash 128 بیتی هست",
+                "هر 4 بیت یک کاراکتر hexadecimal میشه",
+                "128 / 4 = 32 کاراکتر"
+            ],
+            "explanation": "جواب صحیح 32 هست. کد رو خط به خط اجرا کن تا به جواب برسی."
         },
         {
             "type": "quiz",
             "title": "کدوم کتابخانه برای وب‌سکرپینگ مناسب‌تره؟",
             "code": "",
             "options": [
-                {"label": "a", "text": "requests"},
-                {"label": "b", "text": "BeautifulSoup"},
-                {"label": "c", "text": "pandas"},
-                {"label": "d", "text": "matplotlib"}
+                {
+                    "label": "a",
+                    "text": "requests"
+                },
+                {
+                    "label": "b",
+                    "text": "BeautifulSoup"
+                },
+                {
+                    "label": "c",
+                    "text": "pandas"
+                },
+                {
+                    "label": "d",
+                    "text": "matplotlib"
+                }
             ],
             "correct": "b",
             "hint": "BeautifulSoup مخصوص تحلیل HTML هست",
-            "hints": ["requests فقط صفحه رو دانلود می‌کنه", "BeautifulSoup HTML رو تحلیل می‌کنه", "pandas برای داده‌ست"]
+            "hints": [
+                "requests فقط صفحه رو دانلود می‌کنه",
+                "BeautifulSoup HTML رو تحلیل می‌کنه",
+                "pandas برای داده‌ست"
+            ],
+            "explanation": "جواب صحیح گزینه  هست. با دقت بیشتری گزینه‌ها رو مقایسه کن."
         },
         {
             "type": "predict",
@@ -86,7 +108,12 @@
             "code": "import secrets\n\ntoken = secrets.token_urlsafe(16)\nprint(len(token))",
             "answer": "22",
             "hint": "16 بیت → 22 کاراکتر base64",
-            "hints": ["token_urlsafe از base64 استفاده می‌کنه", "16 بایت = 128 بیت", "base64 هر 6 بیت رو یک کاراکتر می‌کنه"]
+            "hints": [
+                "token_urlsafe از base64 استفاده می‌کنه",
+                "16 بایت = 128 بیت",
+                "base64 هر 6 بیت رو یک کاراکتر می‌کنه"
+            ],
+            "explanation": "جواب صحیح 22 هست. کد رو خط به خط اجرا کن تا به جواب برسی."
         },
         {
             "type": "predict",
@@ -94,7 +121,11 @@
             "code": "import re\n\ndef validate_password(pw):\n    checks = [\n        len(pw) >= 8,\n        bool(re.search(r'[A-Z]', pw)),\n        bool(re.search(r'[0-9]', pw)),\n        bool(re.search(r'[!@#$%]', pw))\n    ]\n    return sum(checks) >= 3\n\nprint(validate_password('Abc123'))\nprint(validate_password('Strong123!'))",
             "answer": "False\nTrue",
             "hint": "Abc123 فقط ۲ شرط رو داره (حرف بزرگ و عدد)، باید حداقل ۳ تا باشه",
-            "hints": ["Abc123: طول ❌, حرف بزرگ ✅, عدد ✅, نماد ❌ = 2 شرط", "Strong123!: طول ✅, حرف بزرگ ✅, عدد ✅, نماد ✅ = 4 شرط", "min 3 checks required"],
+            "hints": [
+                "Abc123: طول ❌, حرف بزرگ ✅, عدد ✅, نماد ❌ = 2 شرط",
+                "Strong123!: طول ✅, حرف بزرگ ✅, عدد ✅, نماد ✅ = 4 شرط",
+                "min 3 checks required"
+            ],
             "explanation": "Abc123 فقط حرف بزرگ و عدد داره (۲ شرط)، پس False برمی‌گردونه. Strong123! همه شرط‌ها رو داره."
         }
     ],
@@ -106,7 +137,8 @@
             "code": "from pathlib import Path\n\np = Path('/home/user/documents/report.pdf')\nprint(p.suffix)\nprint(p.stem)\nprint(p.parent)",
             "answer": ".pdf\nreport\n/home/user/documents",
             "hint": "pathlib راه ساده کار با مسیرهاست",
-            "xp": 10
+            "xp": 10,
+            "explanation": "جواب صحیح .pdf\nreport\n/home/user/documents هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "predict",
@@ -115,7 +147,8 @@
             "code": "import hashlib\nimport secrets\n\n# تولید رمز امن\nsalt = secrets.token_hex(16)\npassword = 'mypassword'\nhashed = hashlib.pbkdf2_hmac('sha256', password.encode(), salt.encode(), 100000)\n\nprint(f'Salt: {salt[:20]}...')\nprint(f'Hash length: {len(hashed)} bytes')\nprint(f'Hash: {hashed.hex()[:20]}...')",
             "answer": "Salt: (varies 20 hex chars)...\nHash length: 32 bytes\nHash: (varies 20 hex chars)...",
             "hint": "pbkdf2_hmac تابع key derivation هست",
-            "xp": 15
+            "xp": 15,
+            "explanation": "جواب صحیح Salt: (varies 20 hex chars)...\nHash length: 32 bytes\nHash: (varies 20 hex chars)... هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "bug_hunter",
@@ -124,7 +157,8 @@
             "code": "import hashlib\n\ndef check_password(stored_hash, password):\n    password_hash = hashlib.md5(password.encode()).hexdigest()\n    return stored_hash == password_hash\n\n# ذخیره رمز\nuser_password = 'secret123'\nstored = hashlib.sha256(user_password.encode()).hexdigest()\n\n# بررسی رمز\nprint(check_password(stored, user_password))",
             "error_line": 10,
             "hint": "sha256 ذخیره شده ولی md5 بررسی میشه!",
-            "xp": 15
+            "xp": 15,
+            "explanation": "خط  خطا داره. کد رو با دقت بخون و ببین کجا مشکل داره."
         },
         {
             "type": "predict",
@@ -133,7 +167,8 @@
             "code": "import pandas as pd\nfrom pathlib import Path\n\n# ساخت داده نمونه\ndf = pd.DataFrame({\n    'product': ['A', 'B', 'C', 'A', 'B', 'A'],\n    'quantity': [10, 20, 15, 5, 25, 30],\n    'price': [100, 200, 150, 100, 200, 100]\n})\n\n# محاسبه درآمد\ndf['revenue'] = df['quantity'] * df['price']\n\n# گروه‌بندی بر اساس محصول\nresult = df.groupby('product')['revenue'].sum()\nprint(result['A'])",
             "answer": "4500",
             "hint": "A سه بار: 10*100 + 5*100 + 30*100 = 4500",
-            "xp": 20
+            "xp": 20,
+            "explanation": "جواب صحیح 4500 هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "predict",
@@ -142,7 +177,8 @@
             "code": "import hashlib\nimport secrets\nimport re\n\ndef create_user(username, password):\n    # اعتبارسنجی رمز\n    if len(password) < 8:\n        raise ValueError('رمز کوتاهه!')\n    if not re.search(r'[A-Z].*[0-9]', password):\n        raise ValueError('رمز ضعیفه!')\n    \n    # تولید salt و هش\n    salt = secrets.token_hex(16)\n    key = hashlib.pbkdf2_hmac('sha256', password.encode(), salt.encode(), 100000)\n    \n    return {\n        'username': username,\n        'salt': salt,\n        'key': key.hex(),\n        'key_len': len(key)\n    }\n\nuser = create_user('ali', 'Strong123')\nprint(f'User: {user[\"username\"]}')\nprint(f'Key length: {user[\"key_len\"]}')\nprint(f'Salt: {user[\"salt\"][:16]}...')",
             "answer": "User: ali\nKey length: 32\nSalt: (varies 16 hex chars)...",
             "hint": "pbkdf2_hmac همیشه 32 بایت برمی‌گردونه",
-            "xp": 30
+            "xp": 30,
+            "explanation": "جواب صحیح User: ali\nKey length: 32\nSalt: (varies 16 hex chars)... هست. کد رو با دقت بخون و خط به خط اجرا کن."
         }
     ]
 }

@@ -45,7 +45,10 @@
             "code": "import requests\nresponse = requests.get('https://httpbin.org/get')\nprint(response.status_code)",
             "answer": "200",
             "hint": "status_code 200 یعنی موفقیت",
-            "hints": ["httpbin.org یه API تستی هست", "200 یعنی OK"],
+            "hints": [
+                "httpbin.org یه API تستی هست",
+                "200 یعنی OK"
+            ],
             "explanation": "status_code 200 یعنی درخواست با موفقیت انجام شد"
         },
         {
@@ -53,14 +56,29 @@
             "title": "کدوم method برای ارسال داده استفاده میشه؟",
             "code": "# کدوم؟",
             "options": [
-                {"label": "a", "text": "requests.get()"},
-                {"label": "b", "text": "requests.post()"},
-                {"label": "c", "text": "requests.delete()"},
-                {"label": "d", "text": "requests.put()"}
+                {
+                    "label": "a",
+                    "text": "requests.get()"
+                },
+                {
+                    "label": "b",
+                    "text": "requests.post()"
+                },
+                {
+                    "label": "c",
+                    "text": "requests.delete()"
+                },
+                {
+                    "label": "d",
+                    "text": "requests.put()"
+                }
             ],
             "correct": "b",
             "hint": "POST برای ارسال داده هست",
-            "hints": ["GET برای دریافت هست", "POST برای ارسال هست"],
+            "hints": [
+                "GET برای دریافت هست",
+                "POST برای ارسال هست"
+            ],
             "explanation": "requests.post() برای ارسال داده به سرور استفاده میشه"
         }
     ],
@@ -72,7 +90,8 @@
             "code": "import requests\nresponse = requests.get('https://httpbin.org/get')\ndata = response.json()\nprint(type(data))",
             "answer": "<class 'dict'>",
             "hint": "json() دیکشنری برمیگردونه",
-            "xp": 15
+            "xp": 15,
+            "explanation": "جواب صحیح <class 'dict'> هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "bug_hunter",
@@ -81,7 +100,8 @@
             "code": "import requests\nresponse = requests.get('https://httpbin.org/get')\ndata = response.json()\nprint(data['nonexistent_key'])",
             "error_line": 4,
             "hint": "کلید وجود نداره!",
-            "xp": 20
+            "xp": 20,
+            "explanation": "خط  خطا داره. کد رو با دقت بخون و ببین کجا مشکل داره."
         }
     ]
 }

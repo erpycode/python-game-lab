@@ -47,7 +47,10 @@
             "code": "def shout(func):\n    def wrapper():\n        return func().upper()\n    return wrapper\n\n@shout\ndef say():\n    return 'hello'\n\nprint(say())",
             "answer": "HELLO",
             "hint": "دکوراتور متن رو بزرگ میکنه",
-            "hints": ["wrapper متن رو upper میکنه", "hello به HELLO تبدیل میشه"],
+            "hints": [
+                "wrapper متن رو upper میکنه",
+                "hello به HELLO تبدیل میشه"
+            ],
             "explanation": "دکوراتور shout متن خروجی تابع رو به حروف بزرگ تبدیل میکنه"
         },
         {
@@ -55,14 +58,29 @@
             "title": "کدوم دکوراتور برای caching استفاده میشه؟",
             "code": "# کدوم؟",
             "options": [
-                {"label": "a", "text": "@staticmethod"},
-                {"label": "b", "text": "@property"},
-                {"label": "c", "text": "@lru_cache"},
-                {"label": "d", "text": "@classmethod"}
+                {
+                    "label": "a",
+                    "text": "@staticmethod"
+                },
+                {
+                    "label": "b",
+                    "text": "@property"
+                },
+                {
+                    "label": "c",
+                    "text": "@lru_cache"
+                },
+                {
+                    "label": "d",
+                    "text": "@classmethod"
+                }
             ],
             "correct": "c",
             "hint": "lru_cache نتایج رو ذخیره میکنه",
-            "hints": ["به اسم دکوراتورها نگاه کن", "lru مخفف Least Recently Used هست"],
+            "hints": [
+                "به اسم دکوراتورها نگاه کن",
+                "lru مخفف Least Recently Used هست"
+            ],
             "explanation": "@lru_cache نتایج تابع رو کش میکنه تا دوباره اجرا نشه"
         }
     ],
@@ -74,7 +92,8 @@
             "code": "def bold(func):\n    def wrapper():\n        return f'<b>{func()}</b>'\n    return wrapper\n\n@bold\ndef hello():\n    return 'world'\n\nprint(hello())",
             "answer": "<b>world</b>",
             "hint": "دکوراتور متن رو توی تگ b میذاره",
-            "xp": 15
+            "xp": 15,
+            "explanation": "دکوراتور bold خروجی تابع hello رو توی تگ <b> میذاره. 'world' به '<b>world</b>' تبدیل میشه"
         },
         {
             "type": "bug_hunter",
@@ -83,16 +102,22 @@
             "code": "def log(func):\n    def wrapper():\n        print(f'Calling {func.name}')\n        return func()\n    return wrapper\n\n@log\ndef add(a, b):\n    return a + b",
             "error_line": 3,
             "hint": "اسم تابع اصلی رو چطوری بگیریم؟",
-            "xp": 20
+            "xp": 20,
+            "explanation": "اسم تابع با __name__ گرفته میشه، نه .name. خط اشتباه func.name هست باید func.__name__ باشه"
         },
         {
             "type": "fill_gap",
             "difficulty": "medium",
             "title": "جای خالی رو پر کن:",
             "code": "def cache(func):\n    saved = {}\n    def wrapper(*args):\n        if args not in ___:\n            ___[args] = func(*args)\n        return ___[args]\n    return wrapper",
-            "answer": ["saved", "saved", "saved"],
+            "answer": [
+                "saved",
+                "saved",
+                "saved"
+            ],
             "hint": "از متغیر saved استفاده کن",
-            "xp": 25
+            "xp": 25,
+            "explanation": "saved دیکشنری‌ای‌ه که نتایج رو ذخیره می‌کنه. اگه args قبلاً بوده، دوباره اجرا نمیشه"
         }
     ]
 }

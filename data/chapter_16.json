@@ -64,21 +64,43 @@
             "code": "import pandas as pd\n\ndata = {'fruit': ['apple', 'banana', 'apple'], 'count': [5, 3, 8]}\ndf = pd.DataFrame(data)\nprint(df.groupby('fruit')['count'].sum())",
             "answer": "fruit\napple    13\nbanana    3\nName: count, dtype: int64",
             "hint": "groupby بر اساس fruit گروه‌بندی و sum می‌کنه",
-            "hints": ["apple دو بار تکرار شده: 5 + 8 = 13", "banana یک بار: 3", "groupby نتایج رو ترکیب می‌کنه"]
+            "hints": [
+                "apple دو بار تکرار شده: 5 + 8 = 13",
+                "banana یک بار: 3",
+                "groupby نتایج رو ترکیب می‌کنه"
+            ],
+            "explanation": "جواب صحیح fruit\napple    13\nbanana    3\nName: count, dtype: int64 هست. کد رو خط به خط اجرا کن تا به جواب برسی."
         },
         {
             "type": "quiz",
             "title": "کدوم فریم‌ورک برای ساخت API مناسب‌تره؟",
             "code": "",
             "options": [
-                {"label": "a", "text": "Flask"},
-                {"label": "b", "text": "FastAPI"},
-                {"label": "c", "text": "Pandas"},
-                {"label": "d", "text": "Pygame"}
+                {
+                    "label": "a",
+                    "text": "Flask"
+                },
+                {
+                    "label": "b",
+                    "text": "FastAPI"
+                },
+                {
+                    "label": "c",
+                    "text": "Pandas"
+                },
+                {
+                    "label": "d",
+                    "text": "Pygame"
+                }
             ],
             "correct": "b",
             "hint": "FastAPI مخصوص ساخت API طراحی شده",
-            "hints": ["FastAPI مخصوص REST API هست", "Flask هم API می‌سازه ولی FastAPI بهتره", "Pandas برای تحلیل داده هست"]
+            "hints": [
+                "FastAPI مخصوص REST API هست",
+                "Flask هم API می‌سازه ولی FastAPI بهتره",
+                "Pandas برای تحلیل داده هست"
+            ],
+            "explanation": "جواب صحیح گزینه  هست. با دقت بیشتری گزینه‌ها رو مقایسه کن."
         },
         {
             "type": "predict",
@@ -86,7 +108,12 @@
             "code": "from sklearn.linear_model import LinearRegression\nimport numpy as np\n\nX = np.array([[1], [2], [3], [4], [5]])\ny = np.array([2, 4, 6, 8, 10])\n\nmodel = LinearRegression()\nmodel.fit(X, y)\n\nprint(f'پیش‌بینی برای 6: {model.predict([[6]])[0]:.0f}')",
             "answer": "12",
             "hint": "الگوی y = 2x هست، پس 6 × 2 = 12",
-            "hints": ["داده‌ها رابطه y = 2x دارن", "مدل LinearRegression این رابطه رو یاد می‌گیره", "6 × 2 = 12"]
+            "hints": [
+                "داده‌ها رابطه y = 2x دارن",
+                "مدل LinearRegression این رابطه رو یاد می‌گیره",
+                "6 × 2 = 12"
+            ],
+            "explanation": "جواب صحیح 12 هست. کد رو خط به خط اجرا کن تا به جواب برسی."
         },
         {
             "type": "predict",
@@ -94,7 +121,14 @@
             "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'name': ['Ali', 'Sara', 'Mina', 'Reza'],\n    'score': [85, 92, 78, 95]\n})\n\nresult = df[df['score'] > 80]\nprint(len(result))",
             "answer": "3",
             "hint": "فقط ردیف‌هایی که نمره بیشتر از 80 دارن",
-            "hints": ["Ali: 85 > 80 ✅", "Sara: 92 > 80 ✅", "Mina: 78 > 80 ❌", "Reza: 95 > 80 ✅", "سه نفر符合条件 هستن"]
+            "hints": [
+                "Ali: 85 > 80 ✅",
+                "Sara: 92 > 80 ✅",
+                "Mina: 78 > 80 ❌",
+                "Reza: 95 > 80 ✅",
+                "سه نفر符合条件 هستن"
+            ],
+            "explanation": "جواب صحیح 3 هست. کد رو خط به خط اجرا کن تا به جواب برسی."
         }
     ],
     "challenges": [
@@ -105,7 +139,8 @@
             "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'city': ['Tehran', 'Isfahan', 'Tehran', 'Shiraz'],\n    'temp': [35, 32, 38, 30]\n})\n\nprint(df.groupby('city')['temp'].max())",
             "answer": "city\nIsfahan    32\nShiraz     30\nTehran     38\nName: temp, dtype: int64",
             "hint": "groupby حداکثر دما رو بر اساس شهر نشون میده",
-            "xp": 10
+            "xp": 10,
+            "explanation": "جواب صحیح city\nIsfahan    32\nShiraz     30\nTehran     38\nName: temp, dtype: int64 هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "predict",
@@ -114,7 +149,8 @@
             "code": "from sklearn.tree import DecisionTreeClassifier\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import accuracy_score\n\nX = [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]\ny = [0, 0, 1, 1, 1]\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.4, random_state=42\n)\n\nmodel = DecisionTreeClassifier()\nmodel.fit(X_train, y_train)\nprint(accuracy_score(y_test, model.predict(X_test)))",
             "answer": "0.5",
             "hint": "داده کمه و مدل overfit میشه",
-            "xp": 15
+            "xp": 15,
+            "explanation": "جواب صحیح 0.5 هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "bug_hunter",
@@ -123,7 +159,8 @@
             "code": "import pandas as pd\n\ndf = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})\nprint(df['C'])",
             "error_line": 4,
             "hint": "ستون C وجود نداره!",
-            "xp": 15
+            "xp": 15,
+            "explanation": "خط  خطا داره. کد رو با دقت بخون و ببین کجا مشکل داره."
         },
         {
             "type": "predict",
@@ -132,7 +169,8 @@
             "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'product': ['A', 'B', 'A', 'B', 'A'],\n    'quantity': [10, 20, 5, 15, 30]\n})\n\nresult = df.groupby('product')['quantity'].agg(['sum', 'mean'])\nprint(result.loc['A', 'mean'])",
             "answer": "15.0",
             "hint": "A سه بار تکرار شده: 10 + 5 + 30 = 45، 45/3 = 15",
-            "xp": 20
+            "xp": 20,
+            "explanation": "جواب صحیح 15.0 هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "predict",
@@ -141,7 +179,8 @@
             "code": "from sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.svm import SVC\nimport numpy as np\n\nX_train = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])\ny_train = np.array([0, 0, 1, 1])\nX_test = np.array([[2, 3], [6, 7]])\n\npipeline = Pipeline([\n    ('scaler', StandardScaler()),\n    ('svm', SVC(kernel='linear'))\n])\n\npipeline.fit(X_train, y_train)\npredictions = pipeline.predict(X_test)\nprint(predictions)",
             "answer": "[0 1]",
             "hint": "SVM خطی داده‌ها رو جدا می‌کنه",
-            "xp": 30
+            "xp": 30,
+            "explanation": "جواب صحیح [0 1] هست. کد رو با دقت بخون و خط به خط اجرا کن."
         }
     ]
 }

@@ -48,27 +48,42 @@
             "title": "خروجی این کد چیه؟",
             "code": "def double(x):\n    return x * 2\n\nprint(double(5))",
             "answer": "10",
-            "hint": "۵ ضربدر ۲"
+            "hint": "۵ ضربدر ۲",
+            "explanation": "تابع double عدد ورودی رو ضربدر ۲ میکنه: ۵ × ۲ = ۱۰"
         },
         {
             "type": "predict",
             "title": "خروجی این کد چیه؟",
             "code": "def is_even(n):\n    if n % 2 == 0:\n        return True\n    else:\n        return False\n\nprint(is_even(4))",
             "answer": "True",
-            "hint": "4 تقسیم ۲ باقی‌مانده صفر داره"
+            "hint": "4 تقسیم ۲ باقی‌مانده صفر داره",
+            "explanation": "4 تقسیم ۲ باقی‌مانده صفر داره (4 % 2 == 0) پس True برمی‌گردونه"
         },
         {
             "type": "quiz",
             "title": "out() چه چیزی چاپ میکنه؟",
             "code": "def greet(name, msg='خوش اومدی'):\n    print(f'{msg} {name}')\n\ngreet('Ali')",
             "options": [
-                {"label": "a", "text": "Ali خوش اومدی"},
-                {"label": "b", "text": "خوش اومدی Ali"},
-                {"label": "c", "text": "error"},
-                {"label": "d", "text": "هیچی"}
+                {
+                    "label": "a",
+                    "text": "Ali خوش اومدی"
+                },
+                {
+                    "label": "b",
+                    "text": "خوش اومدی Ali"
+                },
+                {
+                    "label": "c",
+                    "text": "error"
+                },
+                {
+                    "label": "d",
+                    "text": "هیچی"
+                }
             ],
             "correct": "b",
-            "hint": "مقدار پیش‌فرض برای msg استفاده میشه"
+            "hint": "مقدار پیش‌فرض برای msg استفاده میشه",
+            "explanation": "چون فقط name دادیم، msg مقدار پیش‌فرض 'خوش اومدی' رو استفاده میکنه"
         }
     ],
     "challenges": [
@@ -79,7 +94,8 @@
             "code": "def square(n):\n    return n ** 2\n\nprint(square(4))",
             "answer": "16",
             "hint": "۴ به توان ۲",
-            "xp": 10
+            "xp": 10,
+            "explanation": "تابع square عدد رو به توان ۲ میرسونه: ۴² = ۱۶"
         },
         {
             "type": "bug_hunter",
@@ -88,7 +104,8 @@
             "code": "def add(a, b)\n    return a + b\n\nprint(add(3, 5))",
             "error_line": 1,
             "hint": "بعد از def حتماً : میخواد",
-            "xp": 15
+            "xp": 15,
+            "explanation": "بعد از def حتماً دو نقطه (:) لازمه. خط اول بدون : خطاست"
         },
         {
             "type": "predict",
@@ -97,7 +114,8 @@
             "code": "def count_up(n):\n    for i in range(n):\n        print(i, end=' ')\n\ncount_up(4)",
             "answer": "0 1 2 3",
             "hint": "حلقه ۴ بار اجرا میشه (0 تا 3)",
-            "xp": 15
+            "xp": 15,
+            "explanation": "range(4) اعداد ۰, ۱, ۲, ۳ رو چاپ میکنه"
         },
         {
             "type": "predict",
@@ -106,7 +124,8 @@
             "code": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)\n\nprint(factorial(4))",
             "answer": "24",
             "hint": "4 * 3 * 2 * 1 = 24 (تابع بازگشتی هست)",
-            "xp": 25
+            "xp": 25,
+            "explanation": "بازگشتی: factorial(4) = 4 × factorial(3) = 4 × 3 × factorial(2) = 4 × 3 × 2 × factorial(1) = 4 × 3 × 2 × 1 = 24"
         }
     ]
 }

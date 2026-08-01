@@ -58,7 +58,11 @@
             "code": "x = 10\ny = 5\nprint(x)",
             "answer": "10",
             "hint": "فقط مقدار x چاپ شده",
-            "hints": ["x برابر ۱۰ه", "print(x) یعنی مقدار x رو چاپ کن", "x = 10 پس خروجی ۱۰ه"],
+            "hints": [
+                "x برابر ۱۰ه",
+                "print(x) یعنی مقدار x رو چاپ کن",
+                "x = 10 پس خروجی ۱۰ه"
+            ],
             "explanation": "متغیر x مقدار ۱۰ داره و print(x) مقدارش رو چاپ میکنه"
         },
         {
@@ -66,14 +70,30 @@
             "title": "type متغیر z چیه؟",
             "code": "z = 'Hello'",
             "options": [
-                {"label": "a", "text": "int"},
-                {"label": "b", "text": "float"},
-                {"label": "c", "text": "str"},
-                {"label": "d", "text": "bool"}
+                {
+                    "label": "a",
+                    "text": "int"
+                },
+                {
+                    "label": "b",
+                    "text": "float"
+                },
+                {
+                    "label": "c",
+                    "text": "str"
+                },
+                {
+                    "label": "d",
+                    "text": "bool"
+                }
             ],
             "correct": "c",
             "hint": "وقتی متن توی علامت نقل‌قول باشه، رشته (str) هست",
-            "hints": ["علامت نقل‌Quote رو ببین", "متن داخل ' ' یا \" \" رشته (str) هست", "Hello یه متن پس str هست"],
+            "hints": [
+                "علامت نقل‌Quote رو ببین",
+                "متن داخل ' ' یا \" \" رشته (str) هست",
+                "Hello یه متن پس str هست"
+            ],
             "explanation": "وقتی مقداری توی علامت نقل‌Quote باشه (مثل 'Hello')، نوعش str (رشته) هست"
         },
         {
@@ -82,7 +102,11 @@
             "code": "age = 20\nprint(type(age))",
             "answer": "<class 'int'>",
             "hint": "age یه عدد صحیحه",
-            "hints": ["20 یه عدد صحیحه", "int مخفف integer (عدد صحیح) هست", "type() نوع متغیر رو برمی‌گردونه"],
+            "hints": [
+                "20 یه عدد صحیحه",
+                "int مخفف integer (عدد صحیح) هست",
+                "type() نوع متغیر رو برمی‌گردونه"
+            ],
             "explanation": "age = 20 یه عدد صحیحه پس نوعش int هست. type() نوع متغیر رو نشون میده"
         }
     ],
@@ -94,7 +118,8 @@
             "code": "a = 3\nb = 7\nresult = a + b\nprint(result)",
             "answer": "10",
             "hint": "a برابر ۳ و b برابر ۷ه، حساب کن!",
-            "xp": 10
+            "xp": 10,
+            "explanation": "a برابر ۳ و b برابر ۷ هست، جمعشون ۱۰ میشه"
         },
         {
             "type": "bug_hunter",
@@ -103,7 +128,8 @@
             "code": "my name = 'Ali'\nprint(my name)",
             "error_line": 1,
             "hint": "فاصله توی اسم متغیر نباید باشه",
-            "xp": 15
+            "xp": 15,
+            "explanation": "توی اسم متغیر نباید فاصله باشه، my name غلطه و باید my_name باشه"
         },
         {
             "type": "fill_gap",
@@ -112,7 +138,8 @@
             "code": "score = 100\n___ = score * 2\nprint(double_score)",
             "answer": "double_score",
             "hint": "متغیری که توی print استفاده شده رو پر کن",
-            "xp": 15
+            "xp": 15,
+            "explanation": "مقداری که توی print استفاده شده double_score هست پس باید اسم متغیر هم double_score باشه"
         },
         {
             "type": "predict",
@@ -121,7 +148,8 @@
             "code": "x = '5'\ny = '3'\nprint(x + y)",
             "answer": "53",
             "hint": "وقتی عدد توی علامت نقل‌Quote باشه، رشته هست و جمع‌شون کنار هم میشن",
-            "xp": 20
+            "xp": 20,
+            "explanation": "'5' و '3' رشته هستن (توی علامت نقل‌قول)، پس با + کنار هم میشن و 53 چاپ میشه"
         }
     ]
 }

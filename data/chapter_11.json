@@ -70,35 +70,40 @@
             "title": "خروجی این کد چیه؟",
             "code": "class Car:\n    def __init__(self, color):\n        self.color = color\n\n    def honk(self):\n        return f'{self.color} بوق می‌زنه!'\n\nred = Car('قرمز')\nprint(red.honk())",
             "answer": "قرمز بوق می‌زنه!",
-            "hint": "آبجکت red با رنگ قرمز ساخته شده و متد honk اون رنگ رو نمایش میده"
+            "hint": "آبجکت red با رنگ قرمز ساخته شده و متد honk اون رنگ رو نمایش میده",
+            "explanation": "آبجکت red با رنگ 'قرمز' ساخته شده. متد honk رنگ رو توی رشته قرار میده و 'قرمز بوق می‌زنه!' برمی‌گردونه"
         },
         {
             "type": "predict",
             "title": "خروجی این کد چیه؟",
             "code": "class Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        self.count += 1\n        return self.count\n\nc = Counter()\nprint(c.increment())\nprint(c.increment())\nprint(c.increment())",
             "answer": "1\n2\n3",
-            "hint": "هر بار increment صدا زده میشه، count یکی زیاد میشه"
+            "hint": "هر بار increment صدا زده میشه، count یکی زیاد میشه",
+            "explanation": "متد increment هر بار count رو یکی زیاد می‌کنه. سه بار صدا زده میشه: 1، 2، 3"
         },
         {
             "type": "predict",
             "title": "خروجی این کد چیه؟",
             "code": "class Person:\n    def __init__(self, name):\n        self.name = name\n\nclass Student(Person):\n    def __init__(self, name, grade):\n        super().__init__(name)\n        self.grade = grade\n\n    def info(self):\n        return f'{self.name} - کلاس {self.grade}'\n\ns = Student('سارا', 10)\nprint(s.info())",
             "answer": "سارا - کلاس 10",
-            "hint": "super().__init__ مقدار name رو از کلاس والد میگیره"
+            "hint": "super().__init__ مقدار name رو از کلاس والد میگیره",
+            "explanation": "Student از Person ارث می‌بره. super().__init__(name) مقدار name رو از Person میگیره. info رشته 'سارا - کلاس 10' برمی‌گردونه"
         },
         {
             "type": "predict",
             "title": "خروجی این کد چیه؟",
             "code": "class Animal:\n    def speak(self):\n        return '...'\n\nclass Dog(Animal):\n    def speak(self):\n        return 'وَف!'\n\nanimals = [Animal(), Dog(), Animal()]\nfor a in animals:\n    print(a.speak())",
             "answer": "...\nوَف!\n...",
-            "hint": "هر آبجکت متد speak خودش رو صدا میزنه — polymorphism"
+            "hint": "هر آبجکت متد speak خودش رو صدا میزنه — polymorphism",
+            "explanation": "هر آبجکت متد speak خودش رو اجرا می‌کنه (Polymorphism). Animal dots میگه و Dog 'وَف!' میگه"
         },
         {
             "type": "predict",
             "title": "خروجی این کد چیه؟",
             "code": "class Point:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n\n    def __eq__(self, other):\n        return self.x == other.x and self.y == other.y\n\np1 = Point(1, 2)\np2 = Point(1, 2)\np3 = Point(3, 4)\nprint(p1 == p2)\nprint(p1 == p3)",
             "answer": "True\nFalse",
-            "hint": "__eq__ مقایسه x و y رو انجام میده"
+            "hint": "__eq__ مقایسه x و y رو انجام میده",
+            "explanation": "__eq__ مقایسه دو Point رو انجام میده. p1 و p2 مقدار یکی دارن (True). p1 و p3 فرق دارن (False)"
         }
     ],
     "challenges": [
@@ -109,7 +114,8 @@
             "code": "class Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages\n\n    def is_thick(self):\n        return self.pages > 300\n\nb1 = Book('کتاب سبز', 100)\nb2 = Book('کتاب قطور', 500)\nprint(b1.is_thick())\nprint(b2.is_thick())",
             "answer": "False\nTrue",
             "hint": "is_thick بررسی می‌کنه صفحات بیشتر از ۳۰۰ باشه",
-            "xp": 10
+            "xp": 10,
+            "explanation": "is_thick بررسی می‌کنه صفحات بیشتر از 300 باشه. b1 کمتر از 300 هست (False). b2 بیشتر از 300 هست (True)"
         },
         {
             "type": "predict",
@@ -118,7 +124,8 @@
             "code": "class Wallet:\n    def __init__(self, money):\n        self.money = money\n\n    def spend(self, amount):\n        if amount <= self.money:\n            self.money -= amount\n            return True\n        return False\n\nw = Wallet(100)\nprint(w.spend(30))\nprint(w.money)\nprint(w.spend(80))\nprint(w.money)",
             "answer": "True\n70\nFalse\n70",
             "hint": "اول ۳۰ خرج میشه (۷۰ باقی میمونه)، بعد ۸۰ نمیشه چون کافی نیست",
-            "xp": 10
+            "xp": 10,
+            "explanation": "spend اول 30 خرج می‌کنه (100-30=70). بعد 80 خرج کردن ممکن نیست چون 70 کمتر از 80 هست"
         },
         {
             "type": "predict",
@@ -127,7 +134,8 @@
             "code": "class Stack:\n    def __init__(self):\n        self.items = []\n\n    def push(self, item):\n        self.items.append(item)\n\n    def pop(self):\n        if self.items:\n            return self.items.pop()\n        return None\n\n    def peek(self):\n        return self.items[-1] if self.items else None\n\ns = Stack()\ns.push(10)\ns.push(20)\ns.push(30)\nprint(s.pop())\nprint(s.peek())\nprint(s.pop())\nprint(s.peek())",
             "answer": "30\n20\n20\n10",
             "hint": "stack مثل بشقاب شیرینی — آخری اول میره (LIFO)",
-            "xp": 20
+            "xp": 20,
+            "explanation": "Stack مثل بشقاب شیرینیه (LIFO). اول push می‌کنیم 10، 20، 30. بعد pop آخری (30) رو برمی‌گردونه و peek دومی (20) رو نشون میده"
         },
         {
             "type": "predict",
@@ -136,7 +144,8 @@
             "code": "class Person:\n    count = 0\n\n    def __init__(self, name):\n        self.name = name\n        Person.count += 1\n\n    @classmethod\n    def how_many(cls):\n        return cls.count\n\np1 = Person('علی')\np2 = Person('سارا')\np3 = Person('محمد')\nprint(Person.how_many())",
             "answer": "3",
             "hint": "count کلاسی‌ه — هر بار آبجکت جدید ساخته میشه، یکی زیاد میشه",
-            "xp": 20
+            "xp": 20,
+            "explanation": "count یه متغیر کلاسی‌ه و همه آبجکت‌ها ازش استفاده می‌کنن. هر بار __init__ صدا زده میشه، count یکی زیاد میشه: 3"
         },
         {
             "type": "predict",
@@ -145,7 +154,8 @@
             "code": "class Node:\n    def __init__(self, value):\n        self.value = value\n        self.next = None\n\nclass LinkedList:\n    def __init__(self):\n        self.head = None\n\n    def append(self, value):\n        if not self.head:\n            self.head = Node(value)\n        else:\n            current = self.head\n            while current.next:\n                current = current.next\n            current.next = Node(value)\n\n    def to_list(self):\n        result = []\n        current = self.head\n        while current:\n            result.append(current.value)\n            current = current.next\n        return result\n\nll = LinkedList()\nll.append(1)\nll.append(2)\nll.append(3)\nprint(ll.to_list())",
             "answer": "[1, 2, 3]",
             "hint": "هر append آخر لیست لینک‌شده میره و to_list از اول تا آخر رو میخونه",
-            "xp": 30
+            "xp": 30,
+            "explanation": "لیست لینک‌شده مثل زنجیره‌ست. append هر مقدار رو آخر اضافه می‌کنه. to_list از اول تا آخر رو لیست می‌کنه: [1, 2, 3]"
         }
     ]
 }

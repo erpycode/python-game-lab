@@ -51,7 +51,10 @@
             "code": "import sqlite3\nconn = sqlite3.connect(':memory:')\nc = conn.cursor()\nc.execute('CREATE TABLE t (x)')\nc.execute('INSERT INTO t VALUES (42)')\nconn.commit()\nc.execute('SELECT * FROM t')\nprint(c.fetchone())",
             "answer": "(42,)",
             "hint": "fetchone() یه رکورد برمیگردونه",
-            "hints": [":memory: یه پایگاه داده موقتی میسازه", "fetchone() یه تاپل برمیگردونه"],
+            "hints": [
+                ":memory: یه پایگاه داده موقتی میسازه",
+                "fetchone() یه تاپل برمیگردونه"
+            ],
             "explanation": "fetchone() یه تاپل با مقدار (42,) برمیگردونه"
         },
         {
@@ -59,12 +62,21 @@
             "title": "کدوم روش امن‌تره؟",
             "code": "# کدوم؟",
             "options": [
-                {"label": "a", "text": "cursor.execute(f'SELECT * FROM users WHERE name=\"{name}\"')"},
-                {"label": "b", "text": "cursor.execute('SELECT * FROM users WHERE name=?', (name,))"}
+                {
+                    "label": "a",
+                    "text": "cursor.execute(f'SELECT * FROM users WHERE name=\"{name}\"')"
+                },
+                {
+                    "label": "b",
+                    "text": "cursor.execute('SELECT * FROM users WHERE name=?', (name,))"
+                }
             ],
             "correct": "b",
             "hint": "parameterized query امن‌تره",
-            "hints": ["روش a ممکنه SQL Injection داشته باشه", "روش b از parameter استفاده میکنه"],
+            "hints": [
+                "روش a ممکنه SQL Injection داشته باشه",
+                "روش b از parameter استفاده میکنه"
+            ],
             "explanation": "parameterized query از SQL Injection جلوگیری میکنه"
         }
     ],
@@ -76,7 +88,8 @@
             "code": "import sqlite3\nconn = sqlite3.connect(':memory:')\nc = conn.cursor()\nc.execute('CREATE TABLE nums (n)')\nfor i in range(3):\n    c.execute('INSERT INTO nums VALUES (?)', (i,))\nconn.commit()\nc.execute('SELECT COUNT(*) FROM nums')\nprint(c.fetchone()[0])",
             "answer": "3",
             "hint": "COUNT(*) تعداد رکوردها رو میده",
-            "xp": 15
+            "xp": 15,
+            "explanation": "جواب صحیح 3 هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "bug_hunter",
@@ -85,7 +98,8 @@
             "code": "import sqlite3\nconn = sqlite3.connect('data.db')\nc = conn.cursor()\nc.execute('CREATE TABLE users (id, name)')\nc.execute('INSERT INTO users VALUES (1, \"Ali\")')\nprint(c.fetchall())",
             "error_line": 6,
             "hint": "اول باید commit کنی، بعد select بزنی",
-            "xp": 20
+            "xp": 20,
+            "explanation": "خط  خطا داره. کد رو با دقت بخون و ببین کجا مشکل داره."
         }
     ]
 }

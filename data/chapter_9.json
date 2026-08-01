@@ -65,7 +65,11 @@
             "code": "with open('test.txt', 'w') as f:\n    f.write('Hello')\n\nwith open('test.txt', 'r') as f:\n    print(f.read())",
             "answer": "Hello",
             "hint": "فایل نوشته شده و بعد خونده میشه",
-            "hints": ["f.write('Hello') متن رو توی فایل می‌نویسه", "f.read() محتوای فایل رو می‌خونه", "خروجی همون متنی هست که نوشتیم"],
+            "hints": [
+                "f.write('Hello') متن رو توی فایل می‌نویسه",
+                "f.read() محتوای فایل رو می‌خونه",
+                "خروجی همون متنی هست که نوشتیم"
+            ],
             "explanation": "فایل test.txt با محتوای 'Hello' ساخته شده و بعد خونده میشه"
         },
         {
@@ -73,14 +77,30 @@
             "title": "کدوم حالت فایل قبلی رو پاک می‌کنه؟",
             "code": "with open('data.txt', '???') as f:\n    f.write('New content')",
             "options": [
-                {"label": "a", "text": "'r'"},
-                {"label": "b", "text": "'w'"},
-                {"label": "c", "text": "'a'"},
-                {"label": "d", "text": "'r+'"}
+                {
+                    "label": "a",
+                    "text": "'r'"
+                },
+                {
+                    "label": "b",
+                    "text": "'w'"
+                },
+                {
+                    "label": "c",
+                    "text": "'a'"
+                },
+                {
+                    "label": "d",
+                    "text": "'r+'"
+                }
             ],
             "correct": "b",
             "hint": "کدوم حالت محتوای قبلی رو پاک می‌کنه؟",
-            "hints": ["r فقط خواندن هست", "w نوشتن هست و محتوای قبلی رو پاک می‌کنه", "a اضافه کردن هست، محتوا حفظ میشه"],
+            "hints": [
+                "r فقط خواندن هست",
+                "w نوشتن هست و محتوای قبلی رو پاک می‌کنه",
+                "a اضافه کردن هست، محتوا حفظ میشه"
+            ],
             "explanation": "حالت 'w' (write) محتوای قبلی فایل رو پاک می‌کنه و از اول می‌نویسه"
         },
         {
@@ -89,7 +109,11 @@
             "code": "lines = ['line1', 'line2', 'line3']\nwith open('out.txt', 'w') as f:\n    for line in lines:\n        f.write(line + '\\n')\n\nwith open('out.txt', 'r') as f:\n    content = f.readlines()\n    print(len(content))",
             "answer": "3",
             "hint": "چند خط توی فایل نوشته شده؟",
-            "hints": ["سه تا خط توی لیست lines هست", "هر خط با \\n تموم میشه", "readlines() همه خطوط رو برمی‌گردونه"],
+            "hints": [
+                "سه تا خط توی لیست lines هست",
+                "هر خط با \\n تموم میشه",
+                "readlines() همه خطوط رو برمی‌گردونه"
+            ],
             "explanation": "سه خط توی فایل نوشته شده و readlines() اونا رو به صورت لیستی با 3 آیتم برمی‌گردونه"
         },
         {
@@ -98,7 +122,11 @@
             "code": "with open('append.txt', 'w') as f:\n    f.write('First\\n')\n\nwith open('append.txt', 'a') as f:\n    f.write('Second\\n')\n\nwith open('append.txt', 'r') as f:\n    print(f.read(), end='')",
             "answer": "First\nSecond",
             "hint": "اول نوشته شده، بعد اضافه شده",
-            "hints": ["'w' اول فایل رو می‌سازه", "'a' به آخر فایل اضافه می‌کنه", "هر دو خط با هم چاپ میشن"],
+            "hints": [
+                "'w' اول فایل رو می‌سازه",
+                "'a' به آخر فایل اضافه می‌کنه",
+                "هر دو خط با هم چاپ میشن"
+            ],
             "explanation": "اول 'First' نوشته شده، بعد 'Second' به آخر اضافه شده. هر دو خط توی فایل هستن"
         }
     ],
@@ -110,7 +138,8 @@
             "code": "with open('demo.txt', 'w') as f:\n    f.write('Hi')\n\nwith open('demo.txt', 'r') as f:\n    print(f.read())",
             "answer": "Hi",
             "hint": "فایل نوشته شده و بعد خونده میشه",
-            "xp": 10
+            "xp": 10,
+            "explanation": "فایل test.txt با محتوای 'Hi' ساخته شده و سپس خونده میشه"
         },
         {
             "type": "bug_hunter",
@@ -119,7 +148,8 @@
             "code": "f = open('data.txt', 'r')\ncontent = f.read()\nprint(content)",
             "error_line": 1,
             "hint": "فایل باز شده ولی هیچوقت بسته نشده!",
-            "xp": 15
+            "xp": 15,
+            "explanation": "فایل با open باز شده ولی f.close() فراموش شده. بهتره از with استفاده بشه تا فایل خودکار بسته بشه"
         },
         {
             "type": "fill_gap",
@@ -128,7 +158,8 @@
             "code": "try:\n    with open('missing.txt', 'r') as f:\n        print(f.read())\n____ FileNotFoundError:\n    print('فایل پیدا نشد!')",
             "answer": "except",
             "hint": "خطا رو چطوری میگیریم؟",
-            "xp": 15
+            "xp": 15,
+            "explanation": "برای گرفتن خطای FileNotFoundError از except استفاده می‌کنیم"
         },
         {
             "type": "predict",
@@ -137,7 +168,8 @@
             "code": "data = [1, 2, 3, 4, 5]\nwith open('nums.txt', 'w') as f:\n    for num in data:\n        f.write(str(num) + '\\n')\n\nwith open('nums.txt', 'r') as f:\n    print(f.read(), end='')",
             "answer": "1\n2\n3\n4\n5",
             "hint": "هر عدد توی یه خط نوشته شده",
-            "xp": 20
+            "xp": 20,
+            "explanation": "هر عدد لیست به صورت جداگانه توی فایل نوشته شده و بعد فایل خونده میشه. str(num) عدد رو به رشته تبدیل می‌کنه"
         },
         {
             "type": "predict",
@@ -146,7 +178,8 @@
             "code": "with open('log.txt', 'w') as f:\n    for i in range(3):\n        f.write(f'Line {i}\\n')\n\nwith open('log.txt', 'r') as f:\n    lines = [line.strip() for line in f.readlines()]\n    print('\\n'.join(lines))",
             "answer": "Line 0\nLine 1\nLine 2",
             "hint": "سه خط نوشته شده، بعد خط به خط خونده میشه و فاصله‌ها حذف میشه",
-            "xp": 25
+            "xp": 25,
+            "explanation": "حلقه range(3) سه بار اجرا میشه و هر بار یه خط می‌نویسه. readlines() همه خطوط رو لیست می‌کنه و strip() فاصله‌ها و \\\\n رو حذف می‌کنه"
         }
     ]
 }

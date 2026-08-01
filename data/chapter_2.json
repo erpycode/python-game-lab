@@ -41,27 +41,42 @@
             "title": "خروجی این عبارت چیه؟",
             "code": "print(15 // 4)",
             "answer": "3",
-            "hint": "تقسیم صحیح، فقط بخش صحیح رو میخواد"
+            "hint": "تقسیم صحیح، فقط بخش صحیح رو میخواد",
+            "explanation": "۱۵ تقسیم بر ۴ با تقسیم صحیح (//) برابر ۳ هست (باقی‌مانده دور میشه)"
         },
         {
             "type": "predict",
             "title": "خروجی این کد چیه؟",
             "code": "x = 7\nprint(x % 3)",
             "answer": "1",
-            "hint": "باقی‌مانده ۷ تقسیم بر ۳"
+            "hint": "باقی‌مانده ۷ تقسیم بر ۳",
+            "explanation": "۷ تقسیم بر ۳، باقی‌مانده ۱ هست (۷ = ۳×۲ + ۱)"
         },
         {
             "type": "quiz",
             "title": "عبارت 5 > 3 and 2 > 10 چه جوابی میده؟",
             "code": "result = 5 > 3 and 2 > 10\nprint(result)",
             "options": [
-                {"label": "a", "text": "True"},
-                {"label": "b", "text": "False"},
-                {"label": "c", "text": "Error"},
-                {"label": "d", "text": "None"}
+                {
+                    "label": "a",
+                    "text": "True"
+                },
+                {
+                    "label": "b",
+                    "text": "False"
+                },
+                {
+                    "label": "c",
+                    "text": "Error"
+                },
+                {
+                    "label": "d",
+                    "text": "None"
+                }
             ],
             "correct": "b",
-            "hint": "operat و هر دو شرط باید درست باشن"
+            "hint": "operat و هر دو شرط باید درست باشن",
+            "explanation": "5 > 3 درسته (True) ولی 2 > 10 غلطه (False)، و چون and هر دو شرط باید درست باشن، نتیجه False هست"
         }
     ],
     "challenges": [
@@ -72,7 +87,8 @@
             "code": "a = 10\nb = 3\nprint(a // b)\nprint(a % b)",
             "answer": "3\n1",
             "hint": "۱۰ تقسیم ۳ = ۳ باقی‌مانده ۱",
-            "xp": 10
+            "xp": 10,
+            "explanation": "۱۰ تقسیم ۳ با // برابر ۳ هست و باقی‌مانده (%) برابر ۱"
         },
         {
             "type": "quiz",
@@ -80,14 +96,27 @@
             "title": "کدوم عبارت True برمی‌گردونه؟",
             "code": "# کدوم درسته؟",
             "options": [
-                {"label": "a", "text": "10 > 20"},
-                {"label": "b", "text": "5 == 5"},
-                {"label": "c", "text": "3 > 7"},
-                {"label": "d", "text": "1 != 1"}
+                {
+                    "label": "a",
+                    "text": "10 > 20"
+                },
+                {
+                    "label": "b",
+                    "text": "5 == 5"
+                },
+                {
+                    "label": "c",
+                    "text": "3 > 7"
+                },
+                {
+                    "label": "d",
+                    "text": "1 != 1"
+                }
             ],
             "correct": "b",
             "hint": "فقط یکی از اینا درسته",
-            "xp": 15
+            "xp": 15,
+            "explanation": "فقط گزینه b درسته چون 5 == 5 یعنی ۵ مساوی ۵ هست که True هست"
         },
         {
             "type": "bug_hunter",
@@ -96,7 +125,8 @@
             "code": "x = 10\ny = 0\nprint(x / y)",
             "error_line": 3,
             "hint": "تقسیم بر صیرو",
-            "xp": 15
+            "xp": 15,
+            "explanation": "تقسیم بر صفر غیرممکنه و خطای ZeroDivisionError میده"
         },
         {
             "type": "predict",
@@ -105,7 +135,8 @@
             "code": "print(2 ** 3 ** 2)",
             "answer": "512",
             "hint": "توان از راست به چپ اجرا میشه: ۳ به توان ۲ = ۹، بعد ۲ به توان ۹ = ۵۱۲",
-            "xp": 20
+            "xp": 20,
+            "explanation": "توان از راست به چپ اجرا میشه: اول ۳ به توان ۲ = ۹، بعد ۲ به توان ۹ = ۵۱۲"
         }
     ]
 }

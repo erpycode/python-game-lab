@@ -67,7 +67,11 @@
             "code": "d = {'x': 10, 'y': 20}\nprint(d['x'])",
             "answer": "10",
             "hint": "مقدار کلید x رو چاپ میکنه",
-            "hints": ["دیکشنری d کلید x با مقدار ۱۰ داره", "d['x'] مقدار کلید x رو برمی‌گردونه", "جواب ۱۰ هست"],
+            "hints": [
+                "دیکشنری d کلید x با مقدار ۱۰ داره",
+                "d['x'] مقدار کلید x رو برمی‌گردونه",
+                "جواب ۱۰ هست"
+            ],
             "explanation": "d['x'] مقدار مربوط به کلید 'x' که برابر ۱۰ هست رو برمی‌گردونه"
         },
         {
@@ -76,7 +80,11 @@
             "code": "person = {'name': 'Ali', 'age': 25}\nperson['age'] = 26\nprint(person['age'])",
             "answer": "26",
             "hint": "مقدار age از ۲۵ به ۲۶ تغییر کرده",
-            "hints": ["person['age'] = 26 مقدار age رو عوض میکنه", "بعد از تغییر، person['age'] برابر ۲۶ هست", "جواب ۲۶ هست"],
+            "hints": [
+                "person['age'] = 26 مقدار age رو عوض میکنه",
+                "بعد از تغییر، person['age'] برابر ۲۶ هست",
+                "جواب ۲۶ هست"
+            ],
             "explanation": "خط person['age'] = 26 مقدار age رو از ۲۵ به ۲۶ تغییر میده"
         },
         {
@@ -84,14 +92,30 @@
             "title": "person.get('phone') چه چیزی برمی‌گردونه؟",
             "code": "person = {'name': 'Sara', 'age': 22}\nprint(person.get('phone'))",
             "options": [
-                {"label": "a", "text": "None"},
-                {"label": "b", "text": "Error"},
-                {"label": "c", "text": "'Sara'"},
-                {"label": "d", "text": "22"}
+                {
+                    "label": "a",
+                    "text": "None"
+                },
+                {
+                    "label": "b",
+                    "text": "Error"
+                },
+                {
+                    "label": "c",
+                    "text": "'Sara'"
+                },
+                {
+                    "label": "d",
+                    "text": "22"
+                }
             ],
             "correct": "a",
             "hint": "وقتی کلید وجود نداشته باشه، get() چی برمی‌گردونه؟",
-            "hints": ["کلید 'phone' توی دیکشنری نیست", "get() وقتی کلید نباشه None برمی‌گردونه", "جواب None هست"],
+            "hints": [
+                "کلید 'phone' توی دیکشنری نیست",
+                "get() وقتی کلید نباشه None برمی‌گردونه",
+                "جواب None هست"
+            ],
             "explanation": "وقتی کلیدی توی دیکشنری نباشه، get() مقدار None برمی‌گردونه (خلاف [] که خطا میده)"
         },
         {
@@ -100,7 +124,11 @@
             "code": "d = {'a': 1, 'b': 2}\nresult = []\nfor key in d:\n    result.append(key)\nprint(result)",
             "answer": "['a', 'b']",
             "hint": "حلقه فقط روی کلیدها حلقه میزنه",
-            "hints": ["for key in d یعنی روی کلیدها حلقه بزن", "کلیدها a و b هستن", "جواب ['a', 'b'] هست"],
+            "hints": [
+                "for key in d یعنی روی کلیدها حلقه بزن",
+                "کلیدها a و b هستن",
+                "جواب ['a', 'b'] هست"
+            ],
             "explanation": "وقتی روی دیکشنری حلقه بزنی، فقط کلیدها رو می‌بینی"
         }
     ],
@@ -112,7 +140,8 @@
             "code": "d = {'a': 1, 'b': 2, 'c': 3}\nprint(len(d))",
             "answer": "3",
             "hint": "len() تعداد کلیدها رو برمی‌گردونه",
-            "xp": 10
+            "xp": 10,
+            "explanation": "دیکشنری سه کلید (a, b, c) داره پس len برابر ۳ هست"
         },
         {
             "type": "bug_hunter",
@@ -121,7 +150,8 @@
             "code": "person = {'name': 'Ali', 'age': 25}\nprint(person['phone'])",
             "error_line": 2,
             "hint": "کلید phone توی دیکشنری وجود نداره",
-            "xp": 15
+            "xp": 15,
+            "explanation": "کلید 'phone' توی دیکشنری وجود نداره و [] وقتی کلید نباشه خطا میده"
         },
         {
             "type": "fill_gap",
@@ -130,7 +160,8 @@
             "code": "data = {'x': 10}\ndata['y'] = ___\nprint(data)",
             "answer": "20",
             "hint": "یه مقدار عددی اضافه کن",
-            "xp": 15
+            "xp": 15,
+            "explanation": "مقدار دلخواهی بذار، مثلاً ۲۰. مهم اینه که یه مقدار عددی باشه"
         },
         {
             "type": "predict",
@@ -139,7 +170,8 @@
             "code": "d = {'a': 1, 'b': 2}\nd['c'] = 3\ndel d['a']\nprint(d)",
             "answer": "{'b': 2, 'c': 3}",
             "hint": "اول c اضافه میشه، بعد a حذف میشه",
-            "xp": 15
+            "xp": 15,
+            "explanation": "اول d['c'] = 3 اضافه میشه، بعد del d['a'] حذف میشه → {'b': 2, 'c': 3}"
         },
         {
             "type": "predict",
@@ -148,7 +180,8 @@
             "code": "scores = {'Ali': 18, 'Sara': 20, 'Reza': 15}\ntotal = 0\nfor score in scores.values():\n    total += score\nprint(total // len(scores))",
             "answer": "17",
             "hint": "جمع امتیازات رو تقسیم بر تعداد کن",
-            "xp": 20
+            "xp": 20,
+            "explanation": "جمع امتیازات: ۱۸+۲۰+۱۵=۵۳. تقسیم بر تعداد: ۵۳÷۳=۱۷ (تقسیم صحیح)"
         },
         {
             "type": "predict",
@@ -157,7 +190,8 @@
             "code": "words = ['hello', 'world', 'hello', 'python', 'hello']\ncounts = {}\nfor word in words:\n    if word in counts:\n        counts[word] += 1\n    else:\n        counts[word] = 1\nprint(counts)",
             "answer": "{'hello': 3, 'world': 1, 'python': 1}",
             "hint": "تعداد تکرار هر کلمه رو بشمار",
-            "xp": 25
+            "xp": 25,
+            "explanation": "hello سه بار، world یک بار، python یک بار تکرار شده"
         }
     ]
 }

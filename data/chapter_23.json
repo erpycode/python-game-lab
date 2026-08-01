@@ -51,7 +51,10 @@
             "code": "def add(a, b):\n    return a + b\n\ndef test_add():\n    assert add(2, 3) == 5\n    print('Test passed!')\n\ntest_add()",
             "answer": "Test passed!",
             "hint": "assert اگه درست باشه خطایی نمیده",
-            "hints": ["add(2,3) برابر 5 هست", "پس assert درسته"],
+            "hints": [
+                "add(2,3) برابر 5 هست",
+                "پس assert درسته"
+            ],
             "explanation": "assert درسته پس کد ادامه پیدا میکنه"
         },
         {
@@ -59,14 +62,29 @@
             "title": "نام فایل تست باید چطوری باشه؟",
             "code": "# کدوم؟",
             "options": [
-                {"label": "a", "text": "math_test.py"},
-                {"label": "b", "text": "test_math.py"},
-                {"label": "c", "text": "math.py"},
-                {"label": "d", "text": "check.py"}
+                {
+                    "label": "a",
+                    "text": "math_test.py"
+                },
+                {
+                    "label": "b",
+                    "text": "test_math.py"
+                },
+                {
+                    "label": "c",
+                    "text": "math.py"
+                },
+                {
+                    "label": "d",
+                    "text": "check.py"
+                }
             ],
             "correct": "b",
             "hint": "pytest خودکار فایل‌های test_ رو پیدا میکنه",
-            "hints": ["نام باید با test_ شروع بشه", "pytest convention"],
+            "hints": [
+                "نام باید با test_ شروع بشه",
+                "pytest convention"
+            ],
             "explanation": "pytest خودکار فایل‌هایی که با test_ شروع میشن رو پیدا و اجرا میکنه"
         }
     ],
@@ -78,7 +96,8 @@
             "code": "def multiply(a, b):\n    return a * b\n\ndef test_multiply():\n    assert multiply(3, 4) == 12\n    assert multiply(0, 5) == 0\n    print('All passed!')\n\ntest_multiply()",
             "answer": "All passed!",
             "hint": "هر دو assert درست هستن",
-            "xp": 15
+            "xp": 15,
+            "explanation": "جواب صحیح All passed! هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "bug_hunter",
@@ -87,7 +106,8 @@
             "code": "def subtract(a, b):\n    return a - b\n\ndef test_subtract():\n    assert subtract(5, 3) == 2\n    assert subtract(3, 5) == 2  # این غلطه!",
             "error_line": 6,
             "hint": "3 - 5 برابر 2 نیست!",
-            "xp": 20
+            "xp": 20,
+            "explanation": "خط  خطا داره. کد رو با دقت بخون و ببین کجا مشکل داره."
         }
     ]
 }

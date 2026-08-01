@@ -64,7 +64,12 @@
             "code": "result = [x * 2 for x in range(5)]\nprint(result)",
             "answer": "[0, 2, 4, 6, 8]",
             "hint": "range(5) اعداد 0 تا 4 رو تولید می‌کنه",
-            "hints": ["range(5) میشه [0, 1, 2, 3, 4]", "هر عدد دو برابر میشه", "0*2=0, 1*2=2, 2*2=4, 3*2=6, 4*2=8"]
+            "hints": [
+                "range(5) میشه [0, 1, 2, 3, 4]",
+                "هر عدد دو برابر میشه",
+                "0*2=0, 1*2=2, 2*2=4, 3*2=6, 4*2=8"
+            ],
+            "explanation": "جواب صحیح [0, 2, 4, 6, 8] هست. کد رو خط به خط اجرا کن تا به جواب برسی."
         },
         {
             "type": "predict",
@@ -72,7 +77,12 @@
             "code": "words = ['hello', 'world', 'python']\nresult = [word.upper() for word in words]\nprint(result)",
             "answer": "['HELLO', 'WORLD', 'PYTHON']",
             "hint": "upper() حروف رو بزرگ می‌کنه",
-            "hints": ["upper() همه حروف رو به بزرگ تبدیل می‌کنه", "روی هر کلمه اعمال میشه", "لیست جدیدی با حروف بزرگ ساخته میشه"]
+            "hints": [
+                "upper() همه حروف رو به بزرگ تبدیل می‌کنه",
+                "روی هر کلمه اعمال میشه",
+                "لیست جدیدی با حروف بزرگ ساخته میشه"
+            ],
+            "explanation": "جواب صحیح ['HELLO', 'WORLD', 'PYTHON'] هست. کد رو خط به خط اجرا کن تا به جواب برسی."
         },
         {
             "type": "predict",
@@ -80,21 +90,43 @@
             "code": "numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\nevens = [x for x in numbers if x % 2 == 0]\nprint(evens)",
             "answer": "[2, 4, 6, 8, 10]",
             "hint": "% 2 == 0 یعنی عدد زوجه",
-            "hints": ["فقط اعدادی که تقسیم بر 2 بدون باقیمانده میشن", "اعداد زوج: 2, 4, 6, 8, 10", "filter فقط شرط رو رعایت می‌کنه"]
+            "hints": [
+                "فقط اعدادی که تقسیم بر 2 بدون باقیمانده میشن",
+                "اعداد زوج: 2, 4, 6, 8, 10",
+                "filter فقط شرط رو رعایت می‌کنه"
+            ],
+            "explanation": "جواب صحیح [2, 4, 6, 8, 10] هست. کد رو خط به خط اجرا کن تا به جواب برسی."
         },
         {
             "type": "quiz",
             "title": "کدوم ساختار درسته؟",
             "code": "",
             "options": [
-                {"label": "a", "text": "[x for x in range(10)]"},
-                {"label": "b", "text": "[for x in range(10) x]"},
-                {"label": "c", "text": "x for x in range(10)"},
-                {"label": "d", "text": "[range(10) for x]"}
+                {
+                    "label": "a",
+                    "text": "[x for x in range(10)]"
+                },
+                {
+                    "label": "b",
+                    "text": "[for x in range(10) x]"
+                },
+                {
+                    "label": "c",
+                    "text": "x for x in range(10)"
+                },
+                {
+                    "label": "d",
+                    "text": "[range(10) for x]"
+                }
             ],
             "correct": "a",
             "hint": "ساختار استاندارد: [expression for item in iterable]",
-            "hints": ["expression اول میاد، بعد for", "حتماً باید [] داشته باشه", "ساختار [x for x in range(10)] درسته"]
+            "hints": [
+                "expression اول میاد، بعد for",
+                "حتماً باید [] داشته باشه",
+                "ساختار [x for x in range(10)] درسته"
+            ],
+            "explanation": "جواب صحیح گزینه  هست. با دقت بیشتری گزینه‌ها رو مقایسه کن."
         }
     ],
     "challenges": [
@@ -105,7 +137,8 @@
             "code": "result = [x ** 2 for x in range(5)]\nprint(result)",
             "answer": "[0, 1, 4, 9, 16]",
             "hint": "** توان هست، هر عدد به توان 2 میشه",
-            "xp": 10
+            "xp": 10,
+            "explanation": "جواب صحیح [0, 1, 4, 9, 16] هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "predict",
@@ -114,7 +147,8 @@
             "code": "data = {'a': 1, 'b': 2, 'c': 3, 'd': 4}\nresult = {k: v * 10 for k, v in data.items() if v > 2}\nprint(result)",
             "answer": "{'c': 30, 'd': 40}",
             "hint": "فقط مقادیر بزرگتر از 2 ضرب در 10 میشن",
-            "xp": 15
+            "xp": 15,
+            "explanation": "جواب صحیح {'c': 30, 'd': 40} هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "predict",
@@ -123,7 +157,8 @@
             "code": "matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\nresult = [num for row in matrix for num in row if num % 2 != 0]\nprint(result)",
             "answer": "[1, 3, 5, 7, 9]",
             "hint": "فقط اعداد فرد از همه ردیف‌ها",
-            "xp": 20
+            "xp": 20,
+            "explanation": "جواب صحیح [1, 3, 5, 7, 9] هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "predict",
@@ -132,7 +167,8 @@
             "code": "result = [[i * j for j in range(1, 4)] for i in range(1, 4)]\nprint(result[1][2])",
             "answer": "6",
             "hint": "result[1][2] یعنی ردیف دوم، ستون سوم",
-            "xp": 20
+            "xp": 20,
+            "explanation": "جواب صحیح 6 هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "predict",
@@ -141,7 +177,8 @@
             "code": "text = 'hello world python code'\nresult = ' '.join([word[::-1] for word in text.split() if len(word) > 4])\nprint(result)",
             "answer": "dlrow nohtyp",
             "hint": "[::-1] رشته رو برعکس می‌کنه، فقط کلمات بیشتر از ۴ حرف",
-            "xp": 30
+            "xp": 30,
+            "explanation": "جواب صحیح dlrow nohtyp هست. کد رو با دقت بخون و خط به خط اجرا کن."
         }
     ]
 }

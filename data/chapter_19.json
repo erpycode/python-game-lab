@@ -64,7 +64,12 @@
             "code": "square = lambda x: x ** 2\nprint(square(6))",
             "answer": "36",
             "hint": "** توان هست، 6 به توان 2",
-            "hints": ["lambda x: x ** 2 یعنی تابعی که ور رو به توان 2 می‌رسونه", "6 ** 2 = 36", "نتیجه 36 هست"]
+            "hints": [
+                "lambda x: x ** 2 یعنی تابعی که ور رو به توان 2 می‌رسونه",
+                "6 ** 2 = 36",
+                "نتیجه 36 هست"
+            ],
+            "explanation": "جواب صحیح 36 هست. کد رو خط به خط اجرا کن تا به جواب برسی."
         },
         {
             "type": "predict",
@@ -72,7 +77,12 @@
             "code": "data = [(1, 'b'), (2, 'a'), (3, 'c')]\nresult = sorted(data, key=lambda x: x[1])\nprint(result)",
             "answer": "[(2, 'a'), (1, 'b'), (3, 'c')]",
             "hint": "sorted بر اساس حرف دوم مرتب می‌کنه",
-            "hints": ["key=lambda x: x[1] یعنی بر اساس عنصر دوم مرتب کن", "a < b < c پس مرتب‌سازی الفبایی", "نتیجه: (2, 'a'), (1, 'b'), (3, 'c')"]
+            "hints": [
+                "key=lambda x: x[1] یعنی بر اساس عنصر دوم مرتب کن",
+                "a < b < c پس مرتب‌سازی الفبایی",
+                "نتیجه: (2, 'a'), (1, 'b'), (3, 'c')"
+            ],
+            "explanation": "جواب صحیح [(2, 'a'), (1, 'b'), (3, 'c')] هست. کد رو خط به خط اجرا کن تا به جواب برسی."
         },
         {
             "type": "predict",
@@ -80,21 +90,43 @@
             "code": "numbers = [1, 2, 3, 4, 5]\nresult = list(map(lambda x: x * 2, numbers))\nprint(result)",
             "answer": "[2, 4, 6, 8, 10]",
             "hint": "map هر عدد رو دو برابر می‌کنه",
-            "hints": ["map روی هر آیتم لامبدا رو اعمال می‌کنه", "هر عدد ضرب در 2 میشه", "نتیجه لیست جدیدیه"]
+            "hints": [
+                "map روی هر آیتم لامبدا رو اعمال می‌کنه",
+                "هر عدد ضرب در 2 میشه",
+                "نتیجه لیست جدیدیه"
+            ],
+            "explanation": "جواب صحیح [2, 4, 6, 8, 10] هست. کد رو خط به خط اجرا کن تا به جواب برسی."
         },
         {
             "type": "quiz",
             "title": "کدوم گزینه لامبدا درستیه؟",
             "code": "",
             "options": [
-                {"label": "a", "text": "lambda x: return x * 2"},
-                {"label": "b", "text": "lambda x: x * 2"},
-                {"label": "c", "text": "def lambda x: x * 2"},
-                {"label": "d", "text": "lambda(x): x * 2"}
+                {
+                    "label": "a",
+                    "text": "lambda x: return x * 2"
+                },
+                {
+                    "label": "b",
+                    "text": "lambda x: x * 2"
+                },
+                {
+                    "label": "c",
+                    "text": "def lambda x: x * 2"
+                },
+                {
+                    "label": "d",
+                    "text": "lambda(x): x * 2"
+                }
             ],
             "correct": "b",
             "hint": "لامبدا return نداره، فقط expression",
-            "hints": ["lambda نیازی به return نداره", "پرانتز اطراف آرگومان اختیاریه ولی رایج نیست", "def و lambda جداگانه هستن"]
+            "hints": [
+                "lambda نیازی به return نداره",
+                "پرانتز اطراف آرگومان اختیاریه ولی رایج نیست",
+                "def و lambda جداگانه هستن"
+            ],
+            "explanation": "جواب صحیح گزینه  هست. با دقت بیشتری گزینه‌ها رو مقایسه کن."
         }
     ],
     "challenges": [
@@ -105,7 +137,8 @@
             "code": "add = lambda a, b, c: a + b + c\nprint(add(1, 2, 3))",
             "answer": "6",
             "hint": "سه عدد با هم جمع میشن",
-            "xp": 10
+            "xp": 10,
+            "explanation": "جواب صحیح 6 هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "predict",
@@ -114,7 +147,8 @@
             "code": "words = ['banana', 'apple', 'cherry', 'date']\nresult = sorted(words, key=lambda w: len(w))\nprint(result)",
             "answer": "['date', 'apple', 'banana', 'cherry']",
             "hint": "بر اساس طول کلمه مرتب میشه",
-            "xp": 15
+            "xp": 15,
+            "explanation": "جواب صحیح ['date', 'apple', 'banana', 'cherry'] هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "predict",
@@ -123,7 +157,8 @@
             "code": "numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\nresult = list(filter(lambda x: x % 3 == 0, numbers))\nprint(result)",
             "answer": "[3, 6, 9]",
             "hint": "فقط اعدادی که بر 3 تقسیم میشن",
-            "xp": 15
+            "xp": 15,
+            "explanation": "جواب صحیح [3, 6, 9] هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "predict",
@@ -132,7 +167,8 @@
             "code": "make_adder = lambda n: lambda x: x + n\nadd5 = make_adder(5)\nadd10 = make_adder(10)\nprint(add5(3) + add10(2))",
             "answer": "20",
             "hint": "add5(3)=8, add10(2)=12, جمع: 20",
-            "xp": 20
+            "xp": 20,
+            "explanation": "جواب صحیح 20 هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
         {
             "type": "predict",
@@ -141,7 +177,8 @@
             "code": "from functools import reduce\n\nstudents = [\n    {'name': 'Ali', 'scores': [85, 90, 78]},\n    {'name': 'Sara', 'scores': [92, 88, 95]},\n    {'name': 'Mina', 'scores': [75, 82, 80]}\n]\n\navgs = list(map(\n    lambda s: (s['name'], reduce(lambda a, b: a + b, s['scores']) / len(s['scores'])),\n    students\n))\n\nbest = max(avgs, key=lambda x: x[1])\nprint(f'{best[0]}: {best[1]:.1f}')",
             "answer": "Sara: 91.7",
             "hint": "میانگین نمرات هر دانشجو، بعد بهترین رو پیدا کن",
-            "xp": 30
+            "xp": 30,
+            "explanation": "جواب صحیح Sara: 91.7 هست. کد رو با دقت بخون و خط به خط اجرا کن."
         }
     ]
 }

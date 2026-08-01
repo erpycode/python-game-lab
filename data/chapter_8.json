@@ -65,7 +65,11 @@
             "code": "text = 'Hello'\nprint(text.lower())",
             "answer": "hello",
             "hint": "lower() همه حروف رو کوچک می‌کنه",
-            "hints": ["lower() حروف بزرگ رو کوچک می‌کنه", "H بزرگ به h کوچک تبدیل میشه", "Hello → hello"],
+            "hints": [
+                "lower() حروف بزرگ رو کوچک می‌کنه",
+                "H بزرگ به h کوچک تبدیل میشه",
+                "Hello → hello"
+            ],
             "explanation": "lower() همه حروف رو کوچک می‌کنه: Hello → hello"
         },
         {
@@ -74,7 +78,11 @@
             "code": "text = '   python   '\nprint(text.strip())",
             "answer": "python",
             "hint": "strip() فاصله‌های اضافی از اول و آخر رو حذف می‌کنه",
-            "hints": ["strip() فاصله‌های اطراف رو حذف می‌کنه", "فقط فاصله‌های اضافی حذف میشن", "python باقی می‌مونه"],
+            "hints": [
+                "strip() فاصله‌های اطراف رو حذف می‌کنه",
+                "فقط فاصله‌های اضافی حذف میشن",
+                "python باقی می‌مونه"
+            ],
             "explanation": "strip() فاصله‌های اضافی از ابتدا و انتهای متن رو حذف می‌کنه"
         },
         {
@@ -82,14 +90,30 @@
             "title": "find() چه چیزی برمی‌گردونه؟",
             "code": "text = 'Python is great'\nprint(text.find('Java'))",
             "options": [
-                {"label": "a", "text": "error"},
-                {"label": "b", "text": "-1"},
-                {"label": "c", "text": "0"},
-                {"label": "d", "text": "None"}
+                {
+                    "label": "a",
+                    "text": "error"
+                },
+                {
+                    "label": "b",
+                    "text": "-1"
+                },
+                {
+                    "label": "c",
+                    "text": "0"
+                },
+                {
+                    "label": "d",
+                    "text": "None"
+                }
             ],
             "correct": "b",
             "hint": "وقتی متن پیدا نشه، find() چه عددی برمی‌گردونه؟",
-            "hints": ["find() اگه پیدا نکنه خطا نمیده", "find() عدد منفی برمی‌گردونه", "وقتی متن پیدا نشه -1 برمی‌گردونه"],
+            "hints": [
+                "find() اگه پیدا نکنه خطا نمیده",
+                "find() عدد منفی برمی‌گردونه",
+                "وقتی متن پیدا نشه -1 برمی‌گردونه"
+            ],
             "explanation": "وقتی متن مورد نظر توی رشته پیدا نشه، find() عدد -1 برمی‌گردونه"
         },
         {
@@ -98,7 +122,11 @@
             "code": "text = 'aabbcc'\nprint(text.replace('a', 'x'))",
             "answer": "xxbbcc",
             "hint": "replace() همه حروف 'a' رو با 'x' عوض می‌کنه",
-            "hints": ["replace() همه تکرارها رو عوض می‌کنه", "دو تا a داریم، هر دو عوض میشن", "xxbbcc نتیجه هست"],
+            "hints": [
+                "replace() همه تکرارها رو عوض می‌کنه",
+                "دو تا a داریم، هر دو عوض میشن",
+                "xxbbcc نتیجه هست"
+            ],
             "explanation": "replace() همه نمونه‌های 'a' رو با 'x' عوض می‌کنه: aabbcc → xxbbcc"
         },
         {
@@ -107,7 +135,11 @@
             "code": "text = 'one,two,three'\nwords = text.split(',')\nprint(len(words))",
             "answer": "3",
             "hint": "split() متن رو بر اساس کاما به لیست تبدیل می‌کنه",
-            "hints": ["split(',') متن رو با کاما تقسیم می‌کنه", "سه تا کلمه داریم: one, two, three", "len() تعداد آیتم‌ها رو میده"],
+            "hints": [
+                "split(',') متن رو با کاما تقسیم می‌کنه",
+                "سه تا کلمه داریم: one, two, three",
+                "len() تعداد آیتم‌ها رو میده"
+            ],
             "explanation": "split(',') متن رو به سه آیتم تقسیم می‌کنه: ['one', 'two', 'three']، پس len() برابر 3 هست"
         }
     ],
@@ -119,7 +151,8 @@
             "code": "name = 'Ali'\nprint(name.upper())",
             "answer": "ALI",
             "hint": "upper() همه حروف رو بزرگ می‌کنه",
-            "xp": 10
+            "xp": 10,
+            "explanation": "upper() همه حروف رو بزرگ میکنه: 'Ali' → 'ALI'"
         },
         {
             "type": "bug_hunter",
@@ -128,7 +161,8 @@
             "code": "text = 'Hello World'\nprint(text.find())",
             "error_line": 2,
             "hint": "find() حداقل یه ورودی می‌خواد!",
-            "xp": 15
+            "xp": 15,
+            "explanation": "find() حداقل یه ورودی (متنی که دنبالشی) میخواد، بدون ورودی خطا میده"
         },
         {
             "type": "fill_gap",
@@ -137,7 +171,8 @@
             "code": "text = 'Hello World'\nnew_text = text.____('World', 'Python')\nprint(new_text)",
             "answer": "replace",
             "hint": "متدی که متن رو عوض می‌کنه چیه؟",
-            "xp": 15
+            "xp": 15,
+            "explanation": "متد replace متن قدیم رو با جدید عوض میکنه"
         },
         {
             "type": "predict",
@@ -146,7 +181,8 @@
             "code": "text = 'banana'\nprint(text.count('a'))",
             "answer": "3",
             "hint": "چند تا 'a' توی banana هست؟",
-            "xp": 20
+            "xp": 20,
+            "explanation": "banana سه تا 'a' داره: b-a-n-a-n-a"
         },
         {
             "type": "predict",
@@ -155,7 +191,8 @@
             "code": "text = '  Hello, World!  '\nresult = text.strip().replace('World', 'Python').lower()\nprint(result)",
             "answer": "hello, python!",
             "hint": "اول فاصله‌ها حذف میشه، بعد World عوض میشه، بعد همه کوچک میشه",
-            "xp": 25
+            "xp": 25,
+            "explanation": "strip() فاصله‌ها حذف، replace World→Python، lower() همه کوچک → hello, python!"
         }
     ]
 }

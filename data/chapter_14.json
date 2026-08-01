@@ -54,7 +54,10 @@
             "code": "from math import factorial\nprint(factorial(5))",
             "answer": "120",
             "hint": "5! = 5 × 4 × 3 × 2 × 1",
-            "hints": ["5 ضربدر 4 ضربدر 3 ضربدر 2 ضربدر 1", "factorial فاکتوریل میگیره"],
+            "hints": [
+                "5 ضربدر 4 ضربدر 3 ضربدر 2 ضربدر 1",
+                "factorial فاکتوریل میگیره"
+            ],
             "explanation": "5! = 5 × 4 × 3 × 2 × 1 = 120"
         },
         {
@@ -62,14 +65,29 @@
             "title": "کدوم دستور pip پکیج رو نصب میکنه؟",
             "code": "# کدوم؟",
             "options": [
-                {"label": "a", "text": "pip add requests"},
-                {"label": "b", "text": "pip install requests"},
-                {"label": "c", "text": "pip get requests"},
-                {"label": "d", "text": "pip download requests"}
+                {
+                    "label": "a",
+                    "text": "pip add requests"
+                },
+                {
+                    "label": "b",
+                    "text": "pip install requests"
+                },
+                {
+                    "label": "c",
+                    "text": "pip get requests"
+                },
+                {
+                    "label": "d",
+                    "text": "pip download requests"
+                }
             ],
             "correct": "b",
             "hint": "install یعنی نصب",
-            "hints": ["به اسم دستورها نگاه کن", "install معمولی‌ترین هست"],
+            "hints": [
+                "به اسم دستورها نگاه کن",
+                "install معمولی‌ترین هست"
+            ],
             "explanation": "pip install دستور استاندارد نصب پکیج هست"
         }
     ],
@@ -81,7 +99,8 @@
             "code": "import random\nnumbers = [1, 2, 3, 4, 5]\nprint(random.choice(numbers))",
             "answer": "1",
             "hint": "choice یکی از لیست انتخاب میکنه (جواب تصادفیه، ۱ رو فرض کن)",
-            "xp": 15
+            "xp": 15,
+            "explanation": "random.choice یکی از لیست رو انتخاب می‌کنه. جواب تصادفیه ولی در این مثال 1 فرض شده"
         },
         {
             "type": "bug_hunter",
@@ -90,16 +109,21 @@
             "code": "from datetime import DateTime\nnow = DateTime.now()\nprint(now)",
             "error_line": 1,
             "hint": "اسم کلاس باید با حروف کوچیک شروع بشه؟",
-            "xp": 20
+            "xp": 20,
+            "explanation": "اسم کلاس datetime با حروف کوچیک شروع میشه: datetime، نه DateTime. import اشتباهه"
         },
         {
             "type": "fill_gap",
             "difficulty": "medium",
             "title": "جای خالی رو پر کن:",
             "code": "___ import randint\nnum = ___(1, 100)\nprint(num)",
-            "answer": ["from random", "randint"],
+            "answer": [
+                "from random",
+                "randint"
+            ],
             "hint": "از random ماژول randint رو import کن",
-            "xp": 25
+            "xp": 25,
+            "explanation": "از random ماژول randint رو import می‌کنیم و بعد صدا می‌زنیم"
         }
     ]
 }
