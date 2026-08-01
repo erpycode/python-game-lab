@@ -32,30 +32,36 @@
 
 <table>
 <tr>
-<td>
+<td align="center">
 
-### 📗 مبتدی
-| فصل | عنوان |
-|:----|:------|
+#### 📗 مبتدی
+شروع یادگیری
+
+| | فصل |
+|:--:|:------|
 | ۱ | متغیرها |
 | ۲ | عملگرها |
 
 </td>
-<td>
+<td align="center">
 
-### 📘 متوسط
-| فصل | عنوان |
-|:----|:------|
+#### 📘 متوسط
+عمیق‌تر شو!
+
+| | فصل |
+|:--:|:------|
 | ۳ | شرط‌ها |
 | ۴ | حلقه‌ها |
 | ۵ | توابع |
 
 </td>
-<td>
+<td align="center">
 
-### 📕 پیشرفته
-| فصل | عنوان |
-|:----|:------|
+#### 📕 پیشرفته
+حرفه‌ای شو!
+
+| | فصل |
+|:--:|:------|
 | ۶ | لیست‌ها |
 | ۷ | دیکشنری |
 | ۸ | متدهای رشته |
@@ -63,11 +69,13 @@
 | ۱۰ | مدیریت خطا |
 
 </td>
-<td>
+<td align="center">
 
-### 🎓 حرفه‌ای
-| فصل | عنوان |
-|:----|:------|
+#### 🎓 حرفه‌ای
+استاد شو!
+
+| | فصل |
+|:--:|:------|
 | ۱۱ | شی‌گرایی |
 | ۱۲ | جنریتورها |
 | ۱۳ | دکوراتورها |
@@ -117,21 +125,33 @@ python3 -m http.server 8080
 
 ```
 python-game-lab/
-├── index.html          # Main page
-├── css/style.css       # Styles & animations
+├── index.html              # Main page
+├── css/
+│   └── style.css           # Styles & animations
 ├── js/
-│   ├── app.js          # Main logic
-│   ├── sounds.js       # Sound & effects
-│   ├── challenges.js   # Challenge engine
-│   ├── progress.js     # Progress storage
-│   ├── ui.js           # User interface
-│   └── utils.js        # Helper functions
+│   ├── app.js              # Main logic + sounds
+│   ├── challenges.js       # Challenge engine + smart feedback
+│   ├── progress.js         # Progress storage (localStorage)
+│   ├── ui.js               # User interface
+│   └── utils.js            # Helper functions
 ├── data/
-│   ├── chapter_1.json  # Chapter 1: Variables
-│   ├── chapter_2.json  # Chapter 2: Operators
-│   ├── chapter_3.json  # Chapter 3: Conditionals
-│   ├── chapter_4.json  # Chapter 4: Loops
-│   └── chapter_5.json  # Chapter 5: Functions
+│   ├── chapter_1.json      # 📗 Variables
+│   ├── chapter_2.json      # 📗 Operators
+│   ├── chapter_3.json      # 📘 Conditionals
+│   ├── chapter_4.json      # 📘 Loops
+│   ├── chapter_5.json      # 📘 Functions
+│   ├── chapter_6.json      # 📕 Lists
+│   ├── chapter_7.json      # 📕 Dictionaries
+│   ├── chapter_8.json      # 📕 String Methods
+│   ├── chapter_9.json      # 📕 File Handling
+│   ├── chapter_10.json     # 📕 Error Handling
+│   ├── chapter_11.json     # 🎓 OOP
+│   ├── chapter_12.json     # 🎓 Generators
+│   ├── chapter_13.json     # 🎓 Decorators
+│   ├── chapter_14.json     # 🎓 Modules
+│   ├── chapter_15.json     # 🎓 Regex
+│   ├── chapter_16.json     # 🎓 Frameworks
+│   └── chapter_17.json     # 🎓 Python in Practice
 └── README.md
 ```
 
@@ -199,30 +219,36 @@ An online game for learning Python from scratch. Each chapter includes **lessons
 
 <table>
 <tr>
-<td>
+<td align="center">
 
-### 📗 Beginner
-| Chapter | Title |
-|:--------|:------|
+#### 📗 Beginner
+Start learning
+
+| | Chapter |
+|:--:|:------|
 | 1 | Variables |
 | 2 | Operators |
 
 </td>
-<td>
+<td align="center">
 
-### 📘 Intermediate
-| Chapter | Title |
-|:--------|:------|
+#### 📘 Intermediate
+Go deeper!
+
+| | Chapter |
+|:--:|:------|
 | 3 | Conditionals |
 | 4 | Loops |
 | 5 | Functions |
 
 </td>
-<td>
+<td align="center">
 
-### 📕 Advanced
-| Chapter | Title |
-|:--------|:------|
+#### 📕 Advanced
+Pro level!
+
+| | Chapter |
+|:--:|:------|
 | 6 | Lists |
 | 7 | Dictionaries |
 | 8 | String Methods |
@@ -230,11 +256,13 @@ An online game for learning Python from scratch. Each chapter includes **lessons
 | 10 | Error Handling |
 
 </td>
-<td>
+<td align="center">
 
-### 🎓 Expert
-| Chapter | Title |
-|:--------|:------|
+#### 🎓 Expert
+Master it!
+
+| | Chapter |
+|:--:|:------|
 | 11 | OOP |
 | 12 | Generators |
 | 13 | Decorators |
@@ -276,21 +304,33 @@ python3 -m http.server 8080
 
 ```
 python-game-lab/
-├── index.html          # Main page
-├── css/style.css       # Styles & animations
+├── index.html              # Main page
+├── css/
+│   └── style.css           # Styles & animations
 ├── js/
-│   ├── app.js          # Main logic
-│   ├── sounds.js       # Sound & effects
-│   ├── challenges.js   # Challenge engine
-│   ├── progress.js     # Progress storage
-│   ├── ui.js           # User interface
-│   └── utils.js        # Helper functions
+│   ├── app.js              # Main logic + sounds
+│   ├── challenges.js       # Challenge engine + smart feedback
+│   ├── progress.js         # Progress storage (localStorage)
+│   ├── ui.js               # User interface
+│   └── utils.js            # Helper functions
 ├── data/
-│   ├── chapter_1.json  # Chapter 1: Variables
-│   ├── chapter_2.json  # Chapter 2: Operators
-│   ├── chapter_3.json  # Chapter 3: Conditionals
-│   ├── chapter_4.json  # Chapter 4: Loops
-│   └── chapter_5.json  # Chapter 5: Functions
+│   ├── chapter_1.json      # 📗 Variables
+│   ├── chapter_2.json      # 📗 Operators
+│   ├── chapter_3.json      # 📘 Conditionals
+│   ├── chapter_4.json      # 📘 Loops
+│   ├── chapter_5.json      # 📘 Functions
+│   ├── chapter_6.json      # 📕 Lists
+│   ├── chapter_7.json      # 📕 Dictionaries
+│   ├── chapter_8.json      # 📕 String Methods
+│   ├── chapter_9.json      # 📕 File Handling
+│   ├── chapter_10.json     # 📕 Error Handling
+│   ├── chapter_11.json     # 🎓 OOP
+│   ├── chapter_12.json     # 🎓 Generators
+│   ├── chapter_13.json     # 🎓 Decorators
+│   ├── chapter_14.json     # 🎓 Modules
+│   ├── chapter_15.json     # 🎓 Regex
+│   ├── chapter_16.json     # 🎓 Frameworks
+│   └── chapter_17.json     # 🎓 Python in Practice
 └── README.md
 ```
 
