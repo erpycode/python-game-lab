@@ -180,5 +180,10 @@
             "xp": 30,
             "explanation": "جواب صحیح User: ali\nKey length: 32\nSalt: (varies 16 hex chars)... هست. کد رو با دقت بخون و خط به خط اجرا کن."
         }
-    ]
+    ],
+    "project": {
+        "title": "جمع‌آوری قیمت",
+        "description": "یه اسکرپر ساده بساز که قیمت‌های یه سایت رو جمع‌آوری کنه و توی یه فایل ذخیره کنه!",
+        "difficulty": "hard"
+    }
 }

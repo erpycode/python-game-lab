@@ -10,25 +10,29 @@
                 "icon": "🌐",
                 "title": "API چیه؟",
                 "text": "API (Application Programming Interface) راه ارتباط برنامه‌ها با هم هست. مثلاً وقتی آب‌وهوا چک می‌کنی، داری از API استفاده می‌کنی.",
-                "code": "import requests\n\n# دریافت اطلاعات از API\nresponse = requests.get('https://api.github.com/users/erpycode')\n\n# تبدیل به دیکشنری\ndata = response.json()\nprint(data['name'])\nprint(data['public_repos'])"
+                "code": "import requests\n\n# دریافت اطلاعات از API\nresponse = requests.get('https://api.github.com/users/erpycode')\n\n# تبدیل به دیکشنری\ndata = response.json()\nprint(data['name'])\nprint(data['public_repos'])",
+                "output": "erpycode\n5"
             },
             {
                 "icon": "📥",
                 "title": "GET درخواست",
                 "text": "GET برای دریافت اطلاعات استفاده میشه.",
-                "code": "import requests\n\n# GET ساده\nresponse = requests.get('https://jsonplaceholder.typicode.com/posts/1')\nprint(response.status_code)  # 200\nprint(response.json())\n\n# با پارامتر\nparams = {'userId': 1}\nresponse = requests.get('https://jsonplaceholder.typicode.com/posts',\n                       params=params)\nposts = response.json()\nprint(len(posts))"
+                "code": "import requests\n\n# GET ساده\nresponse = requests.get('https://jsonplaceholder.typicode.com/posts/1')\nprint(response.status_code)  # 200\nprint(response.json())\n\n# با پارامتر\nparams = {'userId': 1}\nresponse = requests.get('https://jsonplaceholder.typicode.com/posts',\n                       params=params)\nposts = response.json()\nprint(len(posts))",
+                "output": "200\n{'userId': 1, 'id': 1, 'title': 'sunt aut facere...', 'body': '...'}"
             },
             {
                 "icon": "📤",
                 "title": "POST درخواست",
                 "text": "POST برای ارسال اطلاعات استفاده میشه.",
-                "code": "import requests\n\n# POST\nnew_post = {\n    'title': 'Hello',\n    'body': 'This is a test',\n    'userId': 1\n}\nresponse = requests.post('https://jsonplaceholder.typicode.com/posts',\n                        json=new_post)\nprint(response.status_code)  # 201\nprint(response.json())"
+                "code": "import requests\n\n# POST\nnew_post = {\n    'title': 'Hello',\n    'body': 'This is a test',\n    'userId': 1\n}\nresponse = requests.post('https://jsonplaceholder.typicode.com/posts',\n                        json=new_post)\nprint(response.status_code)  # 201\nprint(response.json())",
+                "output": "201\n{'title': 'Hello', 'body': 'This is a test', 'userId': 1, 'id': 101}"
             },
             {
                 "icon": "🔄",
                 "title": "Handling Errors",
                 "text": "چک کردن خطاهای احتمالی.",
-                "code": "import requests\n\ntry:\n    response = requests.get('https://api.example.com/data', timeout=5)\n    response.raise_for_status()  # اگه خطای HTTP باشه exception میده\n    data = response.json()\nexcept requests.exceptions.Timeout:\n    print('سرور جواب نمیده!')\nexcept requests.exceptions.HTTPError as e:\n    print(f'خطای HTTP: {e}')\nexcept requests.exceptions.RequestException as e:\n    print(f'خطا: {e}')"
+                "code": "import requests\n\ntry:\n    response = requests.get('https://api.example.com/data', timeout=5)\n    response.raise_for_status()  # اگه خطای HTTP باشه exception میده\n    data = response.json()\nexcept requests.exceptions.Timeout:\n    print('سرور جواب نمیده!')\nexcept requests.exceptions.HTTPError as e:\n    print(f'خطای HTTP: {e}')\nexcept requests.exceptions.RequestException as e:\n    print(f'خطا: {e}')",
+                "output": "سرور جواب نمیده!\nیا\nخطای HTTP: 404 Not Found"
             }
         ],
         "tips": [
@@ -103,5 +107,10 @@
             "xp": 20,
             "explanation": "خط  خطا داره. کد رو با دقت بخون و ببین کجا مشکل داره."
         }
-    ]
+    ],
+    "project": {
+        "title": "آب‌وهواگیر",
+        "description": "یه برنامه بساز که از یه API رایگان آب‌وهوای شهرهای مختلف رو بگیره و نمایش بده!",
+        "difficulty": "medium"
+    }
 }

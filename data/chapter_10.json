@@ -174,5 +174,10 @@
             "xp": 30,
             "explanation": "risky(-5) خطا میده: CustomError گرفته میشه. risky(50) نرماله: 50*2=100. risky(200) خطا میده: OverflowError. finally هر سه بار اجرا میشه"
         }
-    ]
+    ],
+    "project": {
+        "title": "محاسبه‌گر ایمن",
+        "description": "یه ماشین حساب بساز که با try/except از خطاها جلوگیری کنه! اگه کاربر چیز اشتباهی وارد کنه، پیام خطا بده نه اینکه کrash بشه!",
+        "difficulty": "medium"
+    }
 }

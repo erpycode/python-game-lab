@@ -194,5 +194,10 @@
             "xp": 25,
             "explanation": "strip() فاصله‌ها حذف، replace World→Python، lower() همه کوچک → hello, python!"
         }
-    ]
+    ],
+    "project": {
+        "title": "پاک‌کننده متن",
+        "description": "یه ابزار بساز که متن کاربر رو پاکسازی کنه: حذف فاصله‌های اضافی، تبدیل به کوچک، حذف کاراکترهای خاص!",
+        "difficulty": "easy"
+    }
 }

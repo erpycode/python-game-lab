@@ -26,13 +26,49 @@
                 "text": "با اینا چند شرط رو باهم ترکیب می‌کنیم:\n\nand (و) → هر دو شرط درست باشه\nor (یا) → حداقل یکی درست باشه\nnot (نه) → عکس شرط",
                 "code": "x = 5\nprint(x > 3 and x < 10)  # True\nprint(x > 3 or x > 10)    # True\nprint(not (x > 10))        # True",
                 "output": "True\nTrue\nTrue"
+            },
+            {
+                "icon": "🛒",
+                "title": "محاسبه قیمت خرید",
+                "text": "فرض کن ۳ تا کتاب خریدی و میخوای قیمت کل و تخفیف رو حساب کنی!",
+                "code": "price1 = 45000\nprice2 = 30000\nprice3 = 25000\n\ntotal = price1 + price2 + price3\nprint(f'جمع قیمت: {total} تومان')\n\ndiscount = total * 0.10\nfinal = total - discount\nprint(f'تخفیف: {discount} تومان')\nprint(f'قیمت نهایی: {final} تومان')",
+                "output": "جمع قیمت: 100000 تومان\nتخفیف: 10000.0 تومان\nقیمت نهایی: 90000.0 تومان"
+            },
+            {
+                "icon": "🔢",
+                "title": "بررسی زوج یا فرد بودن",
+                "text": "با عملگر باقی‌مانده (%) می‌تونی چک کنی یه عدد زوج هست یا فرد!",
+                "code": "number = 7\nif number % 2 == 0:\n    print(f'{number} زوج هست')\nelse:\n    print(f'{number} فرد هست')\n\nnumber = 12\nif number % 2 == 0:\n    print(f'{number} زوج هست')\nelse:\n    print(f'{number} فرد هست')",
+                "output": "7 فرد هست\n12 زوج هست"
+            },
+            {
+                "icon": "🌡️",
+                "title": "تبدیل دما",
+                "text": "فرمول تبدیل سلسیوس به فارنهایت رو با عملگرها اجرا کن!",
+                "code": "celsius = 37\nfahrenheit = (celsius * 9/5) + 32\nprint(f'{celsius} درجه سلسیوس = {fahrenheit} درجه فارنهایت')\n\ncelsius = 0\nfahrenheit = (celsius * 9/5) + 32\nprint(f'{celsius} درجه سلسیوس = {fahrenheit} درجه فارنهایت')",
+                "output": "37 درجه سلسیوس = 98.6 درجه فارنهایت\n0 درجه سلسیوس = 32.0 درجه فارنهایت"
+            },
+            {
+                "icon": "💰",
+                "title": "محاسبه قسط ماهانه",
+                "text": "اگه وام بگیری، هر ماه چقدر باید قسط بدی؟",
+                "code": "loan = 5000000\nmonths = 12\nmonthly = loan // months\nremainder = loan % months\nprint(f'قسط ماهانه: {monthly} تومان')\nprint(f'باقی‌مانده ماه آخر: {remainder} تومان')",
+                "output": "قسط ماهانه: 416666 تومان\nباقی‌مانده ماه آخر: 8 تومان"
+            },
+            {
+                "icon": "✅",
+                "title": "بررسی رمز عبور",
+                "text": "آیا رمز عبور کافی قوی هست؟ با عملگرهای مقایسه و منطقی چک کن!",
+                "code": "password = 'myPass123'\nhas_upper = any(c.isupper() for c in password)\nhas_digit = any(c.isdigit() for c in password)\nlong_enough = len(password) >= 8\n\nis_strong = has_upper and has_digit and long_enough\nprint(f'رمز: {password}')\nprint(f'حروف بزرگ: {has_upper}')\nprint(f'عدد داره: {has_digit}')\nprint(f'طول کافی: {long_enough}')\nprint(f'رمز قوی هست: {is_strong}')",
+                "output": "رمز: myPass123\nحروف بزرگ: True\nعدد داره: True\nطول کافی: True\nرمز قوی هست: True"
             }
         ],
         "tips": [
             "/ همیشه عدد اعشاری میده (حتی <bdi>۱۰ / ۲ = ۵.۰</bdi>)",
             "// فقط بخش صحیح رو برمی‌گردونه (<bdi>۱۰ // ۳ = ۳</bdi>)",
             "% باقی‌مانده تقسیم رو برمی‌گردونه (<bdi>۱۰ % ۳ = ۱</bdi>)",
-            "** توان هست (<bdi>۲ ** ۳</bdi> یعنی ۲ به توان ۳ = ۸)"
+            "** توان هست (<bdi>۲ ** ۳</bdi> یعنی ۲ به توان ۳ = ۸)",
+            "از باقی‌مانده (%) برای بررسی زوج/فرد بودن استفاده کن"
         ]
     },
     "exercises": [
@@ -138,5 +174,10 @@
             "xp": 20,
             "explanation": "توان از راست به چپ اجرا میشه: اول ۳ به توان ۲ = ۹، بعد ۲ به توان ۹ = ۵۱۲"
         }
-    ]
+    ],
+    "project": {
+        "title": "ماشین حساب جادویی",
+        "description": "یه ماشین حساب بساز که دو عدد بگیره و همه عملیات ریاضی (جمع، ضرب، تقسیم، توان) رو روش انجام بده!",
+        "difficulty": "easy"
+    }
 }

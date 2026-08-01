@@ -10,31 +10,36 @@
                 "icon": "💾",
                 "title": "SQLite چیه؟",
                 "text": "SQLite یه پایگاه داده سبک هست که داخل فایل ذخیره میشه. نیاز به نصب جداگانه نداره!",
-                "code": "import sqlite3\n\n# اتصال به پایگاه داده\nconn = sqlite3.connect('mydata.db')\ncursor = conn.cursor()\n\n# ساخت جدول\ncursor.execute('''\n    CREATE TABLE IF NOT EXISTS users (\n        id INTEGER PRIMARY KEY,\n        name TEXT,\n        age INTEGER\n    )\n''')\nconn.commit()"
+                "code": "import sqlite3\n\n# اتصال به پایگاه داده\nconn = sqlite3.connect('mydata.db')\ncursor = conn.cursor()\n\n# ساخت جدول\ncursor.execute('''\n    CREATE TABLE IF NOT EXISTS users (\n        id INTEGER PRIMARY KEY,\n        name TEXT,\n        age INTEGER\n    )\n''')\nconn.commit()",
+                "output": "(فایل mydata.db ساخته شد)"
             },
             {
                 "icon": "➕",
                 "title": "اضافه کردن داده",
                 "text": "با INSERT داده اضافه کن.",
-                "code": "# اضافه کردن یک رکورد\ncursor.execute('INSERT INTO users (name, age) VALUES (?, ?)',\n               ('Ali', 25))\n\n# اضافه کردن چند رکورد\nusers = [('Sara', 22), ('Mohammad', 30), ('Zahra', 28)]\ncursor.executemany('INSERT INTO users (name, age) VALUES (?, ?)', users)\n\nconn.commit()"
+                "code": "# اضافه کردن یک رکورد\ncursor.execute('INSERT INTO users (name, age) VALUES (?, ?)',\n               ('Ali', 25))\n\n# اضافه کردن چند رکورد\nusers = [('Sara', 22), ('Mohammad', 30), ('Zahra', 28)]\ncursor.executemany('INSERT INTO users (name, age) VALUES (?, ?)', users)\n\nconn.commit()",
+                "output": "(۴ رکورد به جدول اضافه شد)"
             },
             {
                 "icon": "🔍",
                 "title": "خواندن داده",
                 "text": "با SELECT داده بخون.",
-                "code": "# خواندن همه رکوردها\ncursor.execute('SELECT * FROM users')\nrows = cursor.fetchall()\nfor row in rows:\n    print(row)\n# ('Ali', 25)\n# ('Sara', 22)\n# ('Mohammad', 30)\n\n# خواندن با شرط\ncursor.execute('SELECT * FROM users WHERE age > 25')\nrows = cursor.fetchall()"
+                "code": "# خواندن همه رکوردها\ncursor.execute('SELECT * FROM users')\nrows = cursor.fetchall()\nfor row in rows:\n    print(row)\n# ('Ali', 25)\n# ('Sara', 22)\n# ('Mohammad', 30)\n\n# خواندن با شرط\ncursor.execute('SELECT * FROM users WHERE age > 25')\nrows = cursor.fetchall()",
+                "output": "('Ali', 25)\n('Sara', 22)\n('Mohammad', 30)\n('Zahra', 28)"
             },
             {
                 "icon": "✏️",
                 "title": "آپدیت و حذف",
                 "text": "داده‌ها رو آپدیت یا حذف کن.",
-                "code": "# آپدیت\ncursor.execute('UPDATE users SET age = ? WHERE name = ?',\n               (26, 'Ali'))\n\n# حذف\ncursor.execute('DELETE FROM users WHERE name = ?', ('Mohammad',))\n\nconn.commit()"
+                "code": "# آپدیت\ncursor.execute('UPDATE users SET age = ? WHERE name = ?',\n               (26, 'Ali'))\n\n# حذف\ncursor.execute('DELETE FROM users WHERE name = ?', ('Mohammad',))\n\nconn.commit()",
+                "output": "(رکورد Ali آپدیت شد و Mohammad حذف شد)"
             },
             {
                 "icon": "🔒",
                 "title": "بستن اتصال",
                 "text": "حتماً آخر کار اتصال رو ببند!",
-                "code": "# بستن اتصال\nconn.close()\n\n# یا با with (خودکار بسته میشه)\nwith sqlite3.connect('mydata.db') as conn:\n    cursor = conn.cursor()\n    cursor.execute('SELECT * FROM users')\n    print(cursor.fetchall())"
+                "code": "# بستن اتصال\nconn.close()\n\n# یا با with (خودکار بسته میشه)\nwith sqlite3.connect('mydata.db') as conn:\n    cursor = conn.cursor()\n    cursor.execute('SELECT * FROM users')\n    print(cursor.fetchall())",
+                "output": "[('Ali', 26), ('Sara', 22), ('Zahra', 28)]"
             }
         ],
         "tips": [
@@ -101,5 +106,10 @@
             "xp": 20,
             "explanation": "خط  خطا داره. کد رو با دقت بخون و ببین کجا مشکل داره."
         }
-    ]
+    ],
+    "project": {
+        "title": "داشبورد مخاطبین",
+        "description": "یه پایگاه داده SQLite بساز برای ذخیره مخاطبین! بتونی اضافه کنی، جستجو کنی و حذف کنی.",
+        "difficulty": "medium"
+    }
 }

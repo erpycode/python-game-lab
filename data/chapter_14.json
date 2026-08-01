@@ -37,6 +37,12 @@
                 "title": "نصب پکیج با pip",
                 "text": "pip ابزار نصب پکیج‌های پایتون هست.",
                 "code": "# نصب پکیج\n# pip install requests\n# pip install numpy\n\n# استفاده\nimport requests\nresponse = requests.get('https://api.example.com')\nprint(response.status_code)"
+            },
+            {
+                "icon": "🌍",
+                "title": "مثال‌های واقعی",
+                "text": "ماژول‌ها توی پروژه‌های واقعی خیلی کاربرد دارن. مثلاً برای کار با فایل‌ها، تاریخ، و اتصال به اینترنت!",
+                "code": "# مثال ۱: کار با فایل‌ها (os + json)\nimport os\nimport json\n\n# لیست فایل‌های پوشه جاری\nfiles = os.listdir('.')\nprint(f'📁 فایل‌ها: {files}')\n\n# ذخیره داده در JSON\ndata = {'name': 'Ali', 'age': 25}\nwith open('user.json', 'w') as f:\n    json.dump(data, f)\nprint('✅ فایل ذخیره شد!')\n\n# مثال ۲: تاریخ و زمان (datetime)\nfrom datetime import datetime, timedelta\n\nnow = datetime.now()\nprint(f'🕐 ساعت فعلی: {now}')\n\n# ۷ روز بعد\nnext_week = now + timedelta(days=7)\nprint(f'📅 هفته بعد: {next_week}')\n\n# فرمت زیبا\nprint(now.strftime('%Y/%m/%d - %H:%M'))\n\n# مثال ۳: انتخاب تصادفی برای قرعه‌کشی (random)\nimport random\n\ncandidates = ['Ali', 'Sara', 'Mohammad', 'Zahra']\nwinner = random.choice(candidates)\nprint(f'🏆 برنده: {winner}')\n\n# مثال ۴: اعتبارسنجی ایمیل (re)\nimport re\n\ndef is_valid_email(email):\n    pattern = r'^[\\w.+-]+@[\\w-]+\\.[\\w.]+$'\n    return bool(re.match(pattern, email))\n\nprint(is_valid_email('test@gmail.com'))  # True\nprint(is_valid_email('invalid'))        # False"
             }
         ],
         "tips": [
@@ -89,6 +95,90 @@
                 "install معمولی‌ترین هست"
             ],
             "explanation": "pip install دستور استاندارد نصب پکیج هست"
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "from datetime import datetime\nnow = datetime.now()\nprint(now.year)",
+            "answer": "2026",
+            "hint": "سال فعلی رو چاپ میکنه",
+            "hints": [
+                "datetime.now() تاریخ و ساعت فعلی رو میده",
+                ".year فقط سال رو برمیگردونه"
+            ],
+            "explanation": "datetime.now() تاریخ فعلی رو برمیگردونه و .year سال رو استخراج میکنه. امسال 2026 هست!"
+        },
+        {
+            "type": "quiz",
+            "title": "__init__.py چه کاری میکنه؟",
+            "code": "# در ساختار پکیج:\nmypackage/\n├── __init__.py\n├── module1.py\n└── module2.py",
+            "options": [
+                {
+                    "label": "a",
+                    "text": "کد اصلی پروژه رو اجرا میکنه"
+                },
+                {
+                    "label": "b",
+                    "text": "پوشه رو به پکیج تبدیل میکنه"
+                },
+                {
+                    "label": "c",
+                    "text": "فایل‌ها رو حذف میکنه"
+                },
+                {
+                    "label": "d",
+                    "text": "پکیج رو نصب میکنه"
+                }
+            ],
+            "correct": "b",
+            "hint": "بدون این فایل، پایتون پوشه رو پکیج نمیشناسه",
+            "hints": [
+                "__init__ مخفف initialize هست",
+                "حتی اگه خالی باشه، مهمه!"
+            ],
+            "explanation": "__init__.py به پایتون میگه که این پوشه یه پکیج هست. بدون این فایل، import کردن از این پوشه کار نمیکنه!"
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "import random\n\nfruits = ['🍎', '🍌', '🍇', '🍊']\nprint(random.choice(fruits))",
+            "answer": "🍎",
+            "hint": "choice یکی از لیست رو انتخاب میکنه (جواب تصادفیه، اولین رو فرض کن)",
+            "hints": [
+                "random.choice یک آیتم تصادفی انتخاب میکنه",
+                "می‌تونه هر کدوم باشه"
+            ],
+            "explanation": "random.choice یکی از آیتم‌های لیست رو به صورت تصادفی انتخاب میکنه. جواب هر بار فرق میکنه!"
+        },
+        {
+            "type": "quiz",
+            "title": "تفاوت import math با from math import sqrt چیه؟",
+            "code": "# روش ۱\nimport math\nresult1 = math.sqrt(16)\n\n# روش ۲\nfrom math import sqrt\nresult2 = sqrt(16)",
+            "options": [
+                {
+                    "label": "a",
+                    "text": "روش ۱ سریع‌تره"
+                },
+                {
+                    "label": "b",
+                    "text": "روش ۲ مستقیم sqrt رو در دسترس میذاره، نیازی به math. نیست"
+                },
+                {
+                    "label": "c",
+                    "text": "روش ۱ کار نمیکنه"
+                },
+                {
+                    "label": "d",
+                    "text": "هیچ فرقی ندارن"
+                }
+            ],
+            "correct": "b",
+            "hint": "import math کل ماژول رو میاره، from...import فقط تابع خاص رو",
+            "hints": [
+                "import math → نیاز به math.sqrt",
+                "from math import sqrt → فقط sqrt"
+            ],
+            "explanation": "وقتی 'import math' میکنی، باید از math.sqrt استفاده کنی. ولی 'from math import sqrt' مستقیم sqrt رو در دسترس میذاره!"
         }
     ],
     "challenges": [
@@ -124,6 +214,33 @@
             "hint": "از random ماژول randint رو import کن",
             "xp": 25,
             "explanation": "از random ماژول randint رو import می‌کنیم و بعد صدا می‌زنیم"
+        },
+        {
+            "type": "predict",
+            "difficulty": "hard",
+            "title": "خروجی این کد چیه؟",
+            "code": "import os\nimport json\n\ndata = {'scores': [95, 87, 92]}\nfilename = 'game_scores.json'\n\nwith open(filename, 'w') as f:\n    json.dump(data, f)\n\nwith open(filename, 'r') as f:\n    loaded = json.load(f)\n\nprint(sum(loaded['scores']) / len(loaded['scores']))",
+            "answer": "91.33333333333333",
+            "hint": "خواندن فایل JSON و حساب کردن میانگین",
+            "hints": [
+                "scores = [95, 87, 92]",
+                "95 + 87 + 92 = 274",
+                "274 / 3 = 91.333..."
+            ],
+            "explanation": "فایل JSON ذخیره و دوباره خوانده میشه. سپس میانگین امتیازات (95+87+92)/3 = 274/3 = 91.33 حساب میشه"
+        },
+        {
+            "type": "predict",
+            "difficulty": "easy",
+            "title": "خروجی این کد چیه؟",
+            "code": "import os\n\npath = '/home/user/documents'\nprint(os.path.join(path, 'file.txt'))",
+            "answer": "/home/user/documents/file.txt",
+            "hint": "os.path.join مسیرها رو به هم وصل میکنه",
+            "hints": [
+                "os.path.join مسیر رو با جداکننده مناسب سیستم‌عامل ترکیب میکنه",
+                "Linux/macOS از / و Windows از \\ استفاده میکنه"
+            ],
+            "explanation": "os.path.join مسیرها رو با جداکننده مناسب سیستم‌عامل به هم وصل میکنه. روی Linux خروجی /home/user/documents/file.txt هست"
         }
     ]
 }

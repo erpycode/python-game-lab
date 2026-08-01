@@ -167,5 +167,10 @@
             "xp": 30,
             "explanation": "جواب صحیح === dev.env ===\nDB=sqlite\nDEBUG=True\n\n=== prod.env ===\nDB=postgresql\nDEBUG=False\n\n=== test.env ===\nDB=sqlite\nDEBUG=True هست. کد رو با دقت بخون و خط به خط اجرا کن."
         }
-    ]
+    ],
+    "project": {
+        "title": "تنظیم پروژه",
+        "description": "یه پروژه جدید بساز: محیط مجازی درست کن، یه فایل requirements.txt بساز و چند تا پکیج محبوب رو نصب کن!",
+        "difficulty": "easy"
+    }
 }

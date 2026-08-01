@@ -10,31 +10,36 @@
                 "icon": "🧪",
                 "title": "چرا تست بنویسیم؟",
                 "text": "تست‌ها مطمئن میشن کدت با تغییرات آینده خراب نمیشه.",
-                "code": "# تابع ساده\ndef add(a, b):\n    return a + b\n\n# تست ساده\ndef test_add():\n    assert add(2, 3) == 5\n    assert add(-1, 1) == 0\n    assert add(0, 0) == 0\n\nprint('All tests passed!')"
+                "code": "# تابع ساده\ndef add(a, b):\n    return a + b\n\n# تست ساده\ndef test_add():\n    assert add(2, 3) == 5\n    assert add(-1, 1) == 0\n    assert add(0, 0) == 0\n\nprint('All tests passed!')",
+                "output": "All tests passed!"
             },
             {
                 "icon": "📝",
                 "title": "قواعد نامگذاری",
                 "text": "نام توابع تست باید با test_ شروع بشه.",
-                "code": "# فایل test_math.py\n\ndef test_add():\n    assert add(2, 3) == 5\n\ndef test_multiply():\n    assert multiply(2, 3) == 6\n\n# اجرا با:\n# pytest test_math.py"
+                "code": "# فایل test_math.py\n\ndef test_add():\n    assert add(2, 3) == 5\n\ndef test_multiply():\n    assert multiply(2, 3) == 6\n\n# اجرا با:\n# pytest test_math.py",
+                "output": "# pytest test_math.py\n# collected 2 items\n# test_math.py::test_add PASSED                   [ 50%]\n# test_math.py::test_multiply PASSED              [100%]\n# 2 passed in 0.01s"
             },
             {
                 "icon": "❌",
                 "title": "تست‌های ناموفق",
                 "text": "وقتی تست Fail بشه، پیام خطا میده.",
-                "code": "def test_add():\n    assert add(2, 3) == 5  # Pass\n\ndef test_wrong():\n    assert add(2, 3) == 6  # Fail!\n    # AssertionError: assert 5 == 6"
+                "code": "def test_add():\n    assert add(2, 3) == 5  # Pass\n\ndef test_wrong():\n    assert add(2, 3) == 6  # Fail!\n    # AssertionError: assert 5 == 6",
+                "output": "FAILED\nAssertionError: assert 5 == 6"
             },
             {
                 "icon": "🔄",
                 "title": "Test Fixtures",
                 "text": "Fixture ها داده‌های مشترک برای تست‌ها هستن.",
-                "code": "import pytest\n\n@pytest.fixture\ndef sample_data():\n    return [1, 2, 3, 4, 5]\n\ndef test_length(sample_data):\n    assert len(sample_data) == 5\n\ndef test_sum(sample_data):\n    assert sum(sample_data) == 15"
+                "code": "import pytest\n\n@pytest.fixture\ndef sample_data():\n    return [1, 2, 3, 4, 5]\n\ndef test_length(sample_data):\n    assert len(sample_data) == 5\n\ndef test_sum(sample_data):\n    assert sum(sample_data) == 15",
+                "output": "# هر دو تست پاس میشن چون fixture داده مشترک فراهم میکنه"
             },
             {
                 "icon": "📊",
                 "title": "گزارش تست",
                 "text": "pytest گزارش کاملی از تست‌ها میده.",
-                "code": "# اجرای تست با جزئیات\n# pytest -v\n\n# اجرای تست با coverage\n# pytest --cov=mycode\n\n# اجرای تست خاص\n# pytest test_math.py::test_add"
+                "code": "# اجرای تست با جزئیات\n# pytest -v\n\n# اجرای تست با coverage\n# pytest --cov=mycode\n\n# اجرای تست خاص\n# pytest test_math.py::test_add",
+                "output": "# pytest -v\n# collected 2 items\n# test_math.py::test_add PASSED                   [ 50%]\n# test_math.py::test_multiply PASSED              [100%]\n# 2 passed in 0.01s"
             }
         ],
         "tips": [
@@ -109,5 +114,10 @@
             "xp": 20,
             "explanation": "خط  خطا داره. کد رو با دقت بخون و ببین کجا مشکل داره."
         }
-    ]
+    ],
+    "project": {
+        "title": "تست‌کننده توابع",
+        "description": "برای چند تا تابع ساده (جمع، ضرب، برگشت رشته) تست بنویس! مطمئن شو همه حالت‌ها درست کار می‌کنن.",
+        "difficulty": "medium"
+    }
 }
