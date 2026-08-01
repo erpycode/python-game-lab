@@ -1,0 +1,112 @@
+{
+    "id": "5",
+    "title": "فصل ۵: توابع 📕",
+    "level": "advanced",
+    "lesson": {
+        "title": "یادگیری توابع",
+        "intro": "توابع مثل ماشین‌هایی هستن که یه کار خاص انجام میدن. یه چیزی میدی توش، یه چیزی بیرون میده!",
+        "sections": [
+            {
+                "icon": "🔧",
+                "title": "تعریف تابع",
+                "text": "برای ساختن تابع از کلمه def استفاده می‌کنیم:",
+                "code": "def say_hello():\n    print('سلام دنیا!')\n\n# فراخوانی تابع\nsay_hello()\nsay_hello()",
+                "output": "سلام دنیا!\nسلام دنیا!"
+            },
+            {
+                "icon": "📥",
+                "title": "پارامتر و آرگومان",
+                "text": "توابع می‌تونن ورودی بگیرن. ورودی‌ها رو پارامتر می‌گیم:",
+                "code": "def greet(name):\n    print(f'سلام {name}!')\n\ngreet('Ali')\ngreet('Sara')",
+                "output": "سلام Ali!\nسلام Sara!"
+            },
+            {
+                "icon": "📤",
+                "title": "مقدار بازگشتی (return)",
+                "text": "return باعث میشه تابع یه مقدار برگردونه:",
+                "code": "def add(a, b):\n    return a + b\n\nresult = add(3, 5)\nprint(result)",
+                "output": "8"
+            },
+            {
+                "icon": "⚙️",
+                "title": "مقدار پیش‌فرض",
+                "text": "می‌تونیم برای پارامتر مقدار پیش‌فرض بذاریم:",
+                "code": "def greet(name, greeting='سلام'):\n    print(f'{greeting} {name}!')\n\ngreet('Ali')\ngreet('Ali', 'خداحافظ')",
+                "output": "سلام Ali!\nخداحافظ Ali!"
+            }
+        ],
+        "tips": [
+            "after def حتماً : بذار",
+            "indent خطوط داخل تابع فراموش نشه",
+            "return خروجی تابع هست، اگه نذاری None برمی‌گردونه",
+            "می‌تونی چند پارامتر داشته باشی: def f(a, b, c)"
+        ]
+    },
+    "exercises": [
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "def double(x):\n    return x * 2\n\nprint(double(5))",
+            "answer": "10",
+            "hint": "۵ ضربدر ۲"
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "def is_even(n):\n    if n % 2 == 0:\n        return True\n    else:\n        return False\n\nprint(is_even(4))",
+            "answer": "True",
+            "hint": "4 تقسیم ۲ باقی‌مانده صفر داره"
+        },
+        {
+            "type": "quiz",
+            "title": "out() چه چیزی چاپ میکنه؟",
+            "code": "def greet(name, msg='خوش اومدی'):\n    print(f'{msg} {name}')\n\ngreet('Ali')",
+            "options": [
+                {"label": "a", "text": "Ali خوش اومدی"},
+                {"label": "b", "text": "خوش اومدی Ali"},
+                {"label": "c", "text": "error"},
+                {"label": "d", "text": "هیچی"}
+            ],
+            "correct": "b",
+            "hint": "مقدار پیش‌فرض برای msg استفاده میشه"
+        }
+    ],
+    "challenges": [
+        {
+            "type": "predict",
+            "difficulty": "easy",
+            "title": "خروجی این تابع چیه؟",
+            "code": "def square(n):\n    return n ** 2\n\nprint(square(4))",
+            "answer": "16",
+            "hint": "۴ به توان ۲",
+            "xp": 10
+        },
+        {
+            "type": "bug_hunter",
+            "difficulty": "medium",
+            "title": "خطا رو پیدا کن!",
+            "code": "def add(a, b)\n    return a + b\n\nprint(add(3, 5))",
+            "error_line": 1,
+            "hint": "بعد از def حتماً : میخواد",
+            "xp": 15
+        },
+        {
+            "type": "predict",
+            "difficulty": "medium",
+            "title": "خروجی این کد چیه؟",
+            "code": "def count_up(n):\n    for i in range(n):\n        print(i, end=' ')\n\ncount_up(4)",
+            "answer": "0 1 2 3",
+            "hint": "حلقه ۴ بار اجرا میشه (0 تا 3)",
+            "xp": 15
+        },
+        {
+            "type": "predict",
+            "difficulty": "hard",
+            "title": "خروجی این کد پیچیده چیه؟",
+            "code": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)\n\nprint(factorial(4))",
+            "answer": "24",
+            "hint": "4 * 3 * 2 * 1 = 24 (تابع بازگشتی هست)",
+            "xp": 25
+        }
+    ]
+}

@@ -1,0 +1,111 @@
+{
+    "id": "2",
+    "title": "فصل ۲: عملگرها 📗",
+    "level": "beginner",
+    "lesson": {
+        "title": "آشنایی با عملگرها",
+        "intro": "عملگرها ابزارهایی هستن که باهاون روی داده‌ها عمل انجام می‌دیم. مثل جمع کردن، مقایسه کردن و...",
+        "sections": [
+            {
+                "icon": "🔢",
+                "title": "عملگرهای ریاضی",
+                "text": "پایتون این عملگرهای ریاضی رو داره:\n• + → جمع\n• - → تفریق\n• * → ضرب\n• / → تقسیم (عدد اعشاری)\n• // → تقسیم صحیح (بدون اعشار)\n• % → باقی‌مانده (برگ)\n• ** → توان",
+                "code": "print(10 + 3)    # 13\nprint(10 - 3)    # 7\nprint(10 * 3)    # 30\nprint(10 / 3)    # 3.3333\nprint(10 // 3)   # 3\nprint(10 % 3)    # 1\nprint(2 ** 3)    # 8",
+                "output": "13\n7\n30\n3.3333333333333335\n3\n1\n8"
+            },
+            {
+                "icon": "⚖️",
+                "title": "عملگرهای مقایسه",
+                "text": "با اینا دو مقدار رو مقایسه می‌کنیم. جوابشون True یا False هست:\n• == → مساوی\n• != → نامساوی\n• > → بزرگتر\n• < → کوچکتر\n• >= → بزرگتر یا مساوی\n• <= → کوچکتر یا مساوی",
+                "code": "print(5 == 5)    # True\nprint(5 != 3)    # True\nprint(5 > 10)    # False\nprint(5 < 10)    # True\nprint(5 >= 5)    # True\nprint(5 <= 3)    # False",
+                "output": "True\nTrue\nFalse\nTrue\nTrue\nFalse"
+            },
+            {
+                "icon": "🧠",
+                "title": "عملگرهای منطقی",
+                "text": "با اینا چند شرط رو باهم ترکیب می‌کنیم:\n• and → هر دو درست باشه\n• or → حداقل یکی درست باشه\n• not → عکس شرط",
+                "code": "x = 5\nprint(x > 3 and x < 10)  # True\nprint(x > 3 or x > 10)    # True\nprint(not (x > 10))        # True",
+                "output": "True\nTrue\nTrue"
+            }
+        ],
+        "tips": [
+            "/ همیشه عدد اعشاری میده (حتی 10/2 = 5.0)",
+            "// فقط بخش صحیح رو برمی‌گردونه (10//3 = 3)",
+            "% باقی‌مانده تقسیم رو برمی‌گردونه (10%3 = 1)",
+            "** توان هست (2**3 = یعنی ۲ به توان ۳ = ۸)"
+        ]
+    },
+    "exercises": [
+        {
+            "type": "predict",
+            "title": "خروجی این عبارت چیه؟",
+            "code": "print(15 // 4)",
+            "answer": "3",
+            "hint": "تقسیم صحیح، فقط بخش صحیح رو میخواد"
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "x = 7\nprint(x % 3)",
+            "answer": "1",
+            "hint": "باقی‌مانده ۷ تقسیم بر ۳"
+        },
+        {
+            "type": "quiz",
+            "title": "عبارت 5 > 3 and 2 > 10 چه جوابی میده؟",
+            "code": "result = 5 > 3 and 2 > 10\nprint(result)",
+            "options": [
+                {"label": "a", "text": "True"},
+                {"label": "b", "text": "False"},
+                {"label": "c", "text": "Error"},
+                {"label": "d", "text": "None"}
+            ],
+            "correct": "b",
+            "hint": "operat و هر دو شرط باید درست باشن"
+        }
+    ],
+    "challenges": [
+        {
+            "type": "predict",
+            "difficulty": "easy",
+            "title": "خروجی این کد چیه؟",
+            "code": "a = 10\nb = 3\nprint(a // b)\nprint(a % b)",
+            "answer": "3\n1",
+            "hint": "۱۰ تقسیم ۳ = ۳ باقی‌مانده ۱",
+            "xp": 10
+        },
+        {
+            "type": "quiz",
+            "difficulty": "medium",
+            "title": "کدوم عبارت True برمی‌گردونه؟",
+            "code": "# کدوم درسته؟",
+            "options": [
+                {"label": "a", "text": "10 > 20"},
+                {"label": "b", "text": "5 == 5"},
+                {"label": "c", "text": "3 > 7"},
+                {"label": "d", "text": "1 != 1"}
+            ],
+            "correct": "b",
+            "hint": "فقط یکی از اینا درسته",
+            "xp": 15
+        },
+        {
+            "type": "bug_hunter",
+            "difficulty": "medium",
+            "title": "خطا کجاست؟",
+            "code": "x = 10\ny = 0\nprint(x / y)",
+            "error_line": 3,
+            "hint": "تقسیم بر صیرو",
+            "xp": 15
+        },
+        {
+            "type": "predict",
+            "difficulty": "medium",
+            "title": "خروجی این کد چیه؟",
+            "code": "print(2 ** 3 ** 2)",
+            "answer": "512",
+            "hint": "توان از راست به چپ اجرا میشه: ۳ به توان ۲ = ۹، بعد ۲ به توان ۹ = ۵۱۲",
+            "xp": 20
+        }
+    ]
+}

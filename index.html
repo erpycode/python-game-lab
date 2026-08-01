@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐍 پایتون‌باز — یادگیری پایتون با بازی</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- انیمیشن Confetti -->
+    <div id="confetti-container"></div>
+
+    <!-- صفحه اصلی (منو) -->
+    <div id="page-home" class="page active">
+        <div class="container">
+            <div class="hero">
+                <div class="snake-icon">🐍</div>
+                <h1 class="title">پایتون‌باز</h1>
+                <p class="subtitle">یادگیری پایتون با بازی و چالش</p>
+            </div>
+
+            <div id="welcome-box" class="card welcome-card hidden">
+                <div class="welcome-text">
+                    <span class="wave">👋</span>
+                    <h2>خوش اومدی <span id="display-username"></span>!</h2>
+                    <p>آخرین پیشرفت: فصل <span id="display-chapter">۱</span> | <span id="display-xp">۰</span> XP</p>
+                </div>
+                <button onclick="showPage('page-chapters')" class="btn btn-primary">
+                    ادامه یادگیری ➡️
+                </button>
+            </div>
+
+            <div id="start-box" class="card welcome-card">
+                <div class="welcome-text">
+                    <h2>🐍 آماده‌ای پایتون یاد بگیری؟</h2>
+                    <p>با چالش‌های جذاب پایتون رو مثل بازی یاد بگیر!</p>
+                </div>
+                <div class="username-input">
+                    <input type="text" id="username-input" placeholder="اسمت رو بنویس..." maxlength="20">
+                    <button onclick="startGame()" class="btn btn-primary">
+                        شروع بازی 🚀
+                    </button>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3>آموزش ساده</h3>
+                    <p>هر فصل با توضیح ساده شروع میشه</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>چالش‌های جذاب</h3>
+                    <p>با بازی پایتون یاد بگیر</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3>ذخیره پیشرفت</h3>
+                    <p>از هرجا ادامه بده</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحه فصل‌ها -->
+    <div id="page-chapters" class="page">
+        <div class="container">
+            <div class="page-header">
+                <button onclick="showPage('page-home')" class="btn-back">🏠 خانه</button>
+                <h2>📚 فصل‌ها</h2>
+                <div class="xp-badge">⭐ <span id="header-xp">۰</span> XP</div>
+            </div>
+
+            <div id="chapters-grid" class="chapters-grid">
+                <!-- فصل‌ها اینجا رندر میشن -->
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحه آموزش فصل -->
+    <div id="page-lesson" class="page">
+        <div class="container">
+            <div class="page-header">
+                <button onclick="showPage('page-chapters')" class="btn-back">📚 فصل‌ها</button>
+                <h2 id="lesson-title">📖 آموزش</h2>
+                <div class="xp-badge">⭐ <span id="lesson-xp">۰</span> XP</div>
+            </div>
+
+            <div id="lesson-content" class="lesson-content">
+                <!-- محتوای آموزش اینجا رندر میشه -->
+            </div>
+
+            <div class="page-nav">
+                <button onclick="showPage('page-chapters')" class="btn btn-secondary">
+                    📚 فصل‌ها
+                </button>
+                <button onclick="showPage('page-exercises')" class="btn btn-primary" id="btn-to-exercises">
+                    ✅ تمرین‌ها ➡️
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحه تمرین -->
+    <div id="page-exercises" class="page">
+        <div class="container">
+            <div class="page-header">
+                <button onclick="showPage('page-lesson')" class="btn-back">📖 آموزش</button>
+                <h2 id="exercise-title">✅ تمرین‌ها</h2>
+                <div class="progress-badge" id="exercise-progress">0/0</div>
+            </div>
+
+            <div id="exercise-content" class="exercise-content">
+                <!-- تمرین‌ها اینجا رندر میشن -->
+            </div>
+
+            <div class="page-nav">
+                <button onclick="showPage('page-lesson')" class="btn btn-secondary">
+                    📖 آموزش
+                </button>
+                <button onclick="showPage('page-challenges')" class="btn btn-primary" id="btn-to-challenges" disabled>
+                    ⚡ چالش‌ها ➡️
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحه چالش‌ها -->
+    <div id="page-challenges" class="page">
+        <div class="container">
+            <div class="page-header">
+                <button onclick="showPage('page-exercises')" class="btn-back">✅ تمرین‌ها</button>
+                <h2 id="challenge-title">⚡ چالش‌ها</h2>
+                <div class="progress-badge" id="challenge-progress">0/0</div>
+            </div>
+
+            <div id="challenge-content" class="challenge-content">
+                <!-- چالش‌ها اینجا رندر میشن -->
+            </div>
+
+            <div class="page-nav">
+                <button onclick="showPage('page-exercises')" class="btn btn-secondary">
+                    ✅ تمرین‌ها
+                </button>
+                <button onclick="completeChapter()" class="btn btn-success" id="btn-complete-chapter" disabled>
+                    🏆 فصل تموم شد!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحه نتیجه فصل -->
+    <div id="page-result" class="page">
+        <div class="container">
+            <div class="result-card">
+                <div class="result-icon">🏆</div>
+                <h2 id="result-title">آفرین! فصل تموم شد!</h2>
+                <div class="result-stats">
+                    <div class="stat">
+                        <div class="stat-value" id="result-score">۰</div>
+                        <div class="stat-label">امتیاز</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="result-xp">+۰</div>
+                        <div class="stat-label">XP کسب شده</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="result-accuracy">۰٪</div>
+                        <div class="stat-label">دقت</div>
+                    </div>
+                </div>
+                <div class="result-actions">
+                    <button onclick="showPage('page-chapters')" class="btn btn-primary">
+                        📚 فصل بعدی
+                    </button>
+                    <button onclick="retryChapter()" class="btn btn-secondary">
+                        🔄 تکرار فصل
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- اسکریپت‌ها -->
+    <script src="js/utils.js"></script>
+    <script src="js/progress.js"></script>
+    <script src="js/challenges.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

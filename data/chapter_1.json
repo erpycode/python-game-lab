@@ -1,0 +1,111 @@
+{
+    "id": "1",
+    "title": "فصل ۱: متغیرها 📗",
+    "level": "beginner",
+    "lesson": {
+        "title": "آشنایی با متغیرها",
+        "intro": "متغیرها مثل جعبه‌هایی هستن که توشون اطلاعات نگه می‌داریم. هر جعبه یه اسم داره و یه مقدار داخلش هست.",
+        "sections": [
+            {
+                "icon": "📦",
+                "title": "تعریف متغیر",
+                "text": "برای ساختن یه متغیر، اسمش رو می‌نویسیم، یه علامت مساوی می‌ذاریم، و بعد مقدارش رو می‌نویسیم:",
+                "code": "name = 'Ali'\nage = 25\nheight = 1.80\nis_student = True",
+                "output": ""
+            },
+            {
+                "icon": "🖨️",
+                "title": "دستور print",
+                "text": "با دستور print می‌تونیم مقدار یه متغیر رو چاپ کنیم:",
+                "code": "name = 'عرفان'\nprint(name)",
+                "output": "عرفان"
+            },
+            {
+                "icon": "🔍",
+                "title": "انواع داده",
+                "text": "پایتون چند نوع داده داره:\n• int → عدد صحیح (مثل 5, -3, 100)\n• float → عدد اعشاری (مثل 3.14, -0.5)\n• str → رشته/متن (مثل 'سلام', \"Hello\")\n• bool → بولین (True یا False)",
+                "code": "age = 25          # int\npi = 3.14         # float\nname = 'Ali'      # str\nis_happy = True   # bool\n\nprint(type(age))\nprint(type(pi))\nprint(type(name))",
+                "output": "<class 'int'>\n<class 'float'>\n<class 'str'>"
+            },
+            {
+                "icon": "✏️",
+                "title": "تغییر مقدار متغیر",
+                "text": "مقدار یه متغیر رو می‌تونیم عوض کنیم:",
+                "code": "score = 0\nprint(score)\n\nscore = 10\nprint(score)",
+                "output": "0\n10"
+            }
+        ],
+        "tips": [
+            "اسم متغیر نباید با عدد شروع بشه (x=5 درسته، 5x=error)",
+            "از Space توی اسم متغیر استفاده نکن (my_name درسته، my name غلطه)",
+            "پایتون به بزرگی و کوچکی حساسه (Name و name فرق دارن)"
+        ]
+    },
+    "exercises": [
+        {
+            "type": "predict",
+            "title": "خروجی این کد رو حدس بزن:",
+            "code": "x = 10\ny = 5\nprint(x)",
+            "answer": "10",
+            "hint": "فقط مقدار x چاپ شده"
+        },
+        {
+            "type": "quiz",
+            "title": "type متغیر z چیه؟",
+            "code": "z = 'Hello'",
+            "options": [
+                {"label": "a", "text": "int"},
+                {"label": "b", "text": "float"},
+                {"label": "c", "text": "str"},
+                {"label": "d", "text": "bool"}
+            ],
+            "correct": "c",
+            "hint": "وقتی متن توی علامت نقل‌قول باشه، رشته (str) هست"
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد رو حدس بزن:",
+            "code": "age = 20\nprint(type(age))",
+            "answer": "<class 'int'>",
+            "hint": "age یه عدد صحیحه"
+        }
+    ],
+    "challenges": [
+        {
+            "type": "predict",
+            "difficulty": "easy",
+            "title": "خروجی کد رو حدس بزن:",
+            "code": "a = 3\nb = 7\nresult = a + b\nprint(result)",
+            "answer": "10",
+            "hint": "a برابر ۳ و b برابر ۷ه، حساب کن!",
+            "xp": 10
+        },
+        {
+            "type": "bug_hunter",
+            "difficulty": "medium",
+            "title": "کجا خطا داره؟ پیدا کن!",
+            "code": "my name = 'Ali'\nprint(my name)",
+            "error_line": 1,
+            "hint": "ospace توی اسم متغیر نباید باشه",
+            "xp": 15
+        },
+        {
+            "type": "fill_gap",
+            "difficulty": "medium",
+            "title": "جای خالی رو پر کن تا کد درست اجرا بشه:",
+            "code": "score = 100\n___ = score * 2\nprint(double_score)",
+            "answer": "double_score",
+            "hint": "متغیری که توی print استفاده شده رو پر کن",
+            "xp": 15
+        },
+        {
+            "type": "predict",
+            "difficulty": "medium",
+            "title": "خروجی این کد چیه؟",
+            "code": "x = '5'\ny = '3'\nprint(x + y)",
+            "answer": "53",
+            "hint": "وقتی عدد توی علامت نقل‌Quote باشه، رشته هست و جمع‌شون کنار هم میشن",
+            "xp": 20
+        }
+    ]
+}
