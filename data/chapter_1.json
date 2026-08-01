@@ -129,7 +129,8 @@
             "error_line": 1,
             "hint": "فاصله توی اسم متغیر نباید باشه",
             "xp": 15,
-            "explanation": "توی اسم متغیر نباید فاصله باشه، my name غلطه و باید my_name باشه"
+            "explanation": "توی اسم متغیر نباید فاصله باشه، my name غلطه و باید my_name باشه",
+            "answer": 1
         },
         {
             "type": "fill_gap",

@@ -200,7 +200,8 @@
             "error_line": 1,
             "hint": "اسم کلاس باید با حروف کوچیک شروع بشه؟",
             "xp": 20,
-            "explanation": "اسم کلاس datetime با حروف کوچیک شروع میشه: datetime، نه DateTime. import اشتباهه"
+            "explanation": "اسم کلاس datetime با حروف کوچیک شروع میشه: datetime، نه DateTime. import اشتباهه",
+            "answer": 1
         },
         {
             "type": "fill_gap",
@@ -227,7 +228,8 @@
                 "95 + 87 + 92 = 274",
                 "274 / 3 = 91.333..."
             ],
-            "explanation": "فایل JSON ذخیره و دوباره خوانده میشه. سپس میانگین امتیازات (95+87+92)/3 = 274/3 = 91.33 حساب میشه"
+            "explanation": "فایل JSON ذخیره و دوباره خوانده میشه. سپس میانگین امتیازات (95+87+92)/3 = 274/3 = 91.33 حساب میشه",
+            "xp": 15
         },
         {
             "type": "predict",
@@ -240,7 +242,13 @@
                 "os.path.join مسیر رو با جداکننده مناسب سیستم‌عامل ترکیب میکنه",
                 "Linux/macOS از / و Windows از \\ استفاده میکنه"
             ],
-            "explanation": "os.path.join مسیرها رو با جداکننده مناسب سیستم‌عامل به هم وصل میکنه. روی Linux خروجی /home/user/documents/file.txt هست"
+            "explanation": "os.path.join مسیرها رو با جداکننده مناسب سیستم‌عامل به هم وصل میکنه. روی Linux خروجی /home/user/documents/file.txt هست",
+            "xp": 15
         }
-    ]
+    ],
+    "project": {
+        "title": "کتابخانه شخصی",
+        "description": "یه کتابخونه شخصی بساز که بتونی کتاب‌ها رو اضافه کنی، لیست کنی و جستجو کنی.",
+        "difficulty": "medium"
+    }
 }

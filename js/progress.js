@@ -96,7 +96,7 @@ function completeChapterProgress(chapterNum, score, xp) {
     
     // آپدیت فصل فعلی
     const nextChapter = chapterNum + 1;
-    if (nextChapter <= 5) { // حداکثر ۵ فصل
+    if (nextChapter <= 23) { // حداکثر ۲۳ فصل
         progress.currentChapter = Math.max(progress.currentChapter, nextChapter);
     }
     

@@ -108,7 +108,8 @@
             "error_line": 4,
             "hint": "count هیچوقت تغییر نمیکنه",
             "xp": 15,
-            "explanation": "count هیچوقت تغییر نمیکنه پس شرط count < 5 همیشه درسته و حلقه بی‌نهایت میشه"
+            "explanation": "count هیچوقت تغییر نمیکنه پس شرط count < 5 همیشه درسته و حلقه بی‌نهایت میشه",
+            "answer": 4
         },
         {
             "type": "predict",

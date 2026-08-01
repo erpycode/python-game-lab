@@ -194,7 +194,8 @@
             "error_line": 3,
             "hint": "اسم تابع اصلی رو چطوری بگیریم؟",
             "xp": 20,
-            "explanation": "اسم تابع با __name__ گرفته میشه، نه .name. خط اشتباه func.name هست باید func.__name__ باشه"
+            "explanation": "اسم تابع با __name__ گرفته میشه، نه .name. خط اشتباه func.name هست باید func.__name__ باشه",
+            "answer": 3
         },
         {
             "type": "fill_gap",
@@ -222,7 +223,8 @@
                 "هر بار صدا زدن، count یکی زیاد میشه",
                 "nonlocal به wrapper اجازه میده count رو عوض کنه"
             ],
-            "explanation": "دکوراتور counter تعداد دفعات فراخوانی تابع رو می‌شمره. nonlocal به wrapper اجازه میده به متغیر count دسترسی داشته باشه و اون رو زیاد کنه"
+            "explanation": "دکوراتور counter تعداد دفعات فراخوانی تابع رو می‌شمره. nonlocal به wrapper اجازه میده به متغیر count دسترسی داشته باشه و اون رو زیاد کنه",
+            "xp": 15
         }
     ],
     "project": {

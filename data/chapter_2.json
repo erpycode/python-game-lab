@@ -162,7 +162,8 @@
             "error_line": 3,
             "hint": "تقسیم بر صیرو",
             "xp": 15,
-            "explanation": "تقسیم بر صفر غیرممکنه و خطای ZeroDivisionError میده"
+            "explanation": "تقسیم بر صفر غیرممکنه و خطای ZeroDivisionError میده",
+            "answer": 3
         },
         {
             "type": "predict",
