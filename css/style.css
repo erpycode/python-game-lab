@@ -827,6 +827,93 @@ body::before {
     background: rgba(255, 255, 255, 0.05);
 }
 
+/* کد ادیتور پروژه */
+.project-editor {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.project-editor label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.code-editor {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px 16px;
+    background: var(--bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    resize: vertical;
+    direction: ltr;
+    text-align: left;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.code-editor:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+}
+
+.code-editor::placeholder {
+    color: var(--text-muted);
+}
+
+.project-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.project-output {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    direction: ltr;
+    text-align: left;
+}
+
+.project-output.hidden {
+    display: none;
+}
+
+.project-output.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.project-output.success {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    color: var(--success);
+}
+
+.project-output.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: var(--danger);
+}
+
+.project-output pre {
+    margin: 0;
+    font-family: inherit;
+    white-space: pre-wrap;
+}
+
 /* ============================================
    صفحه تمرین و چالش
    ============================================ */

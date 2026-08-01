@@ -85,11 +85,26 @@ function renderLesson(chapterData) {
     
     // پروژه عملی
     if (chapterData.project) {
+        const projectId = `project-${chapterData.id}`;
         html += `
             <div class="project-box">
                 <h4>🚀 پروژه عملی: ${chapterData.project.title}</h4>
                 <p>${chapterData.project.description}</p>
                 <span class="project-difficulty">${chapterData.project.difficulty === 'easy' ? '🟢 آسان' : chapterData.project.difficulty === 'medium' ? '🟡 متوسط' : '🔴 سخت'}</span>
+                
+                <div class="project-editor">
+                    <label>✏️ کدت رو اینجا بنویس:</label>
+                    <textarea id="${projectId}-code" class="code-editor" placeholder="# کدت رو اینجا بنویس...&#10;print('سلام دنیا!')" spellcheck="false"></textarea>
+                    <div class="project-actions">
+                        <button onclick="runProjectCode('${chapterData.id}')" class="btn btn-primary">
+                            ▶️ اجرا کن
+                        </button>
+                        <button onclick="clearProjectCode('${chapterData.id}')" class="btn btn-secondary">
+                            🗑️ پاک کن
+                        </button>
+                    </div>
+                    <div id="${projectId}-output" class="project-output hidden"></div>
+                </div>
             </div>
         `;
     }
@@ -820,6 +835,92 @@ function createNextButton(prefix, currentIndex) {
                 🏆 فصل تموم شد!
             </button>`;
         }
+    }
+}
+
+// ============================================
+// توابع پروژه عملی
+// ============================================
+
+// اجرای کد پروژه (شبیه‌سازی ساده)
+function runProjectCode(chapterId) {
+    const codeEl = document.getElementById(`project-${chapterId}-code`);
+    const outputEl = document.getElementById(`project-${chapterId}-output`);
+    
+    if (!codeEl || !outputEl) return;
+    
+    const code = codeEl.value.trim();
+    if (!code) {
+        outputEl.className = 'project-output show error';
+        outputEl.innerHTML = '❌ اول کدت رو بنویس!';
+        return;
+    }
+    
+    // شبیه‌سازی اجرای کد
+    outputEl.className = 'project-output show success';
+    
+    // بررسی ساده کد
+    let output = '';
+    let hasError = false;
+    
+    // چک کردن syntax ساده
+    if (code.includes('def ') && !code.includes(':')) {
+        output = '❌ خطای syntax: بعد از def باید : بذاری';
+        hasError = true;
+    } else if (code.includes('if ') && !code.includes(':')) {
+        output = '❌ خطای syntax: بعد از if باید : بذاری';
+        hasError = true;
+    } else if (code.includes('for ') && !code.includes(':')) {
+        output = '❌ خطای syntax: بعد از for باید : بذاری';
+        hasError = true;
+    } else if (code.includes('print') && !code.includes('(')) {
+        output = '❌ خطای syntax: print باید پرانتز داشته باشه';
+        hasError = true;
+    } else {
+        // شمارش خطوط کد
+        const lines = code.split('\n').filter(l => l.trim());
+        const printCount = (code.match(/print/g) || []).length;
+        const defCount = (code.match(/def /g) || []).length;
+        const ifCount = (code.match(/if /g) || []).length;
+        const forCount = (code.match(/for /g) || []).length;
+        
+        output = `✅ کد شما بررسی شد!\n\n`;
+        output += `📊 آمار:\n`;
+        output += `   📝 خطوط کد: ${lines.length}\n`;
+        output += `   🖨️ دستور print: ${printCount}\n`;
+        output += `   🔧 توابع: ${defCount}\n`;
+        output += `   🔀 شرط‌ها: ${ifCount}\n`;
+        output += `   🔄 حلقه‌ها: ${forCount}\n\n`;
+        
+        if (lines.length < 3) {
+            output += `💡 پیشنهاد: سعی کن کد بیشتری بنویسی!`;
+        } else if (defCount > 0 && printCount > 0) {
+            output += `🎉 عالیه! داری از توابع استفاده میکنی!`;
+        } else if (ifCount > 0) {
+            output += `👍 خوبه! داری شرط استفاده میکنی!`;
+        } else if (forCount > 0) {
+            output += `🔄 عالی! داری حلقه استفاده میکنی!`;
+        } else {
+            output += `💪 ادامه بده!`;
+        }
+    }
+    
+    if (hasError) {
+        outputEl.className = 'project-output show error';
+    }
+    
+    outputEl.innerHTML = `<pre>${output}</pre>`;
+}
+
+// پاک کردن کد پروژه
+function clearProjectCode(chapterId) {
+    const codeEl = document.getElementById(`project-${chapterId}-code`);
+    const outputEl = document.getElementById(`project-${chapterId}-output`);
+    
+    if (codeEl) codeEl.value = '';
+    if (outputEl) {
+        outputEl.className = 'project-output hidden';
+        outputEl.innerHTML = '';
     }
 }
 
