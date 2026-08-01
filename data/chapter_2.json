@@ -59,8 +59,8 @@
                 "icon": "✅",
                 "title": "بررسی رمز عبور",
                 "text": "آیا رمز عبور کافی قوی هست؟ با عملگرهای مقایسه و منطقی چک کن!",
-                "code": "password = 'myPass123'\nhas_upper = any(c.isupper() for c in password)\nhas_digit = any(c.isdigit() for c in password)\nlong_enough = len(password) >= 8\n\nis_strong = has_upper and has_digit and long_enough\nprint(f'رمز: {password}')\nprint(f'حروف بزرگ: {has_upper}')\nprint(f'عدد داره: {has_digit}')\nprint(f'طول کافی: {long_enough}')\nprint(f'رمز قوی هست: {is_strong}')",
-                "output": "رمز: myPass123\nحروف بزرگ: True\nعدد داره: True\nطول کافی: True\nرمز قوی هست: True"
+                "code": "password = 'MyPass123'\nprint(len(password))      # 8\nprint(password.isupper()) # False\nprint(password.islower()) # False\nprint(password.isdigit()) # False",
+                "output": "8\nFalse\nFalse\nFalse"
             }
         ],
         "tips": [
@@ -111,7 +111,7 @@
                 }
             ],
             "correct": "b",
-            "hint": "operat و هر دو شرط باید درست باشن",
+            "hint": "عملگر و هر دو شرط باید درست باشن",
             "explanation": "5 > 3 درسته (True) ولی 2 > 10 غلطه (False)، و چون and هر دو شرط باید درست باشن، نتیجه False هست"
         }
     ],

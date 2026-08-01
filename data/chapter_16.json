@@ -10,7 +10,7 @@
                 "icon": "🌐",
                 "title": "Flask - وب‌سایت ساده",
                 "text": "Flask سبک‌ترین فریم‌ورک وب پایتون هست. با چند خط کد یه وب‌سایت می‌سازی!\n\n💡 Flask برای شروع عالیه، برای پروژه‌های بزرگ Django بهتره.",
-                "code": "from flask import Flask\n\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return 'سلام دنیا!'\n\n@app.route('/about')\ndef about():\n    return 'این سایت م hoeme'\n\nif __name__ == '__main__':\n    app.run(debug=True)",
+                "code": "from flask import Flask\n\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return 'سلام دنیا!'\n\n@app.route('/about')\ndef about():\n    return 'این سایت م home'\n\nif __name__ == '__main__':\n    app.run(debug=True)",
                 "output": "# سرور شروع میشه و در http://localhost:5000 قابل دسترسیه"
             },
             {

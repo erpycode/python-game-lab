@@ -58,7 +58,7 @@
         ],
         "tips": [
             "از __ برای متغیرهای خصوصی استفاده کن ولی یادت نره python واقعاً private نداره",
-            "的原则 Single Responsibility: هر کلاس فقط یه کار انجام بده",
+            " Single Responsibility: هر کلاس فقط یه کار انجام بده",
             "از isinstance و issubclass برای بررسی نوع استفاده کن",
             "Magic methods زیادن! __str__, __repr__, __eq__, __lt__, __len__ از مهم‌ترین‌هاشونن",
             "property برای اعتبارسنجی داده عالیه — مثلاً جلوگیری از مقدار منفی"

@@ -44,7 +44,7 @@
             {
                 "icon": "📚",
                 "title": "متدهای مفید دیکشنری",
-                "text": "دیکشنری چند مethod آماده داره:\n\n• keys() → لیست کلیدها\n• values() → لیست مقادیر\n• items() → لیست جفت‌های کلید-مقدار\n• copy() → کپی دیکشنری\n• update() → بروزرسانی با دیکشنری دیگه",
+                "text": "دیکشنری چند متد آماده داره:\n\n• keys() → لیست کلیدها\n• values() → لیست مقادیر\n• items() → لیست جفت‌های کلید-مقدار\n• copy() → کپی دیکشنری\n• update() → بروزرسانی با دیکشنری دیگه",
                 "code": "data = {'a': 1, 'b': 2, 'c': 3}\n\nprint(list(data.keys()))\nprint(list(data.values()))\nprint(list(data.items()))\n\n# بروزرسانی\ndata.update({'d': 4, 'e': 5})\nprint(data)",
                 "output": "['a', 'b', 'c']\n[1, 2, 3]\n[('a', 1), ('b', 2), ('c', 3)]\n{'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}"
             }

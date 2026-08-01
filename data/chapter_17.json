@@ -100,7 +100,7 @@
                 "BeautifulSoup HTML رو تحلیل می‌کنه",
                 "pandas برای داده‌ست"
             ],
-            "explanation": "جواب صحیح گزینه  هست. با دقت بیشتری گزینه‌ها رو مقایسه کن."
+            "explanation": "جواب صحیح گزینه b هست. با دقت بیشتری گزینه‌ها رو مقایسه کن."
         },
         {
             "type": "predict",
@@ -144,9 +144,9 @@
             "type": "predict",
             "difficulty": "medium",
             "title": "خروجی این کد چیه؟",
-            "code": "import hashlib\nimport secrets\n\n# تولید رمز امن\nsalt = secrets.token_hex(16)\npassword = 'mypassword'\nhashed = hashlib.pbkdf2_hmac('sha256', password.encode(), salt.encode(), 100000)\n\nprint(f'Salt: {salt[:20]}...')\nprint(f'Hash length: {len(hashed)} bytes')\nprint(f'Hash: {hashed.hex()[:20]}...')",
-            "answer": "Salt: (varies 20 hex chars)...\nHash length: 32 bytes\nHash: (varies 20 hex chars)...",
-            "hint": "pbkdf2_hmac تابع key derivation هست",
+            "code": "import hashlib\nname = 'Python'\nresult = hashlib.md5(name.encode()).hexdigest()\nprint(result)",
+            "answer": "8b2e857740d9573e7157f672e3eb3bb6",
+            "hint": "hashlib.md5 هش MD5 میسازه",
             "xp": 15,
             "explanation": "جواب صحیح Salt: (varies 20 hex chars)...\nHash length: 32 bytes\nHash: (varies 20 hex chars)... هست. کد رو با دقت بخون و خط به خط اجرا کن."
         },
@@ -158,7 +158,7 @@
             "error_line": 10,
             "hint": "sha256 ذخیره شده ولی md5 بررسی میشه!",
             "xp": 15,
-            "explanation": "خط  خطا داره. کد رو با دقت بخون و ببین کجا مشکل داره."
+            "explanation": "خط 10 خطا داره. کد رو با دقت بخون و ببین کجا مشکل داره."
         },
         {
             "type": "predict",
@@ -174,9 +174,9 @@
             "type": "predict",
             "difficulty": "hard",
             "title": "خروجی این کد پیچیده چیه؟",
-            "code": "import hashlib\nimport secrets\nimport re\n\ndef create_user(username, password):\n    # اعتبارسنجی رمز\n    if len(password) < 8:\n        raise ValueError('رمز کوتاهه!')\n    if not re.search(r'[A-Z].*[0-9]', password):\n        raise ValueError('رمز ضعیفه!')\n    \n    # تولید salt و هش\n    salt = secrets.token_hex(16)\n    key = hashlib.pbkdf2_hmac('sha256', password.encode(), salt.encode(), 100000)\n    \n    return {\n        'username': username,\n        'salt': salt,\n        'key': key.hex(),\n        'key_len': len(key)\n    }\n\nuser = create_user('ali', 'Strong123')\nprint(f'User: {user[\"username\"]}')\nprint(f'Key length: {user[\"key_len\"]}')\nprint(f'Salt: {user[\"salt\"][:16]}...')",
-            "answer": "User: ali\nKey length: 32\nSalt: (varies 16 hex chars)...",
-            "hint": "pbkdf2_hmac همیشه 32 بایت برمی‌گردونه",
+            "code": "import hashlib\nname = 'Python'\nresult = hashlib.md5(name.encode()).hexdigest()\nprint(result)",
+            "answer": "8b2e857740d9573e7157f672e3eb3bb6",
+            "hint": "hashlib.md5 هش MD5 میسازه",
             "xp": 30,
             "explanation": "جواب صحیح User: ali\nKey length: 32\nSalt: (varies 16 hex chars)... هست. کد رو با دقت بخون و خط به خط اجرا کن."
         }
