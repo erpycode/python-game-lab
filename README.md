@@ -30,25 +30,38 @@
 
 ## 📚 فصل‌ها
 
-| فصل | عنوان | سطح |
-|:----|:------|:----|
-| ۱ | متغیرها | 📗 مبتدی |
-| ۲ | عملگرها | 📗 مبتدی |
-| ۳ | شرط‌ها | 📘 متوسط |
-| ۴ | حلقه‌ها | 📘 متوسط |
-| ۵ | توابع | 📘 متوسط |
-| ۶ | لیست‌ها | 📕 پیشرفته |
-| ۷ | دیکشنری | 📕 پیشرفته |
-| ۸ | متدهای رشته | 📕 پیشرفته |
-| ۹ | مدیریت فایل | 📕 پیشرفته |
-| ۱۰ | مدیریت خطا | 📕 پیشرفته |
-| ۱۱ | شی‌گرایی (OOP) | 🎓 حرفه‌ای |
-| ۱۲ | جنریتورها | 🎓 حرفه‌ای |
-| ۱۳ | دکوراتورها | 🎓 حرفه‌ای |
-| ۱۴ | ماژول‌ها و پکیج‌ها | 🎓 حرفه‌ای |
-| ۱۵ | عبارات باقاعده | 🎓 حرفه‌ای |
-| ۱۶ | آشنایی با فریم‌ورک‌ها | 🎓 حرفه‌ای |
-| ۱۷ | پایتون در عمل | 🎓 حرفه‌ای |
+### 📗 مبتدی
+| فصل | عنوان |
+|:----|:------|
+| ۱ | متغیرها |
+| ۲ | عملگرها |
+
+### 📘 متوسط
+| فصل | عنوان |
+|:----|:------|
+| ۳ | شرط‌ها |
+| ۴ | حلقه‌ها |
+| ۵ | توابع |
+
+### 📕 پیشرفته
+| فصل | عنوان |
+|:----|:------|
+| ۶ | لیست‌ها |
+| ۷ | دیکشنری |
+| ۸ | متدهای رشته |
+| ۹ | مدیریت فایل |
+| ۱۰ | مدیریت خطا |
+
+### 🎓 حرفه‌ای
+| فصل | عنوان |
+|:----|:------|
+| ۱۱ | شی‌گرایی (OOP) |
+| ۱۲ | جنریتورها |
+| ۱۳ | دکوراتورها |
+| ۱۴ | ماژول‌ها و پکیج‌ها |
+| ۱۵ | عبارات باقاعده |
+| ۱۶ | آشنایی با فریم‌ورک‌ها |
+| ۱۷ | پایتون در عمل |
 
 ## 🚀 اجرا کردن
 
@@ -167,25 +180,38 @@ An online game for learning Python from scratch. Each chapter includes **lessons
 
 ## 📚 Chapters
 
-| Chapter | Title | Level |
-|:--------|:------|:------|
-| 1 | Variables | 📗 Beginner |
-| 2 | Operators | 📗 Beginner |
-| 3 | Conditionals | 📘 Intermediate |
-| 4 | Loops | 📘 Intermediate |
-| 5 | Functions | 📘 Intermediate |
-| 6 | Lists | 📕 Advanced |
-| 7 | Dictionaries | 📕 Advanced |
-| 8 | String Methods | 📕 Advanced |
-| 9 | File Handling | 📕 Advanced |
-| 10 | Error Handling | 📕 Advanced |
-| 11 | OOP | 🎓 Expert |
-| 12 | Generators | 🎓 Expert |
-| 13 | Decorators | 🎓 Expert |
-| 14 | Modules & Packages | 🎓 Expert |
-| 15 | Regular Expressions | 🎓 Expert |
-| 16 | Frameworks | 🎓 Expert |
-| 17 | Python in Practice | 🎓 Expert |
+### 📗 Beginner
+| Chapter | Title |
+|:--------|:------|
+| 1 | Variables |
+| 2 | Operators |
+
+### 📘 Intermediate
+| Chapter | Title |
+|:--------|:------|
+| 3 | Conditionals |
+| 4 | Loops |
+| 5 | Functions |
+
+### 📕 Advanced
+| Chapter | Title |
+|:--------|:------|
+| 6 | Lists |
+| 7 | Dictionaries |
+| 8 | String Methods |
+| 9 | File Handling |
+| 10 | Error Handling |
+
+### 🎓 Expert
+| Chapter | Title |
+|:--------|:------|
+| 11 | OOP |
+| 12 | Generators |
+| 13 | Decorators |
+| 14 | Modules & Packages |
+| 15 | Regular Expressions |
+| 16 | Frameworks |
+| 17 | Python in Practice |
 
 ## 🚀 Getting Started
 
