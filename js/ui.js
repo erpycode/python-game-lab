@@ -3,7 +3,7 @@
    ============================================ */
 
 // ============================================
-// رندر صفحه فصل‌ها (دسته‌بندی شده)
+// رندر صفحه فصل‌ها (دسته‌بندی شده + collapsible)
 // ============================================
 function renderChaptersGrid() {
     const container = document.getElementById('chapters-grid');
@@ -30,6 +30,9 @@ function renderChaptersGrid() {
         { key: 'advanced', title: '📕 پیشرفته', subtitle: 'حرفه‌ای شو!', color: 'var(--purple)' }
     ];
     
+    // پیدا کردن سطح فصل فعلی کاربر
+    const currentLevel = chaptersInfo.find(ch => ch.num === progress.currentChapter)?.level || 'beginner';
+    
     let html = '';
     
     levels.forEach(level => {
@@ -43,11 +46,17 @@ function renderChaptersGrid() {
         const totalInLevel = levelChapters.length;
         const progressPercent = Math.round((completedInLevel / totalInLevel) * 100);
         
+        // اگه سطح فعلی کاربر باشه، باز باشه
+        const isOpen = level.key === currentLevel;
+        
         html += `
-            <div class="level-section">
-                <div class="level-header" style="border-right-color: ${level.color};">
+            <div class="level-section ${isOpen ? 'open' : 'closed'}" id="level-${level.key}">
+                <div class="level-header" style="border-right-color: ${level.color};" onclick="toggleLevel('${level.key}')">
                     <div class="level-info">
-                        <h3 class="level-title">${level.title}</h3>
+                        <h3 class="level-title">
+                            <span class="toggle-icon">${isOpen ? '▾' : '◂'}</span>
+                            ${level.title}
+                        </h3>
                         <p class="level-subtitle">${level.subtitle}</p>
                     </div>
                     <div class="level-progress">
@@ -57,7 +66,7 @@ function renderChaptersGrid() {
                         <span class="level-progress-text">${toPersianNum(completedInLevel)}/${toPersianNum(totalInLevel)}</span>
                     </div>
                 </div>
-                <div class="level-chapters">
+                <div class="level-chapters" style="display: ${isOpen ? 'flex' : 'none'};">
         `;
         
         levelChapters.forEach(ch => {
@@ -101,6 +110,29 @@ function renderChaptersGrid() {
     });
     
     container.innerHTML = html;
+}
+
+// باز/بسته کردن دسته
+function toggleLevel(levelKey) {
+    const section = document.getElementById(`level-${levelKey}`);
+    if (!section) return;
+    
+    const chapters = section.querySelector('.level-chapters');
+    const icon = section.querySelector('.toggle-icon');
+    
+    if (section.classList.contains('open')) {
+        // بستن
+        section.classList.remove('open');
+        section.classList.add('closed');
+        chapters.style.display = 'none';
+        icon.textContent = '◂';
+    } else {
+        // باز کردن
+        section.classList.remove('closed');
+        section.classList.add('open');
+        chapters.style.display = 'flex';
+        icon.textContent = '▾';
+    }
 }
 
 // ============================================
