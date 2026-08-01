@@ -1,0 +1,147 @@
+{
+    "id": "19",
+    "title": "فصل ۱۹: توابع لامبدا 🔥",
+    "level": "advanced",
+    "lesson": {
+        "title": "توابع لامبدا - توابع یکبار مصرف",
+        "intro": "لامبدا مثل یه تابع یکبار مصرف هست! 🔥 سریع می‌سازی، استفاده می‌کنی، دور میندازی! برای کارهای کوچک و سریع عالیه.",
+        "sections": [
+            {
+                "icon": "🔥",
+                "title": "لامبدا چیه؟",
+                "text": "لامبدا یه تابع کوچیک و موقتی هست که یه خطی نوشته میشه!\n\n💡 ساختار: lambda arguments: expression\n\nمثل یه کاغذ یادداشت هست: یه چیزی روش می‌نویسی، استفاده می‌کنی، دور میندازی!",
+                "code": "# تابع معمولی\ndef double(x):\n    return x * 2\n\n# لامبدا\ndouble_lambda = lambda x: x * 2\n\nprint(double(5))\nprint(double_lambda(5))\n\n# لامبدا با چند پارامتر\nadd = lambda a, b: a + b\nprint(add(3, 7))",
+                "output": "10\n10\n10"
+            },
+            {
+                "icon": "📋",
+                "title": "مرتب‌سازی هوشمند",
+                "text": "لامبدا بیشتر با توابع مرتب‌سازی استفاده میشه! مثل اینه که به سیستم بگی 'اینا رو بر اساس فیلد خاصی مرتب کن'!\n\n💡 sorted() و .sort() هر دو key می‌گیرن",
+                "code": "students = [\n    {'name': 'Ali', 'score': 85},\n    {'name': 'Sara', 'score': 92},\n    {'name': 'Mina', 'score': 78},\n    {'name': 'Reza', 'score': 95}\n]\n\n# مرتب بر اساس نمره\nby_score = sorted(students, key=lambda s: s['score'])\nprint('صعودی:', [s['name'] for s in by_score])\n\n# مرتب بر اساس حرف اول اسم\nby_name = sorted(students, key=lambda s: s['name'][0])\nprint('بر اساس اسم:', [s['name'] for s in by_name])",
+                "output": "صعودی: ['Mina', 'Ali', 'Sara', 'Reza']\nبر اساس اسم: ['Ali', 'Mina', 'Reza', 'Sara']"
+            },
+            {
+                "icon": "🔍",
+                "title": "فیلتر و تبدیل با map/filter",
+                "text": "لامبدا با توابع map و filter عالی کار می‌کنه!\n\n💡 map: هر آیتم رو تبدیل می‌کنه\n💡 filter: فقط آیتم‌هایی که شرط رو دارن نگه می‌داره\n\nمثل خط تولید کارخونه: map تغییرش میده، filter غربالش می‌کنه!",
+                "code": "numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n\n# map - ضرب در 2\ndoubled = list(map(lambda x: x * 2, numbers))\nprint('ضرب در 2:', doubled)\n\n# filter - فقط زوج\nevens = list(filter(lambda x: x % 2 == 0, numbers))\nprint('زوج‌ها:', evens)\n\n# ترکیب map و filter\nresult = list(map(lambda x: x ** 2, filter(lambda x: x > 5, numbers)))\nprint('مربع اعداد بزرگتر از 5:', result)",
+                "output": "ضرب در 2: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]\nزوج‌ها: [2, 4, 6, 8, 10]\nمربع اعداد بزرگتر از 5: [36, 49, 64, 81, 100]"
+            },
+            {
+                "icon": "🏭",
+                "title": "تولیدکننده تابع - closure",
+                "text": "می‌تونی لامبدا رو برگردونی! یعنی تابعی بسازی که تابع بسازه! 🤯\n\n💡 مثل کارخونه‌ای که ماشین تولید می‌کنه: هر بار یه ماشین جدید می‌دی!",
+                "code": "# تولید تابع ضرب\nmultiply_by = lambda n: lambda x: x * n\n\ndouble = multiply_by(2)\ntriple = multiply_by(3)\n\nprint(double(5))\nprint(triple(5))\n\n# تولید تابع مقایسه\ncompare = lambda op: lambda a, b: a > b if op == '>' else a < b\ngreater = compare('>')\nsmaller = compare('<')\n\nprint(f'5 > 3: {greater(5, 3)}')\nprint(f'2 < 7: {smaller(2, 7)}')",
+                "output": "10\n15\n5 > 3: True\n2 < 7: True"
+            },
+            {
+                "icon": "📦",
+                "title": "کاربردهای واقعی لامبدا",
+                "text": "لامبدا توی پروژه‌های واقعی خیلی استفاده میشه!\n\n• دیکشنری چندسطحی: sorted با key\n• GUI callback: دکمه کلیک\n• decorator: تزئین توابع\n• داده‌های JSON: پردازش سریع\n\n💡 لامبدا برای توابع کوتاه عالیه، برای توابع طولانی def بنویس!",
+                "code": "# ترکیب لامبدا و sorted\ndata = [\n    ('Ali', 25, 90),\n    ('Sara', 30, 85),\n    ('Mina', 22, 95)\n]\n\n# مرتب بر اساس نمره (نزولی)\nby_score = sorted(data, key=lambda x: x[2], reverse=True)\nprint('بر اساس نمره:', by_score)\n\n# ترکیب لامبدا و reduce\nfrom functools import reduce\nnumbers = [1, 2, 3, 4, 5]\nproduct = reduce(lambda a, b: a * b, numbers)\nprint('حاصل‌ضرب:', product)",
+                "output": "بر اساس نمره: [('Mina', 22, 95), ('Ali', 25, 90), ('Sara', 30, 85)]\nحاصل‌ضرب: 120"
+            },
+            {
+                "icon": "⚖️",
+                "title": "لامبدا vs تابع معمولی",
+                "text": "کی لامبدا بزنیم؟ کی تابع معمولی؟\n\n💡 لامبدا:\n• یه خطی باشه\n• فقط یه بار استفاده بشه\n• به عنوان argument باشه\n\n💡 تابع معمولی:\n• چند خطی باشه\n• چند بار استفاده بشه\n• docstring بخوای\n• debug کنی",
+                "code": "# لامبدا مناسب\nsort_by_name = sorted(names, key=lambda x: x.lower())\n\n# تابع معمولی مناسب\ndef process_student(student):\n    \"\"\"پردازش اطلاعات دانشجو\"\"\"\n    result = {\n        'name': student['name'].title(),\n        'grade': 'A' if student['score'] >= 90 else 'B',\n        'passed': student['score'] >= 60\n    }\n    return result\n\nstudents = [\n    {'name': 'ali', 'score': 95},\n    {'name': 'sara', 'score': 78}\n]\n\nfor s in students:\n    print(process_student(s))",
+                "output": "{'name': 'Ali', 'grade': 'A', 'passed': True}\n{'name': 'Sara', 'grade': 'B', 'passed': True}"
+            }
+        ],
+        "tips": [
+            "لامبدا برای توابع یکخطی و موقتی عالیه",
+            "وقتی لامبدا پیچیده شد، از تابع معمولی استفاده کن",
+            "لامبدا با sorted, map, filter, reduce خوب کار می‌کنه",
+            "از لامبدا برای callback و event handler استفاده کن",
+            "lambda: None برای مقدار پیش‌فرض None در keyword argument استفاده میشه"
+        ]
+    },
+    "exercises": [
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "square = lambda x: x ** 2\nprint(square(6))",
+            "answer": "36",
+            "hint": "** توان هست، 6 به توان 2",
+            "hints": ["lambda x: x ** 2 یعنی تابعی که ور رو به توان 2 می‌رسونه", "6 ** 2 = 36", "نتیجه 36 هست"]
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "data = [(1, 'b'), (2, 'a'), (3, 'c')]\nresult = sorted(data, key=lambda x: x[1])\nprint(result)",
+            "answer": "[(2, 'a'), (1, 'b'), (3, 'c')]",
+            "hint": "sorted بر اساس حرف دوم مرتب می‌کنه",
+            "hints": ["key=lambda x: x[1] یعنی بر اساس عنصر دوم مرتب کن", "a < b < c پس مرتب‌سازی الفبایی", "نتیجه: (2, 'a'), (1, 'b'), (3, 'c')"]
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "numbers = [1, 2, 3, 4, 5]\nresult = list(map(lambda x: x * 2, numbers))\nprint(result)",
+            "answer": "[2, 4, 6, 8, 10]",
+            "hint": "map هر عدد رو دو برابر می‌کنه",
+            "hints": ["map روی هر آیتم لامبدا رو اعمال می‌کنه", "هر عدد ضرب در 2 میشه", "نتیجه لیست جدیدیه"]
+        },
+        {
+            "type": "quiz",
+            "title": "کدوم گزینه لامبدا درستیه؟",
+            "code": "",
+            "options": [
+                {"label": "a", "text": "lambda x: return x * 2"},
+                {"label": "b", "text": "lambda x: x * 2"},
+                {"label": "c", "text": "def lambda x: x * 2"},
+                {"label": "d", "text": "lambda(x): x * 2"}
+            ],
+            "correct": "b",
+            "hint": "لامبدا return نداره، فقط expression",
+            "hints": ["lambda نیازی به return نداره", "پرانتز اطراف آرگومان اختیاریه ولی رایج نیست", "def و lambda جداگانه هستن"]
+        }
+    ],
+    "challenges": [
+        {
+            "type": "predict",
+            "difficulty": "easy",
+            "title": "خروجی این کد چیه؟",
+            "code": "add = lambda a, b, c: a + b + c\nprint(add(1, 2, 3))",
+            "answer": "6",
+            "hint": "سه عدد با هم جمع میشن",
+            "xp": 10
+        },
+        {
+            "type": "predict",
+            "difficulty": "medium",
+            "title": "خروجی این کد چیه؟",
+            "code": "words = ['banana', 'apple', 'cherry', 'date']\nresult = sorted(words, key=lambda w: len(w))\nprint(result)",
+            "answer": "['date', 'apple', 'banana', 'cherry']",
+            "hint": "بر اساس طول کلمه مرتب میشه",
+            "xp": 15
+        },
+        {
+            "type": "predict",
+            "difficulty": "medium",
+            "title": "خروجی این کد چیه؟",
+            "code": "numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\nresult = list(filter(lambda x: x % 3 == 0, numbers))\nprint(result)",
+            "answer": "[3, 6, 9]",
+            "hint": "فقط اعدادی که بر 3 تقسیم میشن",
+            "xp": 15
+        },
+        {
+            "type": "predict",
+            "difficulty": "medium",
+            "title": "خروجی این کد چیه؟",
+            "code": "make_adder = lambda n: lambda x: x + n\nadd5 = make_adder(5)\nadd10 = make_adder(10)\nprint(add5(3) + add10(2))",
+            "answer": "20",
+            "hint": "add5(3)=8, add10(2)=12, جمع: 20",
+            "xp": 20
+        },
+        {
+            "type": "predict",
+            "difficulty": "hard",
+            "title": "خروجی این کد پیچیده چیه؟",
+            "code": "from functools import reduce\n\nstudents = [\n    {'name': 'Ali', 'scores': [85, 90, 78]},\n    {'name': 'Sara', 'scores': [92, 88, 95]},\n    {'name': 'Mina', 'scores': [75, 82, 80]}\n]\n\navgs = list(map(\n    lambda s: (s['name'], reduce(lambda a, b: a + b, s['scores']) / len(s['scores'])),\n    students\n))\n\nbest = max(avgs, key=lambda x: x[1])\nprint(f'{best[0]}: {best[1]:.1f}')",
+            "answer": "Sara: 91.7",
+            "hint": "میانگین نمرات هر دانشجو، بعد بهترین رو پیدا کن",
+            "xp": 30
+        }
+    ]
+}

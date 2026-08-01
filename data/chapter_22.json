@@ -1,0 +1,87 @@
+{
+    "id": "22",
+    "title": "فصل ۲۲: API و اینترنت 🎓",
+    "level": "expert",
+    "lesson": {
+        "title": "یادگیری API و اتصال به اینترنت",
+        "intro": "API مثل پستچی دیجیتال هست! درخواست میفرستی و جواب میگیری. باهاش می‌تونی از اطلاعات وب‌سایت‌ها استفاده کنی.",
+        "sections": [
+            {
+                "icon": "🌐",
+                "title": "API چیه؟",
+                "text": "API (Application Programming Interface) راه ارتباط برنامه‌ها با هم هست. مثلاً وقتی آب‌وهوا چک می‌کنی، داری از API استفاده می‌کنی.",
+                "code": "import requests\n\n# دریافت اطلاعات از API\nresponse = requests.get('https://api.github.com/users/erpycode')\n\n# تبدیل به دیکشنری\ndata = response.json()\nprint(data['name'])\nprint(data['public_repos'])"
+            },
+            {
+                "icon": "📥",
+                "title": "GET درخواست",
+                "text": "GET برای دریافت اطلاعات استفاده میشه.",
+                "code": "import requests\n\n# GET ساده\nresponse = requests.get('https://jsonplaceholder.typicode.com/posts/1')\nprint(response.status_code)  # 200\nprint(response.json())\n\n# با پارامتر\nparams = {'userId': 1}\nresponse = requests.get('https://jsonplaceholder.typicode.com/posts',\n                       params=params)\nposts = response.json()\nprint(len(posts))"
+            },
+            {
+                "icon": "📤",
+                "title": "POST درخواست",
+                "text": "POST برای ارسال اطلاعات استفاده میشه.",
+                "code": "import requests\n\n# POST\nnew_post = {\n    'title': 'Hello',\n    'body': 'This is a test',\n    'userId': 1\n}\nresponse = requests.post('https://jsonplaceholder.typicode.com/posts',\n                        json=new_post)\nprint(response.status_code)  # 201\nprint(response.json())"
+            },
+            {
+                "icon": "🔄",
+                "title": "Handling Errors",
+                "text": "چک کردن خطاهای احتمالی.",
+                "code": "import requests\n\ntry:\n    response = requests.get('https://api.example.com/data', timeout=5)\n    response.raise_for_status()  # اگه خطای HTTP باشه exception میده\n    data = response.json()\nexcept requests.exceptions.Timeout:\n    print('سرور جواب نمیده!')\nexcept requests.exceptions.HTTPError as e:\n    print(f'خطای HTTP: {e}')\nexcept requests.exceptions.RequestException as e:\n    print(f'خطا: {e}')"
+            }
+        ],
+        "tips": [
+            "pip install requests رو فراموش نکن",
+            "timeout بذار تا برنامه هنگ نکنه",
+            "از raise_for_status() استفاده کن",
+            "API key رو هیچوقت توی کد commit نکن!"
+        ]
+    },
+    "exercises": [
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "import requests\nresponse = requests.get('https://httpbin.org/get')\nprint(response.status_code)",
+            "answer": "200",
+            "hint": "status_code 200 یعنی موفقیت",
+            "hints": ["httpbin.org یه API تستی هست", "200 یعنی OK"],
+            "explanation": "status_code 200 یعنی درخواست با موفقیت انجام شد"
+        },
+        {
+            "type": "quiz",
+            "title": "کدوم method برای ارسال داده استفاده میشه؟",
+            "code": "# کدوم؟",
+            "options": [
+                {"label": "a", "text": "requests.get()"},
+                {"label": "b", "text": "requests.post()"},
+                {"label": "c", "text": "requests.delete()"},
+                {"label": "d", "text": "requests.put()"}
+            ],
+            "correct": "b",
+            "hint": "POST برای ارسال داده هست",
+            "hints": ["GET برای دریافت هست", "POST برای ارسال هست"],
+            "explanation": "requests.post() برای ارسال داده به سرور استفاده میشه"
+        }
+    ],
+    "challenges": [
+        {
+            "type": "predict",
+            "difficulty": "easy",
+            "title": "خروجی این کد چیه؟",
+            "code": "import requests\nresponse = requests.get('https://httpbin.org/get')\ndata = response.json()\nprint(type(data))",
+            "answer": "<class 'dict'>",
+            "hint": "json() دیکشنری برمیگردونه",
+            "xp": 15
+        },
+        {
+            "type": "bug_hunter",
+            "difficulty": "medium",
+            "title": "خطا کجاست؟",
+            "code": "import requests\nresponse = requests.get('https://httpbin.org/get')\ndata = response.json()\nprint(data['nonexistent_key'])",
+            "error_line": 4,
+            "hint": "کلید وجود نداره!",
+            "xp": 20
+        }
+    ]
+}

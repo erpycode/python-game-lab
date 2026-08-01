@@ -1,0 +1,93 @@
+{
+    "id": "23",
+    "title": "فصل ۲۳: تست‌نویسی 🎓",
+    "level": "expert",
+    "lesson": {
+        "title": "یادگیری تست‌نویسی با pytest",
+        "intro": "تست‌نویسی مثل بازرس کیفیت هست! مطمئن میشه کدت درست کار میکنه و باگ نداره.",
+        "sections": [
+            {
+                "icon": "🧪",
+                "title": "چرا تست بنویسیم؟",
+                "text": "تست‌ها مطمئن میشن کدت با تغییرات آینده خراب نمیشه.",
+                "code": "# تابع ساده\ndef add(a, b):\n    return a + b\n\n# تست ساده\ndef test_add():\n    assert add(2, 3) == 5\n    assert add(-1, 1) == 0\n    assert add(0, 0) == 0\n\nprint('All tests passed!')"
+            },
+            {
+                "icon": "📝",
+                "title": "قواعد نامگذاری",
+                "text": "نام توابع تست باید با test_ شروع بشه.",
+                "code": "# فایل test_math.py\n\ndef test_add():\n    assert add(2, 3) == 5\n\ndef test_multiply():\n    assert multiply(2, 3) == 6\n\n# اجرا با:\n# pytest test_math.py"
+            },
+            {
+                "icon": "❌",
+                "title": "تست‌های ناموفق",
+                "text": "وقتی تست Fail بشه، پیام خطا میده.",
+                "code": "def test_add():\n    assert add(2, 3) == 5  # Pass\n\ndef test_wrong():\n    assert add(2, 3) == 6  # Fail!\n    # AssertionError: assert 5 == 6"
+            },
+            {
+                "icon": "🔄",
+                "title": "Test Fixtures",
+                "text": "Fixture ها داده‌های مشترک برای تست‌ها هستن.",
+                "code": "import pytest\n\n@pytest.fixture\ndef sample_data():\n    return [1, 2, 3, 4, 5]\n\ndef test_length(sample_data):\n    assert len(sample_data) == 5\n\ndef test_sum(sample_data):\n    assert sum(sample_data) == 15"
+            },
+            {
+                "icon": "📊",
+                "title": "گزارش تست",
+                "text": "pytest گزارش کاملی از تست‌ها میده.",
+                "code": "# اجرای تست با جزئیات\n# pytest -v\n\n# اجرای تست با coverage\n# pytest --cov=mycode\n\n# اجرای تست خاص\n# pytest test_math.py::test_add"
+            }
+        ],
+        "tips": [
+            "pip install pytest رو نصب کن",
+            "نام فایل‌ها باید test_ شروع بشه",
+            "از assert برای بررسی جواب استفاده کن",
+            "هر تست فقط یه چیز رو بررسی کنه"
+        ]
+    },
+    "exercises": [
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "def add(a, b):\n    return a + b\n\ndef test_add():\n    assert add(2, 3) == 5\n    print('Test passed!')\n\ntest_add()",
+            "answer": "Test passed!",
+            "hint": "assert اگه درست باشه خطایی نمیده",
+            "hints": ["add(2,3) برابر 5 هست", "پس assert درسته"],
+            "explanation": "assert درسته پس کد ادامه پیدا میکنه"
+        },
+        {
+            "type": "quiz",
+            "title": "نام فایل تست باید چطوری باشه؟",
+            "code": "# کدوم؟",
+            "options": [
+                {"label": "a", "text": "math_test.py"},
+                {"label": "b", "text": "test_math.py"},
+                {"label": "c", "text": "math.py"},
+                {"label": "d", "text": "check.py"}
+            ],
+            "correct": "b",
+            "hint": "pytest خودکار فایل‌های test_ رو پیدا میکنه",
+            "hints": ["نام باید با test_ شروع بشه", "pytest convention"],
+            "explanation": "pytest خودکار فایل‌هایی که با test_ شروع میشن رو پیدا و اجرا میکنه"
+        }
+    ],
+    "challenges": [
+        {
+            "type": "predict",
+            "difficulty": "easy",
+            "title": "خروجی این کد چیه؟",
+            "code": "def multiply(a, b):\n    return a * b\n\ndef test_multiply():\n    assert multiply(3, 4) == 12\n    assert multiply(0, 5) == 0\n    print('All passed!')\n\ntest_multiply()",
+            "answer": "All passed!",
+            "hint": "هر دو assert درست هستن",
+            "xp": 15
+        },
+        {
+            "type": "bug_hunter",
+            "difficulty": "medium",
+            "title": "خطا کجاست؟",
+            "code": "def subtract(a, b):\n    return a - b\n\ndef test_subtract():\n    assert subtract(5, 3) == 2\n    assert subtract(3, 5) == 2  # این غلطه!",
+            "error_line": 6,
+            "hint": "3 - 5 برابر 2 نیست!",
+            "xp": 20
+        }
+    ]
+}

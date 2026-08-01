@@ -1,0 +1,147 @@
+{
+    "id": "18",
+    "title": "فصل ۱۸: لیست کامپریهشن 🛒",
+    "level": "advanced",
+    "lesson": {
+        "title": "لیست کامپریهشن - ساخت لیست با سرعت برق",
+        "intro": "لیست کامپریهشن مثل یه فروشگاه لیست خودکار هست! به جای اینکه بیای یکی یکی اضافه کنی، یه خط کد می‌نویسی و لیستت آمادست! 🛒✨",
+        "sections": [
+            {
+                "icon": "🛒",
+                "title": "فروشگاه لیست - معرفی کامپریهشن",
+                "text": "تصور کنی توی یه فروشگاه بزرگی و می‌خوای یه لیست خرید بسازی. به جای اینکه هر چیز رو جداگانه بنویسی، یه فرمول می‌دی و فروشگاه خودش لیست رو می‌سازه!\n\n💡 ساختار: [expression for item in iterable]\n\nخیلی ساده‌تر از حلقه for معمولیه!",
+                "code": "# روش قدیمی - حلقه for\nsquares_old = []\nfor x in range(5):\n    squares_old.append(x ** 2)\n\n# روش جدید - لیست کامپریهشن\nsquares = [x ** 2 for x in range(5)]\n\nprint('روش قدیمی:', squares_old)\nprint('روش جدید:', squares)",
+                "output": "روش قدیمی: [0, 1, 4, 9, 16]\nروش جدید: [0, 1, 4, 9, 16]"
+            },
+            {
+                "icon": "🔍",
+                "title": "فیلتر کردن - فقط چیزی که می‌خوای!",
+                "text": "می‌خوای فقط اعداد زوج رو داشته باشی؟ یا فقط اسم‌هایی که با حرف الف شروع میشن؟\n\n💡 ساختار: [expression for item in iterable if condition]\n\nمثل اینه که توی فروشگاه فقط کالاهای خاص رو از قفسه برمی‌داری!",
+                "code": "numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n\n# فقط اعداد زوج\nevens = [x for x in numbers if x % 2 == 0]\nprint('اعداد زوج:', evens)\n\n# فقط اسم‌های کوتاه\nnames = ['Ali', 'Sara', 'Mohammad', 'Mina', 'Reza']\nshort_names = [name for name in names if len(name) <= 4]\nprint('اسمهای کوتاه:', short_names)",
+                "output": "اعداد زوج: [2, 4, 6, 8, 10]\nاسمهای کوتاه: ['Ali', 'Mina', 'Reza']"
+            },
+            {
+                "icon": "🔄",
+                "title": "تبدیل و فیلتر همزمان",
+                "text": "می‌تونی همزمان هم تبدیل کنی هم فیلتر! مثل اینه که توی فروشگاه هم قیمت رو عوض کنی هم فقط بعضی کالاها رو برداری!\n\n💡 ساختار: [expression for item in iterable if condition]\n\nexpression می‌تونه هر چیزی باشه: عدد، رشته، لیست و...",
+                "code": "prices = [100, 250, 50, 300, 150, 75]\n\n# تخفیف ۲۰٪ فقط روی اقلام بالای ۱۰۰\ndiscounted = [price * 0.8 for price in prices if price > 100]\nprint('قیمت‌های تخفیف‌خورده:', discounted)\n\n# تبدیل به رشته و فیلتر\nwords = ['hello', 'world', 'python', 'hi', 'code']\nresult = [word.upper() for word in words if len(word) > 3]\nprint('کلمات بلند:', result)",
+                "output": "قیمت‌های تخفیف‌خورده: [200.0, 240.0, 120.0]\nکلمات بلند: ['HELLO', 'WORLD', 'PYTHON', 'CODE']"
+            },
+            {
+                "icon": "🧩",
+                "title": "کامپریهشن توکار - توکار و پیچیده",
+                "text": "می‌تونی کامپریهشن رو توی کامپریهشن دیگه بنویسی! مثل عروسک‌های روسی که یکی توی یکی هستن! 🪆\n\n⚠️ مواظب باش زیاد پیچیده نشه! خوانایی مهم‌تر از خلاصه‌نویسیه.",
+                "code": "# جدول ضرب\nmultiplication = [[i * j for j in range(1, 4)] for i in range(1, 4)]\nprint('جدول ضرب ۳x۳:')\nfor row in multiplication:\n    print(row)\n\n# صاف کردن لیست توکار\nnested = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\nflat = [num for sublist in nested for num in sublist]\nprint('لیست صاف:', flat)",
+                "output": "جدول ضرب ۳x۳:\n[1, 2, 3]\n[2, 4, 6]\n[3, 6, 9]\nلیست صاف: [1, 2, 3, 4, 5, 6, 7, 8, 9]"
+            },
+            {
+                "icon": "🎯",
+                "title": "دیکشنری و سِت کامپریهشن",
+                "text": "فقط لیست نیست! می‌تونی دیکشنری و سِت هم با کامپریهشن بسازی!\n\n💡 دیکشنری: {key: value for item in iterable}\n💡 سِت: {expression for item in iterable}\n\nسِت مثل لیسته ولی تکراری نداره!",
+                "code": "# دیکشنری کامپریهشن\nnames = ['Ali', 'Sara', 'Mina']\nscores = [90, 85, 95]\n\ngrade_book = {name: score for name, score in zip(names, scores)}\nprint('کارنامه:', grade_book)\n\n# سِت کامپریهشن\nnumbers = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]\nunique_squares = {x ** 2 for x in numbers}\nprint('مربع‌های یکتا:', unique_squares)\n\n# فیلتر دیکشنری\npassed = {name: score for name, score in grade_book.items() if score >= 88}\nprint('قبول‌شدگان:', passed)",
+                "output": "کارنامه: {'Ali': 90, 'Sara': 85, 'Mina': 95}\nمربع‌های یکتا: {16, 1, 9, 4}\nقبول‌شدگان: {'Ali': 90, 'Mina': 95}"
+            },
+            {
+                "icon": "⚡",
+                "title": "عملکرد و خوانایی",
+                "text": "لیست کامپریهشن از حلقه for معمولی سریع‌تره! ولی مواظب خوانایی باش.\n\n💡 قانون طلایی:\n• اگه کامپریهشن بیشتر از ۸۰ کاراکتر شد، حلقه بنویس\n• اگه فیلتر پیچیده‌ای داری، حلقه بهتره\n• اگه side effect داری (مثل print)، حلقه بنویس",
+                "code": "# مقایسه عملکرد\nimport time\n\n# روش حلقه\nstart = time.time()\nresult1 = []\nfor i in range(1000000):\n    if i % 2 == 0:\n        result1.append(i * 2)\ntime_loop = time.time() - start\n\n# روش کامپریهشن\nstart = time.time()\nresult2 = [i * 2 for i in range(1000000) if i % 2 == 0]\ntime_comp = time.time() - start\n\nprint(f'حلقه: {time_loop:.4f} ثانیه')\nprint(f'کامپریهشن: {time_comp:.4f} ثانیه')\nprint(f'سریع‌تر: {time_loop / time_comp:.1f}x')",
+                "output": "حلقه: 0.0892 ثانیه\nکامپریهشن: 0.0543 ثانیه\nسریع‌تر: 1.6x"
+            }
+        ],
+        "tips": [
+            "لیست کامپریهشن برای ساخت لیست‌های ساده عالیه، ولی برای کارهای پیچیده حلقه بنویس",
+            "همیشه خوانایی رو فدای خلاصه‌نویسی نکن",
+            "از سِت کامپریهشن برای حذف تکرارها استفاده کن",
+            "دیکشنری کامپریهشن برای تبدیل لیست به دیکشنری عالیه",
+            "اگه expression پیچیده شد، از متغیر موقت استفاده کن"
+        ]
+    },
+    "exercises": [
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "result = [x * 2 for x in range(5)]\nprint(result)",
+            "answer": "[0, 2, 4, 6, 8]",
+            "hint": "range(5) اعداد 0 تا 4 رو تولید می‌کنه",
+            "hints": ["range(5) میشه [0, 1, 2, 3, 4]", "هر عدد دو برابر میشه", "0*2=0, 1*2=2, 2*2=4, 3*2=6, 4*2=8"]
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "words = ['hello', 'world', 'python']\nresult = [word.upper() for word in words]\nprint(result)",
+            "answer": "['HELLO', 'WORLD', 'PYTHON']",
+            "hint": "upper() حروف رو بزرگ می‌کنه",
+            "hints": ["upper() همه حروف رو به بزرگ تبدیل می‌کنه", "روی هر کلمه اعمال میشه", "لیست جدیدی با حروف بزرگ ساخته میشه"]
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\nevens = [x for x in numbers if x % 2 == 0]\nprint(evens)",
+            "answer": "[2, 4, 6, 8, 10]",
+            "hint": "% 2 == 0 یعنی عدد زوجه",
+            "hints": ["فقط اعدادی که تقسیم بر 2 بدون باقیمانده میشن", "اعداد زوج: 2, 4, 6, 8, 10", "filter فقط شرط رو رعایت می‌کنه"]
+        },
+        {
+            "type": "quiz",
+            "title": "کدوم ساختار درسته؟",
+            "code": "",
+            "options": [
+                {"label": "a", "text": "[x for x in range(10)]"},
+                {"label": "b", "text": "[for x in range(10) x]"},
+                {"label": "c", "text": "x for x in range(10)"},
+                {"label": "d", "text": "[range(10) for x]"}
+            ],
+            "correct": "a",
+            "hint": "ساختار استاندارد: [expression for item in iterable]",
+            "hints": ["expression اول میاد، بعد for", "حتماً باید [] داشته باشه", "ساختار [x for x in range(10)] درسته"]
+        }
+    ],
+    "challenges": [
+        {
+            "type": "predict",
+            "difficulty": "easy",
+            "title": "خروجی این کد چیه؟",
+            "code": "result = [x ** 2 for x in range(5)]\nprint(result)",
+            "answer": "[0, 1, 4, 9, 16]",
+            "hint": "** توان هست، هر عدد به توان 2 میشه",
+            "xp": 10
+        },
+        {
+            "type": "predict",
+            "difficulty": "medium",
+            "title": "خروجی این کد چیه؟",
+            "code": "data = {'a': 1, 'b': 2, 'c': 3, 'd': 4}\nresult = {k: v * 10 for k, v in data.items() if v > 2}\nprint(result)",
+            "answer": "{'c': 30, 'd': 40}",
+            "hint": "فقط مقادیر بزرگتر از 2 ضرب در 10 میشن",
+            "xp": 15
+        },
+        {
+            "type": "predict",
+            "difficulty": "medium",
+            "title": "خروجی این کد چیه؟",
+            "code": "matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\nresult = [num for row in matrix for num in row if num % 2 != 0]\nprint(result)",
+            "answer": "[1, 3, 5, 7, 9]",
+            "hint": "فقط اعداد فرد از همه ردیف‌ها",
+            "xp": 20
+        },
+        {
+            "type": "predict",
+            "difficulty": "medium",
+            "title": "خروجی این کد چیه؟",
+            "code": "result = [[i * j for j in range(1, 4)] for i in range(1, 4)]\nprint(result[1][2])",
+            "answer": "6",
+            "hint": "result[1][2] یعنی ردیف دوم، ستون سوم",
+            "xp": 20
+        },
+        {
+            "type": "predict",
+            "difficulty": "hard",
+            "title": "خروجی این کد پیچیده چیه؟",
+            "code": "text = 'hello world python code'\nresult = ' '.join([word[::-1] for word in text.split() if len(word) > 4])\nprint(result)",
+            "answer": "dlrow nohtyp",
+            "hint": "[::-1] رشته رو برعکس می‌کنه، فقط کلمات بیشتر از ۴ حرف",
+            "xp": 30
+        }
+    ]
+}

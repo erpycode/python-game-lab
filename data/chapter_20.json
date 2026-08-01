@@ -1,0 +1,87 @@
+{
+    "id": "20",
+    "title": "فصل ۲۰: محیط مجازی 🎓",
+    "level": "expert",
+    "lesson": {
+        "title": "یادگیری محیط‌های مجازی",
+        "intro": "Virtual Environments مثل جعبه ابزار جداگانه برای هر پروژه هستن. هر پروژه پکیج‌های خودش رو داره و با بقیه قاطی نمیشه!",
+        "sections": [
+            {
+                "icon": "📦",
+                "title": "چرا محیط مجازی؟",
+                "text": "وقتی چند پروژه داری، ممکنه هر کدوم پکیج‌های مختلفی بخواد. محیط مجازی این پکیج‌ها رو جدا نگه میداره.",
+                "code": "# بدون محیط مجازی\npip install django==3.2\npip install flask\n# هر دو نصب میشن ولی ممکنه تداخل ایجاد کنه!\n\n# با محیط مجازی\npython -m venv myenv\nsource myenv/bin/activate  # لینوکس\n# myenv\\Scripts\\activate   # ویندوز\npip install django==3.2\n# فقط برای این پروژه!"
+            },
+            {
+                "icon": "🔧",
+                "title": "ساخت محیط مجازی",
+                "text": "خیلی ساده با یه دستور محیط مجازی بساز.",
+                "code": "# ساخت\npython -m venv myenv\n\n# فعال‌سازی (لینوکس/مک)\nsource myenv/bin/activate\n\n# فعال‌سازی (ویندوز)\nmyenv\\Scripts\\activate\n\n# غیرفعال‌سازی\ndeactivate"
+            },
+            {
+                "icon": "📋",
+                "title": "ذخیره پکیج‌ها",
+                "text": "لیست پکیج‌ها رو در فایل requirements.txt ذخیره کن.",
+                "code": "# ذخیره لیست پکیج‌ها\npip freeze > requirements.txt\n\n# نصب از فایل\npip install -r requirements.txt\n\n# مثال requirements.txt:\n# django==4.2\n# flask==2.3\n# requests==2.31"
+            },
+            {
+                "icon": "📁",
+                "title": "ساختار پروژه",
+                "text": "محیط مجازی رو هیچوقت commit نکن!",
+                "code": "myproject/\n├── myenv/          # ← این رو commit نکن!\n├── src/\n├── requirements.txt\n├── .gitignore      # ← myenv/ رو اضافه کن\n└── README.md\n\n# .gitignore\nmyenv/\n__pycache__/\n*.pyc"
+            }
+        ],
+        "tips": [
+            "هر پروژه محیط مجازی جداگانه داشته باشه",
+            "فایل requirements.txt رو commit کن",
+            "پوشه محیط مجازی رو هیچوقت commit نکن",
+            "از python -m venv استفاده کن (نه virtualenv قدیمی)"
+        ]
+    },
+    "exercises": [
+        {
+            "type": "predict",
+            "title": "خروجی این دستور چیه؟",
+            "code": "python -m venv myenv\nls myenv/",
+            "answer": "bin include lib pyvenv.cfg",
+            "hint": "محیط مجازی چند پوشه داره",
+            "hints": ["پوشه‌های bin, lib, include ساخته میشن"],
+            "explanation": "python -m venv پوشه‌های استاندارد محیط مجازی رو میسازه"
+        },
+        {
+            "type": "quiz",
+            "title": "کدوم فایل باید commit بشه؟",
+            "code": "# کدوم؟",
+            "options": [
+                {"label": "a", "text": "myenv/"},
+                {"label": "b", "text": "requirements.txt"},
+                {"label": "c", "text": "__pycache__/"},
+                {"label": "d", "text": "*.pyc"}
+            ],
+            "correct": "b",
+            "hint": "فایلی که لیست پکیج‌ها رو داره",
+            "hints": ["myenv/ رو نباید commit کرد", "requirements.txt لیست پکیج‌هاست"],
+            "explanation": "requirements.txt لیست پکیج‌های مورد نیاز پروژه رو نگه میداره"
+        }
+    ],
+    "challenges": [
+        {
+            "type": "predict",
+            "difficulty": "easy",
+            "title": "خروجی این دستور چیه؟",
+            "code": "pip freeze > requirements.txt\nprint('Saved!')",
+            "answer": "Saved!",
+            "hint": "pip freeze لیست پکیج‌ها رو ذخیره میکنه",
+            "xp": 15
+        },
+        {
+            "type": "bug_hunter",
+            "difficulty": "medium",
+            "title": "خطا کجاست؟",
+            "code": "python -m venv myenv\nsource myenv/bin/activate\npip install django\n# حالا django نصب شده\n# ولی توی پروژه دیگه هم میخوایم استفاده کنیم\n# بدون activate کردن",
+            "error_line": 5,
+            "hint": "باید activate کنی تا فقط توی این پروژه باشه",
+            "xp": 20
+        }
+    ]
+}
