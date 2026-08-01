@@ -1,0 +1,161 @@
+{
+    "id": "8",
+    "title": "فصل ۸: متدهای رشته 📗",
+    "level": "beginner",
+    "lesson": {
+        "title": "آشنایی با متدهای رشته",
+        "intro": "متدهای رشته مثل ابزارهایی هستن که باهاون متن‌ها رو تغییر می‌دیم. می‌تونی حروف رو بزرگ یا کوچک کنی، فاصله‌ها رو حذف کنی، یا ببینی یه کلمه توی متن هست یا نه!",
+        "sections": [
+            {
+                "icon": "🔤",
+                "title": "upper() و lower() — تغییر اندازه حروف",
+                "text": "upper() همه حروف رو بزرگ می‌کنه و lower() همه رو کوچک. خیلی مفیده وقتی می‌خوای متن رو مقایسه کنی!\n\n💡 نکته: این متدها متن جدید برمی‌گردونن، متن اصلی عوض نمیشه!",
+                "code": "name = 'ali rezaei'\nprint(name.upper())\nprint(name.lower())\n\nmessage = 'Hello World'\nprint(message.upper())\nprint(message.lower())",
+                "output": "ALI REZAEI\nali rezaei\nHELLO WORLD\nhello world"
+            },
+            {
+                "icon": "✂️",
+                "title": "strip() — حذف فاصله‌های اضافی",
+                "text": "strip() فاصله‌ها و کاراکترهای اضافی از اول و آخر متن رو حذف می‌کنه. خیلی وقتا وقتی از کاربر ورودی می‌گیری، فاصله اضافی داره!\n\n• strip() → از هر دو طرف حذف\n• lstrip() → فقط از سمت چپ\n• rstrip() → فقط از سمت راست",
+                "code": "text = '   سلام دنیا   '\nprint(text.strip())\nprint(text.lstrip())\nprint(text.rstrip())\n\nemail = '  user@email.com  '\nprint(email.strip())",
+                "output": "سلام دنیا\nسلام دنیا   \n   سلام دنیا\nuser@email.com"
+            },
+            {
+                "icon": "🔍",
+                "title": "find() و count() — جستجو در متن",
+                "text": "find() موقعیت یه زیررشته رو توی متن پیدا می‌کنه. اگه پیدا نکنه، عدد -1 برمی‌گردونه. count() هم تعداد دفعات تکرار رو حساب می‌کنه.\n\n💡 index() شبیه find() هست ولی اگه پیدا نکنه خطا میده!",
+                "code": "text = 'Python is awesome'\nprint(text.find('awesome'))\nprint(text.find('Java'))\n\nmessage = 'hello hello hello'\nprint(message.count('hello'))\nprint(message.count('x'))",
+                "output": "11\n-1\n3\n0"
+            },
+            {
+                "icon": "🔄",
+                "title": "replace() — جایگزینی متن",
+                "text": "replace() یه قسمت از متن رو با چیز دیگه‌ای عوض می‌کنه. سه تا ورودی می‌خواد: متن قدیم، متن جدید، و (اختیاری) تعداد دفعات.\n\n⚠️ نکته: متن اصلی تغییر نمیکنه! متن جدید برمی‌گردونه.",
+                "code": "text = 'Hello World'\nnew_text = text.replace('World', 'Python')\nprint(new_text)\n\nmessage = 'aabbcc'\nprint(message.replace('a', 'x'))\nprint(message.replace('a', 'x', 1))",
+                "output": "Hello Python\nxxbbcc\nxabbcc"
+            },
+            {
+                "icon": "📝",
+                "title": "split() و join() — تقسیم و ترکیب متن",
+                "text": "split() متن رو بر اساس یه جداکننده (مثل کاما یا فاصله) به لیست تبدیل می‌کنه. join() برعکس، چند تا متن رو با یه جداکننده کنار هم میذاره.\n\n💡 split() بدون پارامتر، بر اساس فاصله تقسیم می‌کنه!",
+                "code": "text = 'Python is fun'\nwords = text.split(' ')\nprint(words)\n\ncsv = 'Ali,Sara,Mohammad'\nnames = csv.split(',')\nprint(names)\n\njoined = ' - '.join(names)\nprint(joined)",
+                "output": "['Python', 'is', 'fun']\n['Ali', 'Sara', 'Mohammad']\nAli - Sara - Mohammad"
+            },
+            {
+                "icon": "✅",
+                "title": "startswith() و endswith() — بررسی ابتدا و انتها",
+                "text": "اینا می‌بینن آیا متن با یه قسمت خاص شروع یا تموم میشه. خیلی مفیده برای اعتبارسنجی!\n\n💡 هر دو یه مقدار True یا False برمی‌گردونن.",
+                "code": "filename = 'photo.jpg'\nprint(filename.startswith('photo'))\nprint(filename.endswith('.jpg'))\nprint(filename.endswith('.png'))\n\nurl = 'https://example.com'\nprint(url.startswith('https'))",
+                "output": "True\nTrue\nFalse\nTrue"
+            }
+        ],
+        "tips": [
+            "metodها متن جدید برمی‌گردونن، متن اصلی تغییر نمیکنه!",
+            "upper() و lower() برای مقایسه متن خیلی مفیدن",
+            "find() اگه پیدا نکنه -1 برمی‌گردونه، ولی index() خطا میده",
+            "split() بدون پارامتر بر اساس فاصله تقسیم می‌کنه",
+            "strip() فقط فاصله‌ها رو حذف نمیکنه، کاراکترهای خاص رو هم حذف می‌کنه",
+            "startswith() و endswith() مقدار True/False برمی‌گردونن"
+        ]
+    },
+    "exercises": [
+        {
+            "type": "predict",
+            "title": "خروجی این کد رو حدس بزن:",
+            "code": "text = 'Hello'\nprint(text.lower())",
+            "answer": "hello",
+            "hint": "lower() همه حروف رو کوچک می‌کنه",
+            "hints": ["lower() حروف بزرگ رو کوچک می‌کنه", "H بزرگ به h کوچک تبدیل میشه", "Hello → hello"],
+            "explanation": "lower() همه حروف رو کوچک می‌کنه: Hello → hello"
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد رو حدس بزن:",
+            "code": "text = '   python   '\nprint(text.strip())",
+            "answer": "python",
+            "hint": "strip() فاصله‌های اضافی از اول و آخر رو حذف می‌کنه",
+            "hints": ["strip() فاصله‌های اطراف رو حذف می‌کنه", "فقط فاصله‌های اضافی حذف میشن", "python باقی می‌مونه"],
+            "explanation": "strip() فاصله‌های اضافی از ابتدا و انتهای متن رو حذف می‌کنه"
+        },
+        {
+            "type": "quiz",
+            "title": "find() چه چیزی برمی‌گردونه؟",
+            "code": "text = 'Python is great'\nprint(text.find('Java'))",
+            "options": [
+                {"label": "a", "text": "error"},
+                {"label": "b", "text": "-1"},
+                {"label": "c", "text": "0"},
+                {"label": "d", "text": "None"}
+            ],
+            "correct": "b",
+            "hint": "وقتی متن پیدا نشه، find() چه عددی برمی‌گردونه؟",
+            "hints": ["find() اگه پیدا نکنه خطا نمیده", "find() عدد منفی برمی‌گردونه", "وقتی متن پیدا نشه -1 برمی‌گردونه"],
+            "explanation": "وقتی متن مورد نظر توی رشته پیدا نشه، find() عدد -1 برمی‌گردونه"
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد رو حدس بزن:",
+            "code": "text = 'aabbcc'\nprint(text.replace('a', 'x'))",
+            "answer": "xxbbcc",
+            "hint": "replace() همه حروف 'a' رو با 'x' عوض می‌کنه",
+            "hints": ["replace() همه تکرارها رو عوض می‌کنه", "دو تا a داریم، هر دو عوض میشن", "xxbbcc نتیجه هست"],
+            "explanation": "replace() همه نمونه‌های 'a' رو با 'x' عوض می‌کنه: aabbcc → xxbbcc"
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد رو حدس بزن:",
+            "code": "text = 'one,two,three'\nwords = text.split(',')\nprint(len(words))",
+            "answer": "3",
+            "hint": "split() متن رو بر اساس کاما به لیست تبدیل می‌کنه",
+            "hints": ["split(',') متن رو با کاما تقسیم می‌کنه", "سه تا کلمه داریم: one, two, three", "len() تعداد آیتم‌ها رو میده"],
+            "explanation": "split(',') متن رو به سه آیتم تقسیم می‌کنه: ['one', 'two', 'three']، پس len() برابر 3 هست"
+        }
+    ],
+    "challenges": [
+        {
+            "type": "predict",
+            "difficulty": "easy",
+            "title": "خروجی این کد رو حدس بزن:",
+            "code": "name = 'Ali'\nprint(name.upper())",
+            "answer": "ALI",
+            "hint": "upper() همه حروف رو بزرگ می‌کنه",
+            "xp": 10
+        },
+        {
+            "type": "bug_hunter",
+            "difficulty": "medium",
+            "title": "کجا خطا داره؟ پیدا کن!",
+            "code": "text = 'Hello World'\nprint(text.find())",
+            "error_line": 2,
+            "hint": "find() حداقل یه ورودی می‌خواد!",
+            "xp": 15
+        },
+        {
+            "type": "fill_gap",
+            "difficulty": "medium",
+            "title": "جای خالی رو پر کن:",
+            "code": "text = 'Hello World'\nnew_text = text.____('World', 'Python')\nprint(new_text)",
+            "answer": "replace",
+            "hint": "متدی که متن رو عوض می‌کنه چیه؟",
+            "xp": 15
+        },
+        {
+            "type": "predict",
+            "difficulty": "medium",
+            "title": "خروجی این کد چیه؟",
+            "code": "text = 'banana'\nprint(text.count('a'))",
+            "answer": "3",
+            "hint": "چند تا 'a' توی banana هست؟",
+            "xp": 20
+        },
+        {
+            "type": "predict",
+            "difficulty": "hard",
+            "title": "خروجی این کد پیچیده چیه؟",
+            "code": "text = '  Hello, World!  '\nresult = text.strip().replace('World', 'Python').lower()\nprint(result)",
+            "answer": "hello, python!",
+            "hint": "اول فاصله‌ها حذف میشه، بعد World عوض میشه، بعد همه کوچک میشه",
+            "xp": 25
+        }
+    ]
+}
