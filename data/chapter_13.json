@@ -31,6 +31,12 @@
                 "title": "کاربرد دکوراتورها",
                 "text": "دکوراتورها کاربردهای زیادی دارن: لاگ کردن، اندازه‌گیری زمان، اعتبارسنجی، caching و...",
                 "code": "import time\n\ndef timer(func):\n    def wrapper(*args):\n        start = time.time()\n        result = func(*args)\n        end = time.time()\n        print(f'{func.__name__}: {end-start:.4f}s')\n        return result\n    return wrapper\n\n@timer\ndef slow_function():\n    time.sleep(1)\n    return 'done'"
+            },
+            {
+                "icon": "🌍",
+                "title": "مثال‌های واقعی",
+                "text": "دکوراتورها توی پروژه‌های واقعی خیلی کاربرد دارن. مثلاً توی وبسایت‌ها برای چک کردن اینکه کاربر لاگین کرده یا نه!",
+                "code": "# مثال ۱: لاگ کردن فراخوانی تابع\ndef log_calls(func):\n    def wrapper(*args, **kwargs):\n        print(f'📞 فراخوانی: {func.__name__}({args}, {kwargs})')\n        result = func(*args, **kwargs)\n        print(f'✅ نتیجه: {result}')\n        return result\n    return wrapper\n\n@log_calls\ndef add(a, b):\n    return a + b\n\nadd(3, 5)\n# 📞 فراخوانی: add((3, 5), {})\n# ✅ نتیجه: 8\n\n# مثال ۲: بررسی دسترسی کاربر\ndef require_admin(func):\n    def wrapper(user, *args, **kwargs):\n        if user.get('is_admin'):\n            return func(user, *args, **kwargs)\n        else:\n            print('⛔ دسترسی غیرمجاز!')\n            return None\n    return wrapper\n\n@require_admin\ndef delete_post(user, post_id):\n    print(f'🗑️ پست {post_id} حذف شد')\n\nadmin = {'name': 'Ali', 'is_admin': True}\nguest = {'name': 'Sara', 'is_admin': False}\n\ndelete_post(admin, 42)   # 🗑️ پست 42 حذف شد\ndelete_post(guest, 42)   # ⛔ دسترسی غیرمجاز!"
             }
         ],
         "tips": [
@@ -82,6 +88,91 @@
                 "lru مخفف Least Recently Used هست"
             ],
             "explanation": "@lru_cache نتایج تابع رو کش میکنه تا دوباره اجرا نشه"
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "def double_result(func):\n    def wrapper(*args):\n        return func(*args) * 2\n    return wrapper\n\n@double_result\ndef square(x):\n    return x * x\n\nprint(square(5))",
+            "answer": "50",
+            "hint": "اول square اجرا میشه، بعد ضربدر 2 میشه",
+            "hints": [
+                "square(5) = 25",
+                "25 * 2 = 50"
+            ],
+            "explanation": "square(5) برابر 25 میشه، بعد دکوراتور result رو ضربدر 2 میکنه: 25 × 2 = 50"
+        },
+        {
+            "type": "quiz",
+            "title": "وقتی @my_decorator قبل از تابع نوشته میشه، چه اتفاقی میفته؟",
+            "code": "@my_decorator\ndef say_hello():\n    print('سلام!')",
+            "options": [
+                {
+                    "label": "a",
+                    "text": "say_hello = my_decorator(say_hello)"
+                },
+                {
+                    "label": "b",
+                    "text": "my_decorator = say_hello(say_hello)"
+                },
+                {
+                    "label": "c",
+                    "text": "say_hello() my_decorator()"
+                },
+                {
+                    "label": "d",
+                    "text": "say_hello + my_decorator"
+                }
+            ],
+            "correct": "a",
+            "hint": "وقتی @ میذاری، پایتون خودش تابع رو به دکوراتور رد میکنه",
+            "hints": [
+                "@ یه میانبر سینتکسی هست",
+                "say_hello = my_decorator(say_hello) درسته"
+            ],
+            "explanation": "@my_decorator دقیقاً مثل say_hello = my_decorator(say_hello) هست. پایتون خودش تابع اصلی رو به دکوراتور پاس میده!"
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "def log(func):\n    def wrapper(*args, **kwargs):\n        print(f'calling {func.__name__}')\n        result = func(*args, **kwargs)\n        print(f'{func.__name__} returned {result}')\n        return result\n    return wrapper\n\n@log\ndef multiply(a, b):\n    return a * b\n\nprint(multiply(3, 4))",
+            "answer": "calling multiply\nmultiply returned 12\n12",
+            "hint": "دکوراتور قبل و بعد از تابع پیام چاپ میکنه",
+            "hints": [
+                "اول 'calling multiply' چاپ میشه",
+                "multiply(3, 4) = 12",
+                "بعد 'multiply returned 12' و بعد خود 12 چاپ میشه"
+            ],
+            "explanation": "دکوراتور log اول اسم تابع رو چاپ میکنه، بعد تابع اجرا میشه (12)، بعد نتیجه رو چاپ میکنه، و در نهایت 12 برگردانده میشه"
+        },
+        {
+            "type": "quiz",
+            "title": "چرا از functools.wraps استفاده میکنیم؟",
+            "code": "import functools\n\ndef my_decorator(func):\n    @functools.wraps(func)\n    def wrapper(*args, **kwargs):\n        return func(*args, **kwargs)\n    return wrapper",
+            "options": [
+                {
+                    "label": "a",
+                    "text": "برای سریع‌تر شدن تابع"
+                },
+                {
+                    "label": "b",
+                    "text": "برای حفظ اطلاعات تابع اصلی (مثل __name__)"
+                },
+                {
+                    "label": "c",
+                    "text": "برای اضافه کردن خطاهای بیشتر"
+                },
+                {
+                    "label": "d",
+                    "text": "برای حذف دکوراتور"
+                }
+            ],
+            "correct": "b",
+            "hint": "بدون wraps، __name__ تابع 'wrapper' میشه",
+            "hints": [
+                "wraps اطلاعات تابع اصلی رو به wrapper منتقل میکنه",
+                "بدون اون، func.__name__ برابر 'wrapper' میشه"
+            ],
+            "explanation": "functools.wraps اطلاعات متابتا (مثل __name__، __doc__) تابع اصلی رو به تابع wrapper منتقل میکنه. بدون اون، وقتی به تابع نگاه کنی، اسمش 'wrapper' هست!"
         }
     ],
     "challenges": [
@@ -118,6 +209,20 @@
             "hint": "از متغیر saved استفاده کن",
             "xp": 25,
             "explanation": "saved دیکشنری‌ای‌ه که نتایج رو ذخیره می‌کنه. اگه args قبلاً بوده، دوباره اجرا نمیشه"
+        },
+        {
+            "type": "predict",
+            "difficulty": "hard",
+            "title": "خروجی این کد چیه؟",
+            "code": "def counter(func):\n    count = 0\n    def wrapper(*args, **kwargs):\n        nonlocal count\n        count += 1\n        print(f'{func.__name__} called {count} times')\n        return func(*args, **kwargs)\n    return wrapper\n\n@counter\ndef say(name):\n    print(f'Hello {name}')\n\nsay('Ali')\nsay('Sara')\nsay('Ali')",
+            "answer": "say called 1 times\nHello Ali\nsay called 2 times\nHello Sara\nsay called 3 times\nHello Ali",
+            "hint": "nonlocal به متغیر بیرونی اجازه تغییر میده",
+            "hints": [
+                "count از صفر شروع میشه",
+                "هر بار صدا زدن، count یکی زیاد میشه",
+                "nonlocal به wrapper اجازه میده count رو عوض کنه"
+            ],
+            "explanation": "دکوراتور counter تعداد دفعات فراخوانی تابع رو می‌شمره. nonlocal به wrapper اجازه میده به متغیر count دسترسی داشته باشه و اون رو زیاد کنه"
         }
     ]
 }

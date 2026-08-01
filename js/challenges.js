@@ -83,6 +83,17 @@ function renderLesson(chapterData) {
         `;
     }
     
+    // پروژه عملی
+    if (chapterData.project) {
+        html += `
+            <div class="project-box">
+                <h4>🚀 پروژه عملی: ${chapterData.project.title}</h4>
+                <p>${chapterData.project.description}</p>
+                <span class="project-difficulty">${chapterData.project.difficulty === 'easy' ? '🟢 آسان' : chapterData.project.difficulty === 'medium' ? '🟡 متوسط' : '🔴 سخت'}</span>
+            </div>
+        `;
+    }
+    
     container.innerHTML = html;
 }
 

@@ -797,6 +797,36 @@ body::before {
     content: '💡 ';
 }
 
+/* باکس پروژه عملی */
+.project-box {
+    background: linear-gradient(135deg, rgba(0, 212, 170, 0.08) 0%, rgba(0, 212, 170, 0.03) 100%);
+    border: 1px solid rgba(0, 212, 170, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    margin-top: 16px;
+}
+
+.project-box h4 {
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.project-box p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.project-difficulty {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05);
+}
+
 /* ============================================
    صفحه تمرین و چالش
    ============================================ */
