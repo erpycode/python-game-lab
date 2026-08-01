@@ -1,0 +1,163 @@
+{
+    "id": "6",
+    "title": "فصل ۶: لیست‌ها 📗",
+    "level": "advanced",
+    "lesson": {
+        "title": "یادگیری لیست‌ها (Lists)",
+        "intro": "لیست‌ها مثل جعبه‌هایی هستن که چند تا چیز توشون جا میشه. یه لیست می‌تونه اعداد، متن‌ها، یا هر چیز دیگه‌ای رو نگه داره. لیست‌ها مهم‌ترین ساختمان داده در پایتون هستن!",
+        "sections": [
+            {
+                "icon": "📋",
+                "title": "تعریف لیست — اولین قدم",
+                "text": "برای ساختن یه لیست، آیتم‌ها رو بین دوتا براکت [ ] میذاریم و با کاما از هم جدا می‌کنیم:\n\n⚠️ نکته مهم: لیست می‌تونه انواع مختلفی از داده رو داشته باشه (اعداد، متن، بولین و...)\n⚠️ نکته مهم: ترتیب آیتم‌ها مهمه و حفظ میشه!",
+                "code": "fruits = ['apple', 'banana', 'cherry']\nnumbers = [1, 2, 3, 4, 5]\nmixed = ['hello', 42, True, 3.14]\nempty = []\n\nprint(fruits)\nprint(numbers)\nprint(mixed)\nprint(empty)",
+                "output": "['apple', 'banana', 'cherry']\n[1, 2, 3, 4, 5]\n['hello', 42, True, 3.14]\n[]"
+            },
+            {
+                "icon": "🔢",
+                "title": "دسترسی به آیتم‌ها — ایندکس‌گذاری",
+                "text": "هر آیتم لیست یه شماره (ایندکس) داره که از ۰ شروع میشه! با براکت [ایندکس] بهش دسترسی پیدا می‌کنیم:\n\n💡 اگه از انتهای لیست بخوای، از عدد منفی استفاده کن: [-1] آخرین آیتم هست",
+                "code": "colors = ['red', 'green', 'blue', 'yellow']\n\nprint(colors[0])    # اولین آیتم\nprint(colors[1])    # دومین آیتم\nprint(colors[-1])   # آخرین آیتم\nprint(colors[-2])   # دومین از آخر",
+                "output": "red\ngreen\nyellow\nblue"
+            },
+            {
+                "icon": "✏️",
+                "title": "تغییر و اضافه کردن آیتم‌ها",
+                "text": "می‌تونیم مقدار یه آیتم رو عوض کنیم یا آیتم جدید اضافه کنیم:\n\n• append() → اضافه کردن به انتهای لیست\n• insert() → اضافه کردن در جای خاص\n• remove() → حذف آیتم با مقدار مشخص\n• pop() → حذف آخرین آیتم",
+                "code": "animals = ['cat', 'dog']\nprint(animals)\n\nanimals.append('bird')         # اضافه در انتها\nprint(animals)\n\nanimals.insert(1, 'fish')      # اضافه در ایندکس ۱\nprint(animals)\n\nanimals.remove('cat')          # حذف cat\nprint(animals)\n\nlast = animals.pop()           # حذف آخرین آیتم\nprint(animals)\nprint(last)",
+                "output": "['cat', 'dog']\n['cat', 'dog', 'bird']\n['cat', 'fish', 'dog', 'bird']\n['fish', 'dog', 'bird']\n['fish', 'dog']\nbird"
+            },
+            {
+                "icon": "✂️",
+                "title": "اسلایس لیست — بریدن قطعات",
+                "text": "اسلایس به ما اجازه میده یه بخش از لیست رو جدا کنیم. فرمت: لیست[شروع:پایان]\n\n⚠️ نکته مهم: آیتم در شروع گرفته میشه ولی آیتم در پایان گرفته نمیشه!\n\n💡 اگه شروع یا پایان رو نذاری، از اول یا تا آخر هست",
+                "code": "letters = ['a', 'b', 'c', 'd', 'e', 'f']\n\nprint(letters[1:4])    # از ایندکس ۱ تا ۳\nprint(letters[:3])     # از اول تا ایندکس ۲\nprint(letters[3:])     # از ایندکس ۳ تا آخر\nprint(letters[::2])    # هر دو آیتم یکی",
+                "output": "['b', 'c', 'd']\n['a', 'b', 'c']\n['d', 'e', 'f']\n['a', 'c', 'e']"
+            },
+            {
+                "icon": "🔄",
+                "title": "حلقه روی لیست",
+                "text": "می‌تونیم با حلقه for روی آیتم‌های لیست حلقه بزنیم:\n\n💡 دو روش اصلی: مستقیم روی آیتم‌ها یا با range() و ایندکس",
+                "code": "# روش اول: مستقیم\nfruits = ['apple', 'banana', 'cherry']\nfor fruit in fruits:\n    print(fruit)\n\nprint('---')\n\n# روش دوم: با ایندکس\nfor i in range(len(fruits)):\n    print(f'{i}: {fruits[i]}')",
+                "output": "apple\nbanana\ncherry\n---\n0: apple\n1: banana\n2: cherry"
+            },
+            {
+                "icon": "🛠️",
+                "title": "توابع مفید لیست",
+                "text": "پایتون توابع آماده‌ای برای کار با لیست‌ها داره:\n\n• len() → طول لیست\n• sorted() → مرتب کردن\n• reversed() → معکوس کردن\n• sum() → جمع آیتم‌ها\n• min() / max() → کمترین / بیشترین\n• 'in' → بررسی وجود آیتم",
+                "code": "nums = [3, 1, 4, 1, 5, 9]\n\nprint(len(nums))          # تعداد آیتم‌ها\nprint(sum(nums))          # جمع\nprint(min(nums))          # کمترین\nprint(max(nums))          # بیشترین\nprint(sorted(nums))       # مرتب شده\nprint(3 in nums)          # ۳ توی لیست هست؟",
+                "output": "6\n23\n1\n9\n[1, 1, 3, 4, 5, 9]\nTrue"
+            }
+        ],
+        "tips": [
+            "ایندکس لیست از ۰ شروع میشه (نه ۱!)",
+            "لیست می‌تونه انواع مختلفی از داده رو داشته باشه",
+            "append() آیتم رو به انتهای لیست اضافه میکنه",
+            "اسلایس [start:end] شامل start هست ولی end رو شامل نمیشه",
+            "با 'in' می‌تونی بررسی کنی آیتمی توی لیست هست یا نه",
+            "len() طول لیست رو برمی‌گردونه",
+            "می‌تونی لیست‌ها رو با + کنار هم بذاری",
+            "sorted() یه لیست جدید برمی‌گردونه، لیست اصلی عوض نمیشه"
+        ]
+    },
+    "exercises": [
+        {
+            "type": "predict",
+            "title": "خروجی این کد چیه؟",
+            "code": "nums = [10, 20, 30]\nprint(nums[1])",
+            "answer": "20",
+            "hint": "ایندکس‌ها از ۰ شروع میشن",
+            "hints": ["ایندکس ۰ = ۱۰, ایندکس ۱ = ۲۰", "nums[1] یعنی دومین آیتم", "جواب ۲۰ هست"],
+            "explanation": "nums[1] یعنی آیتم در ایندکس ۱ که برابر ۲۰ هست"
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این کد رو حدس بزن:",
+            "code": "fruits = ['apple', 'banana']\nfruits.append('cherry')\nprint(fruits)",
+            "answer": "['apple', 'banana', 'cherry']",
+            "hint": "append آیتم رو به انتهای لیست اضافه میکنه",
+            "hints": ["append آخر لیست رو چاپ میکنه", "cherry به انتها اضافه میشه", "لیست جدید سه آیتمی میشه"],
+            "explanation": "append() آیتم 'cherry' رو به انتهای لیست اضافه میکنه"
+        },
+        {
+            "type": "quiz",
+            "title": "nums[-1] چه مقداری برمی‌گردونه؟",
+            "code": "nums = [5, 10, 15, 20]\nprint(nums[-1])",
+            "options": [
+                {"label": "a", "text": "5"},
+                {"label": "b", "text": "10"},
+                {"label": "c", "text": "15"},
+                {"label": "d", "text": "20"}
+            ],
+            "correct": "d",
+            "hint": "عدد منفی یعنی از انتهای لیست",
+            "hints": ["[-1] آخرین آیتم لیست هست", "آیتم آخر ۲۰ هست", "جواب d هست"],
+            "explanation": "عدد منفی -1 به آخرین آیتم لیست اشاره میکنه که ۲۰ هست"
+        },
+        {
+            "type": "predict",
+            "title": "خروجی این اسلایس چیه؟",
+            "code": "nums = [0, 1, 2, 3, 4, 5]\nprint(nums[2:5])",
+            "answer": "[2, 3, 4]",
+            "hint": "اسلایس از ایندکس ۲ شروع میشه و تا ۴ ادامه داره",
+            "hints": ["nums[2] = 2, nums[3] = 3, nums[4] = 4", "ایندکس ۵ شامل نمیشه!", "جواب [2, 3, 4] هست"],
+            "explanation": "اسلایس [2:5] شامل ایندکس‌های ۲, ۳ و ۴ میشه (ایندکس ۵ شامل نیست)"
+        }
+    ],
+    "challenges": [
+        {
+            "type": "predict",
+            "difficulty": "easy",
+            "title": "خروجی این کد چیه؟",
+            "code": "a = [1, 2, 3]\nb = [4, 5]\nc = a + b\nprint(c)",
+            "answer": "[1, 2, 3, 4, 5]",
+            "hint": "عملگر + دوتا لیست رو کنار هم میذاره",
+            "xp": 10
+        },
+        {
+            "type": "bug_hunter",
+            "difficulty": "medium",
+            "title": "کجا خطا داره؟ پیدا کن!",
+            "code": "nums = [1, 2, 3]\nprint(nums[3])",
+            "error_line": 2,
+            "hint": "ایندکس‌ها از ۰ شروع میشن و آخرین ایندکس ۲ هست",
+            "xp": 15
+        },
+        {
+            "type": "fill_gap",
+            "difficulty": "medium",
+            "title": "جای خالی رو پر کن:",
+            "code": "fruits = ['apple', 'banana']\n___.append('cherry')\nprint(fruits)",
+            "answer": "fruits",
+            "hint": "اسم لیست رو بنویس",
+            "xp": 15
+        },
+        {
+            "type": "predict",
+            "difficulty": "medium",
+            "title": "خروجی این کد چیه؟",
+            "code": "nums = [10, 20, 30, 40, 50]\nprint(nums[1:4])",
+            "answer": "[20, 30, 40]",
+            "hint": "اسلایس از ایندکس ۱ تا ۳",
+            "xp": 15
+        },
+        {
+            "type": "predict",
+            "difficulty": "hard",
+            "title": "خروجی این کد چیه؟",
+            "code": "nums = [1, 2, 3, 4, 5]\nnums.remove(3)\nnums.append(6)\nnums.insert(0, 0)\nprint(nums)",
+            "answer": "[0, 1, 2, 4, 5, 6]",
+            "hint": "اول ۳ حذف میشه، بعد ۶ اضافه میشه، بعد ۰ اول لیست اضافه میشه",
+            "xp": 25
+        },
+        {
+            "type": "predict",
+            "difficulty": "hard",
+            "title": "خروجی این کد پیچیده چیه؟",
+            "code": "words = ['hello', 'world', 'python']\nresult = []\nfor word in words:\n    result.append(len(word))\nprint(result)",
+            "answer": "[5, 5, 6]",
+            "hint": "طول هر کلمه رو حساب کن",
+            "xp": 25
+        }
+    ]
+}

@@ -394,11 +394,12 @@ function drop(event, challengeIndex, targetIndex) {
     draggedItem = null;
 }
 
-// بررسی پاسخ
+// بررسی هوشمند پاسخ‌ها
 function checkAnswer(prefix, index) {
     let isCorrect = false;
     let userAnswer = '';
     let correctAnswer = '';
+    let smartFeedback = '';
     
     const data = prefix === 'exercise' ? currentChapter.exercises[index] : currentChapter.challenges[index];
     const resultEl = document.getElementById(`result-${prefix}-${index}`);
@@ -410,17 +411,25 @@ function checkAnswer(prefix, index) {
             userAnswer = predictInput.value.trim();
             correctAnswer = data.answer;
             isCorrect = normalizeAnswer(userAnswer) === normalizeAnswer(correctAnswer);
+            if (!isCorrect && userAnswer) {
+                smartFeedback = generatePredictFeedback(userAnswer, correctAnswer, data);
+            }
             break;
             
         case 'fill_gap':
-            // خوندن چند input مستقیم از کد
             const gapInputs = document.querySelectorAll(`[id^="gap-${prefix}-${index}-"]`);
             const userAnswers = [];
             gapInputs.forEach(input => userAnswers.push(input.value.trim()));
             const correctAnswers = Array.isArray(data.answer) ? data.answer : [data.answer];
-            // مقایسه همه جای خالی‌ها
-            isCorrect = userAnswers.length === correctAnswers.length &&
-                userAnswers.every((ans, i) => normalizeAnswer(ans) === normalizeAnswer(correctAnswers[i]));
+            const gapResults = userAnswers.map((ans, i) => ({
+                user: ans,
+                correct: correctAnswers[i],
+                isCorrect: normalizeAnswer(ans) === normalizeAnswer(correctAnswers[i])
+            }));
+            isCorrect = gapResults.every(g => g.isCorrect);
+            if (!isCorrect) {
+                smartFeedback = generateFillGapFeedback(gapResults);
+            }
             userAnswer = userAnswers.join(', ');
             correctAnswer = correctAnswers.join(', ');
             break;
@@ -429,6 +438,9 @@ function checkAnswer(prefix, index) {
             userAnswer = selectedBugLine[index];
             correctAnswer = data.error_line;
             isCorrect = userAnswer === correctAnswer;
+            if (!isCorrect && userAnswer) {
+                smartFeedback = generateBugHunterFeedback(userAnswer, correctAnswer, data);
+            }
             break;
             
         case 'quiz':
@@ -441,28 +453,32 @@ function checkAnswer(prefix, index) {
             userAnswer = options[selectedIdx].label;
             correctAnswer = data.correct;
             isCorrect = userAnswer === correctAnswer;
+            if (!isCorrect) {
+                smartFeedback = generateQuizFeedback(options, selectedIdx, correctAnswer, data);
+            }
             break;
             
         case 'sort':
             const userLines = window[`sort_lines_${index}`];
             correctAnswer = data.correct_order;
             isCorrect = JSON.stringify(userLines) === JSON.stringify(correctAnswer);
+            if (!isCorrect) {
+                smartFeedback = generateSortFeedback(userLines, correctAnswer);
+            }
             break;
     }
     
-    // نمایش نتیجه
+    // نمایش نتیجه هوشمند
     if (isCorrect) {
         resultEl.className = 'result-message show success';
         resultEl.innerHTML = '🎉 آفرین! درسته!';
         cardEl.classList.add('solved');
         cardEl.classList.remove('wrong');
         
-        // صدای موفقیت + افکت ذرات
         soundManager.playCorrect();
         createParticleEffect(cardEl);
         glowElement(cardEl, '#22C55E');
         
-        // امتیاز
         const xp = data.xp || 10;
         if (prefix === 'challenge') {
             chapterXP += xp;
@@ -473,7 +489,6 @@ function checkAnswer(prefix, index) {
         
         showConfetti();
         
-        // دکمه تمرین/چالش بعدی
         const nextBtn = createNextButton(prefix, index);
         if (nextBtn) {
             resultEl.innerHTML += '<br>' + nextBtn;
@@ -484,11 +499,20 @@ function checkAnswer(prefix, index) {
         if (!wrongAttempts[key]) wrongAttempts[key] = 0;
         wrongAttempts[key]++;
         
-        // آپدیت شمارش اشتباه
         const wrongCountEl = document.getElementById(`wrong-count-${key}`);
         if (wrongCountEl) {
             wrongCountEl.textContent = `${toPersianNum(wrongAttempts[key])} بار اشتباه`;
         }
+        
+        // نمایش feedback هوشمند
+        let errorMsg = `❌ اشتباهه!`;
+        if (smartFeedback) {
+            errorMsg += `<br><div class="smart-feedback">${smartFeedback}</div>`;
+        }
+        errorMsg += `<br><small style="color: var(--text-muted);">${toPersianNum(4 - wrongAttempts[key])} بار دیگه مونده</small>`;
+        
+        resultEl.className = 'result-message show error';
+        resultEl.innerHTML = errorMsg;
         
         // نمایش hint پیشرفته
         if (wrongAttempts[key] >= 2 && data.hints) {
@@ -502,7 +526,7 @@ function checkAnswer(prefix, index) {
             }
         }
         
-        // بعد از ۴ اشتباه، نمایش جواب
+        // بعد از ۴ اشتباه، نمایش جواب کامل
         if (wrongAttempts[key] >= 4) {
             const showAnswerEl = document.getElementById(`show-answer-${key}`);
             if (showAnswerEl) {
@@ -519,8 +543,6 @@ function checkAnswer(prefix, index) {
             }
         }
         
-        resultEl.className = 'result-message show error';
-        resultEl.innerHTML = `❌ اشتباهه! دوباره امتحان کن (${toPersianNum(4 - wrongAttempts[key])} بار دیگه مونده)`;
         cardEl.classList.add('wrong');
         soundManager.playWrong();
         shakeElement(cardEl);
@@ -530,17 +552,119 @@ function checkAnswer(prefix, index) {
     // ذخیره نتیجه
     if (prefix === 'exercise') {
         exerciseResults[index] = isCorrect;
-        // بررسی اتمام تمرین‌ها
         if (exerciseResults.filter(r => r === true).length >= Math.ceil(currentChapter.exercises.length * 0.5)) {
             document.getElementById('btn-to-challenges').disabled = false;
         }
     } else {
         challengeResults[index] = isCorrect;
-        // بررسی اتمام چالش‌ها
         if (challengeResults.filter(r => r === true).length >= Math.ceil(currentChapter.challenges.length * 0.5)) {
             document.getElementById('btn-complete-chapter').disabled = false;
         }
     }
+}
+
+// ============================================
+// توابع تولید feedback هوشمند
+// ============================================
+
+// feedback برای predict
+function generatePredictFeedback(userAns, correctAns, data) {
+    const userNorm = normalizeAnswer(userAns);
+    const correctNorm = normalizeAnswer(correctAns);
+    
+    // چک کن آیا عدد اشتباه وارد کرده
+    if (!isNaN(userNorm) && !isNaN(correctNorm)) {
+        const diff = parseInt(userNorm) - parseInt(correctNorm);
+        if (diff > 0) {
+            return `جوابت ${userAns} هست ولی ${correctAns} باید باشه. جوابت از حد واقعی <strong>${diff} بیشتر</strong> هست. دوباره حساب کن!`;
+        } else {
+            return `جوابت ${userAns} هست ولی ${correctAns} باید باشه. جوابت از حد واقعی <strong>${Math.abs(diff)} کمتر</strong> هست. دوباره حساب کن!`;
+        }
+    }
+    
+    // چک کن آیا نوع داده اشتباهه
+    if (correctNorm.startsWith('<class')) {
+        return `جواب باید نوع داده باشه (مثل <strong>${correctAns}</strong>). تو نوشتی: ${userAns}`;
+    }
+    
+    // feedback عمومی
+    if (data.explanation) {
+        return `${data.explanation}`;
+    }
+    return `جواب صحیح <strong>${correctAns}</strong> هست. دوباره کد رو بخون و فکر کن!`;
+}
+
+// feedback برای fill_gap
+function generateFillGapFeedback(gapResults) {
+    const wrongGaps = gapResults.filter(g => !g.isCorrect);
+    const correctGaps = gapResults.filter(g => g.isCorrect);
+    
+    let feedback = '';
+    
+    if (correctGaps.length > 0) {
+        feedback += `<span style="color: var(--success);">✓ جای خالی ${correctGaps.length > 1 ? 'ها' : ''} اول درسته!</span><br>`;
+    }
+    
+    wrongGaps.forEach((gap, i) => {
+        const gapNum = gapResults.indexOf(gap) + 1;
+        if (gap.user === '') {
+            feedback += `<span style="color: var(--danger);">✗ جای خالی ${gapNum}: خالیه! باید <strong>${gap.correct}</strong> باشه</span><br>`;
+        } else {
+            feedback += `<span style="color: var(--danger);">✗ جای خالی ${gapNum}: <strong>${gap.user}</strong> نوشتی ولی <strong>${gap.correct}</strong> باید باشه</span><br>`;
+        }
+    });
+    
+    return feedback;
+}
+
+// feedback برای bug_hunter
+function generateBugHunterFeedback(userLine, correctLine, data) {
+    const lines = data.code.split('\n');
+    const userLineContent = lines[userLine - 1] || '';
+    const correctLineContent = lines[correctLine - 1] || '';
+    
+    let feedback = `خط ${userLine} (<code>${escapeHtml(userLineContent.trim())}</code>) درسته.<br>`;
+    feedback += `خط خطا <strong>خط ${correctLine}</strong> هست: <code>${escapeHtml(correctLineContent.trim())}</code><br>`;
+    
+    if (data.hint) {
+        feedback += `<span style="color: var(--warning);">💡 ${data.hint}</span>`;
+    }
+    
+    return feedback;
+}
+
+// feedback برای quiz
+function generateQuizFeedback(options, selectedIdx, correctLabel, data) {
+    const selectedOption = options[selectedIdx];
+    const correctOption = options.find(o => o.label === correctLabel);
+    
+    let feedback = `گزینه <strong>${selectedOption.label}) ${selectedOption.text}</strong> اشتباهه.<br>`;
+    feedback += `جواب درست <strong>${correctOption.label}) ${correctOption.text}</strong> هست.<br>`;
+    
+    if (data.explanation) {
+        feedback += `<span style="color: var(--warning);">💡 ${data.explanation}</span>`;
+    }
+    
+    return feedback;
+}
+
+// feedback برای sort
+function generateSortFeedback(userLines, correctLines) {
+    const wrongPositions = [];
+    userLines.forEach((line, i) => {
+        if (line !== correctLines[i]) {
+            wrongPositions.push(i + 1);
+        }
+    });
+    
+    let feedback = `${wrongPositions.length} خط جابه‌جا هست.<br>`;
+    feedback += `ترتیب صحیح:<br>`;
+    correctLines.forEach((line, i) => {
+        const isWrong = line !== userLines[i];
+        feedback += `<span style="color: ${isWrong ? 'var(--danger)' : 'var(--success)'};">${i + 1}. ${escapeHtml(line)}</span><br>`;
+    });
+    
+    return feedback;
 }
 
 // نرمال‌سازی جواب برای مقایسه

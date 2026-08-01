@@ -860,6 +860,28 @@ body::before {
     line-height: 1.8;
 }
 
+/* باکس feedback هوشمند */
+.smart-feedback {
+    background: rgba(255, 212, 59, 0.1);
+    border: 1px solid rgba(255, 212, 59, 0.2);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin-top: 8px;
+    line-height: 1.8;
+    font-size: 0.9rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.smart-feedback code {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    direction: ltr;
+    display: inline-block;
+}
+
 /* دکمه‌های اکشن تمرین */
 .exercise-actions {
     display: flex;

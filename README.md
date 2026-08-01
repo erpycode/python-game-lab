@@ -37,6 +37,11 @@
 | ۳ | شرط‌ها | 📘 متوسط |
 | ۴ | حلقه‌ها | 📘 متوسط |
 | ۵ | توابع | 📕 پیشرفته |
+| ۶ | لیست‌ها | 📕 پیشرفته |
+| ۷ | دیکشنری | 📕 پیشرفته |
+| ۸ | متدهای رشته | 📕 پیشرفته |
+| ۹ | مدیریت فایل | 📕 پیشرفته |
+| ۱۰ | مدیریت خطا | 📕 پیشرفته |
 
 ## 🚀 اجرا کردن
 
@@ -162,6 +167,11 @@ An online game for learning Python from scratch. Each chapter includes **lessons
 | 3 | Conditionals | 📘 Intermediate |
 | 4 | Loops | 📘 Intermediate |
 | 5 | Functions | 📕 Advanced |
+| 6 | Lists | 📕 Advanced |
+| 7 | Dictionaries | 📕 Advanced |
+| 8 | String Methods | 📕 Advanced |
+| 9 | File Handling | 📕 Advanced |
+| 10 | Error Handling | 📕 Advanced |
 
 ## 🚀 Getting Started
 

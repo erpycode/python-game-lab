@@ -16,7 +16,12 @@ function renderChaptersGrid() {
         { num: 2, title: 'فصل ۲: عملگرها', desc: 'عملگرهای ریاضی، مقایسه و منطقی', level: 'beginner' },
         { num: 3, title: 'فصل ۳: شرط‌ها', desc: 'if, else, elif و شرط‌ها', level: 'intermediate' },
         { num: 4, title: 'فصل ۴: حلقه‌ها', desc: 'for, while, range و break', level: 'intermediate' },
-        { num: 5, title: 'فصل ۵: توابع', desc: 'def, return, پارامترها', level: 'advanced' }
+        { num: 5, title: 'فصل ۵: توابع', desc: 'def, return, پارامترها', level: 'advanced' },
+        { num: 6, title: 'فصل ۶: لیست‌ها', desc: 'ایجاد، دسترسی، متدهای لیست', level: 'advanced' },
+        { num: 7, title: 'فصل ۷: دیکشنری', desc: 'کلید-مقدار، متدهای دیکشنری', level: 'advanced' },
+        { num: 8, title: 'فصل ۸: متدهای رشته', desc: 'split, join, replace و...', level: 'advanced' },
+        { num: 9, title: 'فصل ۹: مدیریت فایل', desc: 'خواندن و نوشتن فایل', level: 'advanced' },
+        { num: 10, title: 'فصل ۱۰: مدیریت خطا', desc: 'try, except, raise', level: 'advanced' }
     ];
     
     chaptersInfo.forEach(ch => {
