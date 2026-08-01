@@ -67,6 +67,8 @@
 | ۸ | متدهای رشته |
 | ۹ | مدیریت فایل |
 | ۱۰ | مدیریت خطا |
+| ۱۸ | لیست کامپریهنشن |
+| ۱۹ | توابع لامبدا |
 
 </td>
 <td align="center">
@@ -83,6 +85,10 @@
 | ۱۵ | عبارات باقاعده |
 | ۱۶ | فریم‌ورک‌ها |
 | ۱۷ | پایتون در عمل |
+| ۲۰ | محیط مجازی |
+| ۲۱ | پایگاه داده |
+| ۲۲ | API و اینترنت |
+| ۲۳ | تست‌نویسی |
 
 </td>
 </tr>
@@ -151,7 +157,13 @@ python-game-lab/
 │   ├── chapter_14.json     # 🎓 Modules
 │   ├── chapter_15.json     # 🎓 Regex
 │   ├── chapter_16.json     # 🎓 Frameworks
-│   └── chapter_17.json     # 🎓 Python in Practice
+│   ├── chapter_17.json     # 🎓 Python in Practice
+│   ├── chapter_18.json     # 📕 List Comprehension
+│   ├── chapter_19.json     # 📕 Lambda Functions
+│   ├── chapter_20.json     # 🎓 Virtual Environments
+│   ├── chapter_21.json     # 🎓 SQLite Database
+│   ├── chapter_22.json     # 🎓 API & HTTP
+│   └── chapter_23.json     # 🎓 Testing with pytest
 └── README.md
 ```
 
@@ -254,6 +266,8 @@ Pro level!
 | 8 | String Methods |
 | 9 | File Handling |
 | 10 | Error Handling |
+| 18 | List Comprehension |
+| 19 | Lambda Functions |
 
 </td>
 <td align="center">
@@ -270,6 +284,10 @@ Master it!
 | 15 | Regex |
 | 16 | Frameworks |
 | 17 | Python in Practice |
+| 20 | Virtual Environments |
+| 21 | SQLite Database |
+| 22 | API & HTTP |
+| 23 | Testing with pytest |
 
 </td>
 </tr>
@@ -330,7 +348,13 @@ python-game-lab/
 │   ├── chapter_14.json     # 🎓 Modules
 │   ├── chapter_15.json     # 🎓 Regex
 │   ├── chapter_16.json     # 🎓 Frameworks
-│   └── chapter_17.json     # 🎓 Python in Practice
+│   ├── chapter_17.json     # 🎓 Python in Practice
+│   ├── chapter_18.json     # 📕 List Comprehension
+│   ├── chapter_19.json     # 📕 Lambda Functions
+│   ├── chapter_20.json     # 🎓 Virtual Environments
+│   ├── chapter_21.json     # 🎓 SQLite Database
+│   ├── chapter_22.json     # 🎓 API & HTTP
+│   └── chapter_23.json     # 🎓 Testing with pytest
 └── README.md
 ```
 
