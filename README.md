@@ -30,11 +30,18 @@
 
 ## 📚 فصل‌ها
 
+<table>
+<tr>
+<td>
+
 ### 📗 مبتدی
 | فصل | عنوان |
 |:----|:------|
 | ۱ | متغیرها |
 | ۲ | عملگرها |
+
+</td>
+<td>
 
 ### 📘 متوسط
 | فصل | عنوان |
@@ -42,6 +49,9 @@
 | ۳ | شرط‌ها |
 | ۴ | حلقه‌ها |
 | ۵ | توابع |
+
+</td>
+<td>
 
 ### 📕 پیشرفته
 | فصل | عنوان |
@@ -52,16 +62,23 @@
 | ۹ | مدیریت فایل |
 | ۱۰ | مدیریت خطا |
 
+</td>
+<td>
+
 ### 🎓 حرفه‌ای
 | فصل | عنوان |
 |:----|:------|
-| ۱۱ | شی‌گرایی (OOP) |
+| ۱۱ | شی‌گرایی |
 | ۱۲ | جنریتورها |
 | ۱۳ | دکوراتورها |
-| ۱۴ | ماژول‌ها و پکیج‌ها |
+| ۱۴ | ماژول‌ها |
 | ۱۵ | عبارات باقاعده |
-| ۱۶ | آشنایی با فریم‌ورک‌ها |
+| ۱۶ | فریم‌ورک‌ها |
 | ۱۷ | پایتون در عمل |
+
+</td>
+</tr>
+</table>
 
 ## 🚀 اجرا کردن
 
@@ -180,11 +197,18 @@ An online game for learning Python from scratch. Each chapter includes **lessons
 
 ## 📚 Chapters
 
+<table>
+<tr>
+<td>
+
 ### 📗 Beginner
 | Chapter | Title |
 |:--------|:------|
 | 1 | Variables |
 | 2 | Operators |
+
+</td>
+<td>
 
 ### 📘 Intermediate
 | Chapter | Title |
@@ -192,6 +216,9 @@ An online game for learning Python from scratch. Each chapter includes **lessons
 | 3 | Conditionals |
 | 4 | Loops |
 | 5 | Functions |
+
+</td>
+<td>
 
 ### 📕 Advanced
 | Chapter | Title |
@@ -202,16 +229,23 @@ An online game for learning Python from scratch. Each chapter includes **lessons
 | 9 | File Handling |
 | 10 | Error Handling |
 
+</td>
+<td>
+
 ### 🎓 Expert
 | Chapter | Title |
 |:--------|:------|
 | 11 | OOP |
 | 12 | Generators |
 | 13 | Decorators |
-| 14 | Modules & Packages |
-| 15 | Regular Expressions |
+| 14 | Modules |
+| 15 | Regex |
 | 16 | Frameworks |
 | 17 | Python in Practice |
+
+</td>
+</tr>
+</table>
 
 ## 🚀 Getting Started
 
