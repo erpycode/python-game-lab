@@ -11,6 +11,12 @@
   <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Active">
 </p>
 
+<p align="center">
+  <a href="https://erpycode.github.io/python-game-lab/">
+    <img src="https://img.shields.io/badge/🎮_بازی_آنلاین-اینجا_کلیک_کن-00d4aa?style=for-the-badge&logo=browserstack&logoColor=white" alt="Play Online">
+  </a>
+</p>
+
 ---
 
 ## 🎮 پایتون‌باز چیه؟
@@ -122,6 +128,12 @@ python-game-lab/
   <img src="https://img.shields.io/badge/Platform-Web-4dabf7?style=for-the-badge" alt="Web">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT">
   <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Active">
+</p>
+
+<p align="center">
+  <a href="https://erpycode.github.io/python-game-lab/">
+    <img src="https://img.shields.io/badge/🎮_بازی_آنلاین-اینجا_کلیک_کن-00d4aa?style=for-the-badge&logo=browserstack&logoColor=white" alt="Play Online">
+  </a>
 </p>
 
 ---
