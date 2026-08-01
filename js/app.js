@@ -3,6 +3,19 @@
    ============================================ */
 
 // ============================================
+// تنظیمات صدا
+// ============================================
+function toggleSound() {
+    const enabled = soundManager.toggle();
+    const btn = document.getElementById('sound-toggle');
+    if (btn) {
+        btn.textContent = enabled ? '🔊' : '🔇';
+        btn.title = enabled ? 'خاموش کردن صدا' : 'روشن کردن صدا';
+    }
+    showToast(enabled ? 'صدا روشن شد 🔊' : 'صدا خاموش شد 🔇', 'info');
+}
+
+// ============================================
 // شروع بازی
 // ============================================
 function startGame() {

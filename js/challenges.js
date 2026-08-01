@@ -128,8 +128,15 @@ function renderExercise(chapterData, index) {
     }
     
     html += `
+            <div class="exercise-actions">
+                <button onclick="showHint('exercise-${index}')" class="btn btn-secondary" style="font-size: 0.85rem;">
+                    💡 راهنمایی
+                </button>
+                <span class="wrong-count" id="wrong-count-exercise-${index}" style="color: var(--danger); font-size: 0.85rem;"></span>
+            </div>
             <div class="hint-box" id="hint-exercise-${index}">💡 ${exercise.hint || ''}</div>
             <div class="result-message" id="result-exercise-${index}"></div>
+            <div id="show-answer-exercise-${index}" class="hidden"></div>
         </div>
     `;
     
@@ -245,17 +252,20 @@ function renderBugHunter(challenge, index) {
     return html;
 }
 
-// جای خالی
+// جای خالی — input مستقیم توی کد
 function renderFillGap(item, index, prefix) {
-    const codeWithGap = item.code.replace(/_+/g, '<span style="background: var(--accent); color: var(--bg-primary); padding: 2px 8px; border-radius: 4px; font-weight: bold;">___</span>');
+    let gapIndex = 0;
+    // جایگزینی ___ (حداقل ۳ تا underscore) با input مستقیم
+    const codeWithInputs = item.code.replace(/_{3,}/g, () => {
+        const inputId = `gap-${prefix}-${index}-${gapIndex}`;
+        gapIndex++;
+        return `<input type="text" class="gap-input" id="${inputId}" placeholder="?" autocomplete="off" spellcheck="false">`;
+    });
+    
     return `
         <div style="margin-top: 12px;">
-            <div class="code-block"><pre>${codeWithGap}</pre></div>
-            <input type="text" class="challenge-input" 
-                   id="input-${prefix}-${index}" 
-                   placeholder="جای خالی رو پر کن..."
-                   onkeypress="if(event.key==='Enter') checkAnswer('${prefix}', ${index})">
-            <button onclick="checkAnswer('${prefix}', ${index})" class="btn btn-primary" style="width: 100%;">
+            <div class="code-block code-block-interactive"><pre>${codeWithInputs}</pre></div>
+            <button onclick="checkAnswer('${prefix}', ${index})" class="btn btn-primary" style="width: 100%; margin-top: 12px;">
                 بررسی ✓
             </button>
         </div>
@@ -273,7 +283,8 @@ function renderQuizOptions(item, index, prefix) {
         html += `
             <button class="quiz-option" id="quiz-${prefix}-${index}-${i}" 
                     onclick="selectQuizOption('${prefix}', ${index}, ${i})">
-                ${option.label}) ${option.text}
+                <span style="font-weight: 700; color: var(--accent); min-width: 20px;">${option.label})</span>
+                <span>${escapeHtml(option.text)}</span>
             </button>
         `;
     });
@@ -314,6 +325,8 @@ function renderSortChallenge(challenge, index) {
 
 let selectedBugLine = {};
 let selectedQuizOption = {};
+let wrongAttempts = {}; // شمارش اشتباهات هر تمرین/چالش
+let hintLevels = {}; // سطح hint فعلی
 
 // انتخاب خط باگ
 function selectBugLine(index, lineNum) {
@@ -393,12 +406,23 @@ function checkAnswer(prefix, index) {
     
     switch (data.type) {
         case 'predict':
-        case 'fill_gap':
-            const inputEl = document.getElementById(`input-${prefix}-${index}`);
-            userAnswer = inputEl.value.trim();
+            const predictInput = document.getElementById(`input-${prefix}-${index}`);
+            userAnswer = predictInput.value.trim();
             correctAnswer = data.answer;
-            // مقایسه انعطاف‌پذیر
             isCorrect = normalizeAnswer(userAnswer) === normalizeAnswer(correctAnswer);
+            break;
+            
+        case 'fill_gap':
+            // خوندن چند input مستقیم از کد
+            const gapInputs = document.querySelectorAll(`[id^="gap-${prefix}-${index}-"]`);
+            const userAnswers = [];
+            gapInputs.forEach(input => userAnswers.push(input.value.trim()));
+            const correctAnswers = Array.isArray(data.answer) ? data.answer : [data.answer];
+            // مقایسه همه جای خالی‌ها
+            isCorrect = userAnswers.length === correctAnswers.length &&
+                userAnswers.every((ans, i) => normalizeAnswer(ans) === normalizeAnswer(correctAnswers[i]));
+            userAnswer = userAnswers.join(', ');
+            correctAnswer = correctAnswers.join(', ');
             break;
             
         case 'bug_hunter':
@@ -433,6 +457,11 @@ function checkAnswer(prefix, index) {
         cardEl.classList.add('solved');
         cardEl.classList.remove('wrong');
         
+        // صدای موفقیت + افکت ذرات
+        soundManager.playCorrect();
+        createParticleEffect(cardEl);
+        glowElement(cardEl, '#22C55E');
+        
         // امتیاز
         const xp = data.xp || 10;
         if (prefix === 'challenge') {
@@ -443,10 +472,58 @@ function checkAnswer(prefix, index) {
         }
         
         showConfetti();
+        
+        // دکمه تمرین/چالش بعدی
+        const nextBtn = createNextButton(prefix, index);
+        if (nextBtn) {
+            resultEl.innerHTML += '<br>' + nextBtn;
+        }
     } else {
+        // شمارش اشتباهات
+        const key = `${prefix}-${index}`;
+        if (!wrongAttempts[key]) wrongAttempts[key] = 0;
+        wrongAttempts[key]++;
+        
+        // آپدیت شمارش اشتباه
+        const wrongCountEl = document.getElementById(`wrong-count-${key}`);
+        if (wrongCountEl) {
+            wrongCountEl.textContent = `${toPersianNum(wrongAttempts[key])} بار اشتباه`;
+        }
+        
+        // نمایش hint پیشرفته
+        if (wrongAttempts[key] >= 2 && data.hints) {
+            const hintIndex = Math.min(wrongAttempts[key] - 2, data.hints.length - 1);
+            if (data.hints[hintIndex]) {
+                const hintEl = document.getElementById(`hint-${key}`);
+                if (hintEl) {
+                    hintEl.innerHTML = `💡 ${data.hints[hintIndex]}`;
+                    hintEl.classList.add('visible');
+                }
+            }
+        }
+        
+        // بعد از ۴ اشتباه، نمایش جواب
+        if (wrongAttempts[key] >= 4) {
+            const showAnswerEl = document.getElementById(`show-answer-${key}`);
+            if (showAnswerEl) {
+                showAnswerEl.className = '';
+                showAnswerEl.innerHTML = `
+                    <div class="show-answer-box">
+                        <p>📝 جواب صحیح: <strong style="color: var(--accent);">${correctAnswer}</strong></p>
+                        ${data.explanation ? `<p style="margin-top: 8px; color: var(--text-secondary);">💡 ${data.explanation}</p>` : ''}
+                        <button onclick="skipToNext('${prefix}', ${index})" class="btn btn-primary" style="margin-top: 12px; width: 100%;">
+                            ➡️ تمرین بعدی
+                        </button>
+                    </div>
+                `;
+            }
+        }
+        
         resultEl.className = 'result-message show error';
-        resultEl.innerHTML = `❌ اشتباهه! جواب: <strong>${correctAnswer}</strong>`;
+        resultEl.innerHTML = `❌ اشتباهه! دوباره امتحان کن (${toPersianNum(4 - wrongAttempts[key])} بار دیگه مونده)`;
         cardEl.classList.add('wrong');
+        soundManager.playWrong();
+        shakeElement(cardEl);
         setTimeout(() => cardEl.classList.remove('wrong'), 500);
     }
     
@@ -482,4 +559,68 @@ function showHint(id) {
     if (hint) {
         hint.classList.toggle('visible');
     }
+}
+
+// نمایش جواب و رفتن به بعدی
+function skipToNext(prefix, index) {
+    soundManager.playClick();
+    const items = prefix === 'exercise' ? currentChapter.exercises : currentChapter.challenges;
+    const nextIndex = index + 1;
+    
+    if (nextIndex < items.length) {
+        goToNext(prefix, nextIndex);
+    } else {
+        if (prefix === 'exercise') {
+            showPage('page-challenges');
+        } else {
+            completeChapter();
+        }
+    }
+}
+
+// ============================================
+// دکمه تمرین/چالش بعدی
+// ============================================
+function createNextButton(prefix, currentIndex) {
+    const items = prefix === 'exercise' ? currentChapter.exercises : currentChapter.challenges;
+    const nextIndex = currentIndex + 1;
+    
+    if (nextIndex < items.length) {
+        const label = prefix === 'exercise' ? 'تمرین بعدی' : 'چالش بعدی';
+        return `<button onclick="goToNext('${prefix}', ${nextIndex})" class="btn btn-primary" style="margin-top: 12px; width: 100%;">
+            ➡️ ${label}
+        </button>`;
+    } else {
+        // آخرین آیتم بود
+        if (prefix === 'exercise') {
+            return `<button onclick="showPage('page-challenges')" class="btn btn-success" style="margin-top: 12px; width: 100%;">
+                ⚡ رفتن به چالش‌ها
+            </button>`;
+        } else {
+            return `<button onclick="completeChapter()" class="btn btn-success" style="margin-top: 12px; width: 100%;">
+                🏆 فصل تموم شد!
+            </button>`;
+        }
+    }
+}
+
+// رفتن به تمرین/چالش بعدی
+function goToNext(prefix, nextIndex) {
+    soundManager.playClick();
+    
+    // ریست شمارش اشتباهات
+    const prevKey = `${prefix}-${nextIndex - 1}`;
+    delete wrongAttempts[prevKey];
+    delete hintLevels[prevKey];
+    
+    if (prefix === 'exercise') {
+        currentExerciseIndex = nextIndex;
+        renderExercise(currentChapter, nextIndex);
+    } else {
+        currentChallengeIndex = nextIndex;
+        renderChallenge(currentChapter, nextIndex);
+    }
+    
+    // اسکرول به بالا
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
