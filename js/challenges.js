@@ -1036,17 +1036,17 @@ function getProjectRules(chapterId) {
             { check: c => /\.json\(\)|\.text/.test(c), success: '✅ پاسخ رو خوندی', hint: '💡 .json() یا .text', points: 2 },
             { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 نتیجه رو print کن', points: 2 }
         ],
-        // فصل ۱۸: List Comprehension
+        // فصل ۱۸: Lambda
         '18': [
-            { check: c => /\[.*for.*in/.test(c), success: '✅ list comprehension نوشتی', hint: '💡 [x for x in range()]', points: 4 },
-            { check: c => /if/.test(c) && /\[.*for/.test(c), success: '✅ فیلتر هم داری', hint: '💡 [x for x in ... if ...]', points: 3 },
-            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 لیست رو print کن', points: 2 }
-        ],
-        // فصل ۱۹: Lambda
-        '19': [
             { check: c => /lambda/.test(c), success: '✅ lambda استفاده کردی', hint: '💡 lambda x: x * 2', points: 4 },
             { check: c => /map|filter|sorted/.test(c), success: '✅ با map/filter/sorted ترکیب کردی', hint: '💡 lambda با map یا filter خوبه', points: 3 },
             { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 نتیجه رو print کن', points: 2 }
+        ],
+        // فصل ۱۹: List Comprehension
+        '19': [
+            { check: c => /\[.*for.*in/.test(c), success: '✅ list comprehension نوشتی', hint: '💡 [x for x in range()]', points: 4 },
+            { check: c => /if/.test(c) && /\[.*for/.test(c), success: '✅ فیلتر هم داری', hint: '💡 [x for x in ... if ...]', points: 3 },
+            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 لیست رو print کن', points: 2 }
         ],
         // فصل ۲۰: محیط مجازی
         '20': [

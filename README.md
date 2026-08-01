@@ -67,8 +67,8 @@
 | ۸ | متدهای رشته |
 | ۹ | مدیریت فایل |
 | ۱۰ | مدیریت خطا |
-| ۱۸ | لیست کامپریهنشن |
-| ۱۹ | توابع لامبدا |
+| ۱۸ | توابع لامبدا |
+| ۱۹ | لیست کامپریهنشن |
 
 </td>
 <td align="center">
@@ -266,8 +266,8 @@ Pro level!
 | 8 | String Methods |
 | 9 | File Handling |
 | 10 | Error Handling |
-| 18 | List Comprehension |
-| 19 | Lambda Functions |
+| 18 | Lambda Functions |
+| 19 | List Comprehension |
 
 </td>
 <td align="center">
