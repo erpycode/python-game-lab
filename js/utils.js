@@ -161,7 +161,7 @@ function highlightPython(code) {
 
 // رندر کد با هایلایت
 function renderCode(code) {
-    return `<div class="code-block"><pre>${highlightPython(escapeHtml(code))}</pre></div>`;
+    return `<div class="code-block"><pre>${highlightPython(code)}</pre></div>`;
 }
 
 // رندر کد خروجی
