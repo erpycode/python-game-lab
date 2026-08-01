@@ -93,17 +93,12 @@ function renderLesson(chapterData) {
                 <span class="project-difficulty">${chapterData.project.difficulty === 'easy' ? '🟢 آسان' : chapterData.project.difficulty === 'medium' ? '🟡 متوسط' : '🔴 سخت'}</span>
                 
                 <div class="project-editor">
-                    <label>✏️ کدت رو اینجا بنویس:</label>
-                    <textarea id="${projectId}-code" class="code-editor" placeholder="# کدت رو اینجا بنویس...&#10;print('سلام دنیا!')" spellcheck="false"></textarea>
-                    <div class="project-actions">
-                        <button onclick="runProjectCode('${chapterData.id}')" class="btn btn-primary">
-                            ▶️ اجرا کن
-                        </button>
-                        <button onclick="clearProjectCode('${chapterData.id}')" class="btn btn-secondary">
-                            🗑️ پاک کن
-                        </button>
-                    </div>
-                    <div id="${projectId}-output" class="project-output hidden"></div>
+                    <p style="margin-top: 16px; margin-bottom: 8px; color: var(--text-secondary);">📝 کدت رو اینجا بنویس و بررسی کن:</p>
+                    <textarea id="${projectId}" class="project-textarea" placeholder="# کدت رو اینجا بنویس..." rows="6" dir="ltr" style="font-family: 'Courier New', monospace; width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #e0e0e0; resize: vertical;"></textarea>
+                    <button onclick="checkProjectCode('${chapterData.id}')" class="btn btn-primary" style="margin-top: 10px; width: 100%;">
+                        ✓ بررسی کد
+                    </button>
+                    <div id="project-result-${chapterData.id}" style="margin-top: 10px;"></div>
                 </div>
             </div>
         `;
@@ -841,6 +836,106 @@ function createNextButton(prefix, currentIndex) {
 // ============================================
 // توابع پروژه عملی
 // ============================================
+
+// بررسی کد پروژه
+function checkProjectCode(chapterId) {
+    const textarea = document.getElementById(`project-${chapterId}`);
+    const resultEl = document.getElementById(`project-result-${chapterId}`);
+    
+    if (!textarea || !resultEl) return;
+    
+    const code = textarea.value.trim();
+    if (!code) {
+        resultEl.innerHTML = '<div style="padding: 12px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; color: #ef4444;">❌ اول کدت رو بنویس!</div>';
+        return;
+    }
+    
+    // بررسی‌های ساده
+    let feedback = [];
+    let score = 0;
+    
+    // بررسی وجود print
+    if (code.includes('print')) {
+        feedback.push('✅ از print استفاده کردی — عالی!');
+        score += 2;
+    } else {
+        feedback.push('💡 نکته: از print برای نمایش خروجی استفاده کن');
+    }
+    
+    // بررسی وجود متغیر
+    if (code.includes('=') && !code.includes('==')) {
+        feedback.push('✅ متغیر تعریف کردی — خوبه!');
+        score += 2;
+    }
+    
+    // بررسی وجود تابع
+    if (code.includes('def ')) {
+        feedback.push('✅ تابع تعریف کردی — عالی!');
+        score += 3;
+    }
+    
+    // بررسی وجود حلقه
+    if (code.includes('for ') || code.includes('while ')) {
+        feedback.push('✅ از حلقه استفاده کردی — حرفه‌ای!');
+        score += 3;
+    }
+    
+    // بررسی وجود شرط
+    if (code.includes('if ')) {
+        feedback.push('✅ از شرط استفاده کردی — خوبه!');
+        score += 2;
+    }
+    
+    // بررسی وجود لیست
+    if (code.includes('[') && code.includes(']')) {
+        feedback.push('✅ از لیست استفاده کردی — عالی!');
+        score += 2;
+    }
+    
+    // بررسی وجود دیکشنری
+    if (code.includes('{') && code.includes(':')) {
+        feedback.push('✅ از دیکشنری استفاده کردی — حرفه‌ای!');
+        score += 3;
+    }
+    
+    // بررسی طول کد
+    const lines = code.split('\n').filter(l => l.trim()).length;
+    if (lines >= 5) {
+        feedback.push(`✅ ${lines} خط کد نوشتی — آفرین!`);
+        score += 2;
+    } else if (lines < 3) {
+        feedback.push('💡 سعی کن بیشتر بنویسی!');
+    }
+    
+    // نمایش نتیجه
+    let resultHtml = '<div style="padding: 16px; border-radius: 8px; margin-top: 10px;';
+    
+    if (score >= 8) {
+        resultHtml += 'background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2);">';
+        resultHtml += '<strong style="color: #22c55e;">🏆 آفرین! کد عالی‌ای نوشتی!</strong><br><br>';
+    } else if (score >= 4) {
+        resultHtml += 'background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);">';
+        resultHtml += '<strong style="color: #f59e0b;">👍 خوبه! ولی میتونی بهترش کنی!</strong><br><br>';
+    } else {
+        resultHtml += 'background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2);">';
+        resultHtml += '<strong style="color: #3b82f6;">🚀 شروع خوبیه! ادامه بده!</strong><br><br>';
+    }
+    
+    feedback.forEach(f => {
+        resultHtml += f + '<br>';
+    });
+    
+    resultHtml += `<br><span style="color: var(--text-muted); font-size: 0.85rem;">امتیاز: ${score} از ۱۵</span>`;
+    resultHtml += '</div>';
+    
+    resultEl.innerHTML = resultHtml;
+    
+    // ذخیره پیشرفت
+    const progress = getProgress();
+    if (!progress.projectScores) progress.projectScores = {};
+    progress.projectScores[chapterId] = Math.max(progress.projectScores[chapterId] || 0, score);
+    saveProgress(progress);
+}
 
 // اجرای کد پروژه (شبیه‌سازی ساده)
 function runProjectCode(chapterId) {
