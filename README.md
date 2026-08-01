@@ -11,12 +11,6 @@
   <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Active">
 </p>
 
-<p align="center">
-  <a href="https://erpycode.github.io/python-game-lab/">
-    <img src="https://img.shields.io/badge/🎮_بازی_آنلاین-اینجا_کلیک_کن-00d4aa?style=for-the-badge&logo=browserstack&logoColor=white" alt="Play Online">
-  </a>
-</p>
-
 ---
 
 ## 🎮 پایتون‌باز چیه؟
@@ -45,6 +39,18 @@
 | ۵ | توابع | 📕 پیشرفته |
 
 ## 🚀 اجرا کردن
+
+### 🎮 بازی آنلاین (بدون نصب)
+
+اگه میخوای فقط بازی کنی و نیازی به نصب نداری، از لینک زیر استفاده کن:
+
+**🔗 [بازی آنلاین پایتون‌باز](https://erpycode.github.io/python-game-lab/)**
+
+فقط کافیه لینک رو باز کنی و شروع کنی!
+
+### 💻 اجرا روی سیستم خودت
+
+اگه میخوای پروژه رو دانلود کنی و روی سیستمت اجرا کنی:
 
 <div dir="ltr">
 
@@ -130,12 +136,6 @@ python-game-lab/
   <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Active">
 </p>
 
-<p align="center">
-  <a href="https://erpycode.github.io/python-game-lab/">
-    <img src="https://img.shields.io/badge/🎮_بازی_آنلاین-اینجا_کلیک_کن-00d4aa?style=for-the-badge&logo=browserstack&logoColor=white" alt="Play Online">
-  </a>
-</p>
-
 ---
 
 ## 🎮 What is Python Baz?
@@ -164,6 +164,16 @@ An online game for learning Python from scratch. Each chapter includes **lessons
 | 5 | Functions | 📕 Advanced |
 
 ## 🚀 Getting Started
+
+### 🎮 Play Online (No Install Needed)
+
+Just want to play? Use the link below — no installation required:
+
+**🔗 [Play Python Baz Online](https://erpycode.github.io/python-game-lab/)**
+
+### 💻 Run Locally
+
+If you want to download and run the project on your system:
 
 ```bash
 # Clone the repo
