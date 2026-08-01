@@ -5,10 +5,10 @@
 ### یادگیری پایتون با بازی و چالش | Learn Python Through Games & Challenges
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-Game-Lab-00d4aa?style=for-the-badge&logo=python&logoColor=white" alt="Python Game Lab">
-  <img src="https://img.shields.io/badge/Language-فارسی-ff6b6b?style=for-the-badge" alt="Farsi">
+  <img src="https://img.shields.io/badge/Python-Game_Lab-00d4aa?style=for-the-badge&logo=python&logoColor=white" alt="Python Game Lab">
   <img src="https://img.shields.io/badge/Platform-Web-4dabf7?style=for-the-badge" alt="Web">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT">
+  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Active">
 </p>
 
 ---
@@ -40,50 +40,57 @@
 
 ## 🚀 اجرا کردن
 
+<div dir="ltr">
+
 ```bash
-# کلون کن
+# Clone the repo
 git clone https://github.com/erpycode/python-game-lab.git
 
-# بریم تو پوشه
+# Go to directory
 cd python-game-lab
 
-# سرور محلی بزن
+# Start local server
 python3 -m http.server 8080
 
-# مرورگر باز کن
-# http://localhost:8080
+# Open browser → http://localhost:8080
 ```
+
+</div>
 
 ## 📁 ساختار پروژه
 
+<div dir="ltr">
+
 ```
 python-game-lab/
-├── index.html          # صفحه اصلی
-├── css/style.css       # استایل‌ها و انیمیشن‌ها
+├── index.html          # Main page
+├── css/style.css       # Styles & animations
 ├── js/
-│   ├── app.js          # لاجیک اصلی
-│   ├── sounds.js       # صدا و افکت‌ها
-│   ├── challenges.js   # موتور چالش‌ها
-│   ├── progress.js     # ذخیره پیشرفت
-│   ├── ui.js           # رابط کاربری
-│   └── utils.js        # توابع کمکی
+│   ├── app.js          # Main logic
+│   ├── sounds.js       # Sound & effects
+│   ├── challenges.js   # Challenge engine
+│   ├── progress.js     # Progress storage
+│   ├── ui.js           # User interface
+│   └── utils.js        # Helper functions
 ├── data/
-│   ├── chapter_1.json  # فصل ۱: متغیرها
-│   ├── chapter_2.json  # فصل ۲: عملگرها
-│   ├── chapter_3.json  # فصل ۳: شرط‌ها
-│   ├── chapter_4.json  # فصل ۴: حلقه‌ها
-│   └── chapter_5.json  # فصل ۵: توابع
+│   ├── chapter_1.json  # Chapter 1: Variables
+│   ├── chapter_2.json  # Chapter 2: Operators
+│   ├── chapter_3.json  # Chapter 3: Conditionals
+│   ├── chapter_4.json  # Chapter 4: Loops
+│   └── chapter_5.json  # Chapter 5: Functions
 └── README.md
 ```
+
+</div>
 
 ## 🤝 مشارکت
 
 این پروژه اوپن‌سورس هست! اگه میخوای کمک کنی:
 
 1. 🍴 ریپو رو Fork کن
-2. 🌿 Branch جدید بساز (`git checkout -b feature/amazing-feature`)
-3. ✏️ تغییراتت رو commit کن (`git commit -m 'Add amazing feature'`)
-4. 📤 Push کن (`git push origin feature/amazing-feature`)
+2. 🌿 Branch جدید بساز
+3. ✏️ تغییراتت رو commit کن
+4. 📤 Push کن
 5. 🔀 Pull Request بزن
 
 ## 📝 اضافه کردن فصل جدید
@@ -111,10 +118,10 @@ python-game-lab/
 ### Learn Python Through Games & Challenges
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-Game-Lab-00d4aa?style=for-the-badge&logo=python&logoColor=white" alt="Python Game Lab">
-  <img src="https://img.shields.io/badge/Language-فارسی-ff6b6b?style=for-the-badge" alt="Farsi">
+  <img src="https://img.shields.io/badge/Python-Game_Lab-00d4aa?style=for-the-badge&logo=python&logoColor=white" alt="Python Game Lab">
   <img src="https://img.shields.io/badge/Platform-Web-4dabf7?style=for-the-badge" alt="Web">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT">
+  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Active">
 </p>
 
 ---
@@ -156,8 +163,7 @@ cd python-game-lab
 # Start local server
 python3 -m http.server 8080
 
-# Open browser
-# http://localhost:8080
+# Open browser → http://localhost:8080
 ```
 
 ## 📁 Project Structure
@@ -187,9 +193,9 @@ python-game-lab/
 Contributions are welcome!
 
 1. 🍴 Fork the repo
-2. 🌿 Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. ✏️ Commit changes (`git commit -m 'Add amazing feature'`)
-4. 📤 Push to branch (`git push origin feature/amazing-feature`)
+2. 🌿 Create a feature branch
+3. ✏️ Commit changes
+4. 📤 Push to branch
 5. 🔀 Open a Pull Request
 
 ## 📝 Adding a New Chapter
