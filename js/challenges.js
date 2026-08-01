@@ -837,7 +837,7 @@ function createNextButton(prefix, currentIndex) {
 // توابع پروژه عملی
 // ============================================
 
-// بررسی کد پروژه
+// بررسی هوشمند کد پروژه
 function checkProjectCode(chapterId) {
     const textarea = document.getElementById(`project-${chapterId}`);
     const resultEl = document.getElementById(`project-result-${chapterId}`);
@@ -850,70 +850,45 @@ function checkProjectCode(chapterId) {
         return;
     }
     
-    // بررسی‌های ساده
+    // قوانین هر فصل
+    const rules = getProjectRules(chapterId);
     let feedback = [];
     let score = 0;
+    let maxScore = 0;
     
-    // بررسی وجود print
-    if (code.includes('print')) {
-        feedback.push('✅ از print استفاده کردی — عالی!');
-        score += 2;
-    } else {
-        feedback.push('💡 نکته: از print برای نمایش خروجی استفاده کن');
-    }
+    rules.forEach(rule => {
+        maxScore += rule.points;
+        const passed = rule.check(code);
+        if (passed) {
+            feedback.push({ type: 'success', text: rule.success });
+            score += rule.points;
+        } else {
+            feedback.push({ type: 'hint', text: rule.hint });
+        }
+    });
     
-    // بررسی وجود متغیر
-    if (code.includes('=') && !code.includes('==')) {
-        feedback.push('✅ متغیر تعریف کردی — خوبه!');
-        score += 2;
-    }
-    
-    // بررسی وجود تابع
-    if (code.includes('def ')) {
-        feedback.push('✅ تابع تعریف کردی — عالی!');
-        score += 3;
-    }
-    
-    // بررسی وجود حلقه
-    if (code.includes('for ') || code.includes('while ')) {
-        feedback.push('✅ از حلقه استفاده کردی — حرفه‌ای!');
-        score += 3;
-    }
-    
-    // بررسی وجود شرط
-    if (code.includes('if ')) {
-        feedback.push('✅ از شرط استفاده کردی — خوبه!');
-        score += 2;
-    }
-    
-    // بررسی وجود لیست
-    if (code.includes('[') && code.includes(']')) {
-        feedback.push('✅ از لیست استفاده کردی — عالی!');
-        score += 2;
-    }
-    
-    // بررسی وجود دیکشنری
-    if (code.includes('{') && code.includes(':')) {
-        feedback.push('✅ از دیکشنری استفاده کردی — حرفه‌ای!');
-        score += 3;
-    }
+    // بررسی خطاهای رایج
+    const errors = findCommonErrors(code, chapterId);
+    errors.forEach(err => {
+        feedback.push({ type: 'error', text: err });
+    });
     
     // بررسی طول کد
     const lines = code.split('\n').filter(l => l.trim()).length;
     if (lines >= 5) {
-        feedback.push(`✅ ${lines} خط کد نوشتی — آفرین!`);
+        feedback.push({ type: 'success', text: `✅ ${lines} خط کد نوشتی — آفرین!` });
         score += 2;
-    } else if (lines < 3) {
-        feedback.push('💡 سعی کن بیشتر بنویسی!');
+        maxScore += 2;
     }
     
     // نمایش نتیجه
+    const percentage = Math.round((score / maxScore) * 100);
     let resultHtml = '<div style="padding: 16px; border-radius: 8px; margin-top: 10px;';
     
-    if (score >= 8) {
+    if (percentage >= 80) {
         resultHtml += 'background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2);">';
         resultHtml += '<strong style="color: #22c55e;">🏆 آفرین! کد عالی‌ای نوشتی!</strong><br><br>';
-    } else if (score >= 4) {
+    } else if (percentage >= 50) {
         resultHtml += 'background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);">';
         resultHtml += '<strong style="color: #f59e0b;">👍 خوبه! ولی میتونی بهترش کنی!</strong><br><br>';
     } else {
@@ -922,10 +897,12 @@ function checkProjectCode(chapterId) {
     }
     
     feedback.forEach(f => {
-        resultHtml += f + '<br>';
+        const icon = f.type === 'success' ? '' : f.type === 'error' ? '❌ ' : '💡 ';
+        const color = f.type === 'success' ? '#22c55e' : f.type === 'error' ? '#ef4444' : '#f59e0b';
+        resultHtml += `<span style="color: ${color};">${icon}${f.text}</span><br>`;
     });
     
-    resultHtml += `<br><span style="color: var(--text-muted); font-size: 0.85rem;">امتیاز: ${score} از ۱۵</span>`;
+    resultHtml += `<br><span style="color: var(--text-muted); font-size: 0.85rem;">امتیاز: ${score} از ${maxScore} (${percentage}%)</span>`;
     resultHtml += '</div>';
     
     resultEl.innerHTML = resultHtml;
@@ -935,6 +912,205 @@ function checkProjectCode(chapterId) {
     if (!progress.projectScores) progress.projectScores = {};
     progress.projectScores[chapterId] = Math.max(progress.projectScores[chapterId] || 0, score);
     saveProgress(progress);
+}
+
+// قوانین پروژه هر فصل
+function getProjectRules(chapterId) {
+    const rules = {
+        // فصل ۱: متغیرها
+        '1': [
+            { check: c => /=/.test(c) && !/==/.test(c), success: '✅ متغیر تعریف کردی', hint: '💡 متغیر با = تعریف میشه', points: 2 },
+            { check: c => /print/.test(c), success: '✅ از print استفاده کردی', hint: '💡 با print میتونی مقدار متغیر رو نشون بدی', points: 2 },
+            { check: c => /['"].*['"]/.test(c), success: '✅ رشته تعریف کردی', hint: '💡 از علامت نقل قول برای رشته استفاده کن', points: 2 },
+            { check: c => /\d+/.test(c), success: '✅ عدد استفاده کردی', hint: '💡 عدد بذار تا با متغیر ترکیب کنی', points: 2 }
+        ],
+        // فصل ۲: عملگرها
+        '2': [
+            { check: c => /[+\-*/]/.test(c), success: '✅ عملگر ریاضی استفاده کردی', hint: '💡 از + - * / استفاده کن', points: 2 },
+            { check: c => /print/.test(c), success: '✅ خروجی چاپ کردی', hint: '💡 با print نتیجه رو نشون بده', points: 2 },
+            { check: c => /\d+\s*[+\-*/]\s*\d+/.test(c), success: '✅ محاسبه انجام دادی', hint: '💡 دو عدد رو با عملگر ترکیب کن', points: 3 },
+            { check: c => /==|!=|>=|<=|>|</.test(c), success: '✅ عملگر مقایسه استفاده کردی', hint: '💡 از == یا > یا < استفاده کن', points: 2 }
+        ],
+        // فصل ۳: شرط‌ها
+        '3': [
+            { check: c => /if\s/.test(c), success: '✅ شرط تعریف کردی', hint: '💡 با if شرط بذار', points: 3 },
+            { check: c => /:/.test(c), success: '✅ دو نقطه گذاشتی', hint: '💡 بعد از if باید : بذاری', points: 1 },
+            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 با print نتیجه رو نشون بده', points: 2 },
+            { check: c => /else|elif/.test(c), success: '✅ else/elif استفاده کردی', hint: '💡 با else حالت دیگه رو هم پوشش بده', points: 2 }
+        ],
+        // فصل ۴: حلقه‌ها
+        '4': [
+            { check: c => /for\s/.test(c), success: '✅ حلقه for تعریف کردی', hint: '💡 با for حلقه بزن', points: 3 },
+            { check: c => /range/.test(c), success: '✅ از range استفاده کردی', hint: '💡 range تعداد تکرار رو مشخص میکنه', points: 2 },
+            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 با print نتیجه رو چاپ کن', points: 2 },
+            { check: c => /while/.test(c), success: '✅ حلقه while هم داری', hint: '💡 while برای تکرار شرطی خوبه', points: 2 }
+        ],
+        // فصل ۵: توابع
+        '5': [
+            { check: c => /def\s/.test(c), success: '✅ تابع تعریف کردی', hint: '💡 با def تابع بساز', points: 3 },
+            { check: c => /def\s+\w+\(.*\)/.test(c), success: '✅ پارامتر داری', hint: '💡 تابع باید پارامتر بگیره', points: 2 },
+            { check: c => /return/.test(c), success: '✅ return داری', hint: '💡 با return مقدار برگردون', points: 2 },
+            { check: c => /print/.test(c), success: '✅ خروجی چاپ کردی', hint: '💡 نتیجه تابع رو print کن', points: 2 }
+        ],
+        // فصل ۶: لیست‌ها
+        '6': [
+            { check: c => /\[.*\]/.test(c), success: '✅ لیست تعریف کردی', hint: '💡 لیست با [ ] ساخته میشه', points: 3 },
+            { check: c => /\.append/.test(c), success: '✅ append استفاده کردی', hint: '💡 با append آیتم اضافه کن', points: 2 },
+            { check: c => /for\s.*\s+in\s+/.test(c), success: '✅ روی لیست حلقه زدی', hint: '💡 با for روی لیست حلقه بزن', points: 2 },
+            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 لیست رو print کن', points: 2 }
+        ],
+        // فصل ۷: دیکشنری
+        '7': [
+            { check: c => /\{.*:.*\}/.test(c), success: '✅ دیکشنری تعریف کردی', hint: '💡 دیکشنری با { } ساخته میشه', points: 3 },
+            { check: c => /\[.+\]/.test(c) && /['"].+['"]/.test(c), success: '✅ به دیکشنری دسترسی پیدا کردی', hint: '💡 با [key] مقدار بگیر', points: 2 },
+            { check: c => /\.keys|\.values|\.items/.test(c), success: '✅ متود دیکشنری استفاده کردی', hint: '💡 .keys() یا .values() خوبه', points: 2 },
+            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 نتیجه رو print کن', points: 2 }
+        ],
+        // فصل ۸: متدهای رشته
+        '8': [
+            { check: c => /\.upper|\.lower|\.strip/.test(c), success: '✅ متود رشته استفاده کردی', hint: '💡 .upper() یا .lower() یا .strip()', points: 3 },
+            { check: c => /\.split|\.join/.test(c), success: '✅ split/join استفاده کردی', hint: '💡 .split() رشته رو جدا میکنه', points: 2 },
+            { check: c => /\.replace/.test(c), success: '✅ replace استفاده کردی', hint: '💡 .replace() جایگزینی میکنه', points: 2 },
+            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 نتیجه رو print کن', points: 2 }
+        ],
+        // فصل ۹: مدیریت فایل
+        '9': [
+            { check: c => /open\(/.test(c), success: '✅ فایل باز کردی', hint: '💡 با open() فایل رو باز کن', points: 3 },
+            { check: c => /['"]w['"]|['"]r['"]|['"]a['"]/.test(c), success: '✅ مود فایل مشخص کردی', hint: "💡 r برای خواندن، w برای نوشتن", points: 2 },
+            { check: c => /\.read|\.write|\.close/.test(c), success: '✅ عملیات فایل انجام دادی', hint: '💡 .read() یا .write() استفاده کن', points: 2 },
+            { check: c => /with/.test(c), success: '✅ از with استفاده کردی', hint: '💡 with خودکار فایل رو میبنده', points: 2 }
+        ],
+        // فصل ۱۰: مدیریت خطا
+        '10': [
+            { check: c => /try/.test(c), success: '✅ try داری', hint: '💡 با try شروع کن', points: 3 },
+            { check: c => /except/.test(c), success: '✅ except داری', hint: '💡 except خطا رو میگیره', points: 3 },
+            { check: c => /ValueError|TypeError|NameError|FileNotFoundError/.test(c), success: '✅ نوع خطا مشخص کردی', hint: '💡 نوع خطا رو مشخص کن', points: 2 },
+            { check: c => /print/.test(c), success: '✅ پیام خطا چاپ کردی', hint: '💡 پیام خطا رو print کن', points: 2 }
+        ],
+        // فصل ۱۱: OOP
+        '11': [
+            { check: c => /class\s/.test(c), success: '✅ کلاس تعریف کردی', hint: '💡 با class کلاس بساز', points: 3 },
+            { check: c => /def\s+__init__/.test(c), success: '✅ سازنده داری', hint: '💡 __init__ سازنده کلاسه', points: 2 },
+            { check: c => /self\./.test(c), success: '✅ از self استفاده کردی', hint: '💡 self به خود آبجکت اشاره میکنه', points: 2 },
+            { check: c => /=\s*\w+\(/.test(c), success: '✅ آبجکت ساختی', hint: '💡 از کلاس آبجکت بساز', points: 2 }
+        ],
+        // فصل ۱۲: جنریتورها
+        '12': [
+            { check: c => /def\s/.test(c), success: '✅ تابع تعریف کردی', hint: '💡 جنریتور یه تابعه', points: 2 },
+            { check: c => /yield/.test(c), success: '✅ yield استفاده کردی', hint: '💡 yield جنریتور رو مخصوص میکنه', points: 4 },
+            { check: c => /for.*in/.test(c), success: '✅ روی جنریتور حلقه زدی', hint: '💡 با for مقادیر رو بگیر', points: 2 },
+            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 نتیجه رو print کن', points: 2 }
+        ],
+        // فصل ۱۳: دکوراتورها
+        '13': [
+            { check: c => /def\s/.test(c), success: '✅ تابع تعریف کردی', hint: '💡 دکوراتور یه تابعه', points: 2 },
+            { check: c => /@/.test(c), success: '✅ دکوراتور استفاده کردی', hint: '💡 با @ قبل تابع استفاده کن', points: 3 },
+            { check: c => /def\s+wrapper/.test(c), success: '✅ wrapper داری', hint: '💡 wrapper تابع داخلیه', points: 2 },
+            { check: c => /return/.test(c), success: '✅ return داری', hint: '💡 wrapper رو برگردون', points: 2 }
+        ],
+        // فصل ۱۴: ماژول‌ها
+        '14': [
+            { check: c => /import/.test(c), success: '✅ ماژول import کردی', hint: '💡 با import ماژول بیار', points: 3 },
+            { check: c => /from\s+\w+\s+import/.test(c), success: '✅ from...import استفاده کردی', hint: '💡 from X import Y خاص‌تره', points: 2 },
+            { check: c => /random|datetime|os|json/.test(c), success: '✅ ماژول معروف استفاده کردی', hint: '💡 random یا datetime یا os', points: 2 },
+            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 نتیجه رو print کن', points: 2 }
+        ],
+        // فصل ۱۵: Regex
+        '15': [
+            { check: c => /import\s+re/.test(c), success: '✅ re رو import کردی', hint: '💡 import re لازمه', points: 3 },
+            { check: c => /re\.search|re\.match|re\.findall/.test(c), success: '✅ تابع regex استفاده کردی', hint: '💡 re.search() یا re.findall()', points: 3 },
+            { check: c => /['"]/.test(c) && /\./.test(c), success: '✅ الگو نوشتی', hint: '💡 الگو با نقطه و ...', points: 2 },
+            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 نتیجه رو print کن', points: 2 }
+        ],
+        // فصل ۱۶: فریم‌ورک‌ها
+        '16': [
+            { check: c => /from\s+flask|from\s+django|import\s+flask/.test(c), success: '✅ فریم‌ورک import کردی', hint: '💡 Flask یا Django', points: 3 },
+            { check: c => /app\s*=|@app\.route/.test(c), success: '✅ اپلیکیشن ساختی', hint: '💡 app = Flask(__name__)', points: 3 },
+            { check: c => /def\s+\w+\(/.test(c), success: '✅ تابع مسیر داری', hint: '💡 تابع برای هر صفحه', points: 2 },
+            { check: c => /return/.test(c), success: '✅ return داری', hint: '💡 محتوا رو برگردون', points: 2 }
+        ],
+        // فصل ۱۷: پایتون در عمل
+        '17': [
+            { check: c => /import|from/.test(c), success: '✅ کتابخونه import کردی', hint: '💡 requests یا beautifulsoup', points: 2 },
+            { check: c => /requests\.get|BeautifulSoup/.test(c), success: '✅ درخواست وب دادی', hint: '💡 requests.get() یا BeautifulSoup()', points: 3 },
+            { check: c => /\.json\(\)|\.text/.test(c), success: '✅ پاسخ رو خوندی', hint: '💡 .json() یا .text', points: 2 },
+            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 نتیجه رو print کن', points: 2 }
+        ],
+        // فصل ۱۸: List Comprehension
+        '18': [
+            { check: c => /\[.*for.*in/.test(c), success: '✅ list comprehension نوشتی', hint: '💡 [x for x in range()]', points: 4 },
+            { check: c => /if/.test(c) && /\[.*for/.test(c), success: '✅ فیلتر هم داری', hint: '💡 [x for x in ... if ...]', points: 3 },
+            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 لیست رو print کن', points: 2 }
+        ],
+        // فصل ۱۹: Lambda
+        '19': [
+            { check: c => /lambda/.test(c), success: '✅ lambda استفاده کردی', hint: '💡 lambda x: x * 2', points: 4 },
+            { check: c => /map|filter|sorted/.test(c), success: '✅ با map/filter/sorted ترکیب کردی', hint: '💡 lambda با map یا filter خوبه', points: 3 },
+            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 نتیجه رو print کن', points: 2 }
+        ],
+        // فصل ۲۰: محیط مجازی
+        '20': [
+            { check: c => /venv|virtualenv|pip\s+install/.test(c), success: '✅ محیط مجازی ساختی', hint: '💡 python -m venv myenv', points: 3 },
+            { check: c => /activate|deactivate/.test(c), success: '✅ activate کردی', hint: '💡 source myenv/bin/activate', points: 2 },
+            { check: c => /requirements/.test(c), success: '✅ requirements.txt داری', hint: '💡 pip freeze > requirements.txt', points: 3 },
+            { check: c => /pip/.test(c), success: '✅ pip استفاده کردی', hint: '💡 pip install package_name', points: 2 }
+        ],
+        // فصل ۲۱: SQLite
+        '21': [
+            { check: c => /import\s+sqlite3/.test(c), success: '✅ sqlite3 رو import کردی', hint: '💡 import sqlite3 لازمه', points: 3 },
+            { check: c => /connect/.test(c), success: '✅ اتصال برقرار کردی', hint: '💡 sqlite3.connect()', points: 2 },
+            { check: c => /CREATE\s+TABLE/.test(c), success: '✅ جدول ساختی', hint: '💡 CREATE TABLE', points: 2 },
+            { check: c => /INSERT|SELECT/.test(c), success: '✅ داده خوندی/نوشتی', hint: '💡 INSERT INTO یا SELECT', points: 2 }
+        ],
+        // فصل ۲۲: API
+        '22': [
+            { check: c => /import\s+requests/.test(c), success: '✅ requests رو import کردی', hint: '💡 import requests', points: 3 },
+            { check: c => /requests\.get/.test(c), success: '✅ GET درخواست دادی', hint: '💡 requests.get(url)', points: 3 },
+            { check: c => /\.json\(\)/.test(c), success: '✅ JSON خوندی', hint: '💡 .json() تبدیل به دیکشنری', points: 2 },
+            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 نتیجه رو print کن', points: 2 }
+        ],
+        // فصل ۲۳: Testing
+        '23': [
+            { check: c => /def\s+test_/.test(c), success: '✅ تابع تست نوشتی', hint: '💡 نام باید test_ شروع بشه', points: 3 },
+            { check: c => /assert/.test(c), success: '✅ assert استفاده کردی', hint: '💡 assert نتیجه رو بررسی میکنه', points: 3 },
+            { check: c => /==/.test(c), success: '✅ مقایسه کردی', hint: '💡 assert x == expected', points: 2 },
+            { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 پیام موفقیت چاپ کن', points: 2 }
+        ]
+    };
+    
+    return rules[chapterId] || [
+        { check: c => c.length > 20, success: '✅ کد کافی نوشتی', hint: '💡 بیشتر بنویس!', points: 3 },
+        { check: c => /print/.test(c), success: '✅ خروجی داری', hint: '💡 print بذار', points: 2 },
+        { check: c => /=/.test(c), success: '✅ متغیر داری', hint: '💡 متغیر تعریف کن', points: 2 }
+    ];
+}
+
+// پیدا کردن خطاهای رایج
+function findCommonErrors(code, chapterId) {
+    let errors = [];
+    
+    // بررسی : بعد از if/for/while/def
+    const lines = code.split('\n');
+    lines.forEach((line, i) => {
+        const trimmed = line.trim();
+        if (/^(if|elif|else|for|while|def|class)\s/.test(trimmed) && !trimmed.endsWith(':') && !trimmed.endsWith(':\\')) {
+            errors.push(`خط ${i+1}: بعد از "${trimmed.split(' ')[0]}" باید : بذاری`);
+        }
+    });
+    
+    // بررسی print بدون پرانتز
+    if (/print\s+['"]/.test(code) || /print\s+\w+/.test(code)) {
+        if (!/print\(/.test(code)) {
+            errors.push('print باید پرانتز داشته باشه: print()');
+        }
+    }
+    
+    // بررسی متغیر بدون مقدار
+    if (/^\s*\w+\s*$/.test(code) && !/^(if|for|while|def|class|return|print)/.test(code.trim())) {
+        errors.push('به نظر میاد یه خط فقط اسم متغیره بدون مقدار');
+    }
+    
+    return errors;
 }
 
 // اجرای کد پروژه (شبیه‌سازی ساده)
