@@ -624,6 +624,11 @@ body::before {
     color: var(--purple);
 }
 
+.chapter-number.expert {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));
+    color: #f59e0b;
+}
+
 .chapter-info {
     flex: 1;
     min-width: 0;

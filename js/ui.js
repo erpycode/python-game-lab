@@ -20,14 +20,22 @@ function renderChaptersGrid() {
         { num: 7, title: 'فصل ۷: دیکشنری', desc: 'کلید-مقدار، متدهای دیکشنری', level: 'advanced' },
         { num: 8, title: 'فصل ۸: متدهای رشته', desc: 'split, join, replace و...', level: 'advanced' },
         { num: 9, title: 'فصل ۹: مدیریت فایل', desc: 'خواندن و نوشتن فایل', level: 'advanced' },
-        { num: 10, title: 'فصل ۱۰: مدیریت خطا', desc: 'try, except, raise', level: 'advanced' }
+        { num: 10, title: 'فصل ۱۰: مدیریت خطا', desc: 'try, except, raise', level: 'advanced' },
+        { num: 11, title: 'فصل ۱۱: شی‌گرایی', desc: 'کلاس، object، inheritance', level: 'expert' },
+        { num: 12, title: 'فصل ۱۲: جنریتورها', desc: 'yield، iterator، generator', level: 'expert' },
+        { num: 13, title: 'فصل ۱۳: دکوراتورها', desc: '@decorator، closures', level: 'expert' },
+        { num: 14, title: 'فصل ۱۴: ماژول‌ها', desc: 'import، pip، package', level: 'expert' },
+        { num: 15, title: 'فصل ۱۵: عبارات باقاعده', desc: 'regex، pattern matching', level: 'expert' },
+        { num: 16, title: 'فصل ۱۶: فریم‌ورک‌ها', desc: 'Django, Flask, FastAPI', level: 'expert' },
+        { num: 17, title: 'فصل ۱۷: پایتون در عمل', desc: 'پروژه‌های واقعی', level: 'expert' }
     ];
     
     // دسته‌بندی بر اساس سطح
     const levels = [
         { key: 'beginner', title: '📗 مبتدی', subtitle: 'شروع یادگیری پایتون', color: 'var(--accent)' },
         { key: 'intermediate', title: '📘 متوسط', subtitle: 'عمیق‌تر شو!', color: 'var(--blue)' },
-        { key: 'advanced', title: '📕 پیشرفته', subtitle: 'حرفه‌ای شو!', color: 'var(--purple)' }
+        { key: 'advanced', title: '📕 پیشرفته', subtitle: 'حرفه‌ای شو!', color: 'var(--purple)' },
+        { key: 'expert', title: '🎓 حرفه‌ای', subtitle: 'استاد پایتون شو!', color: '#f59e0b' }
     ];
     
     // پیدا کردن سطح فصل فعلی کاربر

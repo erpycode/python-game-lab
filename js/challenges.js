@@ -575,10 +575,17 @@ function generatePredictFeedback(userAns, correctAns, data) {
     // چک کن آیا عدد اشتباه وارد کرده
     if (!isNaN(userNorm) && !isNaN(correctNorm)) {
         const diff = parseInt(userNorm) - parseInt(correctNorm);
+        const absDiff = Math.abs(diff);
+        
+        // خیلی نزدیکه!
+        if (absDiff <= 2) {
+            return `🎯 <strong>خیلی نزدیکی!</strong> جوابت ${userAns} هست ولی ${correctAns} باید باشه. فقط ${absDiff} فرق داره!`;
+        }
+        
         if (diff > 0) {
-            return `جوابت ${userAns} هست ولی ${correctAns} باید باشه. جوابت از حد واقعی <strong>${diff} بیشتر</strong> هست. دوباره حساب کن!`;
+            return `جوابت <strong>${userAns}</strong> هست ولی <strong>${correctAns}</strong> باید باشه. جوابت ${diff} تا بیشتر از حد واقعیه. دوباره حساب کن!`;
         } else {
-            return `جوابت ${userAns} هست ولی ${correctAns} باید باشه. جوابت از حد واقعی <strong>${Math.abs(diff)} کمتر</strong> هست. دوباره حساب کن!`;
+            return `جوابت <strong>${userAns}</strong> هست ولی <strong>${correctAns}</strong> باید باشه. جوابت ${absDiff} تا کمتر از حد واقعیه. دوباره حساب کن!`;
         }
     }
     
@@ -587,11 +594,35 @@ function generatePredictFeedback(userAns, correctAns, data) {
         return `جواب باید نوع داده باشه (مثل <strong>${correctAns}</strong>). تو نوشتی: ${userAns}`;
     }
     
+    // چک کن آیا نزدیک متنی هست (typo)
+    if (isSimilar(userNorm, correctNorm, 0.6)) {
+        return `🔍 <strong>خیلی نزدیکی!</strong> جوابت تقریباً درسته. یه نگاه دیگه بنداز!`;
+    }
+    
     // feedback عمومی
     if (data.explanation) {
         return `${data.explanation}`;
     }
     return `جواب صحیح <strong>${correctAns}</strong> هست. دوباره کد رو بخون و فکر کن!`;
+}
+
+// بررسی شباهت دو رشته (Levenshtein simplified)
+function isSimilar(str1, str2, threshold) {
+    if (!str1 || !str2) return false;
+    const len1 = str1.length;
+    const len2 = str2.length;
+    const maxLen = Math.max(len1, len2);
+    if (maxLen === 0) return true;
+    
+    let matches = 0;
+    const shorter = len1 < len2 ? str1 : str2;
+    const longer = len1 < len2 ? str2 : str1;
+    
+    for (let i = 0; i < shorter.length; i++) {
+        if (longer.includes(shorter[i])) matches++;
+    }
+    
+    return (matches / maxLen) >= threshold;
 }
 
 // feedback برای fill_gap
@@ -602,13 +633,16 @@ function generateFillGapFeedback(gapResults) {
     let feedback = '';
     
     if (correctGaps.length > 0) {
-        feedback += `<span style="color: var(--success);">✓ جای خالی ${correctGaps.length > 1 ? 'ها' : ''} اول درسته!</span><br>`;
+        feedback += `<span style="color: var(--success);">✓ جای خالی ${correctGaps.length > 1 ? 'ها' : ''} درسته!</span><br>`;
     }
     
     wrongGaps.forEach((gap, i) => {
         const gapNum = gapResults.indexOf(gap) + 1;
         if (gap.user === '') {
             feedback += `<span style="color: var(--danger);">✗ جای خالی ${gapNum}: خالیه! باید <strong>${gap.correct}</strong> باشه</span><br>`;
+        } else if (isSimilar(gap.user.toLowerCase(), gap.correct.toLowerCase(), 0.7)) {
+            // خیلی نزدیکه (typo)
+            feedback += `<span style="color: var(--warning);">🔍 جای خالی ${gapNum}: <strong>${gap.user}</strong> خیلی نزدیکه! فقط یکم اصلاح کن — جواب: <strong>${gap.correct}</strong></span><br>`;
         } else {
             feedback += `<span style="color: var(--danger);">✗ جای خالی ${gapNum}: <strong>${gap.user}</strong> نوشتی ولی <strong>${gap.correct}</strong> باید باشه</span><br>`;
         }
@@ -622,9 +656,20 @@ function generateBugHunterFeedback(userLine, correctLine, data) {
     const lines = data.code.split('\n');
     const userLineContent = lines[userLine - 1] || '';
     const correctLineContent = lines[correctLine - 1] || '';
+    const distance = Math.abs(userLine - correctLine);
     
-    let feedback = `خط ${userLine} (<code>${escapeHtml(userLineContent.trim())}</code>) درسته.<br>`;
-    feedback += `خط خطا <strong>خط ${correctLine}</strong> هست: <code>${escapeHtml(correctLineContent.trim())}</code><br>`;
+    let feedback = '';
+    
+    // نزدیک بودی!
+    if (distance === 1) {
+        feedback = `🎯 <strong>خیلی نزدیکی!</strong> خط ${userLine} درسته، ولی خط <strong>${correctLine}</strong> خطا داره:<br>`;
+    } else if (distance <= 2) {
+        feedback = `📍 <strong>نزدیک بودی!</strong> خط ${userLine} (<code>${escapeHtml(userLineContent.trim())}</code>) درسته.<br>`;
+        feedback += `خط خطا <strong>خط ${correctLine}</strong> هست: <code>${escapeHtml(correctLineContent.trim())}</code><br>`;
+    } else {
+        feedback = `خط ${userLine} (<code>${escapeHtml(userLineContent.trim())}</code>) درسته.<br>`;
+        feedback += `خط خطا <strong>خط ${correctLine}</strong> هست: <code>${escapeHtml(correctLineContent.trim())}</code><br>`;
+    }
     
     if (data.hint) {
         feedback += `<span style="color: var(--warning);">💡 ${data.hint}</span>`;
@@ -638,8 +683,16 @@ function generateQuizFeedback(options, selectedIdx, correctLabel, data) {
     const selectedOption = options[selectedIdx];
     const correctOption = options.find(o => o.label === correctLabel);
     
-    let feedback = `گزینه <strong>${selectedOption.label}) ${selectedOption.text}</strong> اشتباهه.<br>`;
-    feedback += `جواب درست <strong>${correctOption.label}) ${correctOption.text}</strong> هست.<br>`;
+    let feedback = '';
+    
+    // چک کن آیا گزینه‌ش نزدیکه
+    if (isSimilar(selectedOption.text.toLowerCase(), correctOption.text.toLowerCase(), 0.6)) {
+        feedback = `🎯 <strong>خیلی نزدیکی!</strong> گزینه <strong>${selectedOption.label}) ${selectedOption.text}</strong> تقریباً درسته.<br>`;
+        feedback += `ولی جواب دقیق <strong>${correctOption.label}) ${correctOption.text}</strong> هست.<br>`;
+    } else {
+        feedback = `گزینه <strong>${selectedOption.label}) ${selectedOption.text}</strong> اشتباهه.<br>`;
+        feedback += `جواب درست <strong>${correctOption.label}) ${correctOption.text}</strong> هست.<br>`;
+    }
     
     if (data.explanation) {
         feedback += `<span style="color: var(--warning);">💡 ${data.explanation}</span>`;
@@ -657,7 +710,14 @@ function generateSortFeedback(userLines, correctLines) {
         }
     });
     
-    let feedback = `${wrongPositions.length} خط جابه‌جا هست.<br>`;
+    let feedback = '';
+    
+    if (wrongPositions.length <= 2) {
+        feedback += `🎯 <strong>خیلی نزدیکی!</strong> فقط ${wrongPositions.length} خط جابه‌جا هست.<br>`;
+    } else {
+        feedback += `${wrongPositions.length} خط جابه‌جا هست.<br>`;
+    }
+    
     feedback += `ترتیب صحیح:<br>`;
     correctLines.forEach((line, i) => {
         const isWrong = line !== userLines[i];

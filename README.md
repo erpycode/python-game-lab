@@ -36,12 +36,19 @@
 | ۲ | عملگرها | 📗 مبتدی |
 | ۳ | شرط‌ها | 📘 متوسط |
 | ۴ | حلقه‌ها | 📘 متوسط |
-| ۵ | توابع | 📕 پیشرفته |
+| ۵ | توابع | 📘 متوسط |
 | ۶ | لیست‌ها | 📕 پیشرفته |
 | ۷ | دیکشنری | 📕 پیشرفته |
 | ۸ | متدهای رشته | 📕 پیشرفته |
 | ۹ | مدیریت فایل | 📕 پیشرفته |
 | ۱۰ | مدیریت خطا | 📕 پیشرفته |
+| ۱۱ | شی‌گرایی (OOP) | 🎓 حرفه‌ای |
+| ۱۲ | جنریتورها | 🎓 حرفه‌ای |
+| ۱۳ | دکوراتورها | 🎓 حرفه‌ای |
+| ۱۴ | ماژول‌ها و پکیج‌ها | 🎓 حرفه‌ای |
+| ۱۵ | عبارات باقاعده | 🎓 حرفه‌ای |
+| ۱۶ | آشنایی با فریم‌ورک‌ها | 🎓 حرفه‌ای |
+| ۱۷ | پایتون در عمل | 🎓 حرفه‌ای |
 
 ## 🚀 اجرا کردن
 
@@ -166,12 +173,19 @@ An online game for learning Python from scratch. Each chapter includes **lessons
 | 2 | Operators | 📗 Beginner |
 | 3 | Conditionals | 📘 Intermediate |
 | 4 | Loops | 📘 Intermediate |
-| 5 | Functions | 📕 Advanced |
+| 5 | Functions | 📘 Intermediate |
 | 6 | Lists | 📕 Advanced |
 | 7 | Dictionaries | 📕 Advanced |
 | 8 | String Methods | 📕 Advanced |
 | 9 | File Handling | 📕 Advanced |
 | 10 | Error Handling | 📕 Advanced |
+| 11 | OOP | 🎓 Expert |
+| 12 | Generators | 🎓 Expert |
+| 13 | Decorators | 🎓 Expert |
+| 14 | Modules & Packages | 🎓 Expert |
+| 15 | Regular Expressions | 🎓 Expert |
+| 16 | Frameworks | 🎓 Expert |
+| 17 | Python in Practice | 🎓 Expert |
 
 ## 🚀 Getting Started
 
