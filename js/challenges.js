@@ -471,7 +471,14 @@ function checkAnswer(prefix, index) {
     // نمایش نتیجه هوشمند
     if (isCorrect) {
         resultEl.className = 'result-message show success';
-        resultEl.innerHTML = '🎉 آفرین! درسته!';
+        
+        // نمایش توضیح چرا درسته
+        let successMsg = '🎉 آفرین! درسته!';
+        if (data.explanation) {
+            successMsg += `<br><div class="smart-feedback" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.2);">💡 ${data.explanation}</div>`;
+        }
+        resultEl.innerHTML = successMsg;
+        
         cardEl.classList.add('solved');
         cardEl.classList.remove('wrong');
         
@@ -479,12 +486,18 @@ function checkAnswer(prefix, index) {
         createParticleEffect(cardEl);
         glowElement(cardEl, '#22C55E');
         
-        const xp = data.xp || 10;
-        if (prefix === 'challenge') {
-            chapterXP += xp;
-            chapterScore += xp;
-        } else {
-            chapterScore += 5;
+        // امتیاز (فقط اگه قبلاً نگرفته باشه)
+        const progress = getProgress();
+        const isAlreadyCompleted = progress.completedChapters.includes(currentChapter.id);
+        
+        if (!isAlreadyCompleted) {
+            const xp = data.xp || 10;
+            if (prefix === 'challenge') {
+                chapterXP += xp;
+                chapterScore += xp;
+            } else {
+                chapterScore += 5;
+            }
         }
         
         showConfetti();
@@ -571,6 +584,14 @@ function checkAnswer(prefix, index) {
 function generatePredictFeedback(userAns, correctAns, data) {
     const userNorm = normalizeAnswer(userAns);
     const correctNorm = normalizeAnswer(correctAns);
+    
+    // چک کن آیا جواب رشته هست ولی کاربر عدد نوشته
+    const isCorrectString = correctAns.toString().startsWith("'") || correctAns.toString().startsWith('"');
+    const isUserNumber = !isNaN(userNorm) && userNorm !== '';
+    
+    if (isCorrectString && isUserNumber) {
+        return `⚠️ <strong>دقت کن!</strong> جواب یه <strong>رشته (string)</strong> هست نه عدد! وقتی متن‌ها رو جمع می‌کنی، عدد حساب نمیشه. مثلاً <code>'1' + '7'</code> برابر <code>'17'</code> هست (رشته)، نه <code>8</code> (عدد).`;
+    }
     
     // چک کن آیا عدد اشتباه وارد کرده
     if (!isNaN(userNorm) && !isNaN(correctNorm)) {
