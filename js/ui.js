@@ -208,8 +208,7 @@ function showPage(pageId) {
                 break;
             case 'page-exercises':
                 if (currentChapter) {
-                    currentExerciseIndex = 0;
-                    renderExercise(currentChapter, 0);
+                    renderExercise(currentChapter, currentExerciseIndex || 0);
                 }
                 break;
             case 'page-challenges':

@@ -52,14 +52,14 @@ function renderLesson(chapterData) {
     html += `
         <div class="lesson-section">
             <h3>📖 ${chapterData.lesson.title}</h3>
-            <div class="lesson-text">${chapterData.lesson.intro}</div>
+            <div class="lesson-text">${escapeHtml(chapterData.lesson.intro).replace(/\n/g, '<br>')}</div>
         </div>
     `;
     
     // بخش‌های آموزشی
     chapterData.lesson.sections.forEach((section, i) => {
         // تبدیل \n به <br> برای نمایش درست
-        const textWithBreaks = (section.text || '').replace(/\n/g, '<br>');
+        const textWithBreaks = escapeHtml(section.text || '').replace(/\n/g, '<br>');
         
         html += `
             <div class="lesson-section">
@@ -280,7 +280,8 @@ function renderBugHunter(challenge, index) {
 function renderFillGap(item, index, prefix) {
     let gapIndex = 0;
     // جایگزینی ___ (حداقل ۳ تا underscore) با input مستقیم
-    const codeWithInputs = item.code.replace(/_{3,}/g, () => {
+    const escapedCode = escapeHtml(item.code);
+    const codeWithInputs = escapedCode.replace(/_{3,}/g, () => {
         const inputId = `gap-${prefix}-${index}-${gapIndex}`;
         gapIndex++;
         return `<input type="text" class="gap-input" id="${inputId}" placeholder="?" autocomplete="off" spellcheck="false">`;
@@ -496,6 +497,11 @@ function checkAnswer(prefix, index) {
     if (isCorrect) {
         resultEl.className = 'result-message show success';
         
+        // پاک کردن شمارش اشتباهات
+        const correctKey = `${prefix}-${index}`;
+        delete wrongAttempts[correctKey];
+        delete hintLevels[correctKey];
+        
         // نمایش توضیح چرا درسته
         let successMsg = '🎉 آفرین! درسته!';
         if (data.explanation) {
@@ -512,7 +518,7 @@ function checkAnswer(prefix, index) {
         
         // امتیاز (فقط اگه قبلاً نگرفته باشه)
         const progress = getProgress();
-        const isAlreadyCompleted = progress.completedChapters.includes(currentChapter.id);
+        const isAlreadyCompleted = progress.completedChapters.includes(parseInt(currentChapter.id, 10));
         
         if (!isAlreadyCompleted) {
             const xp = data.xp || 10;
@@ -1115,8 +1121,8 @@ function findCommonErrors(code, chapterId) {
 
 // اجرای کد پروژه (شبیه‌سازی ساده)
 function runProjectCode(chapterId) {
-    const codeEl = document.getElementById(`project-${chapterId}-code`);
-    const outputEl = document.getElementById(`project-${chapterId}-output`);
+    const codeEl = document.getElementById(`project-${chapterId}`);
+    const outputEl = document.getElementById(`project-result-${chapterId}`);
     
     if (!codeEl || !outputEl) return;
     
@@ -1185,8 +1191,8 @@ function runProjectCode(chapterId) {
 
 // پاک کردن کد پروژه
 function clearProjectCode(chapterId) {
-    const codeEl = document.getElementById(`project-${chapterId}-code`);
-    const outputEl = document.getElementById(`project-${chapterId}-output`);
+    const codeEl = document.getElementById(`project-${chapterId}`);
+    const outputEl = document.getElementById(`project-result-${chapterId}`);
     
     if (codeEl) codeEl.value = '';
     if (outputEl) {

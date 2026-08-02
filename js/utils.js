@@ -10,7 +10,7 @@ function toPersianNum(num) {
 
 // تبدیل عدد با جداکننده
 function formatNumber(num) {
-    return toPersianNum(num.toLocaleString('fa-IR'));
+    return num.toLocaleString('fa-IR');
 }
 
 // شماره فصل فارسی
@@ -30,7 +30,8 @@ function levelIcon(level) {
     const icons = {
         beginner: '📗',
         intermediate: '📘',
-        advanced: '📕'
+        advanced: '📕',
+        expert: '🎓'
     };
     return icons[level] || '📗';
 }
@@ -40,7 +41,8 @@ function levelName(level) {
     const names = {
         beginner: 'مبتدی',
         intermediate: 'متوسط',
-        advanced: 'پیشرفته'
+        advanced: 'پیشرفته',
+        expert: 'حرفه‌ای'
     };
     return names[level] || 'مبتدی';
 }
