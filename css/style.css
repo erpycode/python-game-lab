@@ -1904,7 +1904,7 @@ body::before {
     font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    z-index: 100;
+    z-index: 200;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2105,7 +2105,7 @@ input:focus-visible {
     font-size: 1.3rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    z-index: 100;
+    z-index: 200;
     display: flex;
     align-items: center;
     justify-content: center;
