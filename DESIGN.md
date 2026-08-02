@@ -1,5 +1,7 @@
 # 🐍 پایتون‌باز — طراحی کامل پروژه
 
+**🔗 [بازی آنلاین](https://erpycode.github.io/python-game-lab/)**
+
 ## هدف
 بازی یادگیری پایتون با رابط وب فارسی. کاربر با چالش‌های تعاملی پایتون یاد میگیره.
 
@@ -7,6 +9,7 @@
 - HTML + CSS + JavaScript (Vanilla)
 - localStorage برای ذخیره پیشرفت
 - GitHub Pages برای هاست رایگان
+- GitHub Actions برای دیپلوی خودکار
 
 ---
 
@@ -22,17 +25,24 @@ python-game-lab/
 │   ├── progress.js         # ذخیره/خوندن پیشرفت (localStorage)
 │   ├── challenges.js       # موتور چالش‌ها + بررسی جواب
 │   ├── ui.js               # رندر کردن صفحات + انیمیشن‌ها
-│   └── utils.js            # توابع کمکی
+│   ├── utils.js            # توابع کمکی
+│   ├── sounds.js           # صدا و افکت‌ها (Web Audio API)
+│   ├── achievements.js     # سیستم دستاورد‌ها
+│   ├── darkmode.js         # تم تاریک/روشن
+│   ├── glossary.js         # واژه‌نامه پایتون (۳۷ کلمه)
+│   ├── search.js           # جستجوی فصل
+│   └── timer.js            # تایمر چالش
 ├── data/
 │   ├── chapter_1.json      # فصل ۱: متغیرها
 │   ├── chapter_2.json      # فصل ۲: عملگرها
-│   ├── chapter_3.json      # فصل ۳: شرط‌ها
-│   ├── chapter_4.json      # فصل ۴: حلقه‌ها
-│   └── chapter_5.json      # فصل ۵: توابع
-├── assets/
-│   └── images/
-├── README.md
-└── DESIGN.md               # همین فایل
+│   ├── ...                 # (۲۳ فصل)
+│   └── chapter_23.json     # فصل ۲۳: تست‌نویسی
+├── .github/
+│   └── workflows/
+│       └── deploy.yml      # دیپلوی GitHub Pages
+├── .nojekyll               # غیرفعال کردن Jekyll
+├── DESIGN.md               # همین فایل
+└── README.md
 ```
 
 ---

@@ -9,6 +9,7 @@
   <img src="https://img.shields.io/badge/Platform-Web-4dabf7?style=for-the-badge" alt="Web">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT">
   <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Active">
+  <a href="https://erpycode.github.io/python-game-lab/"><img src="https://img.shields.io/badge/🎮_بازی_آنلاین- LIVE-00d4aa?style=for-the-badge" alt="Live Demo"></a>
 </p>
 
 ---
@@ -16,6 +17,8 @@
 ## 🎮 پایتون‌باز چیه؟
 
 یه بازی آنلاین برای یادگیری پایتون از صفر. هر فصل شامل **آموزش**، **تمرین** و **چالش** هست. با حل کردن چالش‌ها، سطحت بالا میره و فصل‌های بعدی باز میشه!
+
+**🔗 [بازی آنلاین پایتون‌باز](https://erpycode.github.io/python-game-lab/)**
 
 ## ✨ امکانات
 
@@ -27,6 +30,12 @@
 | 🔊 صدا و افکت | تجربه بازی با صدا و انیمیشن |
 | 📱 ریسپانسیو | روی موبایل و دسکتاپ کار میکنه |
 | 🔒 سطح‌بندی | فصل‌ها قفل هستن و باید فصل قبلی رو تموم کنی |
+| 🌙☀️ حالت تاریک/روشن | تم دلخواهت رو انتخاب کن |
+| 📖 واژه‌نامه پایتون | ۳۷ کلمه کلیدی با توضیح فارسی |
+| 🔍 جستجوی فصل | سریع فصل مورد نظرت رو پیدا کن |
+| 🏅 دستاورد‌ها | ۷ دستاورد قابل باز کردن |
+| ⏱️ تایمر چالش | چالش‌ها رو با تایمر حل کن |
+| 📊 پیشرفت کلی | نوار پیشرفت + آمار کامل |
 
 ## 📚 فصل‌ها
 
@@ -53,6 +62,7 @@
 | ۳ | شرط‌ها |
 | ۴ | حلقه‌ها |
 | ۵ | توابع |
+| ۱۰ | مدیریت خطا |
 
 </td>
 <td align="center">
@@ -66,7 +76,6 @@
 | ۷ | دیکشنری |
 | ۸ | متدهای رشته |
 | ۹ | مدیریت فایل |
-| ۱۰ | مدیریت خطا |
 | ۱۸ | توابع لامبدا |
 | ۱۹ | لیست کامپریهنشن |
 
@@ -98,15 +107,11 @@
 
 ### 🎮 بازی آنلاین (بدون نصب)
 
-اگه میخوای فقط بازی کنی و نیازی به نصب نداری، از لینک زیر استفاده کن:
-
 **🔗 [بازی آنلاین پایتون‌باز](https://erpycode.github.io/python-game-lab/)**
 
 فقط کافیه لینک رو باز کنی و شروع کنی!
 
 ### 💻 اجرا روی سیستم خودت
-
-اگه میخوای پروژه رو دانلود کنی و روی سیستمت اجرا کنی:
 
 <div dir="ltr">
 
@@ -135,35 +140,27 @@ python-game-lab/
 ├── css/
 │   └── style.css           # Styles & animations
 ├── js/
-│   ├── app.js              # Main logic + sounds
+│   ├── app.js              # Main logic + navigation
 │   ├── challenges.js       # Challenge engine + smart feedback
 │   ├── progress.js         # Progress storage (localStorage)
-│   ├── ui.js               # User interface
-│   └── utils.js            # Helper functions
+│   ├── ui.js               # User interface + rendering
+│   ├── utils.js            # Helper functions
+│   ├── sounds.js           # Sound effects (Web Audio API)
+│   ├── achievements.js     # Badge/achievement system
+│   ├── darkmode.js         # Dark/light theme toggle
+│   ├── glossary.js         # Python glossary (37 terms)
+│   ├── search.js           # Chapter search filter
+│   └── timer.js            # Challenge countdown timer
 ├── data/
 │   ├── chapter_1.json      # 📗 Variables
 │   ├── chapter_2.json      # 📗 Operators
-│   ├── chapter_3.json      # 📘 Conditionals
-│   ├── chapter_4.json      # 📘 Loops
-│   ├── chapter_5.json      # 📘 Functions
-│   ├── chapter_6.json      # 📕 Lists
-│   ├── chapter_7.json      # 📕 Dictionaries
-│   ├── chapter_8.json      # 📕 String Methods
-│   ├── chapter_9.json      # 📕 File Handling
-│   ├── chapter_10.json     # 📕 Error Handling
-│   ├── chapter_11.json     # 🎓 OOP
-│   ├── chapter_12.json     # 🎓 Generators
-│   ├── chapter_13.json     # 🎓 Decorators
-│   ├── chapter_14.json     # 🎓 Modules
-│   ├── chapter_15.json     # 🎓 Regex
-│   ├── chapter_16.json     # 🎓 Frameworks
-│   ├── chapter_17.json     # 🎓 Python in Practice
-│   ├── chapter_18.json     # 📕 List Comprehension
-│   ├── chapter_19.json     # 📕 Lambda Functions
-│   ├── chapter_20.json     # 🎓 Virtual Environments
-│   ├── chapter_21.json     # 🎓 SQLite Database
-│   ├── chapter_22.json     # 🎓 API & HTTP
+│   ├── ...                 # (23 chapters total)
 │   └── chapter_23.json     # 🎓 Testing with pytest
+├── .github/
+│   └── workflows/
+│       └── deploy.yml      # GitHub Pages deployment
+├── .nojekyll               # Bypass Jekyll processing
+├── DESIGN.md               # Design documentation
 └── README.md
 ```
 
@@ -198,7 +195,6 @@ python-game-lab/
 ---
 
 <div dir="ltr">
-
 # 🐍 Python Baz
 
 ### Learn Python Through Games & Challenges
@@ -208,6 +204,7 @@ python-game-lab/
   <img src="https://img.shields.io/badge/Platform-Web-4dabf7?style=for-the-badge" alt="Web">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT">
   <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Active">
+  <a href="https://erpycode.github.io/python-game-lab/"><img src="https://img.shields.io/badge/🎮_Play_Live-00d4aa?style=for-the-badge" alt="Live Demo"></a>
 </p>
 
 ---
@@ -215,6 +212,8 @@ python-game-lab/
 ## 🎮 What is Python Baz?
 
 An online game for learning Python from scratch. Each chapter includes **lessons**, **exercises**, and **challenges**. Solve challenges to level up and unlock the next chapter!
+
+**🔗 [Play Python Baz Online](https://erpycode.github.io/python-game-lab/)**
 
 ## ✨ Features
 
@@ -226,6 +225,12 @@ An online game for learning Python from scratch. Each chapter includes **lessons
 | 🔊 Sound & Effects | Game experience with sounds and animations |
 | 📱 Responsive | Works on mobile and desktop |
 | 🔒 Level System | Chapters are locked — complete previous ones to unlock |
+| 🌙☀️ Dark/Light Mode | Choose your preferred theme |
+| 📖 Python Glossary | 37 key terms with Persian descriptions |
+| 🔍 Chapter Search | Find any chapter instantly |
+| 🏅 Achievements | 7 unlockable badges |
+| ⏱️ Challenge Timer | Complete challenges against the clock |
+| 📊 Progress Tracking | Overall progress bar + detailed stats |
 
 ## 📚 Chapters
 
@@ -252,6 +257,7 @@ Go deeper!
 | 3 | Conditionals |
 | 4 | Loops |
 | 5 | Functions |
+| 10 | Error Handling |
 
 </td>
 <td align="center">
@@ -265,7 +271,6 @@ Pro level!
 | 7 | Dictionaries |
 | 8 | String Methods |
 | 9 | File Handling |
-| 10 | Error Handling |
 | 18 | Lambda Functions |
 | 19 | List Comprehension |
 
@@ -297,13 +302,9 @@ Master it!
 
 ### 🎮 Play Online (No Install Needed)
 
-Just want to play? Use the link below — no installation required:
-
 **🔗 [Play Python Baz Online](https://erpycode.github.io/python-game-lab/)**
 
 ### 💻 Run Locally
-
-If you want to download and run the project on your system:
 
 ```bash
 # Clone the repo
@@ -326,35 +327,26 @@ python-game-lab/
 ├── css/
 │   └── style.css           # Styles & animations
 ├── js/
-│   ├── app.js              # Main logic + sounds
+│   ├── app.js              # Main logic + navigation
 │   ├── challenges.js       # Challenge engine + smart feedback
 │   ├── progress.js         # Progress storage (localStorage)
-│   ├── ui.js               # User interface
-│   └── utils.js            # Helper functions
+│   ├── ui.js               # User interface + rendering
+│   ├── utils.js            # Helper functions
+│   ├── sounds.js           # Sound effects (Web Audio API)
+│   ├── achievements.js     # Badge/achievement system
+│   ├── darkmode.js         # Dark/light theme toggle
+│   ├── glossary.js         # Python glossary (37 terms)
+│   ├── search.js           # Chapter search filter
+│   └── timer.js            # Challenge countdown timer
 ├── data/
 │   ├── chapter_1.json      # 📗 Variables
-│   ├── chapter_2.json      # 📗 Operators
-│   ├── chapter_3.json      # 📘 Conditionals
-│   ├── chapter_4.json      # 📘 Loops
-│   ├── chapter_5.json      # 📘 Functions
-│   ├── chapter_6.json      # 📕 Lists
-│   ├── chapter_7.json      # 📕 Dictionaries
-│   ├── chapter_8.json      # 📕 String Methods
-│   ├── chapter_9.json      # 📕 File Handling
-│   ├── chapter_10.json     # 📕 Error Handling
-│   ├── chapter_11.json     # 🎓 OOP
-│   ├── chapter_12.json     # 🎓 Generators
-│   ├── chapter_13.json     # 🎓 Decorators
-│   ├── chapter_14.json     # 🎓 Modules
-│   ├── chapter_15.json     # 🎓 Regex
-│   ├── chapter_16.json     # 🎓 Frameworks
-│   ├── chapter_17.json     # 🎓 Python in Practice
-│   ├── chapter_18.json     # 📕 List Comprehension
-│   ├── chapter_19.json     # 📕 Lambda Functions
-│   ├── chapter_20.json     # 🎓 Virtual Environments
-│   ├── chapter_21.json     # 🎓 SQLite Database
-│   ├── chapter_22.json     # 🎓 API & HTTP
+│   ├── ...                 # (23 chapters total)
 │   └── chapter_23.json     # 🎓 Testing with pytest
+├── .github/
+│   └── workflows/
+│       └── deploy.yml      # GitHub Pages deployment
+├── .nojekyll               # Bypass Jekyll processing
+├── DESIGN.md               # Design documentation
 └── README.md
 ```
 
