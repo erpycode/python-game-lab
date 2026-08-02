@@ -18,6 +18,21 @@
         🔊
     </button>
 
+    <!-- دکمه تم تاریک/روشن -->
+    <button onclick="toggleDarkMode()" id="theme-toggle" class="theme-btn" title="تغییر تم">
+        🌙
+    </button>
+
+    <!-- دکمه واژه‌نامه -->
+    <button onclick="openGlossary()" class="glossary-btn" title="واژه‌نامه پایتون">
+        📖
+    </button>
+
+    <!-- دکمه پیشرفت -->
+    <button onclick="showProgressModal()" class="progress-btn" title="مشاهده پیشرفت">
+        📊
+    </button>
+
     <!-- صفحه اصلی (منو) -->
     <div id="page-home" class="page active">
         <div class="container">
@@ -78,6 +93,23 @@
                 <button onclick="showPage('page-home')" class="btn-back">🏠 خانه</button>
                 <h2>📚 فصل‌ها</h2>
                 <div class="xp-badge">⭐ <span id="header-xp">۰</span> XP</div>
+            </div>
+
+            <!-- نوار پیشرفت کلی -->
+            <div class="overall-progress">
+                <div class="overall-progress-info">
+                    <span class="overall-progress-label">پیشرفت کلی</span>
+                    <span class="overall-progress-text" id="overall-progress-text">۰/۲۳ فصل</span>
+                </div>
+                <div class="overall-progress-bar">
+                    <div class="overall-progress-fill" id="overall-progress-fill" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- جستجوی فصل‌ها -->
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="🔍 جستجو در فصل‌ها..." oninput="searchChapters(this.value)">
+                <button onclick="clearSearch()" class="search-clear-btn" title="پاک کردن">✕</button>
             </div>
 
             <div id="chapters-grid" class="chapters-grid">
@@ -190,12 +222,66 @@
         </div>
     </div>
 
+    <!-- ============================================
+         مودال‌ها و المان‌های کمکی
+         ============================================ -->
+
+    <!-- نوار پایین -->
+    <nav class="bottom-nav" id="bottom-nav">
+        <button class="nav-item active" id="nav-home" onclick="showPage('page-home')">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">خانه</span>
+        </button>
+        <button class="nav-item" id="nav-chapters" onclick="showPage('page-chapters')">
+            <span class="nav-icon">📚</span>
+            <span class="nav-label">فصل‌ها</span>
+        </button>
+    </nav>
+
+    <!-- Toast دستاورد -->
+    <div id="achievement-toast" class="achievement-toast hidden">
+    </div>
+
+    <!-- مودال پیشرفت -->
+    <div id="progress-modal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeProgressModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📊 پیشرفت من</h3>
+                <button onclick="closeProgressModal()" class="modal-close-btn">✕</button>
+            </div>
+            <div id="progress-modal-body" class="modal-body">
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال واژه‌نامه -->
+    <div id="glossary-modal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeGlossary()"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3>📖 واژه‌نامه پایتون</h3>
+                <button onclick="closeGlossary()" class="modal-close-btn">✕</button>
+            </div>
+            <div class="glossary-search">
+                <input type="text" id="glossary-search-input" placeholder="🔍 جستجو..." oninput="filterGlossary(this.value)">
+            </div>
+            <div id="glossary-body" class="modal-body glossary-body">
+            </div>
+        </div>
+    </div>
+
     <!-- اسکریپت‌ها -->
     <script src="js/utils.js"></script>
     <script src="js/sounds.js"></script>
     <script src="js/progress.js"></script>
     <script src="js/challenges.js"></script>
     <script src="js/ui.js"></script>
+    <script src="js/achievements.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/glossary.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/timer.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

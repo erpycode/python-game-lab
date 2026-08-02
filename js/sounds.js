@@ -49,6 +49,23 @@ class SoundManager {
         });
     }
 
+    // صدای شروع بازی 🎮
+    playStart() {
+        if (!this.enabled) return;
+        this.init();
+        this.playTone(440, 0.1, 'sine');
+        setTimeout(() => this.playTone(554.37, 0.1, 'sine'), 100);
+        setTimeout(() => this.playTone(659.25, 0.15, 'sine'), 200);
+    }
+
+    // صدای باز شدن فصل 📖
+    playOpen() {
+        if (!this.enabled) return;
+        this.init();
+        this.playTone(600, 0.08, 'triangle');
+        setTimeout(() => this.playTone(800, 0.1, 'triangle'), 80);
+    }
+
     // صدای راهنمایی 💡
     playHint() {
         if (!this.enabled) return;

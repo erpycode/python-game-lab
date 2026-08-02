@@ -193,6 +193,7 @@ function renderChallenge(chapterData, index) {
                     <span>چالش ${toPersianNum(index + 1)}</span>
                 </div>
                 <span class="challenge-xp">⭐ ${toPersianNum(challenge.xp)} XP</span>
+                <span class="timer-badge" id="challenge-timer"></span>
             </div>
             <div class="challenge-title">${challenge.title}</div>
             ${renderCode(challenge.code)}
@@ -531,7 +532,9 @@ function checkAnswer(prefix, index) {
         }
         
         showConfetti();
-        
+        // چک دستاورد‌ها
+        if (typeof checkAchievements === 'function') checkAchievements();
+
         const nextBtn = createNextButton(prefix, index);
         if (nextBtn) {
             resultEl.innerHTML += '<br>' + nextBtn;

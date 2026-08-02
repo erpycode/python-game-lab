@@ -177,6 +177,7 @@ async function openChapter(chapterNum) {
         
         // نمایش صفحه
         showPage('page-lesson');
+        soundManager.playOpen();
     }
 }
 
@@ -196,7 +197,13 @@ function showPage(pageId) {
         
         // اسکرول به بالا
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        
+
+        // آپدیت نوار پایین
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        const navMap = { 'page-home': 'nav-home', 'page-chapters': 'nav-chapters' };
+        const navId = navMap[pageId];
+        if (navId) document.getElementById(navId)?.classList.add('active');
+
         // آپدیت محتوا بر اساس صفحه
         switch (pageId) {
             case 'page-home':
@@ -205,6 +212,13 @@ function showPage(pageId) {
             case 'page-chapters':
                 renderChaptersGrid();
                 document.getElementById('header-xp').textContent = formatNumber(getTotalXP());
+                // آپدیت نوار پیشرفت کلی
+                const progress = getProgress();
+                const totalDone = progress.completedChapters.length;
+                const overallText = document.getElementById('overall-progress-text');
+                const overallFill = document.getElementById('overall-progress-fill');
+                if (overallText) overallText.textContent = `${toPersianNum(totalDone)}/${toPersianNum(23)} فصل`;
+                if (overallFill) overallFill.style.width = `${Math.round((totalDone / 23) * 100)}%`;
                 break;
             case 'page-exercises':
                 if (currentChapter) {
