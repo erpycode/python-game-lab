@@ -5,6 +5,9 @@
 PB.views = PB.views || {};
 
 PB.views.result = (() => {
+    // جشن (کانفتی/صدا) فقط اولین بار که نتیجه هر فصل نمایش داده میشه
+    const celebratedChapters = new Set();
+
     function render(params) {
         const { el } = PB.utils;
         const chapterId = params.id;
@@ -71,8 +74,11 @@ PB.views.result = (() => {
         const container = PB.ui.renderApp([resultCard]);
         container.classList.add("page-result");
 
-        PB.ui.showConfetti();
-        PB.sound.complete();
+        if (!celebratedChapters.has(String(chapterId))) {
+            celebratedChapters.add(String(chapterId));
+            PB.ui.showConfetti();
+            PB.sound.complete();
+        }
         PB.views.home.renderBottomNav("map");
     }
 

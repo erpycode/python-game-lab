@@ -87,14 +87,28 @@ PB.views.exercises = (() => {
         }
 
         function check(item, userValue) {
-            // اگه رندرر value داره، ازش بگیر (برای fill_gap و sort و...)
-            if (card._rendered && typeof card._rendered.value === "function") {
-                userValue = card._rendered.value();
+            let isCorrect = false;
+            try {
+                // اگه رندرر value داره، ازش بگیر (برای fill_gap و sort و...)
+                if (card._rendered && typeof card._rendered.value === "function") {
+                    userValue = card._rendered.value();
+                }
+                isCorrect = PB.engine.checkAnswer(item, userValue);
+            } catch (e) {
+                if (e.isFeedback) {
+                    showResult(false, e.message);
+                    PB.sound.wrong();
+                    return;
+                }
+                throw e;
             }
-            const isCorrect = PB.engine.checkAnswer(item, userValue);
             // محاسبه امتیاز
             if (isCorrect) {
                 PB.engine.recordAnswer("exercise", true, 5, 2);
+                // ثبت حل کوئیز برای دستاورد quiz_master
+                if (item.type === "quiz" && PB.achievements && PB.achievements.recordQuizSolved) {
+                    PB.achievements.recordQuizSolved(chapterId, item.id || current);
+                }
                 showResult(true, item.explanation || "");
                 PB.sound.correct();
                 PB.ui.showConfetti();

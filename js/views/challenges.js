@@ -109,6 +109,10 @@ PB.views.challenges = (() => {
                 const xp = item.xp || 10;
                 const coins = item.coins || 5;
                 PB.engine.recordAnswer("challenge", true, xp, coins);
+                // ثبت حل کوئیز برای دستاورد quiz_master
+                if (item.type === "quiz" && PB.achievements && PB.achievements.recordQuizSolved) {
+                    PB.achievements.recordQuizSolved(chapterId, item.id || current);
+                }
                 showFeedback(true, item.explanation || "آفرین!");
                 PB.sound.correct();
                 PB.ui.showConfetti();

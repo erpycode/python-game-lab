@@ -108,14 +108,25 @@
     --text-secondary: #45536e;
     --text-muted: #7d8aa5;
 
-    --glow-yellow: rgba(224, 168, 0, 0.35);
-    --glow-green: rgba(16, 150, 70, 0.35);
-    --glow-purple: rgba(140, 60, 230, 0.35);
-    --glow-red: rgba(220, 40, 80, 0.35);
+    /* نئون‌ها — نسخه‌های تیره‌تر و اشباع‌شده برای پس‌زمینه روشن */
+    --neon-yellow: #B45309;
+    --neon-green: #047857;
+    --neon-purple: #7C3AED;
+    --neon-pink: #BE185D;
+    --neon-blue: #1D4ED8;
+    --neon-red: #BE123C;
+    --neon-orange: #C2410C;
+
+    /* گلوها — شدت کمتر در حالت روشن */
+    --glow-yellow: rgba(180, 83, 9, 0.15);
+    --glow-green: rgba(4, 120, 87, 0.15);
+    --glow-purple: rgba(124, 58, 237, 0.15);
+    --glow-red: rgba(190, 18, 60, 0.15);
 
     --shadow-sm: 0 2px 8px rgba(20, 30, 60, 0.08);
     --shadow: 0 8px 24px rgba(20, 30, 60, 0.12);
     --shadow-lg: 0 16px 48px rgba(20, 30, 60, 0.16);
+    --shadow-neon: 0 0 8px var(--glow-yellow);
 
     --code-bg: #ffffff;
     --code-border: rgba(120, 140, 180, 0.25);

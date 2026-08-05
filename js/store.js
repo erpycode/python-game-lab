@@ -14,6 +14,7 @@ PB.store = (() => {
             version: 2,
             username: "",
             createdAt: null,
+            currentChapter: 1,
             settings: {
                 theme: "dark",
                 sound: true,
@@ -93,47 +94,55 @@ PB.store = (() => {
         }
     }
 
+    // کش درون‌حافظه‌ای — از JSON.parse تکراری localStorage جلوگیری می‌کنه
+    let cache = null;
+
     function load() {
         try {
             const raw = localStorage.getItem(STORAGE_KEY);
+            let state;
             if (!raw) {
                 // اگه داده قدیمی بود، مایگریت کن
                 const migrated = migrateLegacy();
                 if (migrated) {
                     localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
-                    return migrated;
+                    state = migrated;
+                } else {
+                    state = defaultState();
                 }
-                return defaultState();
+            } else {
+                const parsed = JSON.parse(raw);
+                // ورژن ناشناخته/قدیمی → با پیش‌فرض ادغام
+                state = merge(defaultState(), parsed);
             }
-            const parsed = JSON.parse(raw);
-            if (parsed && parsed.version !== 2) {
-                // ورژن ناشناخته → با پیش‌فرض ادغام
-                return merge(defaultState(), parsed);
-            }
-            return merge(defaultState(), parsed);
+            cache = state;
+            return state;
         } catch (_) {
-            return defaultState();
+            cache = defaultState();
+            return cache;
         }
     }
 
     function save(state) {
+        cache = state;
         try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         } catch (_) { /* ignore */ }
     }
 
     function get() {
-        return load();
+        return cache ? cache : load();
     }
 
     function update(fn) {
-        const state = load();
+        const state = cache ? cache : load();
         fn(state);
         save(state);
         return state;
     }
 
     function reset() {
+        cache = null;
         localStorage.removeItem(STORAGE_KEY);
         return defaultState();
     }

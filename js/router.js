@@ -45,7 +45,14 @@ PB.router = (() => {
         const route = resolve(parse(window.location.hash));
         const handler = routes[route.name];
         if (handler) {
-            PB.engine?.resetSession();
+            // سشن رو فقط وقتی ریست کن که فصل عوض شده باشه یا به lesson همون فصل برگشته باشیم؛
+            // حرکت بین تمرین‌ها/چالش‌ها/نتیجه همون فصل نباید سشن رو پاک کنه
+            const session = PB.engine?.getSession?.();
+            const isChapter = typeof route.name === "string" && route.name.startsWith("chapter:");
+            const section = isChapter ? route.name.split(":")[1] : null;
+            const sameChapter = !!(session && isChapter && Number(session.id) === Number(route.params.id));
+            const keepSession = sameChapter && section !== "lesson";
+            if (!keepSession) PB.engine?.resetSession();
             handler(route.params);
         } else {
             PB.views?.renderNotFound?.();

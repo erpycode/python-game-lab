@@ -9,10 +9,15 @@ PB.theme = (() => {
     }
 
     function apply(theme) {
+        const prev = document.documentElement.getAttribute("data-theme");
         document.documentElement.setAttribute("data-theme", theme);
-        try {
-            localStorage.setItem(PB.store.THEME_KEY, theme);
-        } catch (_) { /* ignore */ }
+        // فقط وقتی تم واقعاً تغییر کرده مستقیم بنویس؛
+        // تو toggle ذخیره‌سازی اصلی رو PB.store.update انجام می‌ده
+        if (prev !== theme) {
+            try {
+                localStorage.setItem(PB.store.THEME_KEY, theme);
+            } catch (_) { /* ignore */ }
+        }
     }
 
     function toggle() {

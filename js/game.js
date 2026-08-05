@@ -32,9 +32,17 @@ PB.game = (() => {
     }
 
     // ============ استرک روزانه ============
-    function todayKey() {
-        const d = new Date();
+    // کلید تاریخ تقویمی محلی (YYYY-MM-DD) — مستقل از تایم‌زون
+    function dateKey(d) {
         return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    }
+
+    function todayKey() {
+        return dateKey(new Date());
+    }
+
+    function yesterdayKey() {
+        return dateKey(new Date(Date.now() - 86400000));
     }
 
     function isToday(dateStr) {
@@ -48,15 +56,11 @@ PB.game = (() => {
             if (last === today) return s; // امروز قبلاً ثبت شده
 
             if (last) {
-                const lastDate = new Date(last);
-                const now = new Date();
-                const diffDays = Math.floor((now - lastDate) / (1000 * 60 * 60 * 24));
-                if (diffDays === 1) {
+                // مقایسه تاریخ تقویمی (رشته YYYY-MM-DD) به‌جای تفریق تایم‌استمپ
+                if (last === yesterdayKey()) {
                     s.stats.streakDays = (s.stats.streakDays || 0) + 1;
-                } else if (diffDays > 1) {
-                    s.stats.streakDays = 1;
                 } else {
-                    s.stats.streakDays = (s.stats.streakDays || 0) + 1;
+                    s.stats.streakDays = 1;
                 }
             } else {
                 s.stats.streakDays = 1;

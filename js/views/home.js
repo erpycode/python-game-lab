@@ -70,7 +70,8 @@ PB.views.home = (() => {
     function renderContinueCard(state) {
         const { el } = PB.utils;
         const current = PB.catalog.getChapter(state.currentChapter || 1);
-        const chapterName = current ? `فصل ${PB.utils.toFa(current.id)}: ${current.title}` : "";
+        if (!current) return null; // فصل پیدا نشد → کارت ادامه رو نشون نده
+        const chapterName = `فصل ${PB.utils.toFa(current.id)}: ${current.title}`;
 
         const btn = el("button", { class: "btn btn-ghost", text: "ادامه ➡️" });
         btn.addEventListener("click", () => {
@@ -133,8 +134,9 @@ PB.views.home = (() => {
         const nav = el("nav", { class: "bottom-nav" }, [
             navItem("🏠", "خانه", "home", active === "home", "#/home"),
             navItem("🗺️", "نقشه", "map", active === "map", "#/map"),
-            navItem("🏅", "دستاورد", "achievements", false, null, () => PB.achievements.showModal()),
-            navItem("🛒", "فروشگاه", "shop", false, null, () => PB.shop.showModal()),
+            navItem("🏅", "دستاورد", "achievements", active === "achievements", null, () => PB.achievements.showModal()),
+            navItem("🛒", "فروشگاه", "shop", active === "shop", null, () => PB.shop.showModal()),
+            navItem("👤", "پروفایل", "profile", active === "profile" || active === "settings", "#/profile"),
         ]);
         document.body.appendChild(nav);
     }

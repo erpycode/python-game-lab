@@ -39,8 +39,14 @@ PB.utils = (() => {
             else if (key === "dataset") Object.assign(node.dataset, value);
             else node.setAttribute(key, value);
         }
-        if (typeof children === "string") node.textContent = children;
-        else children.forEach((c) => node.append(c));
+        if (typeof children === "string") {
+            // اگه text/html توی attrs داده شده، children نباید روش رو بازنویسی کنه
+            if (attrs.text === undefined && attrs.html === undefined) {
+                node.textContent = children;
+            }
+        } else {
+            children.forEach((c) => node.append(c));
+        }
         return node;
     }
 
@@ -70,20 +76,39 @@ PB.utils = (() => {
             .toLowerCase();
     }
 
-    // شباهت دو رشته (ساده)
-    function isSimilar(str1, str2, threshold) {
-        if (!str1 || !str2) return false;
-        const len1 = str1.length;
-        const len2 = str2.length;
-        const maxLen = Math.max(len1, len2);
-        if (maxLen === 0) return true;
-        let matches = 0;
-        const shorter = len1 < len2 ? str1 : str2;
-        const longer = len1 < len2 ? str2 : str1;
-        for (let i = 0; i < shorter.length; i++) {
-            if (longer.includes(shorter[i])) matches++;
+    // فاصله لونشتاین — تعداد حداقل عملیات (درج/حذف/جایگزینی) برای تبدیل a به b
+    function levenshtein(a, b) {
+        const m = a.length;
+        const n = b.length;
+        if (m === 0) return n;
+        if (n === 0) return m;
+        let prev = new Array(n + 1);
+        let curr = new Array(n + 1);
+        for (let j = 0; j <= n; j++) prev[j] = j;
+        for (let i = 1; i <= m; i++) {
+            curr[0] = i;
+            for (let j = 1; j <= n; j++) {
+                const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+                curr[j] = Math.min(
+                    prev[j] + 1,         // حذف
+                    curr[j - 1] + 1,     // درج
+                    prev[j - 1] + cost   // جایگزینی
+                );
+            }
+            [prev, curr] = [curr, prev];
         }
-        return matches / maxLen >= threshold;
+        return prev[n];
+    }
+
+    // شباهت دو رشته (بر اساس فاصله لونشتاین)
+    function isSimilar(str1, str2, threshold = 0.85) {
+        if (!str1 || !str2) return false;
+        const s1 = String(str1);
+        const s2 = String(str2);
+        const maxLen = Math.max(s1.length, s2.length);
+        if (maxLen === 0) return true;
+        const distance = levenshtein(s1, s2);
+        return 1 - distance / maxLen >= threshold;
     }
 
     // هایلایت پایتون — token ها روی متن خام پیدا می‌شن، بعد escape

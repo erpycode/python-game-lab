@@ -11,6 +11,9 @@ PB.engine = (() => {
         chapter = PB.catalog.getChapterData(id);
         if (!chapter) return null;
 
+        // فصل فعلی رو توی state ذخیره کن (برای «ادامه از» و هایلایت نقشه)
+        PB.store.update((s) => { s.currentChapter = Number(id); });
+
         session = {
             id: id,
             lessonDone: false,
@@ -294,6 +297,11 @@ PB.engine = (() => {
                 s.stats.totalCoins += session.score - session.xpEarned + (stars * 5);
             }
         });
+
+        // چک دستاوردها بعد از تکمیل فصل
+        if (typeof PB.achievements !== "undefined" && PB.achievements.checkAll) {
+            PB.achievements.checkAll();
+        }
 
         return {
             stars,

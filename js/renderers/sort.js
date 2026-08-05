@@ -29,6 +29,9 @@ PB.renderers.sort = (() => {
                 itemNode.addEventListener("dragstart", (e) => {
                     e.dataTransfer.setData("text/plain", String(i));
                     itemNode.classList.add("dragging");
+                    // اگه قبلاً با کلیک swap-source انتخاب شده بود، موقع کشیدن پاکش کن
+                    container.querySelectorAll(".swap-source").forEach((n) => n.classList.remove("swap-source"));
+                    swapFrom = null;
                 });
                 itemNode.addEventListener("dragend", () => {
                     itemNode.classList.remove("dragging");
