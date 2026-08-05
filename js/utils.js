@@ -1,250 +1,210 @@
 /* ============================================
-   🐍 پایتون‌باز — توابع کمکی
+   🐍 پایتون‌باز آرکید — توابع کمکی
    ============================================ */
 
-// تبدیل عدد به فارسی
-function toPersianNum(num) {
-    const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-    return num.toString().replace(/\d/g, d => persianDigits[d]);
-}
+window.PB = window.PB || {};
 
-// تبدیل عدد با جداکننده
-function formatNumber(num) {
-    return num.toLocaleString('fa-IR');
-}
+PB.utils = (() => {
+    const FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
 
-// شماره فصل فارسی
-function chapterName(num) {
-    const names = {
-        1: 'فصل ۱: متغیرها',
-        2: 'فصل ۲: عملگرها',
-        3: 'فصل ۳: شرط‌ها',
-        4: 'فصل ۴: حلقه‌ها',
-        5: 'فصل ۵: توابع'
-    };
-    return names[num] || `فصل ${toPersianNum(num)}`;
-}
+    function toFa(num) {
+        return String(num).replace(/[0-9]/g, (d) => FA_DIGITS[d]);
+    }
 
-// آیکون سطح
-function levelIcon(level) {
-    const icons = {
-        beginner: '📗',
-        intermediate: '📘',
-        advanced: '📕',
-        expert: '🎓'
-    };
-    return icons[level] || '📗';
-}
+    function toEn(str) {
+        return String(str).replace(/[۰-۹]/g, (d) => FA_DIGITS.indexOf(d));
+    }
 
-// نام سطح فارسی
-function levelName(level) {
-    const names = {
-        beginner: 'مبتدی',
-        intermediate: 'متوسط',
-        advanced: 'پیشرفته',
-        expert: 'حرفه‌ای'
-    };
-    return names[level] || 'مبتدی';
-}
+    function formatNumber(num) {
+        return toFa(Math.round(num).toLocaleString("en-US"));
+    }
 
-// نوع چالش
-function challengeTypeName(type) {
-    const names = {
-        predict: '🔮 پیش‌بینی',
-        bug_hunter: '🐛 شکارچی باگ',
-        fill_gap: '✏️ جای خالی',
-        quiz: '📝 چندگزینه‌ای',
-        sort: '🔀 مرتب کردن'
-    };
-    return names[type] || type;
-}
+    function escapeHtml(str) {
+        return String(str)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    }
 
-// کلاس badge نوع چالش
-function challengeBadgeClass(type) {
-    const classes = {
-        predict: 'badge-predict',
-        bug_hunter: 'badge-bug',
-        fill_gap: 'badge-fill',
-        quiz: 'badge-quiz',
-        sort: 'badge-sort'
-    };
-    return classes[type] || 'badge-predict';
-}
-
-// هایلایت کد پایتون (توکن‌محور — بدون باگ)
-function highlightPython(code) {
-    const keywords = new Set([
-        'if', 'else', 'elif', 'for', 'while', 'def', 'return', 'import',
-        'from', 'class', 'try', 'except', 'finally', 'with', 'as',
-        'True', 'False', 'None', 'and', 'or', 'not', 'in', 'is',
-        'break', 'continue', 'pass', 'lambda', 'yield', 'global',
-        'print', 'range', 'len', 'input', 'type', 'int', 'float',
-        'str', 'bool', 'list', 'dict', 'set', 'tuple'
-    ]);
-    const builtins = new Set([
-        'print', 'range', 'len', 'input', 'type', 'int', 'float',
-        'str', 'bool', 'list', 'dict', 'set', 'tuple', 'abs',
-        'max', 'min', 'sum', 'round', 'sorted', 'reversed',
-        'enumerate', 'zip', 'map', 'filter', 'open', 'isinstance'
-    ]);
-
-    let result = '';
-    let i = 0;
-    const lines = code.split('\n');
-
-    for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
-        const line = lines[lineIdx];
-        i = 0;
-        let lineResult = '';
-
-        while (i < line.length) {
-            // کامنت
-            if (line[i] === '#') {
-                lineResult += `<span class="comment">${escapeHtml(line.slice(i))}</span>`;
-                i = line.length;
-                continue;
-            }
-
-            // رشته (تک یا دوتایی)
-            if (line[i] === '"' || line[i] === "'") {
-                const quote = line[i];
-                let j = i + 1;
-                while (j < line.length && line[j] !== quote) {
-                    if (line[j] === '\\') j++;
-                    j++;
-                }
-                j++; // علامت نقل قول پایانی
-                const str = line.slice(i, j);
-                lineResult += `<span class="string">${escapeHtml(str)}</span>`;
-                i = j;
-                continue;
-            }
-
-            // عدد
-            if (/\d/.test(line[i]) && (i === 0 || /[\s(,=+\-*/<>!:[\]]/.test(line[i-1]))) {
-                let j = i;
-                while (j < line.length && /[\d.]/.test(line[j])) j++;
-                lineResult += `<span class="number">${line.slice(i, j)}</span>`;
-                i = j;
-                continue;
-            }
-
-            // کلمه (identifier / keyword)
-            if (/[a-zA-Z_]/.test(line[i])) {
-                let j = i;
-                while (j < line.length && /\w/.test(line[j])) j++;
-                const word = line.slice(i, j);
-
-                // چک کن بعدش ( باشه — یعنی تابع
-                const isFunc = j < line.length && line[j] === '(';
-
-                if (keywords.has(word)) {
-                    lineResult += `<span class="keyword">${word}</span>`;
-                } else if (isFunc && builtins.has(word)) {
-                    lineResult += `<span class="function">${word}</span>`;
-                } else {
-                    lineResult += word;
-                }
-                i = j;
-                continue;
-            }
-
-            // کاراکتر عادی
-            lineResult += escapeHtml(line[i]);
-            i++;
+    // ساخت المان
+    function el(tag, attrs = {}, children = []) {
+        const node = document.createElement(tag);
+        for (const [key, value] of Object.entries(attrs)) {
+            if (key === "class") node.className = value;
+            else if (key === "html") node.innerHTML = value;
+            else if (key === "text") node.textContent = value;
+            else if (key.startsWith("on")) node.addEventListener(key.slice(2), value);
+            else if (key === "dataset") Object.assign(node.dataset, value);
+            else node.setAttribute(key, value);
         }
-
-        if (lineIdx > 0) result += '\n';
-        result += lineResult;
+        if (typeof children === "string") node.textContent = children;
+        else children.forEach((c) => node.append(c));
+        return node;
     }
 
-    return result;
-}
-
-// رندر کد با هایلایت
-function renderCode(code) {
-    return `<div class="code-block"><pre>${highlightPython(code)}</pre></div>`;
-}
-
-// رندر کد خروجی
-function renderOutput(text) {
-    return `<div class="code-block" style="border-color: rgba(126, 231, 135, 0.2);"><pre><span class="output">${escapeHtml(text)}</span></pre></div>`;
-}
-
-// اسکیپ HTML
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
-// مخلوط کردن آرایه (Fisher-Yates)
-function shuffleArray(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    function shuffleArray(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
     }
-    return shuffled;
-}
 
-// تولید عدد تصادفی در بازه
-function randomBetween(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-// نمایش Confetti
-function showConfetti() {
-    const container = document.getElementById('confetti-container');
-    const colors = ['#00d4aa', '#ff6b6b', '#51cf66', '#ffd43b', '#9775fa', '#4dabf7', '#ff922b'];
-    
-    for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.top = '-10px';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animationDelay = Math.random() * 2 + 's';
-        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-        container.appendChild(confetti);
-        
-        setTimeout(() => confetti.remove(), 4000);
+    function randomBetween(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-}
 
-// نمایش toast
-function showToast(message, type = 'info') {
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.style.background = type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--danger)' : 'var(--accent)';
-    toast.style.color = type === 'success' || type === 'error' ? 'white' : 'var(--bg-primary)';
-    toast.textContent = message;
-    document.body.appendChild(toast);
-    
-    setTimeout(() => toast.remove(), 2800);
-}
+    function clamp(num, min, max) {
+        return Math.min(max, Math.max(min, num));
+    }
 
-// نمایش loading
-function showLoading() {
-    const loader = document.createElement('div');
-    loader.id = 'global-loader';
-    loader.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(15, 15, 35, 0.9);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10001;
-    `;
-    loader.innerHTML = '<div style="font-size: 3rem; animation: bounce 1s ease infinite;">🐍</div>';
-    document.body.appendChild(loader);
-}
+    // نرمال‌سازی جواب
+    function normalizeAnswer(answer) {
+        return String(answer)
+            .trim()
+            .replace(/\s+/g, " ")
+            .replace(/['"]/g, "")
+            .toLowerCase();
+    }
 
-function hideLoading() {
-    const loader = document.getElementById('global-loader');
-    if (loader) loader.remove();
-}
+    // شباهت دو رشته (ساده)
+    function isSimilar(str1, str2, threshold) {
+        if (!str1 || !str2) return false;
+        const len1 = str1.length;
+        const len2 = str2.length;
+        const maxLen = Math.max(len1, len2);
+        if (maxLen === 0) return true;
+        let matches = 0;
+        const shorter = len1 < len2 ? str1 : str2;
+        const longer = len1 < len2 ? str2 : str1;
+        for (let i = 0; i < shorter.length; i++) {
+            if (longer.includes(shorter[i])) matches++;
+        }
+        return matches / maxLen >= threshold;
+    }
+
+    // هایلایت پایتون — token ها روی متن خام پیدا می‌شن، بعد escape
+    // رویکرد: با یک regex ترکیبی همه token ها رو match کن، هر کدوم رو escape کن،
+    // و بینشون رو بدون دست‌زدن به HTML escape کن.
+    function highlightPython(code) {
+        const KEYWORDS = "def|class|if|elif|else|for|while|return|import|from|as|with|try|except|finally|raise|pass|break|continue|lambda|yield|global|nonlocal|and|or|not|in|is|None|True|False";
+        // الگوی ترکیبی: کامنت، رشته (تک/دو کوتیشن)، کلیدواژه، عدد، تابع
+        const pattern = new RegExp(
+            `(#[^\n]*)|('(?:[^'\\\\]|\\\\.)*'|"(?:[^"\\\\]|\\\\.)*")|\\b(${KEYWORDS})\\b|(\\b\\d+\\.?\\d*\\b)|([a-zA-Z_][a-zA-Z0-9_]*)(?=\\()`,
+            "g"
+        );
+
+        return code.replace(pattern, (match, comment, str, kw, num, fn) => {
+            let cls = null;
+            if (comment) cls = "cmt";
+            else if (str) cls = "str";
+            else if (kw) cls = "kw";
+            else if (num) cls = "num";
+            else if (fn) cls = "fn";
+            const escapedMatch = escapeHtml(match);
+            return cls ? `<span class="${cls}">${escapedMatch}</span>` : escapedMatch;
+        });
+    }
+
+    function renderCode(code) {
+        return `<div class="code-block"><pre>${highlightPython(code)}</pre></div>`;
+    }
+
+    function renderOutput(output) {
+        return `<div class="terminal-output">${escapeHtml(output)}</div>`;
+    }
+
+    // توست
+    function toast(message, type = "info", duration = 2600) {
+        const root = document.getElementById("toast-root");
+        if (!root) return;
+        const node = el("div", { class: `toast toast-${type}`, text: message });
+        root.appendChild(node);
+        setTimeout(() => {
+            node.classList.add("toast-exit");
+            setTimeout(() => node.remove(), 300);
+        }, duration);
+    }
+
+    // لودر
+    function showLoading(text = "بارگذاری...") {
+        const existing = document.querySelector(".loader-overlay");
+        if (existing) existing.remove();
+        const overlay = el("div", { class: "loader-overlay" }, [
+            el("div", { class: "loader-text", text }),
+            el("div", { class: "loader-bar" }, [el("div", { class: "loader-bar-fill" })]),
+        ]);
+        document.body.appendChild(overlay);
+    }
+
+    function hideLoading() {
+        document.querySelectorAll(".loader-overlay").forEach((n) => n.remove());
+    }
+
+    // کانفتی روی کانواس
+    function showConfetti() {
+        const canvas = document.getElementById("confetti-canvas");
+        if (!canvas) return;
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const colors = ["#ffd43b", "#22c55e", "#a855f7", "#ff4d8d", "#38bdf8"];
+        const pieces = Array.from({ length: 140 }, () => ({
+            x: Math.random() * canvas.width,
+            y: -20 - Math.random() * canvas.height * 0.4,
+            w: 6 + Math.random() * 8,
+            h: 8 + Math.random() * 10,
+            vx: (Math.random() - 0.5) * 3,
+            vy: 2 + Math.random() * 4,
+            rot: Math.random() * Math.PI * 2,
+            vr: (Math.random() - 0.5) * 0.3,
+            color: colors[Math.floor(Math.random() * colors.length)],
+        }));
+
+        let frames = 0;
+        function tick() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            pieces.forEach((p) => {
+                p.x += p.vx + Math.sin(frames * 0.05 + p.rot) * 0.8;
+                p.y += p.vy;
+                p.rot += p.vr;
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rot);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                ctx.restore();
+            });
+            frames++;
+            if (frames < 240) requestAnimationFrame(tick);
+            else ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        tick();
+    }
+
+    return {
+        toFa,
+        toEn,
+        formatNumber,
+        escapeHtml,
+        el,
+        shuffleArray,
+        randomBetween,
+        clamp,
+        normalizeAnswer,
+        isSimilar,
+        highlightPython,
+        renderCode,
+        renderOutput,
+        toast,
+        showLoading,
+        hideLoading,
+        showConfetti,
+    };
+})();

@@ -16,7 +16,7 @@
 
 ## 🎮 پایتون‌باز چیه؟
 
-یه بازی آنلاین برای یادگیری پایتون از صفر. هر فصل شامل **آموزش**، **تمرین** و **چالش** هست. با حل کردن چالش‌ها، سطحت بالا میره و فصل‌های بعدی باز میشه!
+یه بازی آنلاین برای یادگیری پایتون از صفر با حالت **آرکید**! هر فصل شامل **آموزش**، **تمرین** و **چالش** هست. با حل کردن چالش‌ها ایکس‌پی بگیر، سطحت بالا بره، و فصل‌های بعدی باز بشه!
 
 **🔗 [بازی آنلاین پایتون‌باز](https://erpycode.github.io/python-game-lab/)**
 
@@ -31,11 +31,22 @@
 | 📱 ریسپانسیو | روی موبایل و دسکتاپ کار میکنه |
 | 🔒 سطح‌بندی | فصل‌ها قفل هستن و باید فصل قبلی رو تموم کنی |
 | 🌙☀️ حالت تاریک/روشن | تم دلخواهت رو انتخاب کن |
+| 🏅 XP و لِوِل | سیستم ایکس‌پی بازی‌وار با سطح‌بندی پیشرفت |
+| 🔥 روزانه‌ی پیاپی | هر روز وارد شو تا استریک روزانه‌ات حفظ بشه |
+| ⚡ انرژی | سیستم انرژی برای مدیریت بازی روزانه |
+| 📋 ماموریت‌های روزانه | کوئست‌های روزانه با پاداش ایکس‌پی |
+| 🛒 فروشگاه بازی | آیتم‌ها و اسکین‌های قابل خرید با ایکس‌پی |
+| 👤 پروفایل | صفحه پروفایل با آمار و دستاورد‌ها |
+| ⚙️ تنظیمات | صفحه تنظیمات با شخصی‌سازی |
 | 📖 واژه‌نامه پایتون | ۳۷ کلمه کلیدی با توضیح فارسی |
 | 🔍 جستجوی فصل | سریع فصل مورد نظرت رو پیدا کن |
-| 🏅 دستاورد‌ها | ۷ دستاورد قابل باز کردن |
 | ⏱️ تایمر چالش | چالش‌ها رو با تایمر حل کن |
 | 📊 پیشرفت کلی | نوار پیشرفت + آمار کامل |
+
+## 📸 اسکرین‌شات‌ها
+
+<!-- اسکرین‌شات‌های جدید اینجا اضافه کنید -->
+*به‌زودی اضافه می‌شه...*
 
 ## 📚 فصل‌ها
 
@@ -102,94 +113,6 @@
 </td>
 </tr>
 </table>
-
-## 🚀 اجرا کردن
-
-### 🎮 بازی آنلاین (بدون نصب)
-
-**🔗 [بازی آنلاین پایتون‌باز](https://erpycode.github.io/python-game-lab/)**
-
-فقط کافیه لینک رو باز کنی و شروع کنی!
-
-### 💻 اجرا روی سیستم خودت
-
-<div dir="ltr">
-
-```bash
-# Clone the repo
-git clone https://github.com/erpycode/python-game-lab.git
-
-# Go to directory
-cd python-game-lab
-
-# Start local server
-python3 -m http.server 8080
-
-# Open browser → http://localhost:8080
-```
-
-</div>
-
-## 📁 ساختار پروژه
-
-<div dir="ltr">
-
-```
-python-game-lab/
-├── index.html              # Main page
-├── css/
-│   └── style.css           # Styles & animations
-├── js/
-│   ├── app.js              # Main logic + navigation
-│   ├── challenges.js       # Challenge engine + smart feedback
-│   ├── progress.js         # Progress storage (localStorage)
-│   ├── ui.js               # User interface + rendering
-│   ├── utils.js            # Helper functions
-│   ├── sounds.js           # Sound effects (Web Audio API)
-│   ├── achievements.js     # Badge/achievement system
-│   ├── darkmode.js         # Dark/light theme toggle
-│   ├── glossary.js         # Python glossary (37 terms)
-│   ├── search.js           # Chapter search filter
-│   └── timer.js            # Challenge countdown timer
-├── data/
-│   ├── chapter_1.json      # 📗 Variables
-│   ├── chapter_2.json      # 📗 Operators
-│   ├── ...                 # (23 chapters total)
-│   └── chapter_23.json     # 🎓 Testing with pytest
-├── .github/
-│   └── workflows/
-│       └── deploy.yml      # GitHub Pages deployment
-├── .nojekyll               # Bypass Jekyll processing
-├── DESIGN.md               # Design documentation
-└── README.md
-```
-
-</div>
-
-## 🤝 مشارکت
-
-این پروژه اوپن‌سورس هست! اگه میخوای کمک کنی:
-
-1. 🍴 ریپو رو Fork کن
-2. 🌿 Branch جدید بساز
-3. ✏️ تغییراتت رو commit کن
-4. 📤 Push کن
-5. 🔀 Pull Request بزن
-
-## 📝 اضافه کردن فصل جدید
-
-فقط یه فایل JSON جدید توی پوشه `data/` بساز و اسمش رو توی `js/ui.js` اضافه کن. برای جزئیات بیشتر فایل `DESIGN.md` رو ببین.
-
-## 📄 لایسنس
-
-[MIT License](LICENSE)
-
----
-
-<p align="center">
-  ساخته شده با ❤️ توسط <a href="https://github.com/erpycode">ErPyCode</a>
-</p>
-
 </div>
 
 ---
@@ -211,7 +134,7 @@ python-game-lab/
 
 ## 🎮 What is Python Baz?
 
-An online game for learning Python from scratch. Each chapter includes **lessons**, **exercises**, and **challenges**. Solve challenges to level up and unlock the next chapter!
+An online game for learning Python from scratch with an **arcade** experience! Each chapter includes **lessons**, **exercises**, and **challenges**. Earn XP, level up, and unlock new chapters!
 
 **🔗 [Play Python Baz Online](https://erpycode.github.io/python-game-lab/)**
 
@@ -226,11 +149,22 @@ An online game for learning Python from scratch. Each chapter includes **lessons
 | 📱 Responsive | Works on mobile and desktop |
 | 🔒 Level System | Chapters are locked — complete previous ones to unlock |
 | 🌙☀️ Dark/Light Mode | Choose your preferred theme |
+| 🏅 XP & Levels | Arcade-style XP system with progression |
+| 🔥 Daily Streak | Log in daily to maintain your streak |
+| ⚡ Energy | Energy system for daily gameplay management |
+| 📋 Daily Quests | Daily quests with XP rewards |
+| 🛒 In-Game Shop | Buy items and skins with XP |
+| 👤 Profile | Profile page with stats and achievements |
+| ⚙️ Settings | Settings page with customization |
 | 📖 Python Glossary | 37 key terms with Persian descriptions |
 | 🔍 Chapter Search | Find any chapter instantly |
-| 🏅 Achievements | 7 unlockable badges |
 | ⏱️ Challenge Timer | Complete challenges against the clock |
 | 📊 Progress Tracking | Overall progress bar + detailed stats |
+
+## 📸 Screenshots
+
+<!-- Add new arcade screenshots here -->
+*Coming soon...*
 
 ## 📚 Chapters
 
@@ -323,21 +257,37 @@ python3 -m http.server 8080
 
 ```
 python-game-lab/
-├── index.html              # Main page
+├── index.html              # Main page (SPA entry)
 ├── css/
-│   └── style.css           # Styles & animations
+│   ├── tokens.css          # Design tokens (colors, spacing, etc.)
+│   ├── base.css            # Base/reset styles
+│   ├── arcade.css          # Arcade theme & gamification styles
+│   ├── components.css      # Reusable UI components
+│   └── pages.css           # Page-specific styles
 ├── js/
-│   ├── app.js              # Main logic + navigation
-│   ├── challenges.js       # Challenge engine + smart feedback
-│   ├── progress.js         # Progress storage (localStorage)
-│   ├── ui.js               # User interface + rendering
+│   ├── app.js              # SPA router + main entry
+│   ├── router.js           # Hash-based router
+│   ├── state.js            # Global state management (versioned)
+│   ├── migration.js        # Legacy data migration
+│   ├── views/
+│   │   ├── home.js         # Home/dashboard view
+│   │   ├── map.js          # Chapter map view
+│   │   ├── lesson.js       # Lesson view
+│   │   ├── exercises.js    # Exercises view
+│   │   ├── challenges.js   # Challenge view
+│   │   ├── result.js       # Result/score view
+│   │   ├── profile.js      # Profile page
+│   │   └── settings.js     # Settings page
+│   ├── systems/
+│   │   ├── xp.js           # XP & level system
+│   │   ├── streak.js       # Daily streak tracking
+│   │   ├── energy.js       # Energy system
+│   │   ├── quests.js       # Daily quests
+│   │   ├── shop.js         # In-game shop
+│   │   └── sound.js        # Sound effects (Web Audio API)
 │   ├── utils.js            # Helper functions
-│   ├── sounds.js           # Sound effects (Web Audio API)
-│   ├── achievements.js     # Badge/achievement system
-│   ├── darkmode.js         # Dark/light theme toggle
 │   ├── glossary.js         # Python glossary (37 terms)
-│   ├── search.js           # Chapter search filter
-│   └── timer.js            # Challenge countdown timer
+│   └── search.js           # Chapter search filter
 ├── data/
 │   ├── chapter_1.json      # 📗 Variables
 │   ├── ...                 # (23 chapters total)
@@ -349,6 +299,24 @@ python-game-lab/
 ├── DESIGN.md               # Design documentation
 └── README.md
 ```
+
+## 🏗️ Architecture
+
+### SPA Router
+Hash-based routing (`#/home`, `#/map`, `#/lesson/1`, etc.) with view-based rendering. No page reloads.
+
+### State Management
+Versioned state in localStorage with automatic migration when upgrading. Stores XP, streaks, energy, quests, shop inventory, and chapter progress.
+
+### Views Pattern
+Each page is a self-contained view module (`views/*.js`) that renders into the main content area.
+
+### Gamification Systems
+- **XP/Level**: Earn XP from challenges; level up with progression
+- **Daily Streak**: Login consecutive days for bonus rewards
+- **Energy**: Regenerate over time; spend on activities
+- **Daily Quests**: Fresh challenges every day
+- **Shop**: Spend XP on cosmetics and boosts
 
 ## 🤝 Contributing
 
@@ -362,7 +330,7 @@ Contributions are welcome!
 
 ## 📝 Adding a New Chapter
 
-Create a new JSON file in the `data/` folder and add its name to `js/ui.js`. See `DESIGN.md` for details.
+Create a new JSON file in the `data/` folder and add its name to `js/app.js`. See `DESIGN.md` for details.
 
 ## 📄 License
 

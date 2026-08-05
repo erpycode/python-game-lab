@@ -1,77 +1,101 @@
 /* ============================================
-   🐍 پایتون‌باز — سیستم دستاورد‌ها
+   🐍 پایتون‌باز آرکید — دستاوردها
    ============================================ */
 
-const ACHIEVEMENTS_KEY = 'pythonGameAchievements';
+PB.achievements = (() => {
+    const DEFS = [
+        { id: "first_chapter", title: "اولین قدم", desc: "اولین فصلت رو تموم کن", emoji: "🐣", check: (s) => s.completedCount >= 1 },
+        { id: "three_chapters", title: "سه‌گام", desc: "۳ فصل تموم کن", emoji: "👟", check: (s) => s.completedCount >= 3 },
+        { id: "half_way", title: "نیمه راه", desc: "۱۲ فصل تموم کن", emoji: "🏃", check: (s) => s.completedCount >= 12 },
+        { id: "all_chapters", title: "استاد پایتون", desc: "هر ۲۳ فصل رو تموم کن", emoji: "👑", check: (s) => s.completedCount >= 23 },
+        { id: "hundred_xp", title: "صد یار", desc: "۱۰۰ XP جمع کن", emoji: "💯", check: (s) => s.totalXp >= 100 },
+        { id: "thousand_xp", title: "هزاره", desc: "۱۰۰۰ XP جمع کن", emoji: "🚀", check: (s) => s.totalXp >= 1000 },
+        { id: "perfect_score", title: "بی‌نقص", desc: "یک فصل با دقت ۹۰٪+ تموم کن", emoji: "🎯", check: (s) => s.perfectScore },
+        { id: "streak_7", title: "هفته آتشین", desc: "۷ روز پشت‌سرهم بازی کن", emoji: "🔥", check: (s) => s.bestStreak >= 7 },
+        { id: "shopaholic", title: "خریدار حرفه‌ای", desc: "یک آیتم از فروشگاه بخر", emoji: "🛍️", check: (s) => s.inventoryCount >= 1 },
+        { id: "quiz_master", title: "استاد کوئیز", desc: "۱۰ کوئیز درست جواب بده", emoji: "🧠", check: (s) => s.quizSolved >= 10 },
+    ];
 
-// لیست دستاورد‌ها
-const ACHIEVEMENTS = [
-    { id: 'first_chapter', title: '🎯 شروع اولین فصل', desc: 'اولین فصل رو شروع کردی!', condition: (p) => p.completedChapters.length >= 1 },
-    { id: 'three_chapters', title: '🔥 سه فصل تموم شد', desc: '۳ فصل تموم کردی!', condition: (p) => p.completedChapters.length >= 3 },
-    { id: 'half_way', title: '🏆 نصف راه!', desc: '۱۲ فصل تموم کردی!', condition: (p) => p.completedChapters.length >= 12 },
-    { id: 'all_chapters', title: '👑 استاد پایتون!', desc: 'همه ۲۳ فصل رو تموم کردی!', condition: (p) => p.completedChapters.length >= 23 },
-    { id: 'hundred_xp', title: '⭐ ۱۰۰ XP', desc: '۱۰۰ XP کسب کردی!', condition: (p) => p.totalXP >= 100 },
-    { id: 'thousand_xp', title: '💎 ۱۰۰۰ XP', desc: '۱۰۰۰ XP کسب کردی!', condition: (p) => p.totalXP >= 1000 },
-    { id: 'perfect_score', title: '💯 امتیاز کامل', desc: 'یه فصل رو با ۱۰۰٪ تموم کردی!', condition: (p) => Object.values(p.chapters).some(ch => ch.score >= 90) },
-];
+    function unlockedCount() {
+        return PB.store.get().achievements.length;
+    }
 
-// لود کردن دستاورد‌ها
-function loadAchievements() {
-    try {
-        return JSON.parse(localStorage.getItem(ACHIEVEMENTS_KEY)) || [];
-    } catch { return []; }
-}
+    function isUnlocked(id) {
+        return PB.store.get().achievements.some((a) => a.id === id);
+    }
 
-// ذخیره دستاورد‌ها
-function saveAchievements(list) {
-    localStorage.setItem(ACHIEVEMENTS_KEY, JSON.stringify(list));
-}
+    // چک دستاوردها — چندتا در یک بار
+    function checkAll() {
+        const state = PB.store.get();
+        const stats = PB.store.computeStats(state);
 
-// بررسی دستاورد‌ها
-function checkAchievements() {
-    const progress = getProgress();
-    const unlocked = loadAchievements();
-    let newUnlock = null;
-    
-    for (const ach of ACHIEVEMENTS) {
-        if (!unlocked.includes(ach.id) && ach.condition(progress)) {
-            unlocked.push(ach.id);
-            newUnlock = ach;
-            break;
+        // آمار برای چک‌ها
+        const ctx = {
+            completedCount: stats.completedCount,
+            totalXp: stats.totalXp,
+            perfectScore: Object.values(state.chapters).some((ch) => (ch.bestAccuracy || 0) >= 90),
+            bestStreak: state.stats.bestStreak || 0,
+            inventoryCount: state.inventory.length,
+            quizSolved: Object.values(state.chapters).reduce((acc, ch) =>
+                acc + Object.values(ch.answers || {}).filter((a) => a.solved && a.quiz).length, 0),
+        };
+
+        const newly = [];
+        DEFS.forEach((def) => {
+            if (!isUnlocked(def.id) && def.check(ctx)) {
+                newly.push(def);
+            }
+        });
+
+        if (newly.length) {
+            PB.store.update((s) => {
+                newly.forEach((def) => {
+                    s.achievements.push({ id: def.id, ts: new Date().toISOString() });
+                });
+            });
+            // نمایش توست
+            newly.slice(0, 1).forEach((def) => {
+                PB.ui.toast(`${def.emoji} دستاورد جدید: ${def.title}!`, "success", 4200);
+                PB.sound.levelup();
+            });
+            PB.ui.showConfetti();
         }
+        return newly;
     }
-    
-    if (newUnlock) {
-        saveAchievements(unlocked);
-        showAchievementToast(newUnlock);
+
+    // ثبت حل کوئیز (برای دستاورد quiz_master)
+    function recordQuizSolved(chapterId, itemId) {
+        PB.store.update((s) => {
+            const ch = s.chapters[String(chapterId)];
+            if (ch && ch.answers) {
+                ch.answers[itemId] = { ...(ch.answers[itemId] || {}), solved: true, quiz: true };
+            }
+        });
     }
-}
 
-// نمایش toast دستاورد
-function showAchievementToast(achievement) {
-    const toast = document.getElementById('achievement-toast');
-    if (!toast) return;
-    
-    toast.innerHTML = `${achievement.title}<br><span style="font-weight: 400; font-size: 0.8rem;">${achievement.desc}</span>`;
-    toast.classList.remove('hidden');
-    toast.style.animation = 'none';
-    toast.offsetHeight; // ریست انیمیشن
-    toast.style.animation = '';
-    
-    // پخش صدا
-    if (typeof soundManager !== 'undefined' && soundManager.playComplete) {
-        soundManager.playComplete();
+    function showModal() {
+        const { el } = PB.utils;
+        const state = PB.store.get();
+
+        const list = el("div", { class: "achievements-list" });
+        DEFS.forEach((def) => {
+            const unlocked = isUnlocked(def.id);
+            const item = el("div", { class: `achievement-item ${unlocked ? "unlocked" : "locked"}` }, [
+                el("span", { class: "achievement-emoji", text: unlocked ? def.emoji : "🔒" }),
+                el("div", { class: "achievement-info" }, [
+                    el("div", { class: "achievement-title", text: def.title }),
+                    el("div", { class: "achievement-desc text-muted", text: def.desc }),
+                ]),
+                unlocked ? el("span", { class: "badge badge-green", text: "باز شد" }) : null,
+            ].filter(Boolean));
+            list.appendChild(item);
+        });
+
+        PB.ui.openModal({
+            title: `🏅 دستاوردها (${PB.utils.toFa(unlockedCount())}/${PB.utils.toFa(DEFS.length)})`,
+            content: list,
+        });
     }
-    
-    setTimeout(() => toast.classList.add('hidden'), 4000);
-}
 
-// گرفتن لیست دستاورد‌های باز شده
-function getUnlockedAchievements() {
-    return loadAchievements();
-}
-
-// گرفتن تعداد دستاورد‌های باز شده
-function getAchievementCount() {
-    return loadAchievements().length;
-}
+    return { DEFS, unlockedCount, isUnlocked, checkAll, recordQuizSolved, showModal };
+})();

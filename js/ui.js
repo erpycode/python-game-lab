@@ -1,269 +1,209 @@
 /* ============================================
-   🐍 پایتون‌باز — رابط کاربری
+   🐍 پایتون‌باز آرکید — رندرهای مشترک UI
    ============================================ */
 
-// ============================================
-// رندر صفحه فصل‌ها (دسته‌بندی شده + collapsible)
-// ============================================
-function renderChaptersGrid() {
-    const container = document.getElementById('chapters-grid');
-    const progress = getProgress();
-    
-    // اطلاعات فصل‌ها
-    const chaptersInfo = [
-        { num: 1, title: 'فصل ۱: متغیرها', desc: 'متغیرها، انواع داده و print', level: 'beginner' },
-        { num: 2, title: 'فصل ۲: عملگرها', desc: 'عملگرهای ریاضی، مقایسه و منطقی', level: 'beginner' },
-        { num: 3, title: 'فصل ۳: شرط‌ها', desc: 'if, else, elif و شرط‌ها', level: 'intermediate' },
-        { num: 4, title: 'فصل ۴: حلقه‌ها', desc: 'for, while, range و break', level: 'intermediate' },
-        { num: 5, title: 'فصل ۵: توابع', desc: 'def, return, پارامترها', level: 'intermediate' },
-        { num: 6, title: 'فصل ۶: لیست‌ها', desc: 'ایجاد، دسترسی، متدهای لیست', level: 'advanced' },
-        { num: 7, title: 'فصل ۷: دیکشنری', desc: 'کلید-مقدار، متدهای دیکشنری', level: 'advanced' },
-        { num: 8, title: 'فصل ۸: متدهای رشته', desc: 'split, join, replace و...', level: 'advanced' },
-        { num: 9, title: 'فصل ۹: مدیریت فایل', desc: 'خواندن و نوشتن فایل', level: 'advanced' },
-        { num: 10, title: 'فصل ۱۰: مدیریت خطا', desc: 'try, except, raise', level: 'advanced' },
-        { num: 11, title: 'فصل ۱۱: شی‌گرایی', desc: 'کلاس، object، inheritance', level: 'expert' },
-        { num: 12, title: 'فصل ۱۲: جنریتورها', desc: 'yield، iterator، generator', level: 'expert' },
-        { num: 13, title: 'فصل ۱۳: دکوراتورها', desc: '@decorator، closures', level: 'expert' },
-        { num: 14, title: 'فصل ۱۴: ماژول‌ها', desc: 'import، pip، package', level: 'expert' },
-        { num: 15, title: 'فصل ۱۵: عبارات باقاعده', desc: 'regex، pattern matching', level: 'expert' },
-        { num: 16, title: 'فصل ۱۶: فریم‌ورک‌ها', desc: 'Django, Flask, FastAPI', level: 'expert' },
-        { num: 17, title: 'فصل ۱۷: پایتون در عمل', desc: 'پروژه‌های واقعی', level: 'expert' },
-        { num: 18, title: 'فصل ۱۸: توابع لامبدا', desc: 'تابع‌های کوچک و سریع', level: 'advanced' },
-        { num: 19, title: 'فصل ۱۹: لیست کامپریهشن', desc: 'ساخت لیست با یه خط کد!', level: 'advanced' },
-        { num: 20, title: 'فصل ۲۰: محیط مجازی', desc: 'jupyter، virtualenv، pip', level: 'expert' },
-        { num: 21, title: 'فصل ۲۱: پایگاه داده', desc: 'SQLite، ذخیره اطلاعات', level: 'expert' },
-        { num: 22, title: 'فصل ۲۲: API و اینترنت', desc: 'requests، JSON، وب‌سرفس', level: 'expert' },
-        { num: 23, title: 'فصل ۲۳: تست‌نویسی', desc: 'pytest، تست واحد', level: 'expert' }
-    ];
-    
-    // دسته‌بندی بر اساس سطح
-    const levels = [
-        { key: 'beginner', title: '📗 مبتدی', subtitle: 'شروع یادگیری پایتون', color: 'var(--accent)' },
-        { key: 'intermediate', title: '📘 متوسط', subtitle: 'عمیق‌تر شو!', color: 'var(--blue)' },
-        { key: 'advanced', title: '📕 پیشرفته', subtitle: 'حرفه‌ای شو!', color: 'var(--purple)' },
-        { key: 'expert', title: '🎓 حرفه‌ای', subtitle: 'استاد پایتون شو!', color: '#f59e0b' }
-    ];
-    
-    // پیدا کردن سطح فصل فعلی کاربر
-    const currentLevel = chaptersInfo.find(ch => ch.num === progress.currentChapter)?.level || 'beginner';
-    
-    let html = '';
-    
-    levels.forEach(level => {
-        const levelChapters = chaptersInfo.filter(ch => ch.level === level.key);
-        if (levelChapters.length === 0) return;
-        
-        // محاسبه پیشرفت این سطح
-        const completedInLevel = levelChapters.filter(ch => 
-            progress.completedChapters.includes(ch.num)
-        ).length;
-        const totalInLevel = levelChapters.length;
-        const progressPercent = Math.round((completedInLevel / totalInLevel) * 100);
-        
-        // اگه سطح فعلی کاربر باشه، باز باشه
-        const isOpen = level.key === currentLevel;
-        
-        html += `
-            <div class="level-section ${isOpen ? 'open' : 'closed'}" id="level-${level.key}">
-                <div class="level-header" style="border-right-color: ${level.color};" onclick="toggleLevel('${level.key}')">
-                    <div class="level-info">
-                        <h3 class="level-title">
-                            <span class="toggle-icon">${isOpen ? '▾' : '◂'}</span>
-                            ${level.title}
-                        </h3>
-                        <p class="level-subtitle">${level.subtitle}</p>
-                    </div>
-                    <div class="level-progress">
-                        <div class="level-progress-bar">
-                            <div class="level-progress-fill" style="width: ${progressPercent}%; background: ${level.color};"></div>
-                        </div>
-                        <span class="level-progress-text">${toPersianNum(completedInLevel)}/${toPersianNum(totalInLevel)}</span>
-                    </div>
-                </div>
-                <div class="level-chapters" style="display: ${isOpen ? 'flex' : 'none'};">
-        `;
-        
-        levelChapters.forEach(ch => {
-            const isLocked = isChapterLocked(ch.num);
-            const isCompleted = progress.completedChapters.includes(ch.num);
-            const chapterProgress = getChapterProgress(ch.num);
-            
-            let statusIcon = '🔒';
-            let cardClass = 'chapter-card';
-            
-            if (isCompleted) {
-                statusIcon = '✅';
-                cardClass += ' completed';
-            } else if (isLocked) {
-                cardClass += ' locked';
-            } else {
-                statusIcon = '▶️';
-            }
-            
-            html += `
-                <div class="${cardClass}" onclick="openChapter(${ch.num})">
-                    <div class="chapter-number ${ch.level}">
-                        ${levelIcon(ch.level)} ${toPersianNum(ch.num)}
-                    </div>
-                    <div class="chapter-info">
-                        <h3>${ch.title}</h3>
-                        <p>${ch.desc}</p>
-                        ${chapterProgress ? `<p style="color: var(--accent); font-size: 0.8rem;">⭐ ${toPersianNum(chapterProgress.xp)} XP</p>` : ''}
-                    </div>
-                    <div class="chapter-status">
-                        ${isLocked ? '<span class="chapter-locked-icon">🔒</span>' : statusIcon}
-                    </div>
-                </div>
-            `;
-        });
-        
-        html += `
-                </div>
-            </div>
-        `;
-    });
-    
-    container.innerHTML = html;
-}
+PB.ui = (() => {
+    const { el } = PB.utils;
 
-// باز/بسته کردن دسته
-function toggleLevel(levelKey) {
-    const section = document.getElementById(`level-${levelKey}`);
-    if (!section) return;
-    
-    const chapters = section.querySelector('.level-chapters');
-    const icon = section.querySelector('.toggle-icon');
-    
-    if (section.classList.contains('open')) {
-        // بستن
-        section.classList.remove('open');
-        section.classList.add('closed');
-        chapters.style.display = 'none';
-        icon.textContent = '◂';
-    } else {
-        // باز کردن
-        section.classList.remove('closed');
-        section.classList.add('open');
-        chapters.style.display = 'flex';
-        icon.textContent = '▾';
+    // ============ کدبلاک ============
+    function codeBlock(code) {
+        return el("div", { class: "code-block" }, [
+            el("pre", { html: PB.utils.highlightPython(code) }),
+        ]);
     }
-}
 
-// ============================================
-// باز کردن فصل
-// ============================================
-async function openChapter(chapterNum) {
-    if (isChapterLocked(chapterNum)) {
-        showToast('اول فصل قبلی رو تموم کن! 🔒', 'error');
-        return;
-    }
-    
-    showLoading();
-    const success = await startChapter(chapterNum);
-    hideLoading();
-    
-    if (success) {
-        // آپدیت عنوان
-        document.getElementById('lesson-title').textContent = `📖 ${currentChapter.title}`;
-        document.getElementById('lesson-xp').textContent = formatNumber(getTotalXP());
-        
-        // رندر آموزش
-        renderLesson(currentChapter);
-        
-        // ریست دکمه‌ها
-        document.getElementById('btn-to-exercises').disabled = false;
-        document.getElementById('btn-to-challenges').disabled = true;
-        document.getElementById('btn-complete-chapter').disabled = true;
-        
-        // نمایش صفحه
-        showPage('page-lesson');
-        soundManager.playOpen();
-    }
-}
+    // ============ ترمینال فیک ============
+    function fakeTerminal(title = "terminal", lines = [], opts = {}) {
+        const { runButton = false, onRun = null } = opts;
+        const body = el("div", { class: "term-body" }, lines.map((l) =>
+            el("div", { class: "term-line", html: l })
+        ));
 
-// ============================================
-// صفحه‌بندی
-// ============================================
-function showPage(pageId) {
-    // مخفی کردن همه صفحات
-    document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-    });
-    
-    // نمایش صفحه مورد نظر
-    const targetPage = document.getElementById(pageId);
-    if (targetPage) {
-        targetPage.classList.add('active');
-        
-        // اسکرول به بالا
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const term = el("div", { class: "fake-terminal" }, [
+            el("div", { class: "term-head" }, [
+                el("span", { class: "term-dot dot-red" }),
+                el("span", { class: "term-dot dot-yellow" }),
+                el("span", { class: "term-dot dot-green" }),
+                el("span", { class: "term-title", text: title }),
+            ]),
+            body,
+        ]);
 
-        // آپدیت نوار پایین
-        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-        const navMap = { 'page-home': 'nav-home', 'page-chapters': 'nav-chapters' };
-        const navId = navMap[pageId];
-        if (navId) document.getElementById(navId)?.classList.add('active');
-
-        // آپدیت محتوا بر اساس صفحه
-        switch (pageId) {
-            case 'page-home':
-                updateHomePage();
-                break;
-            case 'page-chapters':
-                renderChaptersGrid();
-                document.getElementById('header-xp').textContent = formatNumber(getTotalXP());
-                // آپدیت نوار پیشرفت کلی
-                const progress = getProgress();
-                const totalDone = progress.completedChapters.length;
-                const overallText = document.getElementById('overall-progress-text');
-                const overallFill = document.getElementById('overall-progress-fill');
-                if (overallText) overallText.textContent = `${toPersianNum(totalDone)}/${toPersianNum(23)} فصل`;
-                if (overallFill) overallFill.style.width = `${Math.round((totalDone / 23) * 100)}%`;
-                break;
-            case 'page-exercises':
-                if (currentChapter) {
-                    renderExercise(currentChapter, currentExerciseIndex || 0);
-                }
-                break;
-            case 'page-challenges':
-                if (currentChapter) {
-                    currentChallengeIndex = 0;
-                    renderChallenge(currentChapter, 0);
-                }
-                break;
+        if (runButton && onRun) {
+            const btn = el("button", { class: "btn btn-green btn-sm term-run" }, ["▶ RUN"]);
+            btn.addEventListener("click", onRun);
+            term.appendChild(btn);
         }
+        return term;
     }
-}
 
-// ============================================
-// آپدیت صفحه اصلی
-// ============================================
-function updateHomePage() {
-    const welcomeBox = document.getElementById('welcome-box');
-    const startBox = document.getElementById('start-box');
-    
-    if (hasProgress()) {
-        const progress = getProgress();
-        welcomeBox.classList.remove('hidden');
-        startBox.classList.add('hidden');
-        
-        document.getElementById('display-username').textContent = progress.username;
-        document.getElementById('display-chapter').textContent = toPersianNum(progress.currentChapter);
-        document.getElementById('display-xp').textContent = formatNumber(progress.totalXP);
-    } else {
-        welcomeBox.classList.add('hidden');
-        startBox.classList.remove('hidden');
+    // ============ نوار پیشرفت ============
+    function progressBar(percent, opts = {}) {
+        const { color = "", label = "" } = opts;
+        const fill = el("div", {
+            class: `progress-fill ${color === "green" ? "progress-fill-green" : color === "purple" ? "progress-fill-purple" : ""}`,
+            style: `width: ${PB.utils.clamp(percent, 0, 100)}%`,
+        });
+        const bar = el("div", { class: "progress-track" }, [fill]);
+        if (label) {
+            return el("div", { class: "progress-with-label" }, [
+                el("div", { class: "progress-label", text: label }),
+                bar,
+            ]);
+        }
+        return bar;
     }
-}
 
-// ============================================
-// نمایش نتیجه فصل
-// ============================================
-function showChapterResult(score, xp, accuracy) {
-    document.getElementById('result-score').textContent = formatNumber(score);
-    document.getElementById('result-xp').textContent = `+${formatNumber(xp)}`;
-    document.getElementById('result-accuracy').textContent = `${formatNumber(accuracy)}٪`;
-    
-    showPage('page-result');
-    showConfetti();
-}
+    // ============ ستاره‌ها ============
+    function stars(count, max = 3, colorClass = "") {
+        const container = el("div", { class: "stars" });
+        for (let i = 1; i <= max; i++) {
+            const lit = i <= count;
+            container.appendChild(
+                el("span", { class: `star ${lit ? "lit" : ""} ${lit ? colorClass : ""}`, text: "★" })
+            );
+        }
+        return container;
+    }
+
+    // ============ بج ============
+    function badge(text, color = "ghost") {
+        return el("span", { class: `badge badge-${color}`, text });
+    }
+
+    // ============ قلب (انرژی) ============
+    function hearts(count, max = PB.game.MAX_ENERGY) {
+        const container = el("div", { class: "hearts", title: `${PB.utils.toFa(count)}/${PB.utils.toFa(max)} انرژی` });
+        for (let i = 1; i <= max; i++) {
+            container.appendChild(
+                el("span", { class: `heart ${i <= count ? "filled" : ""}`, text: "❤" })
+            );
+        }
+        return container;
+    }
+
+    // ============ مودال ============
+    function openModal({ title = "", content = null, large = false, onClose = null }) {
+        const root = document.getElementById("modal-root");
+        root.innerHTML = "";
+
+        const closeBtn = el("button", { class: "modal-close", text: "✕", "aria-label": "بستن" });
+        closeBtn.addEventListener("click", close);
+
+        const modal = el("div", { class: `modal ${large ? "modal-lg" : ""}` }, [
+            el("div", { class: "modal-header" }, [
+                el("h3", { text: title }),
+                closeBtn,
+            ]),
+            el("div", { class: "modal-body" }, [content]),
+        ]);
+
+        const overlay = el("div", { class: "modal-overlay" }, [modal]);
+        overlay.addEventListener("click", (e) => {
+            if (e.target === overlay) close();
+        });
+
+        root.appendChild(overlay);
+
+        function close() {
+            root.innerHTML = "";
+            if (onClose) onClose();
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && root.innerHTML) close();
+        }, { once: true });
+
+        return { close };
+    }
+
+    // ============ توست ============
+    function toast(message, type = "info") {
+        PB.utils.toast(message, type);
+    }
+
+    // ============ شیک ============
+    function shakeElement(node) {
+        node.classList.add("anim-shake");
+        setTimeout(() => node.classList.remove("anim-shake"), 500);
+    }
+
+    function glowElement(node, className = "glow-box") {
+        node.classList.add(className);
+        setTimeout(() => node.classList.remove(className), 800);
+    }
+
+    // ============ هدر صفحه ============
+    function pageHeader({ title, subtitle = "", actions = [] }) {
+        const actionsWrap = el("div", { class: "page-header-actions" }, actions);
+        const left = el("div", {}, [
+            el("h1", { text: title }),
+            subtitle ? el("div", { class: "text-muted", style: "font-size: 0.82rem;", text: subtitle }) : null,
+        ].filter(Boolean));
+        return el("div", { class: "page-header" }, [left, actionsWrap]);
+    }
+
+    // ============ هدر با بک ============
+    function backButton(label = "بازگشت", path = "#/map") {
+        const btn = el("button", { class: "btn btn-ghost btn-sm" }, [label]);
+        btn.addEventListener("click", () => (window.location.hash = path));
+        return btn;
+    }
+
+    // ============ رندر صفحه اصلی ============
+    function renderApp(children) {
+        const app = document.getElementById("app");
+        app.innerHTML = "";
+        // پاک کردن فاب‌های قبلی (فقط صفحه اصلی فاب داره)
+        document.querySelectorAll(".fab").forEach((n) => n.remove());
+        const container = el("div", { class: "container" }, children);
+        app.appendChild(container);
+        return container;
+    }
+
+    // پاک کردن کامل app (شامل nav و fabs) قبل از رندر جدید
+    function resetApp() {
+        const app = document.getElementById("app");
+        app.innerHTML = "";
+        return app;
+    }
+
+    // ============ تایمر ============
+    function startTimer(seconds, onTick, onEnd) {
+        let remaining = seconds;
+        const interval = setInterval(() => {
+            remaining--;
+            if (remaining <= 0) {
+                clearInterval(interval);
+                onEnd && onEnd();
+            } else {
+                onTick && onTick(remaining);
+            }
+        }, 1000);
+        return {
+            stop() { clearInterval(interval); },
+            get remaining() { return remaining; },
+        };
+    }
+
+    return {
+        codeBlock,
+        fakeTerminal,
+        progressBar,
+        stars,
+        badge,
+        hearts,
+        openModal,
+        toast,
+        shakeElement,
+        glowElement,
+        pageHeader,
+        backButton,
+        renderApp,
+        startTimer,
+        // پراکسی به utils
+        showConfetti: () => PB.utils.showConfetti(),
+        showLoading: () => PB.utils.showLoading(),
+        hideLoading: () => PB.utils.hideLoading(),
+    };
+})();

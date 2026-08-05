@@ -1,0 +1,525 @@
+/* ============================================
+   🐍 پایتون‌باز آرکید — کامپوننت‌ها
+   ============================================ */
+
+/* ============ دکمه‌ها ============ */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: 10px 22px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+                filter var(--transition-fast), background var(--transition-fast);
+    user-select: none;
+}
+
+.btn:active {
+    transform: scale(0.96);
+}
+
+.btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    filter: grayscale(0.5);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent), #f5b301);
+    color: #1a1500;
+    box-shadow: 0 0 16px var(--glow-yellow);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 0 28px var(--glow-yellow);
+}
+
+.btn-green {
+    background: linear-gradient(135deg, var(--neon-green), #0ea54c);
+    color: #03140a;
+    box-shadow: 0 0 16px var(--glow-green);
+}
+
+.btn-green:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 0 28px var(--glow-green);
+}
+
+.btn-purple {
+    background: linear-gradient(135deg, var(--neon-purple), #7c3aed);
+    color: #fff;
+    box-shadow: 0 0 16px var(--glow-purple);
+}
+
+.btn-purple:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 0 28px var(--glow-purple);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--neon-red), #be123c);
+    color: #fff;
+    box-shadow: 0 0 16px var(--glow-red);
+}
+
+.btn-danger:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+
+.btn-ghost {
+    background: transparent;
+    border: 1px solid rgba(255, 212, 59, 0.3);
+    color: var(--text-primary);
+}
+
+.btn-ghost:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 12px var(--glow-yellow);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-sm {
+    padding: 6px 14px;
+    font-size: 0.82rem;
+}
+
+.btn-lg {
+    padding: 14px 32px;
+    font-size: 1.05rem;
+}
+
+/* ============ کارت‌ها ============ */
+
+.card {
+    background: var(--bg-panel);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition),
+                border-color var(--transition);
+}
+
+.card-hover:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 212, 59, 0.35);
+    box-shadow: var(--shadow), 0 0 20px var(--glow-yellow);
+}
+
+.card-pad {
+    padding: var(--space-5);
+}
+
+/* ============ بج‌ها ============ */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.78rem;
+    font-weight: 700;
+    border: 1px solid transparent;
+}
+
+.badge-yellow {
+    background: rgba(255, 212, 59, 0.12);
+    border-color: rgba(255, 212, 59, 0.4);
+    color: var(--accent);
+}
+
+.badge-green {
+    background: rgba(34, 197, 94, 0.12);
+    border-color: rgba(34, 197, 94, 0.4);
+    color: var(--success);
+}
+
+.badge-purple {
+    background: rgba(168, 85, 247, 0.12);
+    border-color: rgba(168, 85, 247, 0.4);
+    color: var(--neon-purple);
+}
+
+.badge-red {
+    background: rgba(244, 63, 94, 0.12);
+    border-color: rgba(244, 63, 94, 0.4);
+    color: var(--danger);
+}
+
+.badge-blue {
+    background: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.4);
+    color: var(--info);
+}
+
+.badge-ghost {
+    background: var(--bg-inset);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+}
+
+/* ============ نوار پیشرفت ============ */
+
+.progress-track {
+    height: 10px;
+    border-radius: var(--radius-full);
+    background: var(--bg-inset);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    box-shadow: 0 0 10px var(--glow-yellow);
+    transition: width 0.6s var(--transition-slow);
+}
+
+.progress-fill-green {
+    background: linear-gradient(90deg, var(--neon-green), #7ee787);
+    box-shadow: 0 0 10px var(--glow-green);
+}
+
+.progress-fill-purple {
+    background: linear-gradient(90deg, var(--neon-purple), #c084fc);
+    box-shadow: 0 0 10px var(--glow-purple);
+}
+
+/* ============ کدبلاک ============ */
+
+.code-block {
+    position: relative;
+    direction: ltr;
+    text-align: left;
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: var(--space-3) 0;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.65;
+}
+
+.code-block::before {
+    content: "⌄ PYTHON";
+    display: block;
+    padding: 6px 14px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    background: rgba(255, 212, 59, 0.05);
+    border-bottom: 1px solid var(--code-border);
+}
+
+.code-block pre {
+    padding: 14px 16px;
+    overflow-x: auto;
+    color: var(--code-text);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.code-block .kw { color: var(--code-keyword); font-weight: 700; }
+.code-block .str { color: var(--code-string); }
+.code-block .num { color: var(--code-number); }
+.code-block .cmt { color: var(--code-comment); font-style: italic; }
+.code-block .fn { color: var(--code-function); }
+.code-block .out { color: var(--code-output); font-weight: 700; }
+
+/* خروجی ترمینال */
+.terminal-output {
+    direction: ltr;
+    text-align: left;
+    background: var(--bg-inset);
+    border: 1px dashed rgba(255, 212, 59, 0.25);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    margin: var(--space-2) 0;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.terminal-output::before {
+    content: "OUTPUT";
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+/* ============ فیبدبک ============ */
+
+.feedback {
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-sm);
+    font-size: 0.92rem;
+    margin-top: var(--space-3);
+    animation: fadeInUp 0.3s ease both;
+}
+
+.feedback-success {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.35);
+    color: var(--success);
+}
+
+.feedback-error {
+    background: rgba(244, 63, 94, 0.1);
+    border: 1px solid rgba(244, 63, 94, 0.35);
+    color: var(--danger);
+}
+
+.feedback-warning {
+    background: rgba(251, 146, 60, 0.1);
+    border: 1px solid rgba(251, 146, 60, 0.35);
+    color: var(--warning);
+}
+
+.feedback-info {
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: var(--info);
+}
+
+/* ============ مودال ============ */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    background: rgba(11, 15, 25, 0.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    animation: fadeIn 0.25s ease both;
+}
+
+.modal {
+    width: 100%;
+    max-width: 560px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-panel-solid);
+    border: 1px solid rgba(255, 212, 59, 0.25);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg), 0 0 24px var(--glow-yellow);
+    animation: scaleIn 0.3s var(--transition-slow) both;
+    overflow: hidden;
+}
+
+.modal-lg {
+    max-width: 760px;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid rgba(255, 212, 59, 0.15);
+}
+
+.modal-header h3 {
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.modal-close {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: var(--bg-inset);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.modal-close:hover {
+    color: var(--danger);
+    background: rgba(244, 63, 94, 0.12);
+}
+
+.modal-body {
+    padding: var(--space-5);
+    overflow-y: auto;
+}
+
+/* ============ ستاره‌ها ============ */
+
+.stars {
+    display: inline-flex;
+    gap: 2px;
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.stars .star {
+    color: rgba(255, 255, 255, 0.15);
+    text-shadow: none;
+}
+
+.stars .star.lit {
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--glow-yellow);
+}
+
+.stars .star.lit-green {
+    color: var(--success);
+    text-shadow: 0 0 10px var(--glow-green);
+}
+
+.stars .star.lit-purple {
+    color: var(--neon-purple);
+    text-shadow: 0 0 10px var(--glow-purple);
+}
+
+/* ============ تایمر ============ */
+
+.timer-badge {
+    font-family: var(--font-mono);
+    direction: ltr;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    background: var(--bg-inset);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+}
+
+.timer-badge.warning {
+    color: var(--warning);
+    border-color: rgba(251, 146, 60, 0.4);
+}
+
+.timer-badge.danger {
+    color: var(--danger);
+    border-color: rgba(244, 63, 94, 0.4);
+    animation: glowPulse 1s ease-in-out infinite;
+}
+
+/* ============ heart (انرژی) ============ */
+
+.hearts {
+    display: inline-flex;
+    gap: 3px;
+    font-size: 1.1rem;
+}
+
+.hearts .heart {
+    filter: grayscale(1);
+    opacity: 0.35;
+}
+
+.hearts .heart.filled {
+    filter: none;
+    opacity: 1;
+    animation: heartBeat 0.4s ease;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.35); }
+    100% { transform: scale(1); }
+}
+
+/* ============ کد ادیتور (write) ============ */
+
+.code-editor {
+    direction: ltr;
+    text-align: left;
+    width: 100%;
+    min-height: 120px;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    color: var(--code-text);
+    resize: vertical;
+    tab-size: 4;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+.code-editor:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--glow-yellow);
+}
+
+/* ============ چیپ (برچسب‌های کوچک) ============ */
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: var(--bg-inset);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+}
+
+.chip-done {
+    background: rgba(34, 197, 94, 0.12);
+    border-color: rgba(34, 197, 94, 0.35);
+    color: var(--success);
+}
+
+.chip-locked {
+    opacity: 0.55;
+}
+
+/* ============ هدر ثابت ============ */
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-nav);
+    background: var(--bg-panel);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 212, 59, 0.12);
+}
+
+/* ============ پیام و خالی ============ */
+
+.empty-state {
+    text-align: center;
+    padding: var(--space-7) var(--space-4);
+    color: var(--text-muted);
+}
+
+.empty-state .empty-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-3);
+}

@@ -1,0 +1,285 @@
+/* ============================================
+   🐍 پایتون‌باز آرکید — پایه
+   ============================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-ui);
+    background: var(--bg-body);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background var(--transition), color var(--transition);
+}
+
+/* پس‌زمینه نئونی */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+        radial-gradient(ellipse 60% 40% at 15% -10%, var(--glow-yellow) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 85% 10%, var(--glow-purple) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 50% 110%, var(--glow-green) 0%, transparent 60%),
+        var(--bg-deep);
+    transition: background var(--transition);
+}
+
+/* اسکن‌لاین آرکید */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, var(--scanline-opacity)) 3px,
+        transparent 4px
+    );
+}
+
+/* گرید پیکسلی محو */
+.grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(255, 212, 59, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 212, 59, 0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent 80%);
+}
+
+img,
+svg,
+canvas {
+    display: block;
+    max-width: 100%;
+}
+
+button {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+input,
+textarea,
+select {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: var(--bg-inset);
+    border: 1px solid rgba(255, 212, 59, 0.2);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--glow-yellow);
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+/* دسترسی‌پذیری */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ============================================
+   لایوت عمومی
+   ============================================ */
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--space-4);
+    padding-bottom: 96px;
+}
+
+/* هدر بالای صفحات */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-panel);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 212, 59, 0.15);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.page-header h1,
+.page-header h2 {
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.page-header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+/* نوار پایین (موبایل) */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    inset-inline: 0;
+    z-index: var(--z-nav);
+    display: flex;
+    justify-content: space-around;
+    padding: var(--space-2) var(--space-4);
+    padding-bottom: calc(var(--space-2) + env(safe-area-inset-bottom));
+    background: var(--bg-panel);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid rgba(255, 212, 59, 0.15);
+}
+
+.bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.bottom-nav .nav-item.active {
+    color: var(--accent);
+}
+
+.bottom-nav .nav-item.active .nav-icon {
+    transform: translateY(-2px) scale(1.15);
+}
+
+.bottom-nav .nav-icon {
+    font-size: 1.35rem;
+    transition: transform var(--transition);
+}
+
+.bottom-nav .nav-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+/* دکمه‌های شناور */
+.fab {
+    position: fixed;
+    z-index: var(--z-nav);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border-radius: var(--radius-full);
+    background: var(--bg-panel);
+    border: 1px solid rgba(255, 212, 59, 0.25);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.fab:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-neon);
+}
+
+.fab-top-start {
+    top: var(--space-4);
+    inset-inline-start: var(--space-4);
+}
+
+.fab-top-second {
+    top: var(--space-4);
+    inset-inline-start: 68px;
+}
+
+.fab-top-third {
+    top: var(--space-4);
+    inset-inline-start: 116px;
+}
+
+.fab-top-end {
+    top: var(--space-4);
+    inset-inline-end: var(--space-4);
+}
+
+/* ============================================
+   اعداد و متن
+   ============================================ */
+
+.mono {
+    font-family: var(--font-mono);
+    direction: ltr;
+    unicode-bidi: embed;
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.text-accent {
+    color: var(--accent);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
