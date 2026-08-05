@@ -73,7 +73,6 @@
 | ۳ | شرط‌ها |
 | ۴ | حلقه‌ها |
 | ۵ | توابع |
-| ۱۰ | مدیریت خطا |
 
 </td>
 <td align="center">
@@ -84,11 +83,10 @@
 | | فصل |
 |:--:|:------|
 | ۶ | لیست‌ها |
-| ۷ | دیکشنری |
+| ۷ | دیکشنری‌ها |
 | ۸ | متدهای رشته |
 | ۹ | مدیریت فایل |
-| ۱۸ | توابع لامبدا |
-| ۱۹ | لیست کامپریهنشن |
+| ۱۰ | مدیریت خطا |
 
 </td>
 <td align="center">
@@ -105,6 +103,8 @@
 | ۱۵ | عبارات باقاعده |
 | ۱۶ | فریم‌ورک‌ها |
 | ۱۷ | پایتون در عمل |
+| ۱۸ | توابع لامبدا |
+| ۱۹ | لیست کامپریهنشن |
 | ۲۰ | محیط مجازی |
 | ۲۱ | پایگاه داده |
 | ۲۲ | API و اینترنت |
@@ -191,7 +191,6 @@ Go deeper!
 | 3 | Conditionals |
 | 4 | Loops |
 | 5 | Functions |
-| 10 | Error Handling |
 
 </td>
 <td align="center">
@@ -205,8 +204,7 @@ Pro level!
 | 7 | Dictionaries |
 | 8 | String Methods |
 | 9 | File Handling |
-| 18 | Lambda Functions |
-| 19 | List Comprehension |
+| 10 | Error Handling |
 
 </td>
 <td align="center">
@@ -223,6 +221,8 @@ Master it!
 | 15 | Regex |
 | 16 | Frameworks |
 | 17 | Python in Practice |
+| 18 | Lambda Functions |
+| 19 | List Comprehension |
 | 20 | Virtual Environments |
 | 21 | SQLite Database |
 | 22 | API & HTTP |
