@@ -26,8 +26,11 @@ PB.renderers.sort = (() => {
                     el("span", { class: "sort-item-text mono", html: escapeHtml(line) }),
                 ]);
 
+                // به‌جای ذخیره‌ی ایندکس (که بعد از هر تغییر کهنه می‌شه)، خود خط رو جابه‌جا می‌کنیم
+                const draggedText = line;
+
                 itemNode.addEventListener("dragstart", (e) => {
-                    e.dataTransfer.setData("text/plain", String(i));
+                    e.dataTransfer.setData("text/plain", draggedText);
                     itemNode.classList.add("dragging");
                     // اگه قبلاً با کلیک swap-source انتخاب شده بود، موقع کشیدن پاکش کن
                     container.querySelectorAll(".swap-source").forEach((n) => n.classList.remove("swap-source"));
@@ -39,10 +42,14 @@ PB.renderers.sort = (() => {
                 itemNode.addEventListener("dragover", (e) => e.preventDefault());
                 itemNode.addEventListener("drop", (e) => {
                     e.preventDefault();
-                    const from = parseInt(e.dataTransfer.getData("text/plain"), 10);
-                    if (from === i) return;
+                    const movedText = e.dataTransfer.getData("text/plain");
+                    if (movedText === line) return;
+                    const from = lines.indexOf(movedText);
+                    if (from === -1) return;
                     const [moved] = lines.splice(from, 1);
-                    lines.splice(i, 0, moved);
+                    // ایندکس هدف هم باید بعد از حذف، بازمحاسبه بشه
+                    const to = lines.indexOf(line);
+                    lines.splice(to, 0, moved);
                     rebuild();
                 });
 

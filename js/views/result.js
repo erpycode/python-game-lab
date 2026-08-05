@@ -13,21 +13,23 @@ PB.views.result = (() => {
         const chapterId = params.id;
         const chapter = PB.catalog.getChapter(chapterId);
         const session = PB.engine.getSession();
+        const state = PB.store.get();
 
         if (!chapter) {
             window.location.hash = "#/map";
             return;
         }
 
-        // محاسبه نتیجه
-        const stars = session ? session.stars || PB.engine.computeStars() : 0;
-        const score = session ? session.score : 0;
-        const xp = session ? session.xpEarned : 0;
+        // محاسبه نتیجه — اگه سشن موجوده ازش، وگرنه از داده ی ذخیره شده ی فصل
+        const saved = state ? state.chapters[String(chapterId)] : null;
+        const stars = session ? (session.stars || PB.engine.computeStars()) : (saved?.stars || 0);
+        const score = session ? session.score : (saved?.bestScore || 0);
+        const xp = session ? session.xpEarned : (saved?.xp || 0);
         const accuracy = session ? (() => {
             const total = session.exerciseResults.length + session.challengeResults.length;
             const solved = session.exerciseResults.filter(Boolean).length + session.challengeResults.filter(Boolean).length;
             return total ? Math.round((solved / total) * 100) : 0;
-        })() : 0;
+        })() : (saved?.bestAccuracy || 0);
 
         // نام فصل
         const title = `فصل ${PB.utils.toFa(chapterId)}: ${chapter.title}`;

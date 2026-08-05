@@ -38,7 +38,16 @@ PB.achievements = (() => {
             inventoryCount: state.inventory.length,
             quizSolved: Object.values(state.chapters).reduce((acc, ch) =>
                 acc + Object.values(ch.answers || {}).filter((a) => a.solved && a.quiz).length, 0),
+            quizSolvedById: Object.values(state.chapters).reduce((acc, ch) => {
+                Object.entries(ch.answers || {}).forEach(([id, a]) => {
+                    if (a.solved && a.quiz) acc.add(id);
+                });
+                return acc;
+            }, new Set()).size,
         };
+
+        // سازگاری عقب‌گرد: کلیدهای عددی قدیمی (0..9) هم در نظر گرفته شوند
+        ctx.quizSolved = ctx.quizSolvedById || ctx.quizSolved;
 
         const newly = [];
         DEFS.forEach((def) => {

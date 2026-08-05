@@ -67,7 +67,10 @@ PB.views.lesson = (() => {
 
             prevBtn.disabled = sectionIndex === 0;
             nav.appendChild(prevBtn);
-            nav.appendChild(el("span", { class: "lesson-progress-text text-muted", text: `${PB.utils.toFa(sectionIndex)}/${PB.utils.toFa(total)}` }));
+            // بخش ۰ = مقدمه (intro)؛ بقیه بخش‌ها از ۱ تا total شماره می‌شن
+            const progressText = sectionIndex === 0 ? "مقدمه"
+                : `${PB.utils.toFa(sectionIndex)}/${PB.utils.toFa(total)}`;
+            nav.appendChild(el("span", { class: "lesson-progress-text text-muted", text: progressText }));
             nav.appendChild(nextBtn);
         }
 

@@ -24,8 +24,8 @@ PB.shop = (() => {
                     buyBtn.disabled = true;
                     buyBtn.textContent = "خریداری شده ✓";
                     buyBtn.className = "btn btn-ghost btn-block btn-sm";
-                    // آپدیت سکه‌ها در UI
-                    const coinDisplay = grid.parentElement?.querySelector(".shop-coins");
+                    // آپدیت سکه‌ها در UI — نوار سکه داخل محتوای مودال هست، نه والد گرید
+                    const coinDisplay = grid.closest(".shop-content")?.querySelector(".shop-coins");
                     if (coinDisplay) coinDisplay.textContent = `🪙 ${PB.utils.formatNumber(PB.game.getCoins())}`;
                     PB.achievements.checkAll();
                 } else if (result.reason === "no_coins") {

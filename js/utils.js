@@ -68,12 +68,17 @@ PB.utils = (() => {
     }
 
     // نرمال‌سازی جواب
+    // فقط کوتیشن‌های بیرونی matching حذف می‌شن؛ کوتیشن‌های داخلی (مثل '1' داخل لیست) باید بمونن
     function normalizeAnswer(answer) {
-        return String(answer)
+        let s = String(answer)
             .trim()
             .replace(/\s+/g, " ")
-            .replace(/['"]/g, "")
             .toLowerCase();
+        const first = s[0];
+        if ((first === "'" && s.endsWith("'")) || (first === '"' && s.endsWith('"'))) {
+            s = s.slice(1, -1);
+        }
+        return s;
     }
 
     // فاصله لونشتاین — تعداد حداقل عملیات (درج/حذف/جایگزینی) برای تبدیل a به b

@@ -261,11 +261,6 @@ PB.engine = (() => {
         return 0;
     }
 
-    function isChapterComplete() {
-        const chalSolved = session.challengeResults.filter(Boolean).length;
-        return chalSolved >= Math.ceil(itemCount("challenge") * 0.5);
-    }
-
     function finish() {
         const stars = computeStars();
         const accuracyPct = (() => {
@@ -286,6 +281,24 @@ PB.engine = (() => {
             existing.bestAccuracy = Math.max(existing.bestAccuracy, accuracyPct);
             existing.xp = Math.max(existing.xp, session.xpEarned);
             existing.replayCount = (existing.replayCount || 0) + 1;
+
+            // ذخیره‌ی پیشرفت تک‌تک تمرین/چالش‌ها (برای دستاوردها و آمار)
+            if (session.exerciseResults.length || session.challengeResults.length) {
+                existing.answers = existing.answers || {};
+                const results = [
+                    ...(PB.engine.currentItems("exercise") || []).map((it, i) => ({ item: it, solved: session.exerciseResults[i] === true, kind: "exercise" })),
+                    ...(PB.engine.currentItems("challenge") || []).map((it, i) => ({ item: it, solved: session.challengeResults[i] === true, kind: "challenge" })),
+                ];
+                results.forEach(({ item, solved }) => {
+                    if (item?.id) {
+                        existing.answers[item.id] = {
+                            ...(existing.answers[item.id] || {}),
+                            solved: (existing.answers[item.id]?.solved) || solved,
+                            quiz: item.type === "quiz",
+                        };
+                    }
+                });
+            }
 
             // XP و سکه فقط وقتی اضافه میشه که اولین باری که تموم شد
             const wasCompleted = existing.completedAt !== null;
@@ -328,7 +341,6 @@ PB.engine = (() => {
         goToNext,
         accuracy,
         computeStars,
-        isChapterComplete,
         finish,
         checkAnswer,
         feedbackFor,
