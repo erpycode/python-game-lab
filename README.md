@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/Platform-Web-4dabf7?style=for-the-badge" alt="Web">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT">
   <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Active">
-  <a href="https://erpycode.github.io/python-game-lab/"><img src="https://img.shields.io/badge/🎮_بازی_آنلاین- LIVE-00d4aa?style=for-the-badge" alt="Live Demo"></a>
+  <a href="https://erpycode.github.io/python-baz-arcade/"><img src="https://img.shields.io/badge/🎮_بازی_آنلاین- LIVE-00d4aa?style=for-the-badge" alt="Live Demo"></a>
 </p>
 
 ---
@@ -18,7 +18,7 @@
 
 یه بازی آنلاین برای یادگیری پایتون از صفر با حالت **آرکید**! هر فصل شامل **آموزش**، **تمرین** و **چالش** هست. با حل کردن چالش‌ها ایکس‌پی بگیر، سطحت بالا بره، و فصل‌های بعدی باز بشه!
 
-**🔗 [بازی آنلاین پایتون‌باز](https://erpycode.github.io/python-game-lab/)**
+**🔗 [بازی آنلاین پایتون‌باز](https://erpycode.github.io/python-baz-arcade/)**
 
 ## ✨ امکانات
 
@@ -127,7 +127,7 @@
   <img src="https://img.shields.io/badge/Platform-Web-4dabf7?style=for-the-badge" alt="Web">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT">
   <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Active">
-  <a href="https://erpycode.github.io/python-game-lab/"><img src="https://img.shields.io/badge/🎮_Play_Live-00d4aa?style=for-the-badge" alt="Live Demo"></a>
+  <a href="https://erpycode.github.io/python-baz-arcade/"><img src="https://img.shields.io/badge/🎮_Play_Live-00d4aa?style=for-the-badge" alt="Live Demo"></a>
 </p>
 
 ---
@@ -136,7 +136,7 @@
 
 An online game for learning Python from scratch with an **arcade** experience! Each chapter includes **lessons**, **exercises**, and **challenges**. Earn XP, level up, and unlock new chapters!
 
-**🔗 [Play Python Baz Online](https://erpycode.github.io/python-game-lab/)**
+**🔗 [Play Python Baz Online](https://erpycode.github.io/python-baz-arcade/)**
 
 ## ✨ Features
 
@@ -236,16 +236,16 @@ Master it!
 
 ### 🎮 Play Online (No Install Needed)
 
-**🔗 [Play Python Baz Online](https://erpycode.github.io/python-game-lab/)**
+**🔗 [Play Python Baz Online](https://erpycode.github.io/python-baz-arcade/)**
 
 ### 💻 Run Locally
 
 ```bash
 # Clone the repo
-git clone https://github.com/erpycode/python-game-lab.git
+git clone https://github.com/erpycode/python-baz-arcade.git
 
 # Go to directory
-cd python-game-lab
+cd python-baz-arcade
 
 # Start local server
 python3 -m http.server 8080
@@ -256,7 +256,7 @@ python3 -m http.server 8080
 ## 📁 Project Structure
 
 ```
-python-game-lab/
+python-baz-arcade/
 ├── index.html              # Main page (SPA entry)
 ├── css/
 │   ├── tokens.css          # Design tokens (colors, spacing, etc.)
