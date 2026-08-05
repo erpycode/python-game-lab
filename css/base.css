@@ -139,6 +139,14 @@ a {
     padding-bottom: 96px;
 }
 
+/* دسکتاپ — padding سمت راست برای sidebar */
+@media (min-width: 769px) {
+    .container {
+        padding-right: 88px;
+        max-width: 1000px;
+    }
+}
+
 /* هدر بالای صفحات */
 .page-header {
     display: flex;
@@ -167,7 +175,10 @@ a {
     gap: var(--space-2);
 }
 
-/* نوار پایین (موبایل) */
+/* ============================================
+   نوار پایین (موبایل) — نسخه کامل ریسپانسیو
+   ============================================ */
+
 .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -175,41 +186,184 @@ a {
     z-index: var(--z-nav);
     display: flex;
     justify-content: space-around;
-    padding: var(--space-2) var(--space-4);
-    padding-bottom: calc(var(--space-2) + env(safe-area-inset-bottom));
-    background: var(--bg-panel);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-top: 1px solid rgba(255, 212, 59, 0.15);
+    align-items: stretch;
+    padding: var(--space-1) var(--space-2);
+    padding-bottom: calc(var(--space-1) + env(safe-area-inset-bottom, 0px));
+    background: rgba(16, 24, 44, 0.92);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-top: 1px solid rgba(255, 212, 59, 0.12);
+    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.4);
+    /* جلوگیری از لغزش در iOS */
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 
 .bottom-nav .nav-item {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
-    padding: var(--space-2) var(--space-4);
+    justify-content: center;
+    gap: 3px;
+    padding: var(--space-2) var(--space-1);
     border-radius: var(--radius);
     color: var(--text-muted);
-    transition: color var(--transition-fast), transform var(--transition-fast);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    min-height: 52px;
+    /* حداقل ارتفاع برای تاچ مناسب */
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+.bottom-nav .nav-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 24px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 0 0 4px 4px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bottom-nav .nav-item:active {
+    transform: scale(0.92);
 }
 
 .bottom-nav .nav-item.active {
     color: var(--accent);
 }
 
+.bottom-nav .nav-item.active::before {
+    transform: translateX(-50%) scaleX(1);
+}
+
 .bottom-nav .nav-item.active .nav-icon {
-    transform: translateY(-2px) scale(1.15);
+    transform: translateY(-3px) scale(1.2);
+    filter: drop-shadow(0 0 8px var(--glow-yellow));
 }
 
 .bottom-nav .nav-icon {
-    font-size: 1.35rem;
-    transition: transform var(--transition);
+    font-size: 1.4rem;
+    line-height: 1;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .bottom-nav .nav-label {
-    font-size: 0.72rem;
-    font-weight: 600;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+/* ============================================
+   ریسپانسیو نوار پایین
+   ============================================ */
+
+/* موبایل کوچک */
+@media (max-width: 360px) {
+    .bottom-nav {
+        padding: var(--space-1) var(--space-1);
+    }
+
+    .bottom-nav .nav-item {
+        padding: 6px 2px;
+        min-height: 48px;
+    }
+
+    .bottom-nav .nav-icon {
+        font-size: 1.2rem;
+    }
+
+    .bottom-nav .nav-label {
+        font-size: 0.6rem;
+    }
+}
+
+/* موبایل معمولی */
+@media (min-width: 361px) and (max-width: 480px) {
+    .bottom-nav .nav-item {
+        min-height: 54px;
+    }
+
+    .bottom-nav .nav-icon {
+        font-size: 1.45rem;
+    }
+
+    .bottom-nav .nav-label {
+        font-size: 0.68rem;
+    }
+}
+
+/* تبلت */
+@media (min-width: 481px) and (max-width: 768px) {
+    .bottom-nav {
+        max-width: 500px;
+        margin: 0 auto;
+        border-radius: var(--radius) var(--radius) 0 0;
+        border-left: 1px solid rgba(255, 212, 59, 0.12);
+        border-right: 1px solid rgba(255, 212, 59, 0.12);
+    }
+
+    .bottom-nav .nav-item {
+        padding: var(--space-2) var(--space-3);
+    }
+
+    .bottom-nav .nav-icon {
+        font-size: 1.5rem;
+    }
+
+    .bottom-nav .nav-label {
+        font-size: 0.72rem;
+    }
+}
+
+/* دسکتاپ — نوار پایین مخفی بشه، به sidebar تبدیل بشه */
+@media (min-width: 769px) {
+    .bottom-nav {
+        top: 0;
+        bottom: auto;
+        right: 0;
+        left: auto;
+        width: 72px;
+        height: 100vh;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: var(--space-5) var(--space-2);
+        gap: var(--space-1);
+        border-top: none;
+        border-left: 1px solid rgba(255, 212, 59, 0.12);
+        border-radius: 0;
+    }
+
+    .bottom-nav .nav-item {
+        width: 100%;
+        min-height: 60px;
+        padding: var(--space-3);
+    }
+
+    .bottom-nav .nav-item::before {
+        top: 50%;
+        left: 0;
+        right: auto;
+        transform: translateY(-50%) scaleY(0);
+        width: 3px;
+        height: 24px;
+        border-radius: 0 4px 4px 0;
+    }
+
+    .bottom-nav .nav-item.active::before {
+        transform: translateY(-50%) scaleY(1);
+    }
+
+    .bottom-nav .nav-label {
+        font-size: 0.6rem;
+    }
 }
 
 /* دکمه‌های شناور */
