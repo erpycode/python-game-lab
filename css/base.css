@@ -137,6 +137,19 @@ a {
     margin: 0 auto;
     padding: var(--space-4);
     padding-bottom: 96px;
+    animation: page-enter 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* انیمیشن ورود صفحه */
+@keyframes page-enter {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* هدر بالای صفحات */
