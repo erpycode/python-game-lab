@@ -137,18 +137,20 @@ a {
     margin: 0 auto;
     padding: var(--space-4);
     padding-bottom: 96px;
-    animation: page-enter 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: page-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* انیمیشن ورود صفحه */
+/* انیمیشن ورود صفحه — محسوس و باحال */
 @keyframes page-enter {
     from {
         opacity: 0;
-        transform: translateY(16px);
+        transform: translateY(28px) scale(0.97);
+        filter: blur(4px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
+        filter: blur(0);
     }
 }
 
@@ -221,6 +223,23 @@ a {
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     touch-action: manipulation;
+}
+
+.bottom-nav .nav-item::after {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border-radius: var(--radius);
+    background: var(--accent);
+    opacity: 0;
+    transform: scale(0.6);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.bottom-nav .nav-item:hover::after {
+    opacity: 0.08;
+    transform: scale(1);
 }
 
 .bottom-nav .nav-item::before {
